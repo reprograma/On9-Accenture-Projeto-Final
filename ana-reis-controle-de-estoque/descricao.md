@@ -16,9 +16,4 @@ Regras de negócio:
 BÔNUS
 7- Exibir Lucro por produto com senha
 
-Dúvidas
-
-Como colocar o array de clienteContato?
-!!!!!!Operações entre banco de dados
-Criar um novo banco de dados para venda
 

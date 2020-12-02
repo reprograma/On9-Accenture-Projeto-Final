@@ -65,6 +65,9 @@ const emitirPedido = (request, response) => {
  * Deletar uma venda somente com senha
  */
 
+ /**
+  * 
+  */
 module.exports = {
     getAll,
     emitirPedido

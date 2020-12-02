@@ -1,5 +1,5 @@
 const express =  require("express") 
-const router =  express.Router() 
+const router =  express.Router(); 
 
 const controller = require("../controllers/estoqueController")
 
@@ -26,3 +26,5 @@ router.get("/:nomeProduto", controller.getByName);
 @endpoint http://localhost:8080/produtos/add
 **/
 router.post("/add", controller.addProduto)
+
+module.exports = router;
