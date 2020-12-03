@@ -10,6 +10,8 @@ Só vai ter GET (getAll, getByDate, lucro (com senha)), POST (emitir pedido), DE
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
+const Produtos = require("../models/Produtos");
+
 
 
 //GET 
@@ -40,14 +42,26 @@ const getAll = (request, response) => {
 //POST
 /** 
  * Emite um pedido
+ * Faz um POST na coleção Vendas e um PATCH no estoque do produto em Produtos
+ * faço um helper e coloco na rota?
+ * 
 */
 const emitirPedido = (request, response) => {
-    let { nomeProduto, valorVenda, lucro, vendedor, clienteContato, } = request.body;
+    let { nomeProduto, valorVenda, vendedor, clienteContato, } = request.body;
 
-    const novoPedido = new Task({
+   /**
+    * Produtos.findOne({nomeProduto: nomeProduto}) 
+        .then(subtrair => {
+            let novoEstoque = Produtos.novoEstoque - 1
+            Produtos.estoque = novoEstoque
+
+        })
+        .then
+    *  */ 
+
+    const novoPedido = new Vendas({
         nomeProduto,
         valorVenda,
-        lucro,
         vendedor,
         clienteContato
     });

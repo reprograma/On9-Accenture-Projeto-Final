@@ -31,7 +31,7 @@ const getByName = (request, response) => {
 const addProduto = (request, response) => {
     let { nomeProduto, descricao, estoque, valorFabrica } = request.body;
 
-    const novoProduto = new Task({
+    const novoProduto = new Produtos({
         nomeProduto,
         descricao,
         estoque,
