@@ -1,0 +1,45 @@
+REGRA DE NOGOCIO
+
+FALAR SOBRE AS ROTAS
+
+
+Esta API TEM O INTUITO DE....
+
+
+
+
+DOC API.
+
+BM VINDO
+esta api tem o proposito de 
+
+Contato:
+linkedin
+e-mail:
+
+Rotas:
+get:
+/https:
+
+post:
+/cadastrar
+o boddy necessario (usado)
+
+ITENS.
+
+- Fornecedores (Contatos, e endereço)
+- cadastrar produto MODELOS (descrição do produto TECIDO, COR, DETALHES)
+- dar entrada no estoque com o produto.
+- saida do produto no estoque (BAIXA).
+- sair com produto do estoque na sua totalidade ou item a item?
+- quatidade de peças.
+- tamanhos  P, M , G e XG.
+- Descrição do Produto (pode colocar uma foto) - OPCIONAL
+
+
+
+- PRECISO CRIAR UM PROBLEMA E SOLUCIONAR
+
+ MOTIVO AJUDAR O PEQUENO EMPREENDEDOR A COMTROLAR O ESTOQUE EVITANDO GASTOS DESNECESSARIOS.
+
+
