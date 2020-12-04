@@ -10,6 +10,8 @@ mongoose.connect('mongodb://localhost/byHer',
 
 const toDoRoutes = require("./routes/byHerRoute");
 
+app.use(express.json());
+
 app.use("/movies", toDoRoutes,);
 
 module.exports = app

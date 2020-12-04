@@ -3,15 +3,9 @@ const router = express.Router();
 
 const controller = require("../controller/byHerController");
 
-router.get
+router.get("/", controller.getAll)
 
-router.post
-
-router.put
-
-router.patch
-
-router.delete
+router.post("/cadastro", controller.createMovie)
 
 
 module.exports = router

@@ -1,6 +1,6 @@
 const app = require("./src/app");
-const PORT = 8080
+const PORT = 5000
 
 app.listen(PORT, function(){
-    console.log("app rodando na porta" + PORT)
+    console.log("byHer rodando na porta " + PORT)
 });
