@@ -6,31 +6,37 @@ const estoqueController = require('../controllers/estoque-controllers')
  * GET obterProduto
  * desc Retorna todos os produtos
  */
-router.get('/estoque', estoqueController.obterTodosProduto);
+router.get('/', estoqueController.obterTodosProduto);
 
 /**
  * GET obterProduto
  * desc Retorna o produto por id
  */
-router.get('/estoque/:id', estoqueController.obterProdutoPorId);
+router.get('/:id', estoqueController.obterProdutoPorId);
 
 /**
  * POST entradaEstoque
  * desc Criar uma entrada de produto
  */
-router.post('/estoque', estoqueController.entradaEstoque);
+router.post('/', estoqueController.entradaEstoque);
 
 /**
  * PUT atualizar entradaEntradaEstoque
  * desc Atualizar o produto
  */
-router.put('/estoque/:id', estoqueController.atualizarEntradaEstoque);
+router.put('/:id', estoqueController.atualizarEstoque);
+
+/**
+ * PUT atualizar entradaEntradaEstoque
+ * desc Atualizar o produto
+ * Criar função lá no controllers
+ */
+router.patch('/:id', estoqueController.atualizarQuantidadeEstoque);
 
 /**
  * DELETE deleta entradaEntradaEstoque
  * desc Excluir o produto
  */
-router.delete('/estoque/:id', estoqueController.excluirEstoque);
-
+router.delete('/:id', estoqueController.excluirEstoque);
 
 module.exports = router
