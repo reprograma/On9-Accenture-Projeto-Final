@@ -27,7 +27,7 @@ router.post('/', estoqueController.entradaEstoque);
 router.put('/:id', estoqueController.atualizarEstoque);
 
 /**
- * PUT atualizar entradaEntradaEstoque
+ * PATCH atualizar entradaEntradaEstoque
  * desc Atualizar o produto
  * Criar função lá no controllers
  */
