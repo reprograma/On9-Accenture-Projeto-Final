@@ -15,8 +15,6 @@ http://localhost:PORT/byHer
 
 *Onde tem "PORT", colocar a porta que está sendo usada.
 
-//COLOCAR EXEMPLO DE COMO FICA O GET
-
 
 ### POST: /cadastro
 POST para adicionar filmes no Banco de Dados:
