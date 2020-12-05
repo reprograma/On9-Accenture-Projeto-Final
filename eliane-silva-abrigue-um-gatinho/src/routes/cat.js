@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-//const catController = require('../controllers/cat')
+const catController = require('../controllers/cat')
 const homeController = require('../controllers/home')
 
 //@route POST api/cat/newcat
 //@desc Registrar um gato
 //@acess Public
-//router.post('/newcat', catController.createNewCat)
+router.post('/newcat', catController.createNewCat)
 
 //@route GET api/cat/allhomes
 //@desc Visualizar todos lares temporários disponíveis
@@ -26,17 +26,17 @@ router.get('/bydistrict', homeController.getByNeighborhood)
 //@route PUT api/cat/update/:id
 //@desc Atualizar cadastro do gato
 //@acess Public
-//router.put('/update/:id', catController.updateall)
+router.put('/update/:id', catController.updateall)
 
 //@route PATCH api/cat/updateavaiable/:id
 //@desc Atualizar a disponibilidade do gato
 //@acess Public
-//router.patch('/updateavaiable/:id', catController.updateavaiable);
+router.patch('/updateavaiable/:id', catController.updateavaiable);
 
 //@route DELETE api/cat/delete/:id
 //@desc Deletar cadastro do gato
 //@acess Public
-//router.delete('/delete/:id', catController.delete);
+router.delete('/delete/:id', catController.delete);
 
 module.exports = router
 
