@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "eventTitle": "Maraca Surfday",
+        "state": "Pernambuco",
+        "beach": "Maracaipe",
+        "surfDay": "06/12/2020",
+        "openApply": true
+    },
+    {
+        "id": "2",
+        "eventTitle": "Paiva Surfday",
+        "state": "Pernambuco",
+        "beach": "Paiva",
+        "surfDay": "06/01/2020",
+        "openApply": false
+    }
+
+
+]
