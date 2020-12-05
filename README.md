@@ -135,9 +135,8 @@ Resposta:
 
 Clone o projeto e acesse a pasta
 
-$ git clone https://github.com/aline-pereira/On9-Accenture-Projeto-Final
+$ git clone https://github.com/aline-pereira/On9-Accenture-Projeto-Final/tree/aline-santos
 
-$ cd LearnShare
 
 
 ### Siga os passos abaixo
