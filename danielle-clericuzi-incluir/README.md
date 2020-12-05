@@ -14,13 +14,13 @@
 
 
 
-## Requisitos para executar o projeto:
+#### Requisitos para executar o projeto:
 - Possuir VSCODE ou IDE de preferência;
 - Possuir NodeJS;
 - Possuir Banco MongoDB.
 
 
-## Como configurar o ambiente para o projeto:
+#### Como configurar o ambiente para o projeto:
 
 1. Fazer o clone do projeto utilizando o comando Git a seguir:
   - git clone https://github.com/daniclericuzi/On9-Accenture-Projeto-Final/tree/danielle-cavalcanti/danielle-clericuzi-incluir
