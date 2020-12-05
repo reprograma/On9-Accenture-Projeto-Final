@@ -9,15 +9,15 @@ const controller = require("../controllers/vendasController")
 @access Public 
 @endpoint http://localhost:8080/vendas/
 **/
-router.get("/", controller.getAll)
+router.get("/", controller.vendas)
 
 /**
-@route POST vendas/:id
-@desc Emitir um pedido
+@route POST 
+@desc Registrar uma nova venda
 @access Public 
-@endpoint http://localhost:8080/vendas/add
+@endpoint http://localhost:8080/vendas/produto
 **/
-router.post("/:nomeProduto", controller.emitirPedido)
+router.post("/produto", controller.vendaProduto)
 
 module.exports = router;
 

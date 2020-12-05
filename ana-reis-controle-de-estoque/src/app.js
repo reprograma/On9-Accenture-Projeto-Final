@@ -13,6 +13,6 @@ const vendasRoute = require("./routes/vendasRoute")
 
 app.use(express.json())
 app.use("/estoque", estoqueRoute)
-app.use("/vendas", vendasRoute)
+app.use("/venda", vendasRoute)
 
 module.exports = app
