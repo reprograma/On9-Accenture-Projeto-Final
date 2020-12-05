@@ -1,7 +1,7 @@
 ## 🛫🌎 Sobre o Projeto
 
 <h1 align="center">
-	<img alt="Project Screenshots" src="../../assets/docBanner.png" />
+	<img alt="Project Screenshots" src="/assets/docBanner.png" />
 </h1>
 
 <p>O Learn&Share é um projeto que faz jus ao nome, aprender e compartilhar. O projeto visa ser uma plataforma onde você possa ter mentorias gratuitas
