@@ -5,7 +5,7 @@ const {Schema} = mongoose;
 const userSchema = new Schema({
     nomeProduto: String,
     valorVenda: Number,
-    lucro: Number,
+    quantidade: Number,
     vendedor: String,
     clienteContato: Array,
 },

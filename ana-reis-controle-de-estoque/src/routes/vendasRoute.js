@@ -17,7 +17,7 @@ router.get("/", controller.getAll)
 @access Public 
 @endpoint http://localhost:8080/vendas/add
 **/
-router.post("/add", controller.emitirPedido)
+router.post("/:nomeProduto", controller.emitirPedido)
 
 module.exports = router;
 

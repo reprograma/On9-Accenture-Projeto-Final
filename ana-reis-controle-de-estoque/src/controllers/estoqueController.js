@@ -46,6 +46,30 @@ const addProduto = (request, response) => {
 
 }
 
+
+//PATCH
+/**
+ * 
+ *Atualizar descrição
+ */
+const collabTask = (request, response) => {
+    
+    const { id } = request.params;
+    const { collab } = request.body;
+
+    Task.findByIdAndUpdate(id, {$set: {collab}})
+        .then((task) => {
+            response.status(200).json({message: "collab updated"});
+        })
+        .catch((err) => {
+            response.json(err);
+        })
+}
+
+//DELETE
+/**
+ * com senha
+ */
 module.exports = {
     getAll,
     getByName,

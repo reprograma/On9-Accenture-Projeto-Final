@@ -11,6 +11,7 @@ const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
 const Produtos = require("../models/Produtos");
+const { findOne } = require("../models/Vendas");
 
 
 
@@ -46,34 +47,59 @@ const getAll = (request, response) => {
  * faço um helper e coloco na rota?
  * 
 */
-const emitirPedido = (request, response) => {
-    let { nomeProduto, valorVenda, vendedor, clienteContato, } = request.body;
 
-   /**
-    * Produtos.findOne({nomeProduto: nomeProduto}) 
-        .then(subtrair => {
-            let novoEstoque = Produtos.novoEstoque - 1
-            Produtos.estoque = novoEstoque
 
-        })
-        .then
-    *  */ 
-
+const emitirPedido = async (request, response) => {
+    let { nomeProduto, valorVenda, quantidade, vendedor, clienteContato, } = request.body;
+ 
     const novoPedido = new Vendas({
         nomeProduto,
         valorVenda,
+        quantidade,
         vendedor,
         clienteContato
     });
 
     novoPedido.save()
         .then((res) => {
-            response.status(201).json(res);
+            response.status(201).json(res).message(estoqueNovo);
         })
         .catch(err => next(err));
 
+try {
+    let produto = await Produtos.findOne({nomeProduto: request.body.produto.nomeProduto});
+   
+    //let estoqueAtual = await Produtos.find({ estoque: request.body.produto.estoque })
+    
+    produto.estoque = produto.estoque - quantidade
+         
+    await Produtos.updateOne({nomeProduto: request.body.produto.nomeProduto}, {estoque: estoqueNovo});
+    
+    await produto.save();
+
+    return request.status(201).json("Estoque atualizado!");
+
+}
+catch (err){
+    return response.status(400).json({ error: err.message("erro aqui")})
+}
 }
 
+
+  
+   /*   
+    const produto = await Produtos.find({ nomeProduto: request.params.nomeProduto })
+
+    let estoqueAtual = await Produtos.find({ estoque: request.params.estoque })
+    
+    let estoqueNovo = estoqueAtual-quantidade
+    
+        Produtos.findOneAndUpdate({nomeProduto: produto}, {estoque: estoqueNovo}, {returnOriginal: false})
+        .then((id) => {
+            response.status(200).json(id);
+        })
+        .catch(err => next(err));
+        */
 //DELETE
 /** 
  * Deletar uma venda somente com senha
