@@ -3,13 +3,19 @@
 
 #### A inclusão trata-se de dar liberdade as pessoas de IR e ter seu acesso garantido e com bem-estar aonde forem.
 #### Esta API tem como propósito ser uma ferramenta de acessibilidade que busca fomentar a inclusão de pessoas com deficiência através do seu acesso livre e facilitado em todos os espaços.
+
 ## Rotas da Entidade Avaliação
 
 ## Rotas da Entidade Estabelecimento
 
 ## Rotas da Entidade User
 
-#### GET: /
+#### GET: /users
+
+http://localhost:porta/users/
+
+Objetivo: Retornar todos os usuários
+Acesso: Privado
 
 
 
