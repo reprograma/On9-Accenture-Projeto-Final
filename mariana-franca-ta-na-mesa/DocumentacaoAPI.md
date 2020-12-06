@@ -1,6 +1,6 @@
 # Documentação de API (versão 1.0)
 
-## Bem Vindos
+## Bem Vinde
 
 ## Sobre a API ta-na-Mesa
 
@@ -8,7 +8,10 @@ Esta API tem como propósito ser uma coleção pessoal de receitas, onde o usuá
 
 ## Contatos
 
-Linkedin: [https://www.linkedin.com/in/mariana-martiniano-de-frança-7284a642/]
+Linkedin: [www.linkedin.com/in/mariana-martiniano-de-frança-7284a642]
+(http://www.linkedin.com/in/mariana-martiniano-de-fran%C3%A7a-7284a642)
+
+
 Email: donafran@gmail.com
 
 ## Estrutura do JSON
@@ -18,16 +21,8 @@ Email: donafran@gmail.com
     "_id": " ",
 		"nomeReceita": " ",
 		"ingredientePrincipal": " ",
-		"ingredientes": [
-        " ",
-        " ",
-        " "
-    ],
-    "preparo": [
-        " ",
-        " ",
-				" "
-    ],
+		"ingredientes": [ " " ],
+    "preparo": [ " " ],
 		"tipoReceita":" ",
     "receitaSelecionada": " ",
     "observacoes": " ",    
@@ -35,15 +30,10 @@ Email: donafran@gmail.com
 }
 ```
 
-## Acessos
+[ACESSOS](https://www.notion.so/6139d8ed71ec449b93a346a1e1cccc84)
 
-[Untitled](https://www.notion.so/be4674f11e7f41b6ba306036c3d7e467)
 
-```jsx
 
-```
-
-[]()
 
 ## Para rodar o projeto
 
@@ -54,8 +44,6 @@ npm install
 npm start
 
 npm bcrypt
-
-**Observação**:
 
 Esse projeto está em constante desenvolvimento e aberto para pull request.
 
