@@ -88,6 +88,33 @@ Retorno:
 }
 ```
 
+- **Criar novo usuário**
+
+http://localhost:8080/users/create
+
+body necessário:
+
+```jsx
+{
+    "name": "nome",
+	"email": "email@email.com",
+	"password": "senha"
+  }
+```
+
+Retorno:
+
+[201] Created
+
+```jsx
+{
+  "id": "fgspv6vj0",
+  "name": "nome",
+  "email": "email@email.com",
+  "password": "senha"
+}
+```
+
 ### PUT
 
 - Editar localização

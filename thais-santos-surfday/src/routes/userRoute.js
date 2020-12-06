@@ -1,12 +1,12 @@
-/*const express = require('express')
-const app = express()
-const porta = 8080
-const user = require('./userRoute')
+const express = require('express')
+const router = express.Router()
 
-//@router GET /user
-//@desc Retorna todos usuarios
+const userController = require('../controllers/userController')
+
+
+//@router POST /users
+//@desc Cria um novo usuário
 //@access private
-app.get('/userRoute', function(req, res){
-    res.json(user)
-})
-*/
+router.post('/create', userController.createUser)
+
+module.exports = router
