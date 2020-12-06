@@ -1,18 +1,69 @@
-# Turma On9 (Accenture) - Projeto Final
+# Projeto Final - BackEnd - Reprograma
 
-Eis que se finda nosso curso, e agora queremos demonstrar nosso aprendizado em projeto prático.
+## Sobre
 
-## Primeira Entrega - 05/12
+Essa API tem o intuito de possibilitar que os usuários façam login na plataforma 'Blackflix', bem como, favoritem os vídeos que desejarem. Além disso, o perfil de Administrador poderá utilizar dos métodos do CRUD para fazer cadastro de novos vídeos, atualização dos cadastros desses vídeos, deletar vídeos, filtrar vídeos, etc.
 
-* Descritivo do projeto
-* 30% da codificação
+O banco de dados utilizado para registro das informações acima mencionadas foi o MongoDB.
 
-É importante que o projeto esteja numa pasta e não solto na raiz da branch. Além disso, sigam a seguinte estrutura para o nome:
-_nome-sobrenome-nome-do-projeto_
+A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos de Youtubers pretos, com conteúdos variados. A tecnologia utilizada no Front-End foi o React e, você pode conhecer a plataforma aqui: [Blackflix](https://blackflix.vercel.app/ )
 
-## Segunda Entrega - 12/12
 
-* 100% da codificação
-* Link do projeto publicado (o link da lista compartilhada será divulgado na semana 18)
+### Endpoints
 
-## Apresentação do projeto - 13/12
+##### GET
+
+- `/api/videos/all`
+- `/api/videos/:id`
+- `/api/videos/categoria/:id`
+
+- `/api/categorias/all`
+- `/api/categorias/:id`
+
+- `/api/users/all`
+- `/api/users/:id`
+
+##### POST
+
+- `/api/videos`
+
+- `/api/categorias`
+
+- `/api/users`
+
+Body necessário:
+
+
+##### PUT
+
+- `/api/videos/:id`
+
+- `/api/videos/categorias/:id`
+
+- `/api/users/:id`
+
+
+##### DELETE
+
+- `/api/videos/:id`
+
+- `/api/videos/categorias/:id`
+
+- `/api/users/:id`
+
+
+
+##Para rodar o projeto use:
+`git clone [link]`
+`npm install`
+`npm start`
+
+### Documentação da API
+
+![Arquitetura do projeto](./arquitetura.png)
+
+
+### Contatos da Desenvolvedora
+
+[LinkedIn da Jennyffer](https://www.linkedin.com/in/jennyfferndemorais/)
+E-mail: jnm.morais@gmail.com
