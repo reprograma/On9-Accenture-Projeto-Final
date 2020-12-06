@@ -111,7 +111,8 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"Unidade de saúde cadastrada com sucesso",
+    "message":"Unidade de saúde cadastrada com sucesso"
+},
 {
 		"_id":"",
     "type": "",
@@ -315,7 +316,7 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":`O cadastro do usuário de id ${id} foi apagado com sucesso`
+    "message":"O cadastro do usuário de id ${id} foi apagado com sucesso"
 }
 ```
 
@@ -335,7 +336,7 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":`O cadastro da unidade de saúde de id ${id} foi apagado com sucesso`
+    "message":"O cadastro da unidade de saúde de id ${id} foi apagado com sucesso"
 }
 ```
 
