@@ -1,43 +1,14 @@
-const User = require('../models/User')
-const { signupSchema } = require('../validators/user')
-const { hashPassword } = require('../helpers/user')
+const yup = require('yup')
 
-exports.getAll = () => {
-    try {
-        User.find()
-            .then(user => res.status(200).json(user))
-            .catch(res.status(204).json({ message: 'Não há usuários cadastrados' }))
-
-    } catch (e) {
-        console.log(e)
-        return res.status(400).json({ e: 'Não foi possível fazer busca' })
+yup.setLocale({
+    string: {
+        email: 'this e-mail is not valid',
+        min: 'The password need to have 8 charactes'
     }
-}
+})
 
-exports.signup = async (req, res) => {
-    try {
-        const validatedBody = await signupSchema.validate(req.body)
-        const user = new User(validatedBody)
-        User.findOne({ email: validatedBody.email })
-            .then(async existingUser => {
-                if (existingUser) {
-                    return res.status(400).json({
-                        errors: ['This account is registered with other e-mail.']
-                    })
-                }
-
-                const passwordHashed = await hashPassword(user.password, res)
-                user.password = passwordHashed
-                user.save()
-                    .then(user => res.status(200).json(user))
-
-                    .catch(err => {
-                        console.log(err)
-                        return res.status(500).json(err)
-                    })
-            })
-    } catch (e) {
-        console.log(e)
-        return res.status(400).json(e)
-    }
-}
+exports.signupSchema = yup.object().shape({
+    email: yup.string().email().required('This field is required'),
+    password: yup.string().min(8).required('This field is required'),
+    address: yup.string().required('This field is required')
+}).required('This object cannot be empty')
