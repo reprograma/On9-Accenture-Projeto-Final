@@ -7,6 +7,8 @@ Nessa API é possível cadastrar produtos (estoque) e emitir pedidos (vendas), q
 
 ## Estrutura do Projeto
 
+![Estrutura do projeto](estrutura_projeto.png)
+
 ## Dependências requeridas
 
     "bcrypt": "^5.0.0",
@@ -143,6 +145,15 @@ route GET estoque/:nomeProduto
 @endpoint http://localhost:8080/venda/:id
 ```
 
+## Regras de negócio 
+
+- Não cadastrar um produto com nome já existente 
+- Não emitir pedidos caso o estoque não seja o suficiente
+- Senha de acesso para deletar (produto ou venda) com tamanho de 6 caracteres
+- Após o estorno somar o quantidade vendida no estoque
+- Após a venda subtrair a quantidade vendida no estoque
+
+
 ## Como ter acesso?
 
 Para ter o acesso na sua máquina, fazer os seguintes comandos no seu terminal:
@@ -151,7 +162,6 @@ Para ter o acesso na sua máquina, fazer os seguintes comandos no seu terminal:
 git clone <link repositório>
 npm install
 npm start
-
 ```
 
 ### Contato
