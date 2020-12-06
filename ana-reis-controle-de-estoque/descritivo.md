@@ -1,9 +1,9 @@
 # Controle autônomo
 
 ## Sobre o projeto
-Essa API tem o intuito de ajudar dos microempreendedores que estão iniciando (ou não), e que possuem equipes reduzidas facilitando a administração dos produtos que oferecem. O objetivo dessa API é fazer o controle de estoque para autônomos que possuem a dificuldade de administrar a saída e entrada dos produtos que oferecem. 
+Essa API tem o intuito de ajudar os microempreendedores que estão iniciando o seu negócio (ou não) ou que possuem equipes reduzidas, facilitando a administração dos produtos que oferecem. O propósito dessa API é fazer o controle de estoque para autônomos que possuem a dificuldade de administrar a saída e entrada das suas mercadorias
 
-Nessa API é possível cadastrar produtos (estoque) e emitir pedidos (vendas), que para uma melhor organização serão registrados em duas coleções diferentes, utilizando o MongoDB. A emissão de cada pedido está relacionada diretamente com o estoque, fazendo a subtração (venda) ou soma ( abastecimento ou estorno) na quantidade existente do estoque do produto cadastrado que será vendido, permitindo sempre uma atualização simultânea da venda com o estoque.
+Nessa API é possível cadastrar produtos (estoque) e emitir pedidos (vendas). Para uma melhor organização, os registros de Produtos e Vendas, serão armazenados em duas coleções diferentes, utilizando o banco de dados MongoDB. A emissão de cada pedido está relacionada diretamente com o estoque, fazendo a subtração (venda) ou soma (abastecimento ou estorno) na quantidade existente do estoque do produto que será vendido, permitindo sempre uma atualização simultânea da venda com o estoque.
 
 ## Estrutura do Projeto
 

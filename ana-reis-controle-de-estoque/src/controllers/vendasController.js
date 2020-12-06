@@ -73,34 +73,44 @@ const estorno =  (request, response) => {
     const { id } = request.params
 
 
-    Vendas.findByIdAndDelete(id)
-        .then(() => {
-            response.status(200).json("Produto deletado!");
+console.log(id)
 
-            Vendas.findById(id)
-            .then((venda) => {
-                let quantidadeVenda = venda.quantidade
-                let produtoNome = venda.nomeProduto
-    
-                Produtos.findOne({nomeProduto: produtoNome})
-                    .then((produto) => {
-                        
-                        produto.estoque = produto.estoque + quantidadeVenda
-                        response.status(200).message("Estorno feito com sucesso e estoque atualizado ")
-                    })
-                    .catch((err) => {
-                        throw new Error(err);
-                    });
-            })
-         
+    Vendas.findById(id)
+        .then((venda) => {
+            console.log(venda)
+
+            let quantidadeVenda = venda.quantidade
+            let produtoNome = venda.nomeProduto
+
+            console.log (quantidadeVenda)
+            console.log(produtoNome)
+            Produtos.findOne({ nomeProduto: produtoNome })
+                .then(async produto => {
+                    console.log(produto)
+                    console.log(produto.estoque)
+                    produto.estoque = produto.estoque + quantidadeVenda
+                    console.log(produto.estoque)
+
+                await produto.save()
+
+                console.log(produto)
+                    Vendas.findByIdAndDelete(id)
+                        .then(() => {
+                            response.status(200).json("Estorno feito com sucesso e estoque atualizado ")
+                        })
+                        .catch((err) => {
+                            throw new Error(err);
+                        });
+                })
+
         })
-      
-    }
- 
-    
+
+}
+
+
 module.exports = {
-                vendas,
-                periodoVenda,
-                vendaProduto,
-                estorno
-            }
+    vendas,
+    periodoVenda,
+    vendaProduto,
+    estorno
+}
