@@ -26,12 +26,14 @@ Negócio:
 
 ![Funcionamento API Alert Ambulance Traffic](FuncionamentoAPIAlertAmbulanceTraffic.png)
 
-## Ferramentas utilizadas
+## Ferramentas, linguagens e arquitetura utilizadas
 * Node.js
 * Express.js
 * Nodemon
 * mongoDB
 * JavaScript
+* Postman
+* MVC
 
 ## Rotas
 GET
