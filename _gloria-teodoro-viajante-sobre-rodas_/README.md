@@ -4,7 +4,9 @@
 
 # 🎯 Qual a finalidade da API?
 
-  Viajante Sobre Rodas é uma API criada para facilitar a hospedagem de pessoas com deficiência física. Para isso, por meio dela estão sendo cadastrados hoteis e pousadas que estejam de acordo com os princípios da acessibilidade, considerando características imprescindíveis para uma boa experiência durante a hospedagem, como banheiros planejados, vaga de estacionamento exclusiva e rampas de acesso. Há muito trabalho a ser feito para que todas as pessoas possam se conectar verdadeiramente aos espaços físicos de suas cidades, o objetivo é contribuir com esse processo.
+  Viajante Sobre Rodas é uma API criada para facilitar a hospedagem de pessoas com deficiência física. Para isso, utilizando-se do MongoDB, serão cadastrados hotéis e pousadas que estejam de acordo com os princípios da acessibilidade, considerando características imprescindíveis para uma boa experiência durante a hospedagem, como banheiros planejados, vaga de estacionamento exclusiva e rampas de acesso.
+  
+  No Brasil, ser cadeirante significa, quase sempre, ser impedido de planejar viagens, de sonhar com profissões e de se limitar a um reduzido convívio social. São poucos os lugares com planejamento efetivo que integre essas pessoas e poucas as pessoas que se preocupam com a saúde mental de quem vive a luta contra o capacitismo todos os dias. Há muito trabalho a ser feito para que todas as pessoas possam se conectar verdadeiramente aos espaços físicos de suas cidades e se sintam pertencentes ao mundo que também merecem explorar. O objetivo desse projeto é contribuir um pouco com esse processo.
 
 # 🚀 Routes
 
