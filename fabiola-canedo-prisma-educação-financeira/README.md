@@ -2,10 +2,42 @@
 
 ## Prisma Educação Financeira
 
-_Início da Jornada_: Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse trabalhar mediante a realização de um projeto. Uma vez que defini que abordaria sobre Educação Financeira, iniciei uma pesquisa no padrão Double-Diamond, o qual explicarei melhor abaixo: 
+---
 
-## Descobrir 
+## Índice
 
-Realizei um processo de discovery e necessito. 
+* Formulário
+* Análise das Respostas
+* Matriz CSD
+* Card Sorting
 
+---
 
+## Contexto
+Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar  mediante a realização de um projeto. Após a validação que será explicada aqui, defini que abordaria sobre Educação Financeira. Iniciei uma pesquisa no padrão Double-Diamond, com realização de protótipo e etapa final de codificação. 
+
+---
+
+## Formulário de Perguntas 
+
+![imagem com as perguntas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Perguntas_Formulario.PNG)
+
+---
+
+## Análise das respostas do formulário
+
+![imagem com as respostas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Respostas_Formulario.PNG)
+
+---
+
+## Matriz CSD 
+
+![imagem com a Matriz CSD](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Matriz_CSD.PNG)
+
+---
+
+## Card Sorting 
+
+![imagem do card sorting](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG)
+
+---
