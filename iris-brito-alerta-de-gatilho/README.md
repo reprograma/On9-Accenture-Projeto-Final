@@ -23,26 +23,26 @@ O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que 
 
 ### GET 
 Retornar todos os livros do sistema:
-http://localhost:8080/alerta-de-gatilho 
+http://localhost:8080/alertaDeGatilho 
 
 Retornar o livro de acordo com o id:
-http://localhost:8080/alerta-de-gatilho/:id
+http://localhost:8080/alertaDeGatilho/:id
 
 Retornar o livro de acordo com o título:
-http://localhost:8080/alerta-de-gatilho/titulo/*titulo*
+http://localhost:8080/alertaDeGatilho/titulo/*titulo*
 
 Retornar os livros de acordo com o nome do(a) autor(a)
-http://localhost:8080/alerta-de-gatilho/autor/nome-do-autor
+http://localhost:8080/alertaDeGatilho/autor/nome-do-autor
 
 Retornar os livros que têm gatilhos:
-http://localhost:8080/alerta-de-gatilho/temgatilho
+http://localhost:8080/alertaDeGatilho/temgatilho
 
 Retornar os livros que não tem gatilhos:
-http://localhost:8080/alerta-de-gatilho/naotemgatilho
+http://localhost:8080/alertaDeGatilho/naotemgatilho
 
 ### POST
 Adicionar um novo livro:
-http://localhost:8080/alerta-de-gatilho/cadastro
+http://localhost:8080/alertaDeGatilho/cadastro
 
 O body deve conter:
 
@@ -68,7 +68,7 @@ Resposta [400]:
 
 Atualizar os gatilhos de um livro:
 
-http://localhost:8080/alerta-de-gatilho/alterar/:id
+http://localhost:8080/alertaDeGatilho/alterar/:id
 
 O body deve conter: 
 
@@ -82,7 +82,7 @@ O body deve conter:
 
 Deletar um livro:
 
-http://localhost:8080/alerta-de-gatilho/:id
+http://localhost:8080/alertaDeGatilho/:id
 
 Resposta [200]:
 
