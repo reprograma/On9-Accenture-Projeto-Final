@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "tecnica": "Entalhe",
+        "descricao": "Escutura na madeira",
+        "estado": "PE"
+    },
+    {
+        "id": 2,
+        "tecnica": "Cerâmica",
+        "descricao": "Jarros e panelas",
+        "estado": "MG"
+    },
+    {
+        "id": 3,
+        "tecnica": "Trançado",
+        "descricao": "Bolsas, luminárias",
+        "estado": "PA"
+    }
+]
