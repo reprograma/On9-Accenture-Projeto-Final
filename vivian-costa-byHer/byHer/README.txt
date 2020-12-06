@@ -10,54 +10,74 @@ email: vivianalessandra_@hotmail.com
 
 ##  Rotas
 ### GET: /
-GET ALL - Para buscar todos os títulos de filmes cadastrados no Banco de Dados:
-http://localhost:PORT/movies
+**GET ALL - Para buscar todos os títulos de filmes cadastrados no Banco de Dados:**
+http://localhost:5000/movies
+ - Se necessário, alterar a porta.
 
-*Onde tem "PORT", colocar a porta que está sendo usada.
 
 
 ### POST: /cadastro
-POST para adicionar filmes no Banco de Dados:
-http://localhost:PORT/movies/cadastro
+**POST para adicionar filmes no Banco de Dados:**
+http://localhost:5000/movies/cadastro
 
-Body necessário para cadastrar seu filme:`
+Body necessário para cadastrar seu filme:
+
+`
 {
 "title":{ type:  String, required:  true }, 
 "director":{ type:  String, required:  true },
-"nacionality":{ type:  String, required:  true },
+"nacionality":{ type:  Array, required:  true },
 "year":{ type:  Number, required:  true },
-"genre":{ type:  String, required:  true },
+"genre":{ type:  Array, required:  true },
 "about":{ type:  String, required:  true },
 "atLeastOneFemaleWriter":{ type:  Boolean, required:  true}
 }`
 
-*No campo "nacionality", seguir o padrão: "Brazilian", "Mexican", "Korean", etc.
-**No campo "year", seguir o padrão: 2000, 1997, 2015, de colocar SÓ o ano.
-***No campo "genre", seguir o padrão: "Drama", "Romance", "Comedy", etc.
-****No campo "atLeastOneFemaleWriter", se o filme tiver sido escrito por pelo menos uma mulher, digitar: true, se não, digitar: false.
+ - No campo **"nacionality"**, seguir o padrão: "Brazilian", "Mexican", "Korean", etc.
+Se o filme tiver sido produzido em mais de um país, adicionar array.
+Ex: ["Canadian", "Korean"]
+
+ - No campo **"genre"**, seguir o padrão: "Drama", "Romance", "Comedy", etc.
+Se o filme se encaixar em mais de um gênero, adicionar array.
+Ex: ["Horror", "Musical"]
+
+ - No campo **"atLeastOneFemaleWriter"**, se o filme tiver sido escrito por pelo menos uma mulher, digitar: true, se não, digitar: false.
 
 Exemplo:
 
 {
-	"title": "Lady Bird",
-  "director": "Greta Gerwig",
-  "nacionality": "American",
-  "year": 2017,
-  "genre": "Drama",
-	"about": "Descrição breve sobre premissa do filme.",
-	"atLeastOneFemaleWriter": true
+ "title": "Lady Bird",
+ "director": "Greta Gerwig",
+ "nacionality": "American",
+ "year": 2017,
+ "genre": ["Drama", "Comedy"]
+ "about": "Descrição breve sobre premissa do filme.",
+ "atLeastOneFemaleWriter": true
 }
   
 
 
 
 ### GET
-GET BY GENRE - Para buscar filmes por gênero:
+**GET BY GENRE - Para buscar filmes por gênero:**
+http://localhost:5000/movies/genre?genre=*gênero de preferência*
+Exemplo: http://localhost:5000/movies/genre?genre=Comedy
+
+### GET
+**GET BY NACIONALITY - Para buscar filmes pela nacionalidade do mesmo:**
+http://localhost:5000/movies/nacionality?nacionality=*nacionalidade de preferência*
+http://localhost:5000/movies/nacionality?nacionality=Canadian
 
 
 ### GET
-GET BY NACIONALITY - Para buscar filmes pela nacionalidade do mesmo:
+**GET BY YEAR - Para buscar filmes pelo ano de lançamento:**
+http://localhost:5000/movies/year?year=*ano de preferência*
+http://localhost:5000/movies/year?year=2000
 
 
-### GET
-GET BY YEAR - Para buscar filmes pelo ano de lançamento:
+## Dependências
+### Dependências necessárias para rodar a API:
+
+ - Express;
+ - Mongoose;
+ - Nodemon.
