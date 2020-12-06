@@ -9,7 +9,9 @@ router.get('/:id', vaccineController.getVaccineById)
 
 router.post('/register', vaccineController.registerVaccine)
 
-router.post('/register/:id', vaccineController.insertVaccineCard)
+// router.post('/register/:id', vaccineController.insertVaccineCard)
+
+router.patch('/register/:id', vaccineController.insertVaccineCard)
 
 router.use(authMiddleware)
 router.delete('/:id', vaccineController.deleteVaccine)
