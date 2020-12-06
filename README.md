@@ -1,18 +1,351 @@
-# Turma On9 (Accenture) - Projeto Final
+# Meu Resumão (versão 1.0)
+Esse projeto foi elaborado para o trabalho de conclusão do Bootcamp de BackEnd promovido pela {reprograma} ocorrido entre Agosto e Dezembro de 2020 com duração de 18 semanas.
 
-Eis que se finda nosso curso, e agora queremos demonstrar nosso aprendizado em projeto prático.
+## Sobre o Projeto
+Como ex aluna de escola pública e atualmente aluna de uma universidade pública, eu senti muita dificuldade em estudar na época que eu me preparava para o enem, pensando nisso, desenvoldi a idéia do "Meu Resumão" para ajudar os vestibulandos do ENEM. A aplicação serve para os alunos postarem seus resumos pessoais sobre temas relacionados ao ENEM e ajudar outros alunos de forma mais simples e concentrada.
 
-## Primeira Entrega - 05/12
+## Objetivo
+O objetivo do projeto é possibilitar o registro de resumos sobre o ENEM e pesquisar por assunto, matéria e tags.
 
-* Descritivo do projeto
-* 30% da codificação
+## Status
 
-É importante que o projeto esteja numa pasta e não solto na raiz da branch. Além disso, sigam a seguinte estrutura para o nome:
-_nome-sobrenome-nome-do-projeto_
+Em desenvolvimento... 
 
-## Segunda Entrega - 12/12
+## Rotas 
 
-* 100% da codificação
-* Link do projeto publicado (o link da lista compartilhada será divulgado na semana 18)
 
-## Apresentação do projeto - 13/12
+### Apresentação da API
+
+
+
+**POST:** /
+
+Apresenta o título da API e sua versão.
+
+Resposta [200]:
+
+~~~Javascript
+{
+    "titulo": "Meu Resumão",
+    "versao": "1.0.0"
+}
+~~~
+
+
+### Usuario
+Fazer login na API para gerar o JSON Web Token que será enviado em todas as requisições protegidas que apenas o usuário cadastrado terá acesso.
+
+**POST:** meuresumao/usuarios/registrar
+
+Body necessário:
+
+~~~Javascript
+    {
+        "login": "string",
+        "password": "string"
+    }
+~~~
+
+Resposta [200]:
+
+~~~Javascript
+    {
+        {
+            "login": {
+                "id": "object ID",
+                "login": "string"
+            },
+            "token": "string"
+        }
+    }
+~~~
+
+
+### Postagens
+
+**GET:** meuresumao/todos
+
+Listar todas os resumos
+
+Resposta [200]:
+
+~~~Javascript
+[
+    {
+        "_id": "object ID",
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+]
+~~~
+
+**GET:** meuresumao/{id}
+
+Listar todas os resumos pelo ID
+
+Resposta [200]:
+
+~~~Javascript
+[
+    {
+        "_id": "object ID",
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+]
+~~~
+
+**GET:** meuresumao/materia
+
+Listar todas os resumos pela matéria.
+
+Resposta [200]:
+
+~~~Javascript
+[
+    {
+        "_id": "object ID",
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+]
+~~~
+
+**GET:** /meuresumao/tags
+
+Visualizar resumo pela tag escolhida do resumo.
+
+Resposta [200]:
+
+~~~Javascript
+{
+        "_id": "object ID",
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+~~~
+
+**GET:** /meuresumao/assunto
+
+Visualizar resumo pelo assunto do resumo.
+
+Resposta [200]:
+
+~~~Javascript
+{
+        "_id": "object ID",
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+~~~
+
+
+**POST:** meuresumao/criar
+
+Posta novo resumo.
+
+Body necessário:
+
+~~~Javascript
+{
+        "referencias": [
+            "Aqui vai ficar as referencias",
+            "referencia"
+        ],
+        "tags": [
+            "tag01",
+            "tag02",
+            "tag03"
+        ],
+        "titulo": "titulo",
+        "autor": "Michelle Lícia",
+        "resumo": "Aqui vai ficar o resumo",
+        "materia": "Matéria",
+        "assunto": "Assunto",
+    }
+~~~
+
+Resposta [200]:
+
+~~~Javascript
+{
+        "id": 
+        "referencias": Array,
+        "tags": Array,
+        "titulo": String,
+        "autor": String,
+        "resumo": String,
+        "materia": String,
+        "assunto": String,
+        "password": String,
+        "login": String,
+    }
+~~~
+Resposta [201]
+~~~Javascript
+{
+        "mensagem": "Resumo postado com sucesso!"
+    }
+~~~
+
+
+**PUT:** meuresumao/atualizar
+
+Atualiza resumo pelo ID.
+
+Body necessário:
+
+~~~Javascript
+{
+    {
+        "id": String,
+        "referencias": Array,
+        "tags": Array,
+        "titulo": String,
+        "autor": String,
+        "resumo": String,
+        "materia": String,
+        "assunto": String,
+    }
+}
+~~~
+
+Resposta [200]:
+
+~~~Javascript
+{
+        "mensagem": "`{ID} foi atualizado com sucesso!`"
+    }
+~~~
+
+
+
+**DELETE:** meuresumao/:id
+
+Deletar um resumo a partir do seu ID. É necessário autorização com token no padrão: Bearer Token.
+
+Resposta [200]:
+
+~~~Javascript
+{
+    "message": "A Postagem {id} foi deletada com sucesso!"
+}
+~~~
+
+
+## Regras de negócio
+
+- Apenas usuários cadastrados poderá realizar postagens
+- Usuários poderão publicar resumos com o mesmo título.
+
+## Para rodar o Meu Resumão.
+
+1. Clone esse repositório
+2. Digite **npm install** em seu terminal para instalar as dependências configuradas no package.
+
+    ~~~Shell
+        npm install
+    ~~~
+
+- Para rodar o servidor em ambiente de desenvolvimento **npm run dev**:
+
+    ~~~Shell
+        npm run dev
+    ~~~
+
+ - ou, simplesmente digite **npm start**:
+    ~~~Shell
+        npm start
+    ~~~
+
+## Tecnologias
+
+Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e dependências:
+
+- Nodemon;
+- MongoDB;
+- Mongoose;
+- Bcrypt;
+- Yup;
+- Jsonwebtoken;
+- Git e Github;
+- Visual Studio Code;
+- Node.js;
+- Express.js;
+
+
+
+## Futuras melhorias
+- Adicionar a opção de comentários nos resumos.
+- Adicionar a opção resumos favoritos para usuários.
+
+
+Este projeto encontra-se em desenvolvimento e está aberto para pullrequests.
+
+Feito por: Michelle Lícia
+
+Contatos:
+
+[![Linkedin Badge](https://img.shields.io/badge/-michellelicia-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/michellelicia/)](https://www.linkedin.com/in/michellelicia/)
+
+[![Gmail Badge](https://img.shields.io/badge/gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:michellelicia98@gmail.com)](mailto:michellelicia98@gmail.com)

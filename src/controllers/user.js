@@ -45,40 +45,6 @@ const createUser = async (request, response, next) => {
     }
 }
 
-
-const signUp = async (req, res) => {
-    const { password } = req.body
-    const salt = bcrypt.genSaltSync(bcryptSalt)
-
-    try {
-        const validatedBody = await signupUserSchema.validate(req.body)
-
-        const user = new User(validatedBody)
-
-        User.findOne({ email: validatedBody.email }).then(async (existingUser) => {
-            if (existingUser) {
-                return res.status(400).json({
-                    error: ["Conta de e-mail já cadastrado."],
-                })
-            }
-
-            const passwordHashed = await bcrypt.hashSync(password, salt)
-            user.password = passwordHashed
-
-            user.save()
-                .then((user) => res.status(200).json(user))
-                .catch((err) => {
-                    return res.status(500).json(err)
-                })
-        })
-            .catch((err) => {
-                res.status(400).json(err)
-            })
-    } catch (e) {
-        return res.status(400).json(e)
-    }
-}
-
 const deleteUser = function (req, res) {
     const { id } = req.params
 
@@ -91,4 +57,4 @@ const deleteUser = function (req, res) {
         })
 }
 
-module.exports = { deleteUser, signUp, getUser, getUserById, createUser }
+module.exports = { deleteUser, getUser, getUserById, createUser }
