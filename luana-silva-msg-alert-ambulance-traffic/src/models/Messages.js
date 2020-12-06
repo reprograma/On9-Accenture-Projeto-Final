@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
+    ambulanceId: { Type: Schema.types.ObjectId, ref: 'Ambulance', required: true }
+    transitAgentId: { Type: Schema.types.ObjectId, ref: 'transitAgent', required: true }
     helpLocation: { type: String, required: true },
     hospitalLocation: { type: String, required: true },
     date: { type: Date, required: true },

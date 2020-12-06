@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const ambulanceSchema = new mongoose.Schema(
   {
+    email: { type: String, unique: true, required: true },
+    password: { type: String, required: true },
     driverName: { type: String, required: true },
     driverCPF: { type: String, required: true, unique: true },
     licensePlate: { type: String, required: true },
