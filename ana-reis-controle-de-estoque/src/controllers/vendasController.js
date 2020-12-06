@@ -21,6 +21,16 @@ const vendas = (request, response) => {
  * Criar todo o código
  */
 const periodoVenda = async (request, response) => {
+
+    const {data} = request.params;
+
+    Produtos.find({createdAt})
+        .then((produto) => {
+            response.status(200).json(produto);
+        })
+        .catch(err => next(err));
+
+
 }
 
 
@@ -66,7 +76,6 @@ const vendaProduto = async (request, response) => {
 /**
  * Aplicar Validação 
  * Aplicar senha
- * Fazer funcionar a adição no estoque 
  */
 
 const estorno =  (request, response) => {
@@ -77,24 +86,17 @@ console.log(id)
 
     Vendas.findById(id)
         .then((venda) => {
-            console.log(venda)
 
             let quantidadeVenda = venda.quantidade
             let produtoNome = venda.nomeProduto
 
-            console.log (quantidadeVenda)
-            console.log(produtoNome)
             Produtos.findOne({ nomeProduto: produtoNome })
                 .then(async produto => {
-                    console.log(produto)
-                    console.log(produto.estoque)
+ 
                     produto.estoque = produto.estoque + quantidadeVenda
-                    console.log(produto.estoque)
+                    await produto.save()
 
-                await produto.save()
-
-                console.log(produto)
-                    Vendas.findByIdAndDelete(id)
+                     Vendas.findByIdAndDelete(id)
                         .then(() => {
                             response.status(200).json("Estorno feito com sucesso e estoque atualizado ")
                         })

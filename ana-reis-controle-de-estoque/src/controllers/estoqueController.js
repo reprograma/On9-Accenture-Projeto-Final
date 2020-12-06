@@ -16,17 +16,14 @@ const estoqueGeral = (request, response) => {
 //GET
 /**
  * Aplicar Validação
- * Fazer funcionar 
  */
 const nomeProduto = (request, response) => {
 
-    const {nomeProduto} = request.query;
-
-    console.log(nomeProduto)
-
+    const {nomeProduto} = request.params;
 
     Produtos.find({nomeProduto: nomeProduto})
         .then((produto) => {
+            console.log(produto.createdAt)
             response.status(200).json(produto);
         })
         .catch(err => next(err));
@@ -37,24 +34,36 @@ const nomeProduto = (request, response) => {
 //POST
 /**
  * Aplicar Validação
- * Regra de negócio: não cadastrar produto já existente
  */
 const cadastroProduto = (request, response) => {
     let { nomeProduto, descricao, estoque, valorFabrica } = request.body;
 
-    const novoProduto = new Produtos({
+     const novoProduto = new Produtos({
         nomeProduto,
         descricao,
         estoque,
         valorFabrica,
     });
 
+    const checarNome =  request.body.nomeProduto
+
+    console.log(checarNome)
     
-    novoProduto.save()
-        .then((res) => {
-            response.status(201).json(res);
+    Produtos.findOne({nomeProduto: checarNome})
+        .then(produto => {
+            if (produto){
+                response.status(400).json("Produto já cadastrado")
+            }else {
+                novoProduto.save()
+                .then((res) => {
+                    response.status(201).json(res);
+                })
+                .catch(err => next(err));
+            }
         })
-        .catch(err => next(err));
+
+    
+    
 
 }
 
