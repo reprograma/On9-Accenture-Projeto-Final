@@ -2,7 +2,7 @@ const express = require("express")
 const app = express() 
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/Controle", 
+mongoose.connect(`${process.env.DATABASE}`, 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
