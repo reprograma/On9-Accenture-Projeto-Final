@@ -9,13 +9,15 @@ function verificarSenha(senhaEntrada, senha) {
 
 exports.accessToken = (req, res) => {
     try {
-        const { mail, senha: senhaEntrada } = req.body;
-
+        const { mail, senhaEntrada } = req.body;
+        console.log('email: ' + mail)
+        console.log('senhaEntrada: ' + senhaEntrada)
         Anunciante.findOne({ email: mail })
             .then((anunciante) => {
-                const { id, email, senha } = anunciante;
+                let { id, email, senha } = anunciante;
 
                 try {
+                    console.log('entrei aqui')
                     verificarSenha(senhaEntrada, senha);
                 } catch (e) {
                     return res.status(401).json({ error: 'senha does not match' });

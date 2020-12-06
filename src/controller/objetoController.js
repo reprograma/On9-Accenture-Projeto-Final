@@ -16,6 +16,20 @@ const obterTodos = async(req, res) => {
         })
 }
 
+const obterPorId = async(req, res) => {
+    const { id } = req.params;
+    Objeto.findById(id)
+        .then((objeto) => {
+            if (objeto == 0) {
+                res.status(404).json({ message: 'Este objeto nao esta cadastrado' });
+            }
+            res.status(200).json(objetos);
+        })
+        .catch((err) => {
+            res.status(400).json(err);
+        })
+}
+
 const obterPorNome = async(req, res) => {
     const { nome } = req.params;
     Objeto.find({ nome: nome })
@@ -66,5 +80,6 @@ const salvarObjeto = async(req, res, next) => {
 module.exports = {
     obterTodos,
     obterPorNome,
+    obterPorId,
     salvarObjeto,
 }

@@ -7,6 +7,7 @@ const clienteSchema = new Schema({
     endereco: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     senha: { type: String, required: true },
+    objetosAlugados: [{ type: Schema.Types.ObjectId, ref: 'Objeto' }]
 }, { timestamps: true });
 
 const Cliente = mongoose.model('Cliente', clienteSchema);
