@@ -4,6 +4,7 @@ const Vendas = require("../models/Vendas");
 const Produtos = require("../models/Produtos");
 
 
+
 //GET 
 const vendas = (request, response) => {
 
@@ -14,7 +15,19 @@ const vendas = (request, response) => {
         .catch(err => next(err));
 }
 
+//GET
+/***
+ * Aplicar Validação 
+ * Criar todo o código
+ */
+const periodoVenda = async (request, response) => {
+}
+
+
 //POST
+/**
+ * Aplicar Validação 
+ */
 const vendaProduto = async (request, response) => {
     let { nomeProduto, valorVenda, quantidade, vendedor, clienteContato } = request.body;
 
@@ -26,21 +39,20 @@ const vendaProduto = async (request, response) => {
         clienteContato
     });
 
-    await novoPedido.save()
-
     try {
         let produto = await Produtos.findOne({ nomeProduto });
-            
+
         produto.estoque = produto.estoque - quantidade
 
-        if (produto.estoque < 0){
+        if (produto.estoque < 0) {
             return response.status(400).json("Quantidade insuficiente! Favor abastecer");
-        }else{
+        } else {
+            await novoPedido.save()
+
             await produto.save();
 
             return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + "unidades")
         }
-        
 
     }
     catch (err) {
@@ -50,10 +62,45 @@ const vendaProduto = async (request, response) => {
     }
 }
 
-
 //DELETE
+/**
+ * Aplicar Validação 
+ * Aplicar senha
+ * Fazer funcionar a adição no estoque 
+ */
 
+const estorno =  (request, response) => {
+    const { id } = request.params
+
+
+    Vendas.findByIdAndDelete(id)
+        .then(() => {
+            response.status(200).json("Produto deletado!");
+
+            Vendas.findById(id)
+            .then((venda) => {
+                let quantidadeVenda = venda.quantidade
+                let produtoNome = venda.nomeProduto
+    
+                Produtos.findOne({nomeProduto: produtoNome})
+                    .then((produto) => {
+                        
+                        produto.estoque = produto.estoque + quantidadeVenda
+                        response.status(200).message("Estorno feito com sucesso e estoque atualizado ")
+                    })
+                    .catch((err) => {
+                        throw new Error(err);
+                    });
+            })
+         
+        })
+      
+    }
+ 
+    
 module.exports = {
-    vendas,
-    vendaProduto
-}
+                vendas,
+                periodoVenda,
+                vendaProduto,
+                estorno
+            }

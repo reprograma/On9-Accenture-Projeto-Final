@@ -4,7 +4,7 @@ const router =  express.Router();
 const controller = require("../controllers/estoqueController")
 
 /**
-@route GET produtos
+@route GET estoque
 @desc Retorna todos os produtos
 @access Public 
 @endpoint http://localhost:8080/estoque/
@@ -12,24 +12,24 @@ const controller = require("../controllers/estoqueController")
 router.get("/", controller.estoqueGeral)
 
 /**
-@route GET produtos/:id
-@desc Retorna produto por id
+@route GET estoque/:nomeProduto
+@desc Retorna produto pelo nome
 @access Public 
 @endpoint http://localhost:8080/estoque/:nomeProduto
 **/
-router.get("/:nomeProduto", controller.getByName);
+router.get("/:nomeProduto", controller.nomeProduto);
 
 /**
-@route POST produtos/:id
+@route POST estoque/add
 @desc Cadastrar novo produto
 @access Public 
-@endpoint http://localhost:8080/estoque/add
+@endpoint http://localhost:8080/estoque/cadastro
 **/
-router.post("/add", controller.addProduto)
+router.post("/cadastro", controller.cadastroProduto)
 
 /**
-@route PATCH false/collab/:id
-@desc update collab
+@route PATCH estoque/abastecimento
+@desc Abastecer o estoque de um produto
 @access Public 
 @endpoint http://localhost:8080/estoque/abastecimento
 **/
@@ -37,8 +37,8 @@ router.patch("/abastecimento", controller.abastecerEstoque)
 
 /**
 @route DELETE /:id
-@desc delete task
-@access Public 
+@desc Deletar um produto
+@access Private 
 @endpoint http://localhost:8080/estoque/:id
 **/
 router.delete("/:id", controller.deletarProduto)

@@ -14,34 +14,18 @@ const estoqueGeral = (request, response) => {
 }
 
 //GET
+/**
+ * Aplicar Validação
+ * Fazer funcionar 
+ */
+const nomeProduto = (request, response) => {
 
-const getByName = async (request, response) => {
-
-    /*
-        const { nomeProduto } = request.query;
-    
-    try {
-        let produto = await Produtos.findOne({ nomeProduto });
-
-        return response.status(201).json(produto);
-
-    }
-    catch (err) {
-
-        return response.status(400).json({ error: err.message })
-
-    }
-}
-
-
-const getByName = (request, response) => {
-
-    const {nomeProduto} = request.params;
+    const {nomeProduto} = request.query;
 
     console.log(nomeProduto)
 
 
-    Produtos.findOne(nomeProduto)
+    Produtos.find({nomeProduto: nomeProduto})
         .then((produto) => {
             response.status(200).json(produto);
         })
@@ -49,11 +33,13 @@ const getByName = (request, response) => {
 
 
 }
-*/
-}
 
 //POST
-const addProduto = (request, response) => {
+/**
+ * Aplicar Validação
+ * Regra de negócio: não cadastrar produto já existente
+ */
+const cadastroProduto = (request, response) => {
     let { nomeProduto, descricao, estoque, valorFabrica } = request.body;
 
     const novoProduto = new Produtos({
@@ -74,6 +60,9 @@ const addProduto = (request, response) => {
 
 
 //PATCH
+/**
+ *Aplicar Validação 
+ */
 const abastecerEstoque = async (request, response) => {
 
     
@@ -99,9 +88,9 @@ const abastecerEstoque = async (request, response) => {
 
 //DELETE
 /**
- * com senha
- */
-
+ *  Aplicar Validação
+ * Colocar senha
+*/
 const deletarProduto = (request, response) => {
     const { id } = request.params
 
@@ -118,8 +107,8 @@ const deletarProduto = (request, response) => {
 
 module.exports = {
     estoqueGeral,
-    getByName,
-    addProduto,
+    nomeProduto,
+    cadastroProduto,
     abastecerEstoque,
     deletarProduto
 }
