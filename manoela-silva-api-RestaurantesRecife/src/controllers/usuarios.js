@@ -1,43 +1,42 @@
 const Usuario = require('../models/usuarios');
-const { loginSchema } = require('../validators/usuario');
-const { hashSenha } = require('../helpers/usuario'); 
+const bcrypt = require('bcrypt')
+const { senhaHash } = require ('../helpers/usuario')
+
 
 const todosUsuarios = (req, res) => {
     Usuario.find()
-    .then((usuarios)=>{
-    if(Usuario.length < 0){
-        res.status(204).json({message: 'não existem usuarios cadastrados'})
-    }else{
-        res.status(200).json(usuarios)
-    }
-    })
-    .catch((err)=>{
-        res.status(500).json(err)
-      })
+        .then((usuarios) => {
+            if (usuarios) {
+                res.status(204).send({ message: 'não existem usuarios cadastrados' })
+            } else {
+                res.status(200).json(usuarios)
+            }
+        })
+        .catch((err) => {
+            res.status(500).json(err)
+        })
 }
 
-const cadastroUsuario = async (req, res, next)=>{
-    const validaBody = await loginSchema.validate(req.body)
+const cadastroUsuario = async (req, res, next) => {
+    const { nome, email, senha } = req.body
+    const salt = bcrypt.genSaltSync(10)
+
     try {
-        const senhahash = await hashSenha(usuario.senha, res)
-
-        try{
-            const usuario= new Usuario({
-                nome,
-                email,
-                senha,
-            });
-
-            usuario.save()
-                .then((usuario)=>{
-                res.status(201).json(usuario);
-                })
-                .catch(err => next(err));
-        } catch (e) {
-        return res.status(401).json({error: 'erro'});
-        }
-    }catch (e) {
-        return res.status(401).json({error: 'erro'});
+        const hasheaSenha = await senhaHash (senha, salt, res)
+        console.log(hasheaSenha)
+        const usuario = new Usuario({
+            nome,
+            email,
+            hasheaSenha,
+        })
+        usuario.save()
+            .then((usuario) => {
+                res.status(200).json(usuario)
+            }).catch((err) => {
+                return res.status(500).json(err)
+            })
+    } catch (e) {
+        return res.status(400).json(e)
     }
 }
 

@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt')
 
-exports.senhahash = async (senha, res) => {
+exports.senhaHash = async (senha, salt, res) => {
+  
   try {
-    const salt = await bcrypt.genSalt(10)
+    console.log(senha)
     const hashearSenha = await bcrypt.hash(senha, salt)
+    console.log(hashearSenha)
     return hashearSenha
   } catch (e) {
     console.log(e)
