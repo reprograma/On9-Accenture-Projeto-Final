@@ -2,6 +2,8 @@
 
 ## Prisma Educação Financeira
 
+**Prisma** recebe uma iluminação e dissipa em várias outras cores. Assim como um prisma que reflete algo, o projeto possui o objetivo de democratizar o conhecimento acerca da educação financeira, e empoderar a sociedade para que estes possam disseminar o aprendizado e ajudar a instruir os outros ao seu redor.  Vem com a **Prisma Educação Financeira**! Tome as rédeas da sua vida financeira, sem conflito de interesse e que pode lhe proporcionar mais rentabilidade.
+
 ---
 
 ## Índice
