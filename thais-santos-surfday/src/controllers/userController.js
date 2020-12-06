@@ -1,18 +1,20 @@
 const { res, req } = require('express')
-const user = require('../models/user.json')
+const Users = require('../models/user')
 
-const createUser = (req, res) =>{
+
+const createUser = (req, res, next) =>{
     let {name, email, password} = req.body
-
-    const newUser = { 
-        id: Math.random().toString(32).substr(2,9),
-        name: name,
-        email: email,
-        password: password,
-    }
-
-    user.push(newUser)
-    res.status(201).json(newUser)
+    
+    const newUser = new Users({
+        name,
+        email,
+        password,
+    })
+    newUser.save()
+    .then((newUser) => {
+        res.status(201).json(newUser)
+    })
+    .catch(err => next(err))
 
 }
 

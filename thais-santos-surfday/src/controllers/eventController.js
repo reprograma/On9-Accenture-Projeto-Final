@@ -1,73 +1,83 @@
-const event = require('../models/event.json')
+const {req, res} = require('express')
+const mongoose = require('mongoose')
+const { response } = require('../app')
+const { events } = require('../models/event')
+const Event = require('../models/event')
 
 const getAll = (req, res) => {
-    res.status(200).send(event)
+    Event.find()
+    .then((events) => {
+        res.status(200).json(events)
+    })
+    .catch(err => next(err))
 }
 
 const getByApply = (req, res) =>{
-    const openApllies = event.find(event => event.openApply == true)
-    res.status(200).send(openApllies)
+    //const openApllies = event.find(event => event.openApply == true)
+    //res.status(200).send(openApllies)
+    Event.find({ openApply: true})
+        .then((events) => {
+            res.status(200).json(events)
+        })
+        .catch(err => next(err))
 }
 
-const createEvent = (req, res) =>{
+const createEvent = (req, res, next) =>{
     let {eventTitle, state, beach, surfDay} = req.body
 
-    const newEvent = { 
-        id: Math.random().toString(32).substr(2,9),
-        eventTitle: eventTitle,
-        state: state ,
-        beach: beach,
-        surfDay: surfDay.toString(),
-        openApply: true
-    }
-
-    event.push(newEvent)
-    res.status(201).json(newEvent)
-
+    const newEvent = new Event({
+        eventTitle,
+        state,
+        beach,
+        surfDay
+    })
+    newEvent.save()
+        .then((newEvent) => {
+            res.status(201).json(newEvent)
+        })
+        .catch(err => next(err))
 }
 
-const updateEvent = (req, res) =>{
+    const updateEvent = (req, res) =>{
     const { id } = req.params //pegando o id na URL
-    const { state, beach } = req.body //pegando os dados enviados body
-
-    const updatedEvent = event.find( event => event.id == id) //procurando o evento a ser atualizado
-    
-    const newEvent = {  //construindo o novo evento
-        id: updatedEvent.id, //mantendo as informações
-        eventTitle: updatedEvent.eventTitle,
-        state: state , //adicionando os novos valores mandados pelo usuario
-        beach: beach,
-        surfDay: updatedEvent.surfDay,
-        openApply: true
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: 'Specified id is not valid'})
+        return
     }
-    
-    const index = event.indexOf(updatedEvent) //procura a posiçao do evento a ser atualizado no json
-
-    event[index] = newEvent //atribuindo o evento antigo ao novo
-
-    res.status(200).json(event[index])
+    Event.findByIdAndUpdate(id, req.body)
+        .then(() => {
+            res.status(200).json({ message: `${req.params.id} is is updated`})
+        })
+        .catch((err) => {
+            res.json(err)
+        })
 }
+
 
 const closeApllies = (req, res) =>{
     const { id } = req.params
     const { openApply } = req.body
 
-    const closedEvent = event.find(event => event.id == id)
+    Event.findByIdAndUpdate(id, {$set: {openApply}})
+    .then((events) => {
+        res.status(200).json({message: `${req.params.id} applies are closed`})
+    })
+    .catch((err) => {
 
-    closedEvent.openApply = openApply
-
-    res.status(200).json({mensagem: "Inscrições encerradas"})
+    })
 }
 
 
-const deleteEvent = (req, res) =>{
-    const{id} = req.params
-    const filterEvent = event.find(event => event.id == id)
+const deleteEvent = (req, res, next) =>{
+    const{ id } = req.params
 
-    const index = event.indexOf(filterEvent)
-    event.splice(index, 1)
-
-    res.json({mensagem: "evento deletado com sucesso"})
+    Event.findByIdAndDelete(id)
+        .then(() => {
+            res.status(200).json('Evento cancelado')
+        })
+        .catch((err) => {
+            throw new Error(err)
+        })    
 }
 
 
