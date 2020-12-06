@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/alertaDeGatilho', 
+mongoose.connect(`${process.env.DATABASE}`, 
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,
