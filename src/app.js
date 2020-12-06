@@ -13,7 +13,7 @@ const login = require('./routes/login')
 
 const app = express()
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(`${process.env.DATABASE}`, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
