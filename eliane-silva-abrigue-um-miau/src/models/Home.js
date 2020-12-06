@@ -9,8 +9,8 @@ const homeSchema = new Schema({
     city: { type: String, required: true },
     neighborhood: { type: String, required: true },
     homeDescription: { type: String, required: true },
-    available: { type: Boolean, default: true }
-    favorite: { type: mongoose.Schema.Types.ObjectId, ref: 'Cat'}
+    available: { type: Boolean, default: true },
+    favoriteCats: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cat' }]
 },
     { timestamps: true })
 

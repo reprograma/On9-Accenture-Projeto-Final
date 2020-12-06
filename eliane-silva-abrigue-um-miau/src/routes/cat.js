@@ -3,40 +3,40 @@ const router = express.Router()
 const catController = require('../controllers/cat')
 const homeController = require('../controllers/home')
 
-//@route POST api/cat/newcat
+//@route POST api/cat/new-cat
 //@desc Registrar um gato
 //@acess Public
-router.post('/newcat', catController.createNewCat)
+router.post('/new-cat', catController.createNewCat)
 
-//@route GET api/cat/allhomes
+//@route GET api/cat/all-homes
 //@desc Visualizar todos lares temporários disponíveis
 //@acess Public
-router.get('/allhomes', homeController.getAll)
+router.get('/all-homes', homeController.getAll)
 
-//@route GET api/cat/bycity
+//@route GET api/cat/by-city
 //@desc Visualizar lares temporários por cidade
 //@acess Public
-router.get('/bycity', homeController.getByCity) 
+router.get('/by-city', homeController.getByCity) 
 
-//@route GET api/cat/bydistrict
+//@route GET api/cat/by-district
 //@desc Visualizar lares temporários por bairro
 //@acess Public
-router.get('/bydistrict', homeController.getByNeighborhood)
+router.get('/by-district', homeController.getByNeighborhood)
 
-//@route PUT api/cat/update/:id
+//@route PUT api/cat/update-registration/:id
 //@desc Atualizar cadastro do gato
 //@acess Public
-router.put('/update/:id', catController.updateall)
+router.put('/update-registration/:id', catController.updateRegistration)
 
-//@route PATCH api/cat/updateavaiable/:id
+//@route PATCH api/cat/update-available/:id
 //@desc Atualizar a disponibilidade do gato
 //@acess Public
-router.patch('/updateavaiable/:id', catController.updateavaiable);
+router.patch('/update-available/:id', catController.updateAvailable);
 
 //@route DELETE api/cat/delete/:id
 //@desc Deletar cadastro do gato
 //@acess Public
-router.delete('/delete/:id', catController.delete);
+router.delete('/delete/:id', catController.deleteRegistration);
 
 module.exports = router
 

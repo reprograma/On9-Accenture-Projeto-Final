@@ -4,6 +4,7 @@ const bcryptSalt = 9
 const Home = require('../models/Home')
 
 
+
 exports.createNewHome = async (request, response,) => {
     const { name, email, password, contact, city, neighborhood, homeDescription, available } = request.body
     const salt = bcrypt.genSaltSync(bcryptSalt)
@@ -49,9 +50,9 @@ exports.getAll = (request, response) => {
 }
 
 
-
 exports.getByCity = (request, response) => {
     const city = request.query.city
+
     Home.find({ city: city })
         .then((home) => {
             response.status(200).json(home)
@@ -64,12 +65,24 @@ exports.getByCity = (request, response) => {
 
 exports.getByNeighborhood = (request, response) => {
     const neighborhood = request.query.neighborhood
+
     Home.find({ neighborhood: neighborhood })
         .then((home) => {
             response.status(200).json(home)
         })
         .catch((error) => {
             response.status(400).json({ error: 'Erro ao buscar bairros.' })
+        })
+}
+
+exports.getFavCats = async (request, response) => {
+    const { id } = request.params
+    const fav = await Home.findById(id).populate('favoriteCats')
+        .then((favoriteCats) => {
+            response.status(200).json(favoriteCats)
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Não foi encontrado um miau favorito` })
         })
 }
 
@@ -91,11 +104,24 @@ exports.updateAvailable = (request, response) => {
     const { available } = request.body
 
     Home.findByIdAndUpdate(id, { $set: { available } })
-        .then((home) => {
+        .then(() => {
             response.status(200).json({ message: `Atualizado com sucesso.` })
         })
         .catch((error) => {
             response.status(400).json({ error: 'Não foi possível atualizar.' })
+        })
+}
+
+exports.updateFavCats = (request, response) => {
+    const { id } = request.params
+    const { favoriteCats } = request.body
+
+    Home.findByIdAndUpdate(id, { $set: { favoriteCats } })
+        .then(() => {
+            response.status(200).json({ message: `Miau favoritado!` })
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Não foi possível favoritar` })
         })
 }
 
