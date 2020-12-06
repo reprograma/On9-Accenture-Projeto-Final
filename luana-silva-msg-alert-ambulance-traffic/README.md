@@ -15,11 +15,24 @@ Negócio:
 * http://www2.recife.pe.gov.br/node/289274
 * 
 
+## Diagrama do funcionamento da api
 
+![Funcionamento API Alert Ambulance Traffic](FuncionamentoAPIAlertAmbulanceTraffic.png)
 
-## Segunda Entrega - 12/12
+## Ferramentas utilizadas
+* Node.js
+* Express.js
+* Nodemon
+* mongoDB
+* JavaScript
 
-* 100% da codificação
-* Link do projeto publicado (o link da lista compartilhada será divulgado na semana 18)
+## Rotas
+GET
+~~~JavaScript
 
-## Apresentação do projeto - 13/12
+~~~
+
+POST
+~~~JavaScript
+
+~~~
