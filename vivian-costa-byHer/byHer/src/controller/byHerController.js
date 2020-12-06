@@ -10,11 +10,32 @@ const getAll = (request, response) => {
     .catch(err => next(err));
 }
 
-//const getByGenre = 
+const getByGenre = (request, response) => {
+    const { genre } = request.query;
+    Movie.find({ genre: genre })
+    .then((movie) => {
+        response.status(200).json(movie);
+    })
+    .catch(err => next(err));
+}
 
-//const getByNacionality =
+const getByNacionality = (request, response) => {
+    const { nacionality } = request.query;
+    Movie.find({ nacionality: nacionality })
+    .then((movie) => {
+        response.status(200).json(movie);
+    })
+    .catch(err => next(err));
+}
 
-//const getByYear = 
+const getByYear = (request, response) => {
+    const { year } = request.query;
+    Movie.find({ year: year })
+    .then((movie) => {
+        response.status(200).json(movie);
+    })
+    .catch(err => next(err));
+}
 
 const createMovie = (request, response) => {
     let { title, director, nacionality, year, genre, about, atLeastOneFemaleWriter } = request.body
@@ -39,8 +60,8 @@ const createMovie = (request, response) => {
 
 module.exports = {
     getAll,
-   // getByGenre,
-    //getByNacionality,
-    //getByYear,
+    getByGenre,
+    getByNacionality,
+    getByYear,
     createMovie
 }

@@ -1,11 +1,18 @@
 const express = require("express");
+const { route } = require(".");
 const router = express.Router();
 
 const controller = require("../controller/byHerController");
 
-router.get("/", controller.getAll)
+router.get("/", controller.getAll);
 
-router.post("/cadastro", controller.createMovie)
+router.get("/genre", controller.getByGenre);
+
+router.get("/nacionality", controller.getByNacionality);
+
+router.get("/year", controller.getByYear);
+
+router.post("/cadastro", controller.createMovie);
 
 
 module.exports = router

@@ -11,14 +11,14 @@ email: vivianalessandra_@hotmail.com
 ##  Rotas
 ### GET: /
 GET ALL - Para buscar todos os títulos de filmes cadastrados no Banco de Dados:
-http://localhost:PORT/byHer
+http://localhost:PORT/movies
 
 *Onde tem "PORT", colocar a porta que está sendo usada.
 
 
 ### POST: /cadastro
 POST para adicionar filmes no Banco de Dados:
-http://localhost:PORT/byHer/cadastro
+http://localhost:PORT/movies/cadastro
 
 Body necessário para cadastrar seu filme:`
 {
