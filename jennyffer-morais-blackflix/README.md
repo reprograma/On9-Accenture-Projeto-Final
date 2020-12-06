@@ -15,9 +15,10 @@ A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos
 
 - `/api/videos/all`
 - `/api/videos/:id`
+- `/api/videos/categoria/:id`
 
-- `/api/videos/categorias/all`
-- `/api/videos/categorias/:id`
+- `/api/categorias/all`
+- `/api/categorias/:id`
 
 - `/api/users/all`
 - `/api/users/:id`
@@ -26,7 +27,7 @@ A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos
 
 - `/api/videos`
 
-- `/api/videos/categorias`
+- `/api/categorias`
 
 - `/api/users`
 

@@ -5,7 +5,7 @@ exports.videoSchema = yup
   .object()
   .shape({
     titulo: yup.string().required("Título é obrigatório"),
-    url: yup.string().required("URL obrigatória"),
-    categoria: yup.isSchema(Categoria),
+    urlVideo: yup.string().url().required("URL obrigatória"),
+    categoriaId: yup.isSchema(Categoria),
   })
   .required("O formulário não pode ser vazio");
