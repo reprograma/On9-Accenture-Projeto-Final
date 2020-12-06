@@ -32,10 +32,10 @@ Resposta [200]:
 ~~~
 
 
-### Login
+### Usuario
 Fazer login na API para gerar o JSON Web Token que será enviado em todas as requisições protegidas que apenas o usuário cadastrado terá acesso.
 
-**POST:** meuresumao/login
+**POST:** meuresumao/usuarios/registrar
 
 Body necessário:
 
@@ -208,7 +208,6 @@ Body necessário:
 
 ~~~Javascript
 {
-    "_id": "object ID",
         "referencias": [
             "Aqui vai ficar as referencias",
             "referencia"
@@ -327,11 +326,13 @@ Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e de
 - MongoDB;
 - Mongoose;
 - Bcrypt;
-- Jsonwebtoken.
+- Yup;
+- Jsonwebtoken;
 - Git e Github;
 - Visual Studio Code;
 - Node.js;
 - Express.js;
+
 
 
 ## Futuras melhorias

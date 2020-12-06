@@ -41,10 +41,8 @@ const getByTags = (request, response) => {
 
 //Post
 const createPost = async (request, response, next) => {
-    const { titulo, autor, resumo, materia, assunto, referencias, tags, password, login } = request.body
-    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const { titulo, autor, resumo, materia, assunto, referencias, tags } = request.body
     try {
-        const hashPass = await bcrypt.hashSync(password, salt);
         const newTask = new Task({
             titulo,
             autor,
@@ -52,9 +50,7 @@ const createPost = async (request, response, next) => {
             materia,
             assunto,
             referencias,
-            tags,
-            hashPass,
-            login
+            tags
         })
 
         newTask.save()
