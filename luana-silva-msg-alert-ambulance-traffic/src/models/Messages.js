@@ -2,20 +2,22 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
-    ambulanceId: { Type: Schema.types.ObjectId, ref: 'Ambulance', required: true }
-    transitAgentId: { Type: Schema.types.ObjectId, ref: 'transitAgent', required: true }
-    helpLocation: { type: String, required: true },
-    hospitalLocation: { type: String, required: true },
-    date: { type: Date, required: true },
-    exitTime: { type: String, required: true },
-    licensePlate: { type: String, required: true },
-    routesToHopital: { type: String, required: false }
-    telephoneNumber: { type: Number, required: true },
-    readConfirmation: { type: Boolean, required: true, default: false },
+    ambulanceId: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    driverName: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    licensePlate: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    locationAmbulance: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    destinationHospital: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    telephoneNumberAmbulance: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    routesToHopital: { Type: Schema.types.ObjectId, ref: 'AmbulanceUser', required: true },
+    transitAgentId: { Type: Schema.types.ObjectId, ref: 'TransitAgentUser', required: true },
+    transitAgentName: { Type: Schema.types.ObjectId, ref: 'TransitAgentUser', required: true },
+    transitAgentlocation: { Type: Schema.types.ObjectId, ref: 'TransitAgentUser', required: true },
+    telephoneNumberAgent: { Type: Schema.types.ObjectId, ref: 'TransitAgentUser', required: true },
+    readConfirmation: { type: Boolean, required: true, default: true },
   },
   { timestamps: true }
 );
 
-const Messages = mongoose.model("Messages", messageSchema);
+const MessagesSend = mongoose.model("MessagesSend", MessagesSend);
 
-module.exports = Messages;
+module.exports = MessagesSend;

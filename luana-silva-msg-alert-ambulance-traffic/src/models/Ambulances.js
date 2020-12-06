@@ -9,11 +9,12 @@ const ambulanceSchema = new mongoose.Schema(
     licensePlate: { type: String, required: true },
     location: { type: String, required: true },
     destination: { type: String, required: true },
-    telephoneNumber: { type: Number, required: true },
+    routesToHopital: { type: Number, required: false },
+    telephoneNumberAmbulance: { type: Number, required: true },
   },
   { timestamps: true }
 );
 
-const Ambulance = mongoose.model("Ambulance", ambulanceSchema);
+const AmbulancesUser = mongoose.model("AmbulancesUser", ambulanceSchema);
 
-module.exports = Ambulance;
+module.exports = AmbulancesUser;
