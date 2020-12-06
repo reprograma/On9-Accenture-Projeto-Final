@@ -4,6 +4,11 @@ const getAll = (req, res) => {
     res.status(200).send(event)
 }
 
+const getByApply = (req, res) =>{
+    const openApllies = event.find(event => event.openApply == true)
+    res.status(200).send(openApllies)
+}
+
 const createEvent = (req, res) =>{
     let {eventTitle, state, beach, surfDay} = req.body
 
@@ -49,10 +54,9 @@ const closeApllies = (req, res) =>{
 
     const closedEvent = event.find(event => event.id == id)
 
-    event.openApply = openApply
+    closedEvent.openApply = openApply
 
-    res.status(200).json({mensagem: "Inscrições encerradas",
-    closedEvent})
+    res.status(200).json({mensagem: "Inscrições encerradas"})
 }
 
 
@@ -71,6 +75,7 @@ const deleteEvent = (req, res) =>{
 
 module.exports = {
     getAll,
+    getByApply,
     createEvent,
     deleteEvent,
     updateEvent,

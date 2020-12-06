@@ -5,9 +5,11 @@ const eventController = require('../controllers/eventController')
 
 router.get('/', eventController.getAll)
 
+router.get('/open', eventController.getByApply)
+
 router.post('/create', eventController.createEvent)
 
-router.put('/editar/:id', eventController.updateEvent)
+router.put('/edit/:id', eventController.updateEvent)
 
 router.patch('/open/:id', eventController.closeApllies)
 
