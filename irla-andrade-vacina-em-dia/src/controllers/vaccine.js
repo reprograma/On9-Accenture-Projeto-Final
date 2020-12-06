@@ -128,6 +128,31 @@ exports.insertVaccineCard = async (req, res, next) => {
   }
 }
 
+// exports.insertVaccineCard = async (req, res, next) => {
+//   user = req.params
+//   id = user.id
+
+//   const { name } = req.body
+//   try{
+//     const newVaccineTaken = await Vaccine.findOne({ name: name })
+//       .then(async existingVaccine => {
+//         if(existingVaccine) {
+//           return res.status(404).json({ error: [`Vacina não cadastrada.`]})
+//         }
+//       })
+
+//     const userById = await User.findById(id)
+//     userById.vaccinesTaken.push(newVaccineTaken)
+//     await userById.save()
+//       .then((user) => {
+//         res.status(200).json(user)
+//       })
+//       .catch(err => next(err))
+//   } catch(e) {
+//     return res.status(400).json(e)
+//   }
+// }
+
 exports.deleteVaccine = (req, res) => {
   const { id } = req.params
 
