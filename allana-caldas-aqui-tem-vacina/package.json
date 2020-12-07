@@ -1,0 +1,18 @@
+{
+  "name": "allana-caldas-aqui-tem-vacina",
+  "version": "1.0.0",
+  "description": "Primeira parte do Projeto Final da turma de Desenvolvimento BackEnd do Reprograma",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Allana Caldas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.4",
+    "nodemon": "^2.0.6",
+    "yup": "^0.32.1"
+  }
+}
