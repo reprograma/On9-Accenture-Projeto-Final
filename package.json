@@ -1,0 +1,35 @@
+{
+  "name": "michelle-silva-meu-resumao",
+  "version": "1.0.0",
+  "description": "Projeto final do reprograma. API de um website voltado para postagens de resumos sobre assuntos do ENEM.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miclicia/meu-resumao.git"
+  },
+  "keywords": [
+    "api",
+    "nodejs",
+    "enem",
+    "resumo"
+  ],
+  "author": "Michelle Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miclicia/meu-resumao/issues"
+  },
+  "homepage": "https://github.com/miclicia/meu-resumao#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "express-unless": "^0.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.17",
+    "nodemon": "^2.0.6",
+    "yup": "^0.32.1"
+  }
+}
