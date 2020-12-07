@@ -1,0 +1,48 @@
+Essa api tem o proposito de listar, cadastrar e avaliar os restaurantes de Recife.
+Alguns restaurantes ainda não possuem cadastro em nenhum app ou site, porém nem por isso deixam de ser maravilhosos. 
+Essa API tem a finalidade de possibilitar a busca pelo menu que o usuario gosta de consumir, ex.: vegano, sushi, churrasco etc. 
+
+Quem deve fazer o cadastro de um novo restaurante deve ser um usuario que precisa se cadastrar com nome, email e senha. 
+O banco tem dois Schemas: usuario e restaurante. Criando um relacionamento entre tabelas. 
+
+Os clientes podem inserir cometários e dá uma nota para o restaurante de acordo com sua experiência, para inserir um novo comentario o cliente não precisa
+necessariamente estar cadastrado no sistema como usuario. 
+
+Através das notas fornecidas pelos clientes será gerado uma média para o restaurante.
+
+## ROTAS
+
+RESTAURANTES
+*GET 
+buscar todos os restaurantes = http://localhost:3000/restaurantes/
+buscar restaurantes por especialidades = http://localhost:3000/restaurantes/especialidade
+buscar restaurante por id = http://localhost:3000/restaurantes/:id
+*POST
+cadastrar novo restaurante = http://localhost:3000/restaurantes/cadastro
+Body necessário: 
+{
+nome: "", 
+senha:"", 
+restaurante:"", 
+especialidades:"", 
+rua:""
+}
+*PATCH
+inserir uma avaliação ao restaurante = http://localhost:3000/restaurantes/:id
+Body necessário: 
+{
+avaliação:"", 
+nota:number
+}
+
+USUARIOS
+*GET 
+buscar todos os usuarios = http://localhost:3000/usuarios/
+*POST
+cadastrar um novo usuario = http://localhost:3000/usuarios/cadastrado
+Body necessário:
+{
+nome:"", 
+email:"", 
+senha:""
+}
