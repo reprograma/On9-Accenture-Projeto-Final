@@ -1,0 +1,36 @@
+{
+  "name": "alert-ambulance-traffic",
+  "version": "1.0.0",
+  "description": "O objetivo dessa API é receber mensagens da localidade em que a ambulância está e para onde está indo e quando estiver em engarrafamento ou trânsito lento enviar mensagens informando a rua e sentido que está indo para os agentes de trânsito gerenciar o tráfego para a ambulância passar com facilidade e sem esperar muito tempo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luanaCristina/On9-Accenture-Projeto-Final.git"
+  },
+  "keywords": [
+    "API",
+    "alert",
+    "ambulance",
+    "traffic"
+  ],
+  "author": "Luana Cristina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luanaCristina/On9-Accenture-Projeto-Final/issues"
+  },
+  "homepage": "https://github.com/luanaCristina/On9-Accenture-Projeto-Final#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.4",
+    "nodemon": "^2.0.6",
+    "validator": "^13.5.1",
+    "yup": "^0.32.1"
+  }
+}
