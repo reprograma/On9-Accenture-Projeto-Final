@@ -1,11 +1,38 @@
 # DOCUMENTAÇÃO API incluIR (versão 1.0)
 ## Bem-vinde!
 
-#### A inclusão trata-se de dar liberdade as pessoas de IR e ter seu acesso garantido e com bem-estar aonde forem.
+#### A inclusão trata-se de dar liberdade as pessoas de IR e vir, com seu acesso garantido e bem-estar aonde forem.
 #### Esta API tem como propósito ser uma ferramenta de acessibilidade que busca fomentar a inclusão de pessoas com deficiência através do seu acesso livre e facilitado em todos os espaços.
 
 ## Rotas da Entidade Avaliação
 
+#### GET: /avaliacao/estabelecimento
+
+http://localhost:5000/avaliacao/estabelecimento
+
+Objetivo: Retornar todas as avaliações por estabelecimento
+Acesso: Publico
+
+#### GET: /avaliacao/user
+
+http://localhost:5000/avaliacao/user
+
+Objetivo: Retornar todas as avaliações feitas pelo prório usuário
+Acesso: Privado (apenas o próprio usuário pode realizar esse filtro)
+
+#### POST: /avaliacao/cadastrar
+
+http://localhost:5000/avaliacao/cadastrar
+
+Objetivo: Realizar cadastro de estabelecimentos
+Acesso: Publico
+
+#### DELETE: /avaliacao/:id
+
+http://localhost:5000/avaliacao/:id
+
+Objetivo: Deletar a avaliação cadastrada
+Acesso: Privado
 
 
 ## Rotas da Entidade Estabelecimento
