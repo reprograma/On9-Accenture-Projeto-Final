@@ -1,0 +1,24 @@
+{
+  "name": "on9-accenture-projeto-final",
+  "version": "1.0.0",
+  "description": "Projeto final",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunardosanjos/On9-Accenture-Projeto-Final.git"
+  },
+  "author": "Bruna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunardosanjos/On9-Accenture-Projeto-Final/issues"
+  },
+  "homepage": "https://github.com/brunardosanjos/On9-Accenture-Projeto-Final#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
