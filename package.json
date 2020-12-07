@@ -1,0 +1,23 @@
+{
+  "name": "jennyffer-morais-blackflix",
+  "version": "1.0.0",
+  "description": "API desenvolvida como projeto final do bootcamp de BackEnd da Reprograma. BackEnd desenvolvido para integrar ao meu projeto front-end desenvolvido em React.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "author": "Jennyffer de Morais\u001b[A\u001b[A\u001b[B\u001b[B",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.4",
+    "nodemon": "^2.0.6",
+    "yup": "^0.32.1"
+  }
+}
