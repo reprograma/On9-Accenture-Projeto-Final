@@ -1,0 +1,24 @@
+{
+  "name": "aline-santos-LearnShare",
+  "version": "1.0.0",
+  "description": "Projeto final turma On9-Accenture",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aline-pereira/On9-Accenture-Projeto-Final"
+  },
+  "author": "Aline Santos",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.3",
+    "nodemon": "^2.0.6"
+  }
+}
