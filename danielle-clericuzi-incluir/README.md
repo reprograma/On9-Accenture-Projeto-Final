@@ -107,13 +107,6 @@ Acesso: Público
 http://localhost:5000/users/login
 
 Objetivo: Realizar login de usuário
-Acesso: Público
-
-#### PATCH: /users/:id
-
-http://localhost:5000/users/:id
-
-Objetivo: Alterar campo cidade no cadastro de usuário
 Acesso: Privado
 
 #### DELETE: /users/:id
