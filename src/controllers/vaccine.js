@@ -45,21 +45,47 @@ exports.getVaccineById = (req, res, next) => {
 // Se vacina não existe, registrar nova vacina (chamar o método que registra nova vacina)
 //getvacinabyname
 
+//FUNCIONANDO OK
+// exports.registerVaccine = async (req, res, next) => {
+//   const { name, dose, avoidedDiseases } = req.body
+
+//   const newVaccine = new Vaccine({
+//     name,
+//     date: new Date().toString(),
+//     dose,
+//     avoidedDiseases
+//   })
+
+//   newVaccine.save()
+//     .then(vaccine => {
+//       res.status(201).json(vaccine)
+//     })
+//     .catch(err => next(err))
+// }
+
 exports.registerVaccine = async (req, res, next) => {
   const { name, dose, avoidedDiseases } = req.body
 
-  const newVaccine = new Vaccine({
-    name,
-    date: new Date().toString(),
-    dose,
-    avoidedDiseases
-  })
+  Vaccine.findOne({name: name } && { dose: dose }).then(async (existingVaccine) => {
+    if (existingVaccine) {
+      return res.status(400).json({
+        error: ["Já existe está vacina cadastrada."],
+      }) 
+    }
 
-  newVaccine.save()
-    .then(vaccine => {
-      res.status(201).json(vaccine)
+    const newVaccine = new Vaccine({
+      name,
+      date: new Date().toString(),
+      dose,
+      avoidedDiseases
     })
-    .catch(err => next(err))
+
+    newVaccine.save()
+      .then(vaccine => {
+        res.status(201).json(vaccine)
+      })
+      .catch(err => next(err))
+  })  
 }
 
 //chamar o método getvacinabyname
