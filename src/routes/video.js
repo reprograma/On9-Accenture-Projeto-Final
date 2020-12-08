@@ -8,4 +8,7 @@ router.get("/categoria/:id", videoController.getByCategoria);
 
 router.post("/new", videoController.criarVideo);
 
+router.put("/editar/:id", videoController.atualizarVideo);
+
+
 module.exports = router;

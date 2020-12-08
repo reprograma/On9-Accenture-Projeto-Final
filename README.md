@@ -6,8 +6,7 @@ Essa API tem o intuito de possibilitar que os usuários façam login na platafor
 
 O banco de dados utilizado para registro das informações acima mencionadas foi o MongoDB.
 
-A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos de Youtubers pretos, com conteúdos variados. A tecnologia utilizada no Front-End foi o React e, você pode conhecer a plataforma aqui: [Blackflix](https://blackflix.vercel.app/ )
-
+A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos de Youtubers pretos, com conteúdos variados. A tecnologia utilizada no Front-End foi o React e, você pode conhecer a plataforma aqui: [Blackflix](https://blackflix.vercel.app/)
 
 ### Endpoints
 
@@ -27,21 +26,44 @@ A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos
 
 - `/api/videos`
 
+Body necessário para criar vídeo:
+
+`{ "titulo": "QUER COMEÇAR A ORGANIZAR SUA VIDA FINANCEIRA? NATH FINANÇAS TE AJUDA!! - GABI OLIVEIRA", "urlVideo": "https://www.youtube.com/watch?v=wTnSMw4NtXA", "categoriaId": "5fcfcfb69b882e392cae3b3a" }`
+
 - `/api/categorias`
 
+Body necessário para criar categoria:
+
+`{ "titulo": "Gabi Oliveira", "cor": "#6BD1FF", "canal": "Canal De pretas por Gabi Oliveira", "urlCanal": "https://www.youtube.com/channel/UCF108KZPnFVxP8lILiJ1kng" }`
+
 - `/api/users`
-
-Body necessário:
-
 
 ##### PUT
 
 - `/api/videos/:id`
 
+Body necessário para atualizar vídeo:
+
+`{
+    "titulo": "teste put",
+    "urlVideo": "https://www.youtube.com/watch?v=qL6HTLmJ3OUteste-put",
+    "categoriaId": "5fcfcfb69b882e392cae3b3a"
+  }`
+
+
 - `/api/videos/categorias/:id`
 
-- `/api/users/:id`
+Body necessário para atualizar categoria:
 
+`{
+  "titulo": "teste put",
+  "cor": "#9cd33b",
+  "canal": "teste put",
+  "urlCanal": "https://www.youtube.com/c/spartakus/featuredteste-put"
+}`
+
+
+- `/api/users/:id`
 
 ##### DELETE
 
@@ -51,8 +73,6 @@ Body necessário:
 
 - `/api/users/:id`
 
-
-
 ##Para rodar o projeto use:
 `git clone [link]`
 `npm install`
@@ -61,7 +81,6 @@ Body necessário:
 ### Documentação da API
 
 ![Arquitetura do projeto](./arquitetura.png)
-
 
 ### Contatos da Desenvolvedora
 

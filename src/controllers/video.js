@@ -1,5 +1,6 @@
 const Video = require("../models/Video");
 const { videoSchema } = require("../validators/video");
+const mongoose = require("mongoose");
 
 exports.getAll = async (req, res) => {
   try {
@@ -37,8 +38,7 @@ exports.getByCategoria = async (req, res) => {
   try {
     const categoriaId = req.params.id;
 
-    Video.find({ categoriaId: categoriaId })
-    .then(async (videos) => {
+    Video.find({ categoriaId: categoriaId }).then(async (videos) => {
       const status = videos && videos.length > 0 ? 200 : 204;
 
       return res.status(status).send(videos);
@@ -90,4 +90,26 @@ exports.criarVideo = async (req, res) => {
     console.log({ e });
     return res.status(200).json(e);
   }
+};
+
+exports.atualizarVideo = async (req, res) => {
+  const { id } = req.params; //pega o ID na URL
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    // verifica se o valor passado é um ID e, se é válido no BD
+    res.status(400).json({ message: "Esse ID não é válido." });
+    return;
+  }
+
+  Video.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          message: `O vídeo com o ID: ${req.params.id} foi atualizado.`,
+        });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 };

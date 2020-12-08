@@ -1,5 +1,6 @@
 const Categoria = require("../models/Categoria");
 const { categoriaSchema } = require("../validators/categoria");
+const mongoose = require("mongoose");
 
 exports.getAll = async (req, res) => {
   try {
@@ -74,4 +75,26 @@ exports.criarCategoria = async (req, res) => {
     console.log({ e });
     return res.status(200).json(e);
   }
+};
+
+exports.atualizarCategoria = (req, res) => {
+  const { id } = req.params; //pega o ID na URL
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    // verifica se o valor passado é um ID e, se é válido no BD
+    res.status(400).json({ message: "Esse ID não é válido." });
+    return;
+  }
+
+  Categoria.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          message: ` A categoria com o ID: ${req.params.id} foi atualizada.`,
+        });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 };
