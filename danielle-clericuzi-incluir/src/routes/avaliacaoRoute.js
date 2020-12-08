@@ -10,14 +10,6 @@ const avaliacaoController = require('../controllers/avaliacaoController');
 **/
 router.get('/avaliacao/estabelecimento', avaliacaoController.obterAvaliacaoPorEstabelecimento);
 
- /**
-@route GET avaliacao/user
-@desc Retornar as avaliações realizadas por aquele usuario
-@access Privado
-@endpoint http://localhost:porta/avaliacao/user
-**/
-router.get('/avaliacao/user', avaliacaoController.obterAvaliacaoPorUsuario);
-
 /**
 @route POST avaliacao/cadastro
 @desc Realizar o cadastro de uma avaliacao para um estabelecimento
@@ -25,7 +17,6 @@ router.get('/avaliacao/user', avaliacaoController.obterAvaliacaoPorUsuario);
 @endpoint http://localhost:porta/avaliacao/cadastro
 **/
 router.get('/avaliacao/cadastro', avaliacaoController.realizarCadastroAvaliacao);
-
 
 /**
 @route DELETE avaliacao/id

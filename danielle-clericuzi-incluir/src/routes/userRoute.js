@@ -23,20 +23,11 @@ router.get('/users/cadastro', userController.realizarCadastroUser);
 @endpoint http://localhost:porta/users/login
 **/
 router.post('/users/login', userController.loginUser);
-
-/**
- @route PATCH users
- @desc Atualizar somente o título
- @access Privado
- @endpoint http://localhost:porta/users/:id
- **/
- router.patch('/users/:id', userController.atualizarCamposUser);
-
 /**
 @route DELETE users
 @desc Deletar a conta
 @access Privado
-@endpoint http://localhost:porta/tarefas/:id
+@endpoint http://localhost:porta/users/:id
 **/
 router.delete('/users/:id', tarefaController.deletarUser);
 

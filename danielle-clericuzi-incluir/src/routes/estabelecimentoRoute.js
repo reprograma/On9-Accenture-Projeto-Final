@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const estabelecimentoController = require('../controllers/estabelecimentoController');
 
+
 /**
 @route GET estabelecimento
 @desc Retornar todos os estabelecimentos
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimento);
+router.get('/', estabelecimentoController.obterEstabelecimento);
 
  /**
 @route GET estabelecimento/cidade
@@ -16,7 +17,7 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimento);
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/cidade
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorCidade);
+router.get('/estabelecimentos/cidade', estabelecimentoController.obterEstabelecimentoPorCidade);
 
 /**
 @route GET estabelecimento/tipo
@@ -24,7 +25,7 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/tipo
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorTipo);
+router.get('/estabelecimentos/tipo', estabelecimentoController.obterEstabelecimentoPorTipo);
 
 /**
 @route GET estabelecimento/nome
@@ -32,7 +33,7 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/nome
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorTipo);
+router.get('/estabelecimentos/nome', estabelecimentoController.obterEstabelecimentoPorNome);
 
 /**
 @route POST estabelecimento/cadastro
@@ -40,11 +41,11 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Privado
 @endpoint http://localhost:porta/estabelecimentos/cadastro
 **/
-router.get('/estabelecimentos/cadastro', estabelecimentoController.realizarCadastroEstabelecimento);
+router.get('/estabelecimentos/cadastro', estabelecimentoController.cadastrarEstabelecimento);
 
 /**
  @route PATCH estabelecimentos/id
- @desc Atualizar somente o título
+ @desc Atualizar os campos do cadastro com exceção do tipo
  @access Privado
  @endpoint http://localhost:porta/estabelecimentos/:id
  */

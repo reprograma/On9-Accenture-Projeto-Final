@@ -15,9 +15,9 @@ yup.setLocale({
  */
 
 exports.estabelecimentoSchema = yup.object().shape({
-    nome: yup.string().nome().required('Esse campo é obrigatório'),
-    endereço: yup.string().endereço().required('Esse campo é obrigatório'),
-    cidade: yup.string().cidade().required('Esse campo é obrigatório'),
-    tipo: yup.string().tipo().required('Esse campo é obrigatório'),
-    dataInclusao: yup.date().dataInclusao().required('Esse campo é obrigatório')
+    nome: yup.string().required('Esse campo é obrigatório'),
+    endereço: yup.string().required('Esse campo é obrigatório'),
+    cidade: yup.string().required('Esse campo é obrigatório'),
+    tipo: yup.string().required('Esse campo é obrigatório'),
+    dataInclusao: yup.date().required('Esse campo é obrigatório')
   }).required('Esse objeto não pode ser vazio');

@@ -13,10 +13,10 @@ const app = express();
 /*
   * Conectar com o MongoDB
 */
-//mongoose.connect(process.env.MONGODB_URI, {
-  //useNewUrlParser: true,
- /// useUnifiedTopology: true
-//});
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 let db = mongoose.connection;
 
@@ -31,9 +31,9 @@ db.once("open", function (){
 /**
  * Routes
  */
-//const user = require("./routes/userRoute")
-//const estabelecimento = require("./routes/estabelecimentoRoute")
-//const avaliacao = require("./routes/avaliacaoRoute")
+//const users = require("./routes/userRoute")
+const estabelecimentos = require("./routes/estabelecimentoRoute")
+//const avaliacoes = require("./routes/avaliacaoRoute")
 
 /**
  * Configurar body parser
@@ -49,8 +49,8 @@ app.use(function (req, res, next) {
     next()
   });
 
-//app.use("/user", user)
-//app.use("/estabelecimento", estabelecimento)
-//app.use("/avaliacao", avaliacao)
+//app.use("/user", users)
+app.use("/estabelecimentos", estabelecimentos)
+//app.use("/avaliacao", avaliacoes)
 
-module.exports = app
+module.exports = app;

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
  * Atributos da entidade user
  */
 const userSchema = new mongoose.Schema({
-    // id: { type : Number}, -> precisa deixar aqui ou no banco?? 
     nome: { type: String, unique: false, required: true },
     sobrenome: { type: String, unique: false, required: true },
     nascimento: { type: Date, unique: true, required: true },
