@@ -24,13 +24,13 @@ A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos
 
 ##### POST
 
-- `/api/videos`
+- `/api/videos/new`
 
 Body necessário para criar vídeo:
 
 `{ "titulo": "QUER COMEÇAR A ORGANIZAR SUA VIDA FINANCEIRA? NATH FINANÇAS TE AJUDA!! - GABI OLIVEIRA", "urlVideo": "https://www.youtube.com/watch?v=wTnSMw4NtXA", "categoriaId": "5fcfcfb69b882e392cae3b3a" }`
 
-- `/api/categorias`
+- `/api/categorias/new`
 
 Body necessário para criar categoria:
 
@@ -40,7 +40,7 @@ Body necessário para criar categoria:
 
 ##### PUT
 
-- `/api/videos/:id`
+- `/api/videos/editar/:id`
 
 Body necessário para atualizar vídeo:
 
@@ -51,7 +51,7 @@ Body necessário para atualizar vídeo:
   }`
 
 
-- `/api/videos/categorias/:id`
+- `/api/videos/categorias/editar/:id`
 
 Body necessário para atualizar categoria:
 

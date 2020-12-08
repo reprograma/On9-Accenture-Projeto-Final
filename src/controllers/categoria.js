@@ -88,13 +88,23 @@ exports.atualizarCategoria = (req, res) => {
 
   Categoria.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
     .then(() => {
-      res
-        .status(200)
-        .json({
-          message: ` A categoria com o ID: ${req.params.id} foi atualizada.`,
-        });
+      res.status(200).json({
+        message: ` A categoria com o ID: ${req.params.id} foi atualizada.`,
+      });
     })
     .catch((err) => {
       res.json(err);
+    });
+};
+
+exports.deletarCategoria = (req, res) => {
+  const { id } = req.params;
+
+  Categoria.findByIdAndDelete(id) // o método encontra e deleta a categoria por ID
+    .then(() => {
+      res.status(200).json("Categoria deletada.");
+    })
+    .catch((err) => {
+      throw new Error(err); // throw new Error => mostra o erro
     });
 };

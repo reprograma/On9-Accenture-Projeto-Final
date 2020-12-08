@@ -103,13 +103,23 @@ exports.atualizarVideo = async (req, res) => {
 
   Video.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
     .then(() => {
-      res
-        .status(200)
-        .json({
-          message: `O vídeo com o ID: ${req.params.id} foi atualizado.`,
-        });
+      res.status(200).json({
+        message: `O vídeo com o ID: ${req.params.id} foi atualizado.`,
+      });
     })
     .catch((err) => {
       res.json(err);
+    });
+};
+
+exports.deletarVideo = (req, res) => {
+  const { id } = req.params;
+
+  Video.findByIdAndDelete(id) // o método encontra e deleta o vídeo por ID
+    .then(() => {
+      res.status(200).json("Vídeo deletado.");
+    })
+    .catch((err) => {
+      throw new Error(err); // throw new Error => mostra o erro
     });
 };
