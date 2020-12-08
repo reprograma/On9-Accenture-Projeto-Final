@@ -60,19 +60,4 @@ exports.post = async (req, res, next) => {
   }
 };
 
-exports.postCreateNewMessageAmbulance = async (messageSendAmbulance, ambulanceId) => {
-    const newMessage = new Messages ({
-        ambulanceId: MessagesSend.id,
-        driverName: MessagesSend.driverName,
-        licensePlate: MessagesSend.licensePlate,
-        locationAmbulance: MessagesSend.locationAmbulance,
-        destinationHospital: MessagesSend.destinationHospital,
-        routesToHopital: MessagesSend.routesToHopital,
-    })
-    try {
-        return await newMessage.save()
-    } catch (e) {
-        console.log(e)
-        throw new Error(e)
-    }
-}
+

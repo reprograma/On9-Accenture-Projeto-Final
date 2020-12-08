@@ -14,4 +14,4 @@ const transitAgentSchema = new mongoose.Schema(
 
 const TransitAgentUser = mongoose.model("TransitAgentUser", transitAgentSchema);
 
-module.exports = TransitAgentsUser;
+module.exports = TransitAgentUser;

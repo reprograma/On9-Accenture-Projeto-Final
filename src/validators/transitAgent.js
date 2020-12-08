@@ -13,7 +13,7 @@ exports.transitAgentSchema = yup
       .min(11)
       .required("O número do CPF é obrigatório."),
     transitAgentlocation: yup.string().required("Sua locação é obrigatória."),
-    telephoneNumber: yup.string().min(11)(
+    telephoneNumberAgent: yup.string().min(11).required(
       "Seu número de telefone com o DDD é obrigatório."
     ),
     transitAgentId: yup.string().required("O id do usuário é obrigatório."),

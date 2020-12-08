@@ -4,3 +4,6 @@ const controller = require("../controllers/transitAgent");
 const authMiddleware = require("../middlewares/auth");
 
 //@route POST 
+
+
+module.exports = router

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
+//mongoose.connect(`${process.env.DATABASE_URL}`, {
 mongoose.connect("mongodb://localhost/alertamb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -9,7 +10,7 @@ mongoose.connect("mongodb://localhost/alertamb", {
 
 //routes
 const index = require("./routes/index");
-const ambulances = requre("./routes/ambulance");
+const ambulances = require("./routes/ambulance");
 const agentTransits = require("./routes/transitAgent");
 const sessions = require("./routes/sessionsRoute");
 

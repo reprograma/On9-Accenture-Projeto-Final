@@ -25,15 +25,15 @@ exports.getById = (req, res) => {
     .catch((err) => next(err));
 };
 
-exports.getMessageAmbulanceSent = (req, res, next) => {
-    const todayDate = () => new Date().toString();
-    if (todayDate == MessagesSend.DateSchema){
-      .then((Messages) => {
-        resp.status(200).json(Messages);
-      })
-      .catch((err) => next(err));
-    }
-  };
+//exports.getMessageAmbulanceSent = (req, res, next) => {
+ //   const todayDate = () => new Date().toString();
+    //if (todayDate == MessagesSend.DateSchema){
+ //     .then((Messages) => {
+ //       resp.status(200).json(Messages);
+//      })
+//      .catch((err) => next(err));
+//    }
+//  };
 
 exports.postCreateAgent = async (req, res, next) => {
   const {
@@ -73,7 +73,7 @@ exports.postCreateNewMessageAgent = async (messageSendAgent, transitAgentId) => 
         transitAgentName: MessagesSend.transitAgentName,
         transitAgentlocation: MessagesSend.transitAgentlocation,
         telephoneNumberAgent: MessagesSend.telephoneNumberAgent,
-        readConfirmation: MessagesSend.readConfirmation
+        readConfirmation: MessagesSend.readConfirmation,
         dateSendAgent: MessagesSend.DateSchema
     })
     try {

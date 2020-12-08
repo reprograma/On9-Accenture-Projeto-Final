@@ -5,7 +5,7 @@ const authMiddleware = require("../middlewares/auth")
 
 router.get("/", controller.get)
 router.post("/", controller.post)
-router.postCreateNewMessageAmbulance("")
+//router.postCreateNewMessageAmbulance("")
 router.use(authMiddleware);
 router.get("/nasceuSp", controller.getSp)
 router.get("/:id", controller.getById)

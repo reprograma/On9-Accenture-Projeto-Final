@@ -8,6 +8,6 @@ exports.ambulanceSchema = yup.object().shape({
     licensePlate: yup.string().required('O número da placa da ambulância é obritaório.'),
     location: yup.string().required('Sua locação é obrigatória.'),
     destination: yup.string().required("Seu local de destino é obrigatório."),
-    telephoneNumber: yup.string().min(11)("Seu número de telefone com o DDD é obrigatório."),
+    telephoneNumberAmbulance: yup.string().min(11).required("Seu número de telefone com o DDD é obrigatório."),
     ambulanceId: yup.string().required('O id do usuário é obrigatório.')
 }).required('O formulário não pode ser vazio.')
