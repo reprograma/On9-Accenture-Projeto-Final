@@ -16,7 +16,7 @@ dotenv.config();
  */
 const videos = require("./routes/video");
 const categorias = require("./routes/categoria");
-// const users = require("./routes/user");
+const users = require("./routes/user");
 
 /**
  * Create Express server.
@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/videos", videos);
 app.use("/api/categorias", categorias);
-// app.use("/api/users", users);
+app.use("/api/users", users);
 
 /*
  * Error Handler.

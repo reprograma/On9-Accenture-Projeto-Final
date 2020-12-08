@@ -20,7 +20,7 @@ router.get("/:id", videoController.getById);
 
 /**
 @route GET videos/categoria
-@desc Retornar todos os vídeos de uma categoria por id 
+@desc Retornar todos os vídeos por categoria 
 @access Public 
 @endpoint http://localhost:porta/videos/categoria/:id
 **/

@@ -51,7 +51,7 @@ Body necessário para atualizar vídeo:
   }`
 
 
-- `/api/videos/categorias/editar/:id`
+- `/api/categorias/editar/:id`
 
 Body necessário para atualizar categoria:
 
@@ -69,7 +69,7 @@ Body necessário para atualizar categoria:
 
 - `/api/videos/:id`
 
-- `/api/videos/categorias/:id`
+- `/api/categorias/:id`
 
 - `/api/users/:id`
 
