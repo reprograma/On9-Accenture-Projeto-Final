@@ -5,7 +5,7 @@ const { promisify } = require('util');
 
 module.exports = async (req, res, next) => {
 
-    if (req.path === '/usuarios/criar' || req.path === '/login') {
+    if (req.path === '/usuarios/criar' || req.path === '/login' || '/criar' || '/atualizartitulo' || '/atualizar') {
         next();
     } else {
         const authHeader = req.headers.authorization;

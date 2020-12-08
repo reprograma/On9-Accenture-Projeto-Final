@@ -4,7 +4,8 @@ const unless = require("express-unless")
 
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true)
-mongoose.connect(`${process.env.DATABASE}`,
+//`${process.env.DATABASE}`
+mongoose.connect('mongodb://localhost/meuresumao',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
