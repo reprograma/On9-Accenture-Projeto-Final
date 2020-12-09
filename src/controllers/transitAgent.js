@@ -38,11 +38,11 @@ exports.getById = (req, res) => {
 exports.postCreateAgent = async (req, res, next) => {
   const {
     email,
-    password,
     transitAgentName,
+    password,
     transitAgentCPF,
     transitAgentlocation,
-    telephoneNumber,
+    telephoneNumberAgent
   } = req.body;
   const salt = bcrypt.genSaltSync(bcryptSalt);
   try {
@@ -50,11 +50,11 @@ exports.postCreateAgent = async (req, res, next) => {
 
     const newAgent = new TransitAgentUser({
       email,
-      hashPass,
       transitAgentName,
+      hashPass,
       transitAgentCPF,
       transitAgentlocation,
-      telephoneNumber,
+      telephoneNumberAgent
     });
     newAgent
       .save()
