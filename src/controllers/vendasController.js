@@ -2,7 +2,9 @@ const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
 const Produtos = require("../models/Produtos");
-
+const Vendedor = require("../models/Vendedor")
+const bcrypt = require("bcrypt");
+const bcryptSalt = 6;
 
 
 //GET 
@@ -16,30 +18,43 @@ const vendas = (request, response) => {
 }
 
 //GET
-/***
- * Aplicar Validação 
- * Criar todo o código
- */
-const periodoVenda = async (request, response) => {
+const vendedorxs = (request, response) => {
 
-    const {data} = request.params;
-
-    Produtos.find({createdAt})
-        .then((produto) => {
-            response.status(200).json(produto);
+    Vendedor.find()
+        .then((vendedorxs) => {
+            response.status(200).json(vendedorxs);
         })
         .catch(err => next(err));
-
-
 }
 
+//POST
+const vendedor = async (req, res, next) => { 
+    const { nome, password, rg } = req.body;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+
+    try {
+      const hashPass = await bcrypt.hashSync(password, salt);
+  
+      const novoVendedor = new Vendedor({
+        nome,
+        rg,
+        hashPass
+      });
+      
+      novoVendedor.save()
+        .then((vendedor) => {
+            res.status(201).json(vendedor);
+        })
+        .catch(err => next(err));
+    } catch (e) {
+      return res.status(401).json({ error: 'erro' });
+    }
+  }
 
 //POST
-/**
- * Aplicar Validação 
- */
 const vendaProduto = async (request, response) => {
     let { nomeProduto, valorVenda, quantidade, vendedor, clienteContato } = request.body;
+    
 
     const novoPedido = new Vendas({
         nomeProduto,
@@ -72,12 +87,9 @@ const vendaProduto = async (request, response) => {
     }
 }
 
-//DELETE
-/**
- * Aplicar Validação 
- * Aplicar senha
- */
 
+
+//DELETE
 const estorno =  (request, response) => {
     const { id } = request.params
 
@@ -112,7 +124,8 @@ console.log(id)
 
 module.exports = {
     vendas,
-    periodoVenda,
+    vendedorxs,
     vendaProduto,
+    vendedor,
     estorno
 }

@@ -1,7 +1,25 @@
 const express =  require("express") 
 const router =  express.Router(); 
-
 const controller = require("../controllers/vendasController")
+const authMiddleware =  require("../middlewares/auth")
+
+
+
+/**
+@route GET VENDEDORXS
+@desc Retorna todas as vendas
+@access Public 
+@endpoint http://localhost:8080/venda/vendedorxs
+**/
+router.get("/vendedorxs", controller.vendedorxs)
+
+/**
+@route POST ACESSO VENDEDORX
+@desc Registrar uma nova venda
+@access Public 
+@endpoint http://localhost:8080/venda/novoVendedor
+**/
+router.post("/novoVendedor", controller.vendedor)
 
 /**
 @route GET venda
@@ -12,14 +30,6 @@ const controller = require("../controllers/vendasController")
 router.get("/", controller.vendas)
 
 /**
-@route GET venda/:data
-@desc Retorna todas as vendas do dia 
-@access Public 
-@endpoint http://localhost:8080/venda/:data 
-**/
-router.get("/data", controller.periodoVenda)
-
-/**
 @route POST venda/produto
 @desc Registrar uma nova venda
 @access Public 
@@ -28,6 +38,7 @@ router.get("/data", controller.periodoVenda)
 router.post("/produto", controller.vendaProduto)
 
 
+router.use(authMiddleware);
 
 /**
 @route DELETE /:id

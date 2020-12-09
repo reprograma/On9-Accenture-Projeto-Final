@@ -1,7 +1,7 @@
 const express =  require("express") 
 const router =  express.Router(); 
-
 const controller = require("../controllers/estoqueController")
+
 
 /**
 @route GET estoque
@@ -34,6 +34,7 @@ router.post("/cadastro", controller.cadastroProduto)
 @endpoint http://localhost:8080/estoque/abastecimento
 **/
 router.patch("/abastecimento", controller.abastecerEstoque)
+
 
 /**
 @route DELETE /:id
