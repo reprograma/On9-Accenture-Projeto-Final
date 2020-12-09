@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
+//@route GET api/index/
+//@desc Mostra boas vindas a API
+//@acess Public
 router.get('/', function (request, response){
     response.status(200).send({
         title: "Abrigue um Miau",
