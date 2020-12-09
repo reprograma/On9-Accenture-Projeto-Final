@@ -6,7 +6,7 @@ const vaccinesRoutes = require('./routes/vaccineRoutes.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/AquiTemVacina',
+mongoose.connect(`${process.env.DATABASE_URL}`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -25,8 +25,8 @@ app.use(function (request, response, next) {
 })
 
 
-app.use('/unidades-de-saude', healthClinicRoutes);
-app.use('/vacinas', vaccinesRoutes);
+app.use('/health-clinics', healthClinicRoutes);
+app.use('/vaccines', vaccinesRoutes);
 app.use('/admin', sessionRoutes);
 
 module.exports = app;
