@@ -25,8 +25,8 @@ exports.getById = (req, res) => {
 exports.post = async (req, res, next) => {
   const {
     email,
-    password,
     driverName,
+    password,
     driverCPF,
     licensePlate,
     location,
@@ -40,8 +40,8 @@ exports.post = async (req, res, next) => {
 
     const newAmbulance = new AmbulancesUser({
       email,
-      hashPass,
       driverName,
+      hashPass,
       driverCPF,
       licensePlate,
       location,
