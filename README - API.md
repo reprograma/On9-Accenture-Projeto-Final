@@ -33,14 +33,14 @@ Fazendo um pedido de de busca sobre um direiro (usando uma palavra que lhe repre
 
 ## API deve retornar seguinte JSON com dados da API:
 
-<!-- [
+[
   {
         "id": "",
         "titleLegalSubject": "Licença Maternidade",
         "description": "A funcionária gestante tem direito a se afastar de suas atividades profissionais, sem prejuízo de salário, por 120 dias.",
         "sourceInformation": "artigo 392 da CLT"
     }
-] -->
+] 
 
 
 ## As rotas da API:
