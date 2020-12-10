@@ -4,7 +4,7 @@ const bcryptSalt = 9
 const Cat = require('../models/Cat')
 
 exports.createNewCat = async (request, response) => {
-    const { responsible, email, contact, password, city, neighborhood, nicknameCat, characters, available } = request.body
+    const { responsible, email, password, contact, city, neighborhood, nicknameCat, characters, available } = request.body
     const salt = bcrypt.genSaltSync(bcryptSalt)
 
     try {
@@ -13,8 +13,8 @@ exports.createNewCat = async (request, response) => {
         const newCat = new Cat({
             responsible,
             email,
-            contact,
             hashPass,
+            contact,
             city,
             neighborhood,
             nicknameCat,
@@ -38,7 +38,7 @@ exports.createNewCat = async (request, response) => {
 }
 
 exports.getAll = (request, response) => {
-    Cat.find()
+    Cat.find({}, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "characters": 1, "available": 1 }).skip()
         .then((cat) => {
             response.status(200).json(cat)
         })

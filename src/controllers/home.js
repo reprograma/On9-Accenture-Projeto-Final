@@ -75,11 +75,11 @@ exports.getByNeighborhood = (request, response) => {
         })
 }
 
-exports.getFavCats = async (request, response) => {
+exports.getFavCats = (request, response) => {
     const { id } = request.params
-    const fav = await Home.findById(id).populate('favoriteCats')
-        .then((favoriteCats) => {
-            response.status(200).json(favoriteCats)
+    Home.findById(id).populate({ path: 'favoriteCats', select: 'responsible contact city neighborhood nicknameCat characters available' })
+        .then((favorites) => {
+            response.status(200).json(favorites)
         })
         .catch((error) => {
             response.status(400).json({ error: `Não foi encontrado um miau favorito` })

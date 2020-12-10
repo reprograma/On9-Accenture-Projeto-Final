@@ -2,11 +2,17 @@ const express = require('express')
 const router = express.Router()
 const homeController = require('../controllers/home')
 const catController = require('../controllers/cat')
+const middleware = require('../middlewares/auth')
 
 //@route POST api/home/new
 //@desc Registrar novo usuário que ofereça um lar temporário
 //@acess Public
 router.post('/new', homeController.createNewHome)
+
+//@route Middleware
+//@desc Utiliza o token gerado para o usuário para que tenha acesso a outras rotas
+//@acess Private
+router.use(middleware)
 
 //@route GET api/home/all
 //@desc Visualizar todos os gatos cadastrados
