@@ -9,9 +9,9 @@ app.use(cors())
 app.use(express.json())
 
 const index = require("./routes/index")
-const law = require("./routes/lawsRoute")
+const rights  = require("./routes/rightsRoute")
 
 app.use("/", index)
-app.use("/laws", laws)
+app.use("/rights", rights)
 
 module.exports = app
