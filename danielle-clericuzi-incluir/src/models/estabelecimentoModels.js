@@ -5,9 +5,8 @@ const mongoose = require('mongoose');
 const estabelecimentoSchema = new mongoose.Schema({
     nome: { type: String, unique: false, required: true },
     endereco: { type: String, unique: false, required: true },
-    cidade: { type: Date, unique: false, required: true },
+    cidade: { type: String, unique: false, required: true },
     tipo: { type: String, unique: false, required: true },
-    dataInclusao: { type: Date, required: true },
   }, { timestamps: true })
 
   /**

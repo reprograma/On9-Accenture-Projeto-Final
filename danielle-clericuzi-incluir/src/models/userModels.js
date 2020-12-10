@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     sobrenome: { type: String, unique: false, required: true },
     nascimento: { type: Date, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
-    cidade: { type: String, required: true }
+    senha: { type: String, required: true },
+    cidade: { type: String, required: true },
   }, { timestamps: true })
 
   /**

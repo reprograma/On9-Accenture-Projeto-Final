@@ -16,14 +16,14 @@ yup.setLocale({
 // será que preciso colocar aqui os IDs do user e estabelecimento??
 
 exports.avaliacaoSchema = yup.object().shape({
-    vagaPCD: yup.boolean().vagaPCD().required('É preciso avaliar este campo'),
-    banheiro: yup.boolean().banheiro().required('É preciso avaliar este campo'),
-    notaBanheiro: yup.number().notaBanheiro(),
-    sinalizacao: yup.boolean().sinalizacao().required('É preciso avaliar este campo'),
-    notaSinalizacao: yup.number().notaSinalizacao(),
-    tradutorLibras: yup.boolean().tradutorLibras().required('É preciso avaliar este campo'),
-    rampa: yup.boolean().rampa().required('É preciso avaliar este campo'),
-    locomocaoInterna: yup.number().locomocaoInterna().required('É preciso avaliar este campo'),
-    avaliacaoGeral: yup.number().avaliacaoGeral().required('É preciso avaliar este campo'),
-    dataInclusao: yup.number().dataInclusao().required('É preciso avaliar este campo')
+    vagaPCD: yup.boolean().required('É preciso avaliar este campo'),
+    banheiro: yup.boolean().required('É preciso avaliar este campo'),
+    notaBanheiro: yup.number(),
+    sinalizacao: yup.boolean().required('É preciso avaliar este campo'),
+    notaSinalizacao: yup.number(),
+    tradutorLibras: yup.boolean().required('É preciso avaliar este campo'),
+    rampa: yup.boolean().required('É preciso avaliar este campo'),
+    locomocaoInterna: yup.number().required('É preciso avaliar este campo'),
+    avaliacaoGeral: yup.number().required('É preciso avaliar este campo'),
+    dataInclusao: yup.date().required('É preciso avaliar este campo')
   }).required('Esse objeto não pode ser vazio');

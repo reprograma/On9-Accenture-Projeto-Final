@@ -5,9 +5,7 @@
 require('dotenv').config();
 
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
 const app = express();
 
 /*
@@ -31,14 +29,12 @@ db.once("open", function (){
 /**
  * Routes
  */
-//const users = require("./routes/userRoute")
-const estabelecimentos = require("./routes/estabelecimentoRoute")
-//const avaliacoes = require("./routes/avaliacaoRoute")
+const users = require('./routes/userRoute')
+const estabelecimentos = require('./routes/estabelecimentoRoute')
+const avaliacoes = require('./routes/avaliacaoRoute')
 
-/**
- * Configurar body parser
- */
-app.use(bodyParser.json());
+
+app.use(express.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -49,8 +45,8 @@ app.use(function (req, res, next) {
     next()
   });
 
-//app.use("/user", users)
-app.use("/estabelecimentos", estabelecimentos)
-//app.use("/avaliacao", avaliacoes)
+app.use('/users', users)
+app.use('/estabelecimentos', estabelecimentos)
+app.use('/avaliacao', avaliacoes)
 
 module.exports = app;

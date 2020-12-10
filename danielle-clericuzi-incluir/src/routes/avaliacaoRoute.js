@@ -16,7 +16,7 @@ router.get('/avaliacao/estabelecimento', avaliacaoController.obterAvaliacaoPorEs
 @access Publico
 @endpoint http://localhost:porta/avaliacao/cadastro
 **/
-router.get('/avaliacao/cadastro', avaliacaoController.realizarCadastroAvaliacao);
+router.post('/cadastro', avaliacaoController.realizarCadastroAvaliacao);
 
 /**
 @route DELETE avaliacao/id
@@ -24,7 +24,7 @@ router.get('/avaliacao/cadastro', avaliacaoController.realizarCadastroAvaliacao)
 @access Privado
 @endpoint http://localhost:porta/avaliacao/:id
 **/
-router.delete('/avaliacao/:id', avaliacaoController.deletarAvaliacao);
+router.delete('/:id', avaliacaoController.deletarAvaliacao);
 
 
 module.exports = router;

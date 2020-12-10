@@ -16,7 +16,6 @@ const avaliacaoSchema = new mongoose.Schema({
     rampa: { type: Boolean, required: true },
     locomocaoInterna: { type: Number, required: true },
     avaliacaoGeral: { type: Number, required: true },
-    dataInclusao: { type: Date, required: true },
   }, { timestamps: true })
 
   /**

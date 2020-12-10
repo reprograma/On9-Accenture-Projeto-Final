@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const estabelecimentoController = require('../controllers/estabelecimentoController');
 
-
 /**
 @route GET estabelecimento
 @desc Retornar todos os estabelecimentos
@@ -17,7 +16,7 @@ router.get('/', estabelecimentoController.obterEstabelecimento);
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/cidade
 **/
-router.get('/estabelecimentos/cidade', estabelecimentoController.obterEstabelecimentoPorCidade);
+router.get('/cidade', estabelecimentoController.obterEstabelecimentoPorCidade);
 
 /**
 @route GET estabelecimento/tipo
@@ -25,7 +24,7 @@ router.get('/estabelecimentos/cidade', estabelecimentoController.obterEstabeleci
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/tipo
 **/
-router.get('/estabelecimentos/tipo', estabelecimentoController.obterEstabelecimentoPorTipo);
+router.get('/tipo', estabelecimentoController.obterEstabelecimentoPorTipo);
 
 /**
 @route GET estabelecimento/nome
@@ -33,7 +32,7 @@ router.get('/estabelecimentos/tipo', estabelecimentoController.obterEstabelecime
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/nome
 **/
-router.get('/estabelecimentos/nome', estabelecimentoController.obterEstabelecimentoPorNome);
+router.get('/nome', estabelecimentoController.obterEstabelecimentoPorNome);
 
 /**
 @route POST estabelecimento/cadastro
@@ -41,7 +40,7 @@ router.get('/estabelecimentos/nome', estabelecimentoController.obterEstabelecime
 @access Privado
 @endpoint http://localhost:porta/estabelecimentos/cadastro
 **/
-router.get('/estabelecimentos/cadastro', estabelecimentoController.cadastrarEstabelecimento);
+router.post('/cadastro', estabelecimentoController.cadastrarEstabelecimento);
 
 /**
  @route PATCH estabelecimentos/id
@@ -49,7 +48,7 @@ router.get('/estabelecimentos/cadastro', estabelecimentoController.cadastrarEsta
  @access Privado
  @endpoint http://localhost:porta/estabelecimentos/:id
  */
- router.patch('/estabelecimentos/:id', estabelecimentoController.atualizarCadastroEstabelecimento);
+ router.patch('/:id', estabelecimentoController.atualizarCadastroEstabelecimento);
 
 /**
 @route DELETE estabelecimentos/id
@@ -57,7 +56,7 @@ router.get('/estabelecimentos/cadastro', estabelecimentoController.cadastrarEsta
 @access Privado
 @endpoint http://localhost:porta/estabelecimentos/:id
 **/
-router.delete('/estabelecimentos/:id', estabelecimentoController.deletarEstabelecimento);
+router.delete('/:id', estabelecimentoController.deletarEstabelecimento);
 
 
 module.exports = router;
