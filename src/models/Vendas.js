@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const userSchema = new Schema({
-    nomeProduto: String,
-    valorVenda: Number,
-    quantidade: Number,
-    vendedor: String,
-    clienteContato: Array,
+    nomeProduto:  {type: String, required: true},
+    valorVenda: {type: Number, required: true},
+    quantidade: {type: Number, required: true},
+    vendedor: {type: String, required: true},
+    clienteContato: {type: Array, required: true},
 },
 {timestamps: true});
 

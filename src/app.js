@@ -10,7 +10,8 @@ mongoose.connect("mongodb://localhost/Controle", //`${process.env.DATABASE}`
 
 const estoqueRoute = require("./routes/estoqueRoute")
 const vendasRoute = require("./routes/vendasRoute")
-const sessions = require("./routes/sessionRoute")
+const vendedorRoute = require ("./routes/vendedoresRoute")
+const sessions = require("./routes/sessaoRoute");
 
 app.use(express.json())
 
@@ -26,5 +27,6 @@ app.use(function(req, res, next) {
 app.use("/estoque", estoqueRoute)
 app.use("/venda", vendasRoute)
 app.use("/session", sessions)
+app.use("/vendedor", vendedorRoute)
 
 module.exports = app

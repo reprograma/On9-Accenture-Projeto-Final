@@ -1,11 +1,9 @@
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
-const Produtos = require("../models/Produtos");
-const Vendedor = require("../models/Vendedor")
-const bcrypt = require("bcrypt");
-const bcryptSalt = 6;
-
+const Estoque = require("../models/Estoque");
+const Vendedor = require("../models/Vendedores")
+const {vendaSchema} = require("../validators/vendas")
 
 //GET 
 const vendas = (request, response) => {
@@ -17,82 +15,47 @@ const vendas = (request, response) => {
         .catch(err => next(err));
 }
 
-//GET
-const vendedorxs = (request, response) => {
-
-    Vendedor.find()
-        .then((vendedorxs) => {
-            response.status(200).json(vendedorxs);
-        })
-        .catch(err => next(err));
-}
-
-//POST
-const vendedor = async (req, res, next) => { 
-    const { nome, password, rg } = req.body;
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-
-    try {
-      const hashPass = await bcrypt.hashSync(password, salt);
-  
-      const novoVendedor = new Vendedor({
-        nome,
-        rg,
-        hashPass
-      });
-      
-      novoVendedor.save()
-        .then((vendedor) => {
-            res.status(201).json(vendedor);
-        })
-        .catch(err => next(err));
-    } catch (e) {
-      return res.status(401).json({ error: 'erro' });
-    }
-  }
-
 //POST
 const vendaProduto = async (request, response) => {
-    let { nomeProduto, valorVenda, quantidade, vendedor, clienteContato } = request.body;
-    
 
-    const novoPedido = new Vendas({
-        nomeProduto,
-        valorVenda,
-        quantidade,
-        vendedor,
-        clienteContato
-    });
+    const vendaValidada = await vendaSchema.validate(request.body)
+    const nomeProduto = vendaValidada.nomeProduto
+    const vendedor = vendaValidada.vendedor
+
+    console.log(vendedor)
 
     try {
-        let produto = await Produtos.findOne({ nomeProduto });
+        let produto = await Estoque.findOne({nomeProduto: nomeProduto});
+        let vendedor = await Vendedor.findOne({nome: vendedor})
 
-        produto.estoque = produto.estoque - quantidade
+            console.log(vendedor)
+            
+        produto.estoque = produto.estoque - vendaValidada.quantidade
 
         if (produto.estoque < 0) {
             return response.status(400).json("Quantidade insuficiente! Favor abastecer");
         } else {
-            await novoPedido.save()
 
-            await produto.save();
+            let novoPedido = new Vendas(vendaValidada)
+                novoPedido.save()
+                produto.save();
 
-            return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + "unidades")
+            return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + " unidades")
         }
-
     }
     catch (err) {
 
         return response.status(400).json({ error: err.message })
-
     }
 }
-
-
 
 //DELETE
 const estorno =  (request, response) => {
     const { id } = request.params
-
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json
+    }
+    
 
 console.log(id)
 
@@ -102,7 +65,7 @@ console.log(id)
             let quantidadeVenda = venda.quantidade
             let produtoNome = venda.nomeProduto
 
-            Produtos.findOne({ nomeProduto: produtoNome })
+            Estoque.findOne({ nomeProduto: produtoNome })
                 .then(async produto => {
  
                     produto.estoque = produto.estoque + quantidadeVenda
@@ -124,8 +87,6 @@ console.log(id)
 
 module.exports = {
     vendas,
-    vendedorxs,
     vendaProduto,
-    vendedor,
     estorno
 }

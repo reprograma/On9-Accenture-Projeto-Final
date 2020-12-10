@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const authConfig = require("../config/auth")
 const bcrypt = require("bcrypt")
-const Vendedor = require("../models/Vendedor")
+const Vendedor = require("../models/Vendedores")
 
 
 function checkPassword(passwordEntry, password) {

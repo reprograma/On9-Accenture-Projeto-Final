@@ -1,6 +1,7 @@
 const express =  require("express") 
 const router =  express.Router(); 
 const controller = require("../controllers/estoqueController")
+const authMiddleware =  require("../middlewares/auth")
 
 
 /**
@@ -35,6 +36,7 @@ router.post("/cadastro", controller.cadastroProduto)
 **/
 router.patch("/abastecimento", controller.abastecerEstoque)
 
+router.use(authMiddleware);
 
 /**
 @route DELETE /:id

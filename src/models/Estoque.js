@@ -10,6 +10,6 @@ const produtoSchema = new Schema({
 },
 {timestamps: true});
 
-const Produtos =  mongoose.model('Produtos', produtoSchema);
+const Estoque =  mongoose.model('Estoque', produtoSchema);
 
-module.exports = Produtos;
+module.exports = Estoque;
