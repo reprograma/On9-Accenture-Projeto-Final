@@ -1,12 +1,8 @@
+# API - DIREITOS DAS MULHERES TECH
+
 ![logo](logo.png)
 
 
-
-
-
-
-
-# API - DIREITOS DAS MULHERES TECH
 
 ## Sobre
 - Descrição do nosso projeto
