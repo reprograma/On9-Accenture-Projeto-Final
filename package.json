@@ -1,0 +1,28 @@
+{
+    "name": "on9-accenture-projeto-final",
+    "version": "1.0.0",
+    "description": "projeto de conclusão do curso de nodejs da reprograma",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/clacla-s8/On9-Accenture-Projeto-Final.git"
+    },
+    "author": "Clarice Santos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/clacla-s8/On9-Accenture-Projeto-Final/issues"
+    },
+    "homepage": "https://github.com/clacla-s8/On9-Accenture-Projeto-Final#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.10.17",
+        "nodemon": "^2.0.6",
+        "yup": "^0.31.1"
+    }
+}
