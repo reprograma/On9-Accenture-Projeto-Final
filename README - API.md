@@ -71,6 +71,7 @@ RETORNA: "/rights/delete/[ID]" Deleta o direito por id específico e retorna men
 
 \ DIREITOS-DAS-MULHERES-TECH
 		 |   .gitignore
+		 |   .env
 		 |   package-lock.json
 		 |   package.json
 	   |   **server.js**
@@ -80,17 +81,20 @@ RETORNA: "/rights/delete/[ID]" Deleta o direito por id específico e retorna men
 			    |
 			    📂---controller
 			    |       **rightsController.js**
-			    |
+			    |       **userController.js**
           📂---data
           |     **rights.json**
           | 
 	  📂---model
 	  |       **rightsSchema.js
 	  |       **Repository.js**
-	  |
+	  |       **userModel.js
           📂---routes
-		**rightsRoute.js**
-		**index.js**
+	  |	**rightsRoute.js**
+          |     **index.js**
+	  📂---validators
+	  	**userValidator.js**
+		**rightsValidator.js**
 
 
 ### Endpoints
