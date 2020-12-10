@@ -1,7 +1,7 @@
 ## 🛫🌎 Sobre o Projeto
 
 <h1 align="center">
-	<img alt="Project Screenshots" src="../../assets/docBanner.png" />
+	<img alt="Project Screenshots" src="https://uploaddeimagens.com.br/images/002/991/809/full/docBanner.png?1607199592" />
 </h1>
 
 <p>O Learn&Share é um projeto que faz jus ao nome, aprender e compartilhar. O projeto visa ser uma plataforma onde você possa ter mentorias gratuitas
@@ -135,9 +135,8 @@ Resposta:
 
 Clone o projeto e acesse a pasta
 
-$ git clone https://github.com/aline-pereira/On9-Accenture-Projeto-Final
+$ git clone https://github.com/aline-pereira/On9-Accenture-Projeto-Final/tree/aline-santos
 
-$ cd LearnShare
 
 
 ### Siga os passos abaixo
