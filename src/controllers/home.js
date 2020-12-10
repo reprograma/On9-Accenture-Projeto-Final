@@ -53,7 +53,7 @@ exports.getAll = (request, response) => {
 exports.getByCity = (request, response) => {
     const city = request.query.city
 
-    Home.find({ city: city }, { "name": 1, "contact": 1, "city": 1, "neigborhood": 1, "homeDescription": 1, "available": true })
+    Home.find({ city: city, available: true }, { "name": 1, "contact": 1, "city": 1, "neigborhood": 1, "homeDescription": 1, "available": 1 })
         .then((home) => {
             response.status(200).json(home)
         })
@@ -65,7 +65,7 @@ exports.getByCity = (request, response) => {
 exports.getByNeighborhood = (request, response) => {
     const neighborhood = request.query.neighborhood
 
-    Home.find({ neighborhood: neighborhood }, { "name": 1, "contact": 1, "city": 1, "neighborhood": 1, "homeDescription": 1 })
+    Home.find({ neighborhood: neighborhood, available: true }, { "name": 1, "contact": 1, "city": 1, "neighborhood": 1, "homeDescription": 1 })
         .then((home) => {
             response.status(200).json(home)
         })
@@ -77,11 +77,17 @@ exports.getByNeighborhood = (request, response) => {
 exports.getFavCats = (request, response) => {
     const { id } = request.params
     Home.findById(id).populate({ path: 'favoriteCats', select: 'responsible contact city neighborhood nicknameCat characters available' })
-        .then((favorites) => {
-            response.status(200).json(favorites)
+        .then((user) => {
+            const { id, favoriteCats } = user
+            response.status(200).json({
+                user: {
+                    id,
+                },
+                favoriteCats
+            })
         })
         .catch((error) => {
-            response.status(400).json({ error: `Não foi encontrado um miau favorito` })
+            response.status(400).json({ error: `Não foi encontrado um miau favorito.` })
         })
 }
 
@@ -111,16 +117,16 @@ exports.updateAvailable = (request, response) => {
         })
 }
 
-exports.updateFavCats = (request, response) => {
+exports.insertFavCats = (request, response) => {
     const { id } = request.params
     const { favoriteCats } = request.body
 
-    Home.findByIdAndUpdate(id, { $set: { favoriteCats } })
+    Home.findByIdAndUpdate(id, { $push: { favoriteCats } })
         .then(() => {
             response.status(200).json({ message: `Miau favoritado!` })
         })
         .catch((error) => {
-            response.status(400).json({ error: `Não foi possível favoritar` })
+            response.status(400).json({ error: `Não foi possível favoritar.` })
         })
 }
 

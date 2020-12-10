@@ -2,19 +2,24 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-mongoose.connect(`${process.env.DATABASE_URL}`,
+mongoose.connect(`mongodb+srv://ELIANESILVA:eliane@cluster0.edyv0.mongodb.net/AbrigueUmMiau?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
         useUnifiedTopology: true,
-    
+    })
+    .then(()=>{
+        console.log('MongoDB conectado')
+    })
+    .catch((error)=>{
+        console.log('Não foi possível se conectar ao MongoDB')
     })
 
 
 const index = require('./routes/index')
 const home = require('./routes/home')
 const cat = require('./routes/cat')
-const sessionH = require('./routes/sessionHome')
-const sessionC = require('./routes/sessionCat')
 
 
 app.use(express.json())
@@ -32,7 +37,5 @@ app.use(function (req, res, next) {
 app.use('/index', index)
 app.use("/home", home)
 app.use("/cat", cat)
-app.use('/session-home', sessionH)
-app.use('/session-cat', sessionC)
 
 module.exports = app

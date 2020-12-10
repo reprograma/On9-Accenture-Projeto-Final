@@ -9,7 +9,7 @@ const catSchema = new Schema({
     city: { type: String, required: true },
     neighborhood: { type: String, required: true },
     nicknameCat: { type: String, required: true },
-    characters: { type: String, required: true },
+    aboutTheMiau: { type: String, required: true },
     available: { type: Boolean, default: true }
 },
     { timestamps: true })

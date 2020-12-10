@@ -4,7 +4,7 @@ const bcryptSalt = 9
 const Cat = require('../models/Cat')
 
 exports.createNewCat = async (request, response) => {
-    const { responsible, email, password, contact, city, neighborhood, nicknameCat, characters, available } = request.body
+    const { responsible, email, password, contact, city, neighborhood, nicknameCat, aboutTheMiau, available } = request.body
     const salt = bcrypt.genSaltSync(bcryptSalt)
 
     try {
@@ -18,7 +18,7 @@ exports.createNewCat = async (request, response) => {
             city,
             neighborhood,
             nicknameCat,
-            characters,
+            aboutTheMiau,
             available
         })
         Cat.findOne({ email: email })
@@ -38,7 +38,7 @@ exports.createNewCat = async (request, response) => {
 }
 
 exports.getAll = (request, response) => {
-    Cat.find({ available: true }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "characters": 1, "available": 1 })
+    Cat.find({ available: true }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "aboutTheMiau": 1, "available": 1 })
         .then((cat) => {
             response.status(200).json(cat)
         })
@@ -50,7 +50,7 @@ exports.getAll = (request, response) => {
 exports.getByCity = (request, response) => {
     const city = request.query.city
 
-    Cat.find({ city: city }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "characters": 1, "available": 1 })
+    Cat.find({ city: city, available: true }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "aboutTheMiau": 1, "available": 1 })
         .then((cat) => {
             response.status(200).json(cat)
         })
@@ -62,7 +62,7 @@ exports.getByCity = (request, response) => {
 exports.getByNeighborhood = (request, response) => {
     const neighborhood = request.query.neighborhood
 
-    Cat.find({ neighborhood: neighborhood }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "characters": 1, "available": 1 })
+    Cat.find({ neighborhood: neighborhood, available: true }, { "responsible": 1, "contact": 1, "city": 1, "neighborhood": 1, "aboutTheMiau": 1, "available": 1 })
         .then((cat) => {
             response.status(200).json(cat)
         })

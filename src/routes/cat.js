@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const catController = require('../controllers/cat')
 const homeController = require('../controllers/home')
-const authMiddleware = require('../middlewares/authCat')
 
 //@route POST api/cat/new-cat
 //@desc Registrar um gato

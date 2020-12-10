@@ -2,12 +2,16 @@ const express = require('express')
 const router = express.Router()
 const homeController = require('../controllers/home')
 const catController = require('../controllers/cat')
-const middleware = require('../middlewares/auth')
 
 //@route POST api/home/new
 //@desc Registrar novo usuário que ofereça um lar temporário
 //@acess Public
 router.post('/new', homeController.createNewHome)
+
+//@route POST api/home/favorite/:id
+//@desc Acrescentar ID's de gatos favoritos através do ID do lar temporário
+//@acess Public
+router.post('/favorite/:id', homeController.insertFavCats)
 
 //@route GET api/home/all
 //@desc Visualizar todos os gatos cadastrados
@@ -29,11 +33,6 @@ router.get('/by-district', catController.getByNeighborhood)
 //@acess Public
 router.get('/favorites/:id', homeController.getFavCats)
 
-//@route Middleware
-//@desc Utiliza o token gerado para o usuário para que tenha acesso a outras rotas
-//@acess Private
-//router.use(middleware)
-
 //@route PUT api/home/update/:id
 //@desc Atualizar todo cadastro do Lar Temporário
 //@acess Public
@@ -43,11 +42,6 @@ router.put('/update/:id', homeController.updateAll)
 //@desc Atualizar a disponibilidade do lar temporário
 //@acess Public
 router.patch('/available/:id', homeController.updateAvailable)
-
-//@route PATCH api/home/favorite/:id
-//@desc Acrescentar ID's de gatos favoritos através do ID do lar temporário
-//@acess Public
-router.patch('/favorite/:id', homeController.updateFavCats)
 
 //@route DELETE api/home/delete/:id
 //@desc Deletar cadastro do Lar Temporário
