@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const authConfig = require('../config/authCat')
+const authConfig = require('../config/auth')
 const bcrypt = require('bcrypt')
 const Cat = require('../models/Cat')
 

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const configAuth = require('../config/authCat')
+const configAuth = require('../config/auth')
 const { promisify } = require('util')
 
 module.exports = async (request, response, next) => {

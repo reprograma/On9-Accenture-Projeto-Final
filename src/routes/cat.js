@@ -9,11 +9,6 @@ const authMiddleware = require('../middlewares/authCat')
 //@acess Public
 router.post('/new-cat', catController.createNewCat)
 
-//@route Middleware
-//@desc Utiliza o token gerado para o usuário que cadastrou um gato para que tenha acesso a outras rotas
-//@acess Private
-router.use(authMiddleware)
-
 //@route GET api/cat/all-homes
 //@desc Visualizar todos lares temporários disponíveis
 //@acess Public
@@ -28,6 +23,11 @@ router.get('/by-city', homeController.getByCity)
 //@desc Visualizar lares temporários por bairro
 //@acess Public
 router.get('/by-district', homeController.getByNeighborhood)
+
+//@route Middleware
+//@desc Utiliza o token gerado para o usuário que cadastrou um gato para que tenha acesso a outras rotas
+//@acess Private
+//router.use(authMiddleware)
 
 //@route PUT api/cat/update-registration/:id
 //@desc Atualizar cadastro do gato

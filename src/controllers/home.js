@@ -40,7 +40,7 @@ exports.createNewHome = async (request, response,) => {
 }
 
 exports.getAll = (request, response) => {
-    Home.find({ available: true })
+    Home.find({ available: true }, { "name": 1, "contact": 1, "city": 1, "neighborhood": 1, "homeDescription": 1, "available": 1 })
         .then((home) => {
             response.status(200).json(home)
         })
@@ -53,20 +53,19 @@ exports.getAll = (request, response) => {
 exports.getByCity = (request, response) => {
     const city = request.query.city
 
-    Home.find({ city: city })
+    Home.find({ city: city }, { "name": 1, "contact": 1, "city": 1, "neigborhood": 1, "homeDescription": 1, "available": true })
         .then((home) => {
             response.status(200).json(home)
-
-                .catch((error) => {
-                    response.status(400).json({ error: 'Erro ao buscar por cidade.' })
-                })
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Erro ao buscar bairro` })
         })
 }
 
 exports.getByNeighborhood = (request, response) => {
     const neighborhood = request.query.neighborhood
 
-    Home.find({ neighborhood: neighborhood })
+    Home.find({ neighborhood: neighborhood }, { "name": 1, "contact": 1, "city": 1, "neighborhood": 1, "homeDescription": 1 })
         .then((home) => {
             response.status(200).json(home)
         })
