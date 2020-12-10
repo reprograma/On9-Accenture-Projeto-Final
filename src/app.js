@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/RestaurantesRecife', 
+mongoose.connect(`${process.env.dataBaseUrl}`, 
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,
