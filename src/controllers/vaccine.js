@@ -1,192 +1,117 @@
+const mongoose = require('mongoose')
 const Vaccine = require('../models/Vaccine')
 const User = require('../models/User')
 
 exports.getVaccine = (req, res, next) => {
-  Vaccine.find()
-    .then(user => {
+  Vaccine.find().sort({ name: 1 })
+    .then((user) => {
       res.status(200).json(user)
     })
-    .catch(err => next(err))
+    .catch((err) => next(err))
+}
+
+exports.getVaccineByName = (req, res) => {
+  const { name } = req.query
+  Vaccine.find({ name: name }).sort({ dose: 1 }).then((vaccine) => {
+      res.status(200).json(vaccine)
+    })
+    .catch((err) => {
+      res.status(400).json(err)
+    })
 }
 
 exports.getVaccineById = (req, res, next) => {
   const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: `O ID especificado não é válido.` })
+    return
+  }
+
   Vaccine.findById(id)
     .then((vaccine) => {
       res.status(200).json(vaccine)
     })
-    .catch(err => next(err))
-    //vaccine.create. retornar vacina nova para o método
+    .catch((err) => next(err))
 }
-
-// function getByName(name) {
-//   Vaccine.findOne(name).then((response) => {
-//     return response
-//   }).catch(err => next(err))
-// }
-
-// function getVaccineByName(name, dose, avoidedDiseases) {
-  // var query = { name: name },
-  // update = { name: name, dose: dose, avoidedDiseases: avoidedDiseases },
-  // options = { upsert: true, new: true, setDefaultsOnInsert: true };
-  // Vaccine.findOneAndUpdate(query, update, options, function(error, vaccine) {
-  //   if(vaccine) {
-  //     return vaccine
-  //   } else {
-  //     console.log(error)
-  //     return error
-  //   }
-  // })
-// }
-
-
-//Pesquisar pelo nome
-//Se vacina existe, vincular ao usuário que tomou a vacina
-// Se vacina não existe, registrar nova vacina (chamar o método que registra nova vacina)
-//getvacinabyname
-
-//FUNCIONANDO OK
-// exports.registerVaccine = async (req, res, next) => {
-//   const { name, dose, avoidedDiseases } = req.body
-
-//   const newVaccine = new Vaccine({
-//     name,
-//     date: new Date().toString(),
-//     dose,
-//     avoidedDiseases
-//   })
-
-//   newVaccine.save()
-//     .then(vaccine => {
-//       res.status(201).json(vaccine)
-//     })
-//     .catch(err => next(err))
-// }
 
 exports.registerVaccine = async (req, res, next) => {
   const { name, dose, avoidedDiseases } = req.body
 
-  Vaccine.findOne({name: name } && { dose: dose }).then(async (existingVaccine) => {
-    if (existingVaccine) {
-      return res.status(400).json({
-        error: ["Já existe está vacina cadastrada."],
-      }) 
-    }
+  Vaccine.findOne({ $and: [{ name: name }, { dose: dose }] })
+    .then(async (existingVaccine) => {
+      if (existingVaccine) {
+        return res.status(400).json({
+          error: ["Já existe essa vacina cadastrada."]
+        })
+      }
 
-    const newVaccine = new Vaccine({
-      name,
-      date: new Date().toString(),
-      dose,
-      avoidedDiseases
-    })
-
-    newVaccine.save()
-      .then(vaccine => {
-        res.status(201).json(vaccine)
+      const newVaccine = new Vaccine({
+        name,
+        date: new Date().toString(),
+        dose,
+        avoidedDiseases
       })
-      .catch(err => next(err))
-  })  
+
+      newVaccine
+        .save()
+        .then((vaccine) => {
+          res.status(201).json(vaccine)
+        })
+        .catch((err) => next(err))
+    })
+    .catch((err) => {
+      res.status(400).json(err)
+    })
 }
 
-//chamar o método getvacinabyname
-// exports.insertVaccineCard = async (req, res, next) => {
-//   user = req.params
-//   id = user.id
-
-//   const { name, dose, avoidedDiseases } = req.body
-//   console.log(name)
-//   let vaccine = getVaccineByName(name, dose, avoidedDiseases)
-//   try{
-//     const newVaccineTaken = vaccine
-//     console.log("Vaccine", newVaccineTaken)
-//     const userById = await User.findById(id)
-//     userById.vaccinesTaken.push(newVaccineTaken)
-//     await userById.save()
-//   } catch(e) {
-//     return res.status(400).json(e)
-//   }
-
-// }
-
-// exports.insertVaccineCard = async (req, res, next) => {
-//   user = req.params
-//   id = user.id
-
-//   const { name, dose, avoidedDiseases } = req.body
-//   try{
-//     const newVaccineTaken = await Vaccine.create({
-//       name,
-//       dose,
-//       avoidedDiseases
-//     })
-
-//     await newVaccineTaken.save()
-//       .then((vaccine) => {
-//         res.status(201).json(vaccine)
-//       })
-//       .catch(err => next(err))
-
-//     const userById = await User.findById(id)
-//     userById.vaccinesTaken.push(newVaccineTaken)
-//     await userById.save()
-//   } catch(e) {
-//     return res.status(400).json(e)
-//   }
-// }
-
-exports.insertVaccineCard = async (req, res, next) => {
+exports.insertVaccineCard = async (req, res) => {
   user = req.params
   id = user.id
 
-  const { name } = req.body
-  try{
-    const newVaccineTaken = await Vaccine.findOne({ name: name })
+  const { name, dose } = req.body
 
-    const userById = await User.findById(id)
-    userById.vaccinesTaken.push(newVaccineTaken)
-    await userById.save()
-      .then((user) => {
-        res.status(200).json(user)
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: `O ID especificado não é válido.` })
+    return
+  }
+
+  try {
+    Vaccine.findOne({ $and: [{ name: name }, { dose: dose }] }).then(async (existingVaccine) => {
+        if (!existingVaccine) {
+          return res.status(404).json({
+            error: [`Não existe essa vacina cadastrada na base de dados.`]
+          })
+        }
+
+        const newVaccineTaken = await Vaccine.findOne({ $and: [{ name: name }, { dose: dose }] })
+        const userById = await User.findById(id)
+
+        userById.vaccinesTaken.push(newVaccineTaken)
+
+        userById.save()
+          .then((user) => {
+            res.status(200).json(user)
+          })
+          .catch((err) => {
+            return res.status(500).json(err)
+          })
       })
-      .catch(err => next(err))
-  } catch(e) {
+      .catch((err) => {
+        res.status(400).json(err)
+      })
+  } catch (e) {
     return res.status(400).json(e)
   }
 }
 
-// exports.insertVaccineCard = async (req, res, next) => {
-//   user = req.params
-//   id = user.id
-
-//   const { name } = req.body
-//   try{
-//     const newVaccineTaken = await Vaccine.findOne({ name: name })
-//       .then(async existingVaccine => {
-//         if(existingVaccine) {
-//           return res.status(404).json({ error: [`Vacina não cadastrada.`]})
-//         }
-//       })
-
-//     const userById = await User.findById(id)
-//     userById.vaccinesTaken.push(newVaccineTaken)
-//     await userById.save()
-//       .then((user) => {
-//         res.status(200).json(user)
-//       })
-//       .catch(err => next(err))
-//   } catch(e) {
-//     return res.status(400).json(e)
-//   }
-// }
-
 exports.deleteVaccine = (req, res) => {
   const { id } = req.params
 
-  Vaccine.findByIdAndDelete(id)
-    .then(() => {
-      res.status(200).json({ message: `Vacina deletada com sucesso.`})
+  Vaccine.findByIdAndDelete(id).then(() => {
+      res.status(200).json({ message: `Vacina deletada com sucesso.` })
     })
-    .catch(err => {
+    .catch((err) => {
       throw new Error(err)
     })
 }

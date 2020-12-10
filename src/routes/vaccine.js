@@ -5,15 +5,13 @@ const authMiddleware = require('../middlewares/auth')
 
 router.get('/', vaccineController.getVaccine)
 
+router.get('/name', vaccineController.getVaccineByName)
+
 router.get('/:id', vaccineController.getVaccineById)
 
-router.post('/register', vaccineController.registerVaccine)
-
-// router.post('/register/:id', vaccineController.insertVaccineCard)
-
-router.patch('/register/:id', vaccineController.insertVaccineCard)
-
 router.use(authMiddleware)
+router.post('/register', vaccineController.registerVaccine)
+router.patch('/vaccinestaken/:id', vaccineController.insertVaccineCard)
 router.delete('/:id', vaccineController.deleteVaccine)
 
 module.exports = router

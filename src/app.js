@@ -14,11 +14,11 @@ const login = require('./routes/login')
 const app = express()
 
 mongoose.connect(`${process.env.DATABASE}`, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-})
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err))
 
@@ -30,6 +30,5 @@ app.use('/users', users)
 app.use('/vaccines', vaccines)
 app.use('/admin', admin)
 app.use('/login', login)
-
 
 module.exports = app
