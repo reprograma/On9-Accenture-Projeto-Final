@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-router.get("/", function(request, response){
+router.get("/rights", function(request, response){
     response.status(200).send({
         title: "Direitos das mulheres Tech",
         version: "1.0.0",
