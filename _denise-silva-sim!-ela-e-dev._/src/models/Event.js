@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
+const {Schema} = mongoose;
 
 const eventSchema = new mongoose.Schema({
   eventId: { type: Schema.Types.ObjectId, required: true },
