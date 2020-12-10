@@ -28,6 +28,7 @@ app.use(function (req, res, next) {
 
 app.use("/", index);
 app.use("/ambulances", ambulances);
+app.use("/message", messagesSend);
 app.use("/agents", agentTransits);
 app.use("/sessions", sessions);
 

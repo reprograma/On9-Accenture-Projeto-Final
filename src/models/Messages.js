@@ -5,15 +5,15 @@ const messageSchema = new mongoose.Schema(
     ambulanceId: { type: mongoose.Schema.Types.ObjectId,ref: 'AmbulanceUser' },
     driverName: { type: mongoose.Schema.Types.ObjectId, ref: 'AmbulanceUser'},
     licensePlate: { type: mongoose.Schema.Types.ObjectId, ref: 'AmbulanceUser'},
-    locationAmbulance: { type: String, required: true },
-    destinationHospital: { type: String, required: true },
+    locationAmbulance: { type: String },
+    destinationHospital: { type: String },
     telephoneNumberAmbulance: { type: mongoose.Schema.Types.ObjectId, ref: 'AmbulanceUser'},
-    routesToHopital: { type: String, required: true },
+    routesToHopital: { type: String },
     transitAgentId: { type: mongoose.Schema.Types.ObjectId, ref: 'TransitAgentUser'},
     transitAgentName: { type: mongoose.Schema.Types.ObjectId, ref: 'TransitAgentUser'},
-    transitAgentlocation: { type: String, required: true },
+    transitAgentlocation: { type: String },
     telephoneNumberAgent: { type: mongoose.Schema.Types.ObjectId, ref: 'TransitAgentUser'},
-    readConfirmation: { type: Boolean, required: true, default: true }
+    readConfirmation: { type: Boolean, default: true }
   },
   { timestamps: true }
 );
