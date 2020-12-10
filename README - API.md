@@ -1,6 +1,8 @@
+# API - DIREITOS DAS MULHERES TECH
+
+![logo](logo.png)
 
 
-# API - DIREITOS DAS MULHERES
 
 ## Sobre
 - Descrição do nosso projeto
@@ -9,21 +11,21 @@ Um API para que mulheres possam buscar informações jurídicas gratuitas sobre 
 
 O usuário pode tanto requisitar por palavra chave (um nome título do assunto que queria) que atenda sua necessidade de conhecimento em relação ao seu direito do trabalho, que estará disponível no banco de dados.
 
-Fazendo um pedido de de busca sobre um direiro (usando uma palavra que lhe represente. (Ex: "assédio", "licença")
+Fazendo um pedido de busca sobre um direiro usando uma palavra que lhe represente. (Ex: "intervalo", "licença maternidade", "férias".)
 
 
 ## Dados para o usuário preencher para se cadastrar na API
--email: texto e obrigatório
--senha: texto e obrigatório
--profissão/ocupação: texto e obrigatório
+-email: texto e obrigatório,
+-senha: texto e obrigatório,
+-profissão/ocupação: texto e obrigatório.
 
 
 
 ## Dados de responsabilidade do API que retornará ao servidor após a busca/consulta:
--id: automático e obrigatorio
--título do assunto jurídico: texto e obrigatório
--descrição sobre o assunto: texto e obrigatório
--fonte de informação do direito: texto e obrigatório 
+-id: automático e obrigatorio,
+-título do assunto jurídico: texto e obrigatório,
+-descrição sobre o assunto: texto e obrigatório,
+-fonte de informação do direito: texto e obrigatório .
 
 ## API deve retornar seguinte JSON com dados da API:
 
@@ -69,39 +71,39 @@ RETORNA: "/laws/delete/[ID]" Deleta o direito por id específico e retorna mensa
 			    |   **app.js**
 			    |
 			    📂---controller
-			    |       **NOMEController.js**
-			    |
-          📂---data
-          |     **laws.json**
-          | 
+			    |     **rightsController.js**
+			    |     **userController.js**
+          		    📂---data
+                            |     **rights.json**
+                            | 
 			    📂---model
-			    |       **NOMESchema.js
-					|       Repository.js**
-			    |
+			    |       **rightsSchema.js
+			    | 	    **Repository.js**
+			    |       **user.js**
 			    📂---routes
-			            **NOMERoute.js
-									index.js**
+			            **rightsRoute.js
+				    **index.js**
 
 
 ### Endpoints
 
 - `/api/users/singup`
 - `/api/users/all`
-- `/api/laws/requests/new`
+- `/api/rights/requests/new`
 
 
 ### links para testar o API
 
-- **/laws/ferias/user/:id**
+- **/rights/ferias/user/:id**
 
   - Buscar o item cadastro "férias" dentro dos arquivos dos direitos, para o usuário ler.
 
-- **/laws/requested/user/:id**
+- **/rights/requested/user/:id**
   - Buscar todos os direitos que esse usuário requisitou.
 
-**/laws/request/delete/:id**
+**/rights/request/delete/:id**
 
 - Excluir um direito (dentro da pasta direitos) cadastrado na API.
 
 
-O presente projeto de API está em constante desenvolvimento.
+O presente projeto de API "Direitos das Mulheres Tech" está em constante desenvolvimento.
