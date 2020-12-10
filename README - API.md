@@ -14,7 +14,7 @@ Sobre o que pretende saber em relação ao seu trabalho, para analisar se tem di
 
 O usuário pode tanto requisitar por palavra chave (um nome título do assunto que queria) que atenda sua necessidade de conhecimento em relação ao seu direito do trabalho, que estará disponível no banco de dados.
 
-Fazendo um pedido de de busca sobre um direiro (usando uma palavra que lhe represente. (Ex: "assédio", "licença")
+Fazendo um pedido de de busca sobre um direiro (usando uma palavra que lhe represente. (Ex: "intervalos", "licença maternidade", "férias")
 
 
 ## Dados para o usuário preencher para se cadastrar na API
