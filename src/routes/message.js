@@ -6,7 +6,7 @@ const messageAgent = require("../controllers/transitAgent");
 
 // @route POST /messages/new
 // @desc Criar uma mensagem
-//router.post("/new", messageAmbulance.addMessage);
+//router.post("/new", messageAmbulance.postNewMessage);
 
 // @route POST /messages/new
 // @desc Criar uma mensagem

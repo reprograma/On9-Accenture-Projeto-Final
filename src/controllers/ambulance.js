@@ -29,9 +29,6 @@ exports.post = async (req, res, next) => {
     password,
     driverCPF,
     licensePlate,
-    location,
-    destination,
-    routesToHopital,
     telephoneNumberAmbulance,
   } = req.body;
   const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -44,9 +41,6 @@ exports.post = async (req, res, next) => {
       hashPass,
       driverCPF,
       licensePlate,
-      location,
-      destination,
-      routesToHopital, 
       telephoneNumberAmbulance
     });
     newAmbulance

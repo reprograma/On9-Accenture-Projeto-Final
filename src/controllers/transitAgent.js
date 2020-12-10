@@ -67,19 +67,4 @@ exports.postCreateAgent = async (req, res, next) => {
   }
 };
 
-exports.postCreateNewMessageAgent = async (messageSendAgent, transitAgentId) => {
-    const newMessage = new Messages ({
-        transitAgentId: MessagesSend.id,
-        transitAgentName: MessagesSend.transitAgentName,
-        transitAgentlocation: MessagesSend.transitAgentlocation,
-        telephoneNumberAgent: MessagesSend.telephoneNumberAgent,
-        readConfirmation: MessagesSend.readConfirmation,
-        dateSendAgent: MessagesSend.DateSchema
-    })
-    try {
-        return await newMessage.save()
-    } catch (e) {
-        console.log(e)
-        throw new Error(e)
-    }
-}
+
