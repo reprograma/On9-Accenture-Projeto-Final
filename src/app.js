@@ -12,12 +12,12 @@ mongoose.connect(process.env.DATABASE_URL,
         useCreateIndex: true,
         useUnifiedTopology: true,
     })
-    // .then(()=>{
-    //     console.log('MongoDB conectado')
-    // })
-    // .catch((error)=>{
-    //     console.log('Não foi possível se conectar ao MongoDB')
-    // })
+    .then(()=>{
+        console.log('MongoDB conectado')
+    })
+    .catch((error)=>{
+        console.log('Não foi possível se conectar ao MongoDB')
+    })
 
 
 const index = require('./routes/index')
