@@ -5,7 +5,7 @@ const mentorRouter = require("./routes/mentorRoutes");
 const mentoredRouter = require("./routes/mentoredRoutes");
 
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/LearnShare', {
+mongoose.connect(`${process.env.DATABASE_ULR}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
