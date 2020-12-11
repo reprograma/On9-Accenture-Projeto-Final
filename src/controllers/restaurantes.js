@@ -37,17 +37,18 @@ const cadastroRestaurante = (req, res) => {
     const { nome, restaurante, especialidades, rua } = req.body
     try {
         const restaurante = new Restaurante({
-            nome = nome,
-            restaurante = restaurante,
-            especialidades = especialidades,
-            rua = rua
+            nome,
+            restaurante,
+            especialidades,
+            rua
         });
-
         restaurante.save()
             .then((restaurante) => {
-                res.status(201).json(restaurante);
+                res.status(200).json(restaurante);
             })
-            .catch(err => next(err));
+            .catch((err) => {
+                return res.status(500).json(err)
+            })
     } catch (e) {
         return res.status(401).json({ error: 'erro' });
     }
