@@ -23,8 +23,8 @@ exports.accessToken = (req, res) => {
               id,
               email,
             },
-            token: jwt.sign({ id }, process.env.SECRET, {
-              expiresIn: process.env.EXPIRESIN,
+            token: jwt.sign({ id }, `${process.env.SECRET}`, {
+              expiresIn: `${process.env.EXPIRESIN}`,
             }),
           })
         } catch (e) {
