@@ -2,6 +2,7 @@ const { response, request } = require("express")
 const mongoose = require("mongoose")
 const Recipe = require("../models/Receita.js")
 const bcrypt = require("bcrypt")
+const helpers = require("../helpers/helpersUser")
 
 const getAll = (request, response) => {
     Recipe.find()
@@ -12,6 +13,7 @@ const getAll = (request, response) => {
             response.status(400).json({ message: "erro" })
         })
 }
+
 
 const getId = (req, res) => {
     const { id } = req.params
@@ -84,27 +86,80 @@ const getByNoChoseRecipe = (request, response) => {
 }
 
 
+const getBySortRecipe = (request, response) => {
+    
+    Recipe.find({}).sort({"nomeReceita": 1})        
+          .then((recipes) => {
+             response.status(200).json(recipes);
+        })
+          .catch(err => {
+              response.status(400).json({ message: "erro" })
+        })
+    
+    
+}
+
+const getByQuickList = (request, response) =>{
+    Recipe.find({},{"nomeReceita": 1, "ingredientes": 1, "preparo": 1, "_id": 0}).sort({"nomeReceita": 1})
+          .then((recipes) => {
+             response.status(200).json(recipes);
+   })
+          .catch(err => {
+             response.status(400).json({ message: "erro" })
+   })
+
+}
+
+
+
 
 const createRecipe = (request, response) => {
     let { nomeReceita, ingredientePrincipal, ingredientes, preparo, observacoes,tipoReceita,receitaSelecionada } = request.body
+    
+    let newName = [];
+    let nameRepeat = false;
 
-    const newRecipe = new Recipe({
+    for (let i = 0; i < nomeReceita.length; i ++) {
+        if(!newName.includes(nomeReceita)){
+         newName.push(nomeReceita)  
+        } else {
+            nameRepeat = true;
+        }    
+    };
+       // if(nameRepeat == nomeReceita) {
+            //response.status(400).json({message: "Não se pode cadastrar duas receitas iguais!"});
+        //return;
+        //}
+          
+
+    const newRecipe =  new Recipe({ 
         nomeReceita,
         ingredientePrincipal,
         ingredientes,
         preparo,
         observacoes,
-        tipoReceita,
-        receitaSelecionada, 
+        tipoReceita, 
+        receitaSelecionada
 
     });
 
+    //Recipe.push(newRecipe);
+
+
     newRecipe.save()
-        .then((res) => {
-            response.status(201).json(res);
+            .then((res) => {
+                response.status(201).json(res)
         })
-        .catch(err => next(err));
-}
+            .catch((err)=> {
+                response.status(400).json({ message: "Não se pode cadastrar duas receitas com nome igual!" })
+    
+        });
+}    
+
+
+   
+
+    
 
 const updateRecipe = (request, response) => {
     const { id } = request.params
@@ -185,10 +240,21 @@ const updateTitle = (req, res) => {
     const { id } = req.params
     const { nomeReceita } = req.body
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(400).json({ message: "ID não é válido" })
-        return;
-    } else {
+    let newName = [];
+    let nameRepeat = false;
+
+    for (let i = 0; i < nomeReceita.length; i ++) {
+        if(!newName.includes(nomeReceita)){
+         newName.push(nomeReceita)  
+        } else {
+            nameRepeat = true;
+        }    
+    };
+
+    //if (!mongoose.Types.ObjectId.isValid(id)) {
+        //res.status(400).json({ message: "ID não é válido" })
+        //return;
+    //} else {
         Recipe.findByIdAndUpdate(id, { $set: { nomeReceita } })
             .then(() => {
                 res.status(200).json({ message: `O nome da receita foi atualizado` })
@@ -197,8 +263,9 @@ const updateTitle = (req, res) => {
                 res.json(err)
             })
 
-    }
 }
+
+
 
 const updateType = (req, res) => {
     const { id } = req.params
@@ -229,7 +296,7 @@ const updatePreparation = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { preparo } })
             .then(() => {
-                res.status(200).json({ message: `O modo de preparo foi modificadp` })
+                res.status(200).json({ message: `O modo de preparo foi modificado` })
             })
             .catch((err) => {
                 res.json(err)
@@ -279,6 +346,8 @@ module.exports = {
     getByTypeFood,
     getByChoseRecipe,
     getByNoChoseRecipe,
+    getBySortRecipe,
+    getByQuickList,
     createRecipe,
     updateRecipe,
     uptdateChosenRecipe, 
