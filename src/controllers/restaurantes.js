@@ -60,7 +60,7 @@ const adicionarComentario = (req, res) => {
             avaliacao,
             nota
         });
-        comentario.push()
+        comentario.push(Restaurante.comentario)
             .then((comentario) => {
                 res.status(201).json(comentario);
             })
