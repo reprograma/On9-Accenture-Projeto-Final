@@ -36,15 +36,15 @@ const restaurantePorId = (req, res) => {
 const cadastroRestaurante = (req, res) => {
     const { nome, restaurante, especialidades, rua } = req.body
     try {
-        const restaurante = new Restaurante({
+        const resTaurante = new Restaurante({
             nome,
             restaurante,
             especialidades,
             rua
         });
-        restaurante.save()
-            .then((restaurante) => {
-                res.status(200).json(restaurante);
+        resTaurante.save()
+            .then((resTaurante) => {
+                res.status(200).json(resTaurante);
             })
             .catch((err) => {
                 return res.status(500).json(err)
