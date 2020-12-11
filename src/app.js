@@ -10,6 +10,9 @@ mongoose.connect("mongodb://localhost/tanaMesa",
 
 const index = require("./routes/index")
 const receita = require("./routes/receitaRoute")
+const sessions = require("./routes/sessionRoute")
+
+
 
 
 app.use(express.json());
@@ -25,6 +28,9 @@ app.use(function(req,res, next){
 
 app.use("/", index)
 app.use("/receita", receita)
+app.use("/sessions", sessions)
+
+
 
 
 module.exports = app

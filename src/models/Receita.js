@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 
+
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -10,6 +11,7 @@ const userSchema = new Schema({
     observacoes: String,
     tipoReceita: {type: String, required: true},
     receitaSelecionada: { type: Boolean, default: false },
+    
     },
     { timestamp: true });
 
