@@ -8,19 +8,15 @@ function checkPassword(passwordEntry, password) {
     return bcrypt.compareSync(passwordEntry, password)
 }
 
-exports.accessToken = (req, res) => {
+exports.accessToken = async (req, res) => {
     try {
       const { name, password: passwordEntry } = req.body;
         
       Vendedor.findOne({nome: name})
         .then((user) => {
             const {id, nome, hashPass } = user;
-  
-            try {
-              checkPassword(passwordEntry, hashPass);
-            } catch(e) {
-              return res.status(401).json({ error: 'password does not match' });
-            }
+
+            if(!checkPassword(passwordEntry,hashPass)) {res.status(401).json({message: "senha incorreta"})}
   
             try {
               return res.json({

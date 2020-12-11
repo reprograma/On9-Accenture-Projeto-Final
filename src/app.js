@@ -1,8 +1,11 @@
 const express = require("express")
 const app = express() 
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
 
-mongoose.connect("mongodb://localhost/Controle", //`${process.env.DATABASE}`
+dotenv.config();
+
+mongoose.connect(`${process.env.DATABASE}`, //"mongodb://localhost/Controle",// 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -30,3 +33,4 @@ app.use("/session", sessions)
 app.use("/vendedor", vendedorRoute)
 
 module.exports = app
+
