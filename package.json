@@ -1,6 +1,9 @@
 {
   "name": "allana-caldas-aqui-tem-vacina",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.18.3"
+  },
   "description": "Primeira parte do Projeto Final da turma de Desenvolvimento BackEnd do Reprograma",
   "main": "server.js",
   "scripts": {
