@@ -1,7 +1,5 @@
 const controller = require("../controllers/hostingController")
 const express = require("express")
-const stateController = require("../controllers/stateController")
-const cityController = require("../controllers/cityController")
 const router = express.Router()
 require('mongoose')
 
