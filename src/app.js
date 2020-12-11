@@ -3,7 +3,11 @@ const bodyParser = require('body-parser')
 const app = express()
 
 const mongoose = require('mongoose');
-mongoose.connect(`${process.env.DATABASE}`, 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+mongoose.connect(`${process.env.MONGO}`, 
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,

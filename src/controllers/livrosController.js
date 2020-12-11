@@ -74,7 +74,7 @@ const getByTitle = (request, response) =>{
 }
 
 const getByTrigger = (request, response) =>{
-    const { triggers } = request.body 
+    const { triggers } = request.params 
 
     Book.find(triggers)
         .then((books)=>{
