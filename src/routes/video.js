@@ -8,7 +8,7 @@ const videoController = require("../controllers/video");
 @access Public 
 @endpoint http://localhost:porta/videos/all
 **/
-router.get("/all", videoController.getAll);
+router.get("/", videoController.getAll);
 
 /**
 @route GET videos/:id

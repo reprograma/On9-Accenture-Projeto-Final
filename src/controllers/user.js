@@ -1,4 +1,3 @@
-
 const User = require("../models/User");
 const { signupSchema } = require("../validators/user");
 const { hashPassword } = require("../helpers/user");
