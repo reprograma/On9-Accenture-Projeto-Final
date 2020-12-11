@@ -23,7 +23,8 @@ const authRoutes = require("./routes/authRoutes")
 
 
 
-app.use('/api/hosting', hostingRoutes, authRoutes);
+app.use('/api/hosting', hostingRoutes);
+app.use('/api/user', authRoutes);
 
 
 app.get("/", (request, response) => {
