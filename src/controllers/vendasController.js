@@ -4,7 +4,7 @@ const Vendas = require("../models/Vendas");
 const Estoque = require("../models/Estoque");
 const Vendedor = require("../models/Vendedores")
 const {vendaSchema} = require("../validators/vendas")
-const {DateSchema} = require("yup")
+
 //const {vendaSchema} = require("../validators/vendaSchema")
 
 //GET 
@@ -21,47 +21,40 @@ const vendas = (request, response) => {
 const vendaProduto = async (request, response) => {
 
     const vendaValidada = await vendaSchema.validate(request.body)
-    console.log(vendaValidada)
     const nomeProduto = vendaValidada.nomeProduto
     const vendedor = vendaValidada.vendedor
 
-    
-
-    
-    
-        if(Vendedor.findOne({nome: vendedor})){
-            console.log(vendedor)
-            console.log("vendedor cadastrado")
-
             try {
                 let produto = await Estoque.findOne({nomeProduto: nomeProduto});
-             
-                   
-                produto.estoque = produto.estoque - vendaValidada.quantidade
+                let buscaVendedor = await Vendedor.findOne({nome: vendedor})
+
+                if (buscaVendedor !== null){
+                    
+                    produto.estoque = produto.estoque - vendaValidada.quantidade
         
-                if (produto.estoque < 0) {
-                    return response.status(400).json("Quantidade insuficiente! Favor abastecer");
-                } else {
-        
-                    let novoPedido = new Vendas(vendaValidada)
-                        novoPedido.save()
-                        produto.save();
-        
-                    return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + " unidades")
-                }
+                    if (produto.estoque < 0) {
+                        return response.status(400).json("Quantidade insuficiente! Favor abastecer");
+                    } else {
+            
+                        let novoPedido = new Vendas(vendaValidada)
+                            novoPedido.save()
+                            produto.save();
+            
+                        return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + " unidades")
+                    }
+
+                }else (buscaVendedor == null); {
+                    return response.status(400).json("Vendedor(a) não cadastrado(a), não é possível realizar venda")} 
+                
             }
             catch (err) {
         
                 return response.status(400).json({ error: err.message })
             }
         
-        }else{
-            console.log("vendedor não encontrado")
         }
-    }
-        
-
-
+   
+    
 //DELETE
 const estorno =  (request, response) => {
     const { id } = request.params

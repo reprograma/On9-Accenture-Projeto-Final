@@ -5,10 +5,11 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-mongoose.connect(`${process.env.DATABASE}`, //"mongodb://localhost/Controle",// 
+mongoose.connect(`${process.env.DATABASE}`, //  "mongodb://localhost/Controle",// 
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
     });
 
 const estoqueRoute = require("./routes/estoqueRoute")
