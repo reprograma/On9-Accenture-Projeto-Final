@@ -4,7 +4,11 @@
 
 Em nosso país, muitos animais são abandonados diariamente, tamanho abandono que não tem um número exato . Com gatos, a situação ainda é pior, pois a fêmea pode ter de 1 a 6 filhotes por parto, e pode ter até 3 ninhadas ao ano.
 
-Com isto, algumas pessoas disponibilizam seus lares para abrigo temporário para gatos que estejam em situação de risco, e estas pessoas utilizam redes sociais que muitas vezes, dispersam este tipo de informação que tanto poderia ajudar um gatinho. Pensando nisso, desenvolvi uma API que possibilita a estas pessoas se cadastrarem para localizar estes animais, através de usuários que cadastram estes felinos em estado de vulnerabilidade, seja por estarem prenhas, machucado ou mesmo para ter uma companhia até encontrar um lar definitivo.
+Com isto, algumas pessoas disponibilizam seus lares para abrigo temporário para gatos que estejam em situação de risco, e estas pessoas utilizam redes sociais que muitas vezes, dispersam este tipo de informação que tanto poderia ajudar um gatinho. 
+
+Pensando nisso, desenvolvi uma API que possibilita a estas pessoas cadastrarem seus lares e ter  acesso as informações de gatos, também cadastrados por outros usuários, que tenham conhecimento de algum felino vulnerável. 
+
+Os usuários que cadastram um gato, também terá acesso as informações de lares disponíveis para possível negociação de abrigo.
 
 ## Rota (Index)
 
@@ -18,7 +22,7 @@ Com isto, algumas pessoas disponibilizam seus lares para abrigo temporário para
 
 ### POST
 
-- Cadastro um novo lar temporário
+- Cadastro um novo lar temporário:
 
 [http://localhost:5000/home/new](http://localhost:5000/home/new)
 
@@ -38,10 +42,11 @@ Como é o body:
 
 ```
 
-Resposta [200] status de sucesso
+Resposta (200) status de sucesso
 
 ```jsx
 {
+	"available": true,
 	"name": "Nome Sobrenone",
 	"email": "email@email.com",
 	"password": "password",
@@ -49,11 +54,11 @@ Resposta [200] status de sucesso
 	"city": "Cidade",
 	"neighborhood": "Bairro",
 	"homeDescription": "Apê telado, sem rota de fuga",
-	"available": true
+	"favoriteCats": []
 }
 ```
 
-Resposta [400] status de erro
+Resposta (400) status de erro
 
 ```jsx
 {
@@ -61,21 +66,86 @@ Resposta [400] status de erro
 }
 ```
 
+### POST
+
+- Insere no campo "favoriteCats" o ID de um gato favoritado através do ID do usuário que está oferecendo um lar:
+
+[http://localhost:5000/home/favorite/:id](http://localhost:5000/home/favorite/:id)
+
+Como é o body:
+
+```jsx
+{
+	"favoriteCats": "5fcd07993e62460a8457be16"
+}
+```
+
+Resposta(200) status sucesso:
+
+```jsx
+{
+	"message": "Miau favoritado!"
+}
+```
+
+Resposta (400) status erro:
+
+```jsx
+{
+	"error": "Não foi possível favoritar."
+}
+```
+
 ### GET
 
-Todos as rotas GET irão retornar as informações dos gatos, pois não é de interesse que um usuário que ofereça um lar tenha acesso a outro usuário de lar.
+Estas rotas GET irão retornar as informações dos gatos, pois não é de interesse que um usuário que ofereça um lar tenha acesso a outro usuário ofertante:
 
 - Realiza busca de todos os gatos cadastrados:
 
 [http://localhost:5000/home/all](http://localhost:5000/home/all)
 
-- Realiza busca de gatos por cidade:
+- Realiza busca de gatos por cidade através de query. Ex: São+Paulo:
 
-[http://localhost:5000/home/bycity](http://localhost:5000/home/bycity)
+[http://localhost:5000/home/by-city?city=São+Paulo](http://localhost:5000/home/by-city?city=S%C3%A3o+Paulo)
 
-- Realiza busca de gatos por bairro:
+- Realiza busca de gatos por bairro através de query. Ex: Cachoeirinha :
 
-[http://localhost:5000/home/bydistrict](http://localhost:5000/home/bydistrict)
+[http://localhost:5000/home/by-district?neighborhood=Cachoeirinha](http://localhost:5000/home/by-district?neighborhood=Cachoeirinha)
+
+### GET
+
+- Mostra ao usuário as informações dos gatos que foram favoritados por ele através de seu ID:
+
+[http://localhost:5000/home/favorites/:id](http://localhost:5000/home/favorites/:id)
+
+Resposta (200) status sucesso:
+
+```jsx
+{
+    "user": {
+        "id": "5fd23eeb07d27800e81a53af"
+    },
+    "favoriteCats": [
+        {
+            "available": true,
+            "_id": "5fd2a57aa29adc3bbc96de0a",
+            "responsible": "Name",
+            "contact": Number,
+            "city": "city",
+            "neighborhood": "neighborhood",
+            "nicknameCat": "Leo"
+        }
+    ]
+}
+```
+
+Resposta (400) status erro:
+
+```jsx
+{
+	"error": "Não foi encontrado um miau favorito."
+}
+```
 
 ### PUT
 
@@ -98,7 +168,7 @@ Como é o body:
 }
 ```
 
-Resposta [200] status de sucesso:
+Resposta (200) status de sucesso:
 
 ```jsx
 {
@@ -106,7 +176,7 @@ Resposta [200] status de sucesso:
 }
 ```
 
-Reposta [400] status de erro:
+Reposta (400) status de erro:
 
 ```jsx
 {
@@ -128,7 +198,7 @@ Como é o body:
 }
 ```
 
-Resposta [200] status de sucesso:
+Resposta (200) status de sucesso:
 
 ```jsx
 {
@@ -136,7 +206,7 @@ Resposta [200] status de sucesso:
 }
 ```
 
-Resposta [400] status de erro:
+Resposta (400) status de erro:
 
 ```jsx
 {
@@ -154,7 +224,7 @@ Resposta [400] status de erro:
 
 ### POST
 
-- Cadastra um novo gato contendo as informações dele(a) e também da pessoa que tem o conhecimento do felino
+- Cadastra um novo gato contendo as informações dele(a) e também da pessoa que tem o conhecimento do felino:
 
 [http://localhost:5000/cat/newcat](http://localhost:5000/cat/newcat)
 
@@ -169,12 +239,12 @@ Como é o body:
     "city": "type: string",
     "neighborhood": "type: string",
     "nicknameCat": "type: string",
-    "characters": [{"color": "string", "adult": "boolean", "puppy": "boolean", "conditions": "string"}],
+    "aboutTheMiau": "type: string",
     "avaiable": {"type": "boolean", "default": true}
 }
 ```
 
-Resposta [200] status sucesso:
+Resposta (200) status sucesso:
 
 ```jsx
 {
@@ -186,13 +256,13 @@ Resposta [200] status sucesso:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Apelido gato",
-    "characters": [{"color": "cor", "adult": "true", "puppy": "false", "conditions": "Felino machucado"}],
+    "aboutTheMiau": "Fêmea, adulta e está prestes a parir. Necessita de um abrigo.",
     "avaiable": true
 
 }
 ```
 
-Resposta [400] status erro:
+Resposta (400) status erro:
 
 ```jsx
 {
@@ -202,23 +272,23 @@ Resposta [400] status erro:
 
 ### GET
 
-Assim como as rotas do lar temporário, as rotas GET de usuários que cadastrarão os gatos, mostrará apenas usuários que cadastraram um lar para abrigo.
+Assim como as rotas do lar temporário, as rotas GET de usuários que cadastrarão os gatos, mostrará apenas usuários que cadastraram um lar para abrigo:
 
 - Busca todos os lares temporários disponíveis:
 
-[http://localhost:5000/cat/allhomes](http://localhost:5000/cat/allhomes)
+[http://localhost:5000/cat/all-homes](http://localhost:5000/cat/all-homes)
 
-- Busca todos os lares temporários por cidade:
+- Busca todos os lares temporários por cidade através de query. Ex: São+Paulo:
 
-[http://localhost:5000/cat/bycity](http://localhost:5000/cat/bycity)
+[http://localhost:5000/cat/by-city?city=São+Paulo](http://localhost:5000/cat/by-city?city=S%C3%A3o+Paulo)
 
-- Busca todos os lares temporários por bairro:
+- Busca todos os lares temporários por bairro através de query. Ex: Lapa:
 
-[http://localhost:5000/cat/bydistrict](http://localhost:5000/cat/bydistrict)
+[http://localhost:5000/cat/by-district?neighborhood=Santana](http://localhost:5000/cat/by-district?neighborhood=Santana)
 
 ### PUT
 
-- Atualiza todo o cadastro do usuário que realizou o cadastro do felino utilizando o ID
+- Atualiza todo o cadastro do usuário que realizou o cadastro do felino utilizando o ID:
 
 [http://localhost:5000/cat/update/:id](http://localhost:5000/cat/update/:id)
 
@@ -233,13 +303,13 @@ Estrutura do body:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Mel",
-    "characters": [{"color": "Amarelo", "adult": "true", "puppy": "false", "conditions": "Felino machucado"}],
+    "aboutTheCat": "Amarelo, filhote e já está na rua por um bom tempo",
     "avaiable": true
 
 }
 ```
 
-Resposta [200] status de sucesso:
+Resposta (200) status de sucesso:
 
 ```jsx
 {
@@ -247,7 +317,7 @@ Resposta [200] status de sucesso:
 }
 ```
 
-Resposta [400] status de erro:
+Resposta (400) status de erro:
 
 ```jsx
 {
@@ -269,7 +339,7 @@ Estrutura do body:
 }
 ```
 
-Resposta [200] status de sucesso:
+Resposta (200) status de sucesso:
 
 ```jsx
 {
@@ -277,7 +347,7 @@ Resposta [200] status de sucesso:
 }
 ```
 
-Resposta [400] status de erro:
+Resposta (400) status de erro:
 
 ```jsx
 {

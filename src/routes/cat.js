@@ -2,17 +2,11 @@ const express = require('express')
 const router = express.Router()
 const catController = require('../controllers/cat')
 const homeController = require('../controllers/home')
-const authMiddleware = require('../middlewares/authCat')
 
 //@route POST api/cat/new-cat
 //@desc Registrar um gato
 //@acess Public
 router.post('/new-cat', catController.createNewCat)
-
-//@route Middleware
-//@desc Utiliza o token gerado para o usuário que cadastrou um gato para que tenha acesso a outras rotas
-//@acess Private
-router.use(authMiddleware)
 
 //@route GET api/cat/all-homes
 //@desc Visualizar todos lares temporários disponíveis
@@ -28,6 +22,11 @@ router.get('/by-city', homeController.getByCity)
 //@desc Visualizar lares temporários por bairro
 //@acess Public
 router.get('/by-district', homeController.getByNeighborhood)
+
+//@route Middleware
+//@desc Utiliza o token gerado para o usuário que cadastrou um gato para que tenha acesso a outras rotas
+//@acess Private
+//router.use(authMiddleware)
 
 //@route PUT api/cat/update-registration/:id
 //@desc Atualizar cadastro do gato
