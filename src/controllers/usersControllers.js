@@ -1,21 +1,51 @@
-//const { res} = require('express')
 const mongoose = require('mongoose')
-const Users = require('../models/User');
-const signupUserSchema = require('../validators/user');
-const bcrypt = require("bcrypt");
-const bcryptSalt = 8;
+const User = require('../models/User')
+const { signupUserSchema } = require('../validators/user')
+const bcrypt = require('bcrypt')
+const bcryptSalt = 8
 
+exports.getAll = (req, res, next) => {
+  User.find()
+    .then((user) => {
+      res.status(200).json(user)
+    })
+    .catch((err) => next(err))
+}
 
- exports.post = async (req, res) => {
+exports.getByCity = (req, res) => {
+    const {city}  = req.query;
+  
+      User.find({city: city})
+        .then((user) => {
+            res.status(200).json(user)
+        }) 
+        .catch((error) => {
+              res.status(400).json({ error: 'City not found' })
+        })
+}
+  
+exports.getByGameType = (req, res) => {
+    const {type} = req.query;
+  
+   User.find({type: type})
+        .then((user) => {
+            res.status(200).json(user)
+        }) 
+        .catch((error) => {
+            res.status(400).json({ error: 'Type not found' })
+        })
+}
+
+exports.signup = async (req, res) => {
   const { password } = req.body
   const salt = bcrypt.genSaltSync(bcryptSalt)
 
   try {
     const validatedBody = await signupUserSchema.validate(req.body)
 
-    const user = new Users(validatedBody)
+    const user = new User(validatedBody)
 
-    Users.findOne({ email: validatedBody.email })
+    User.findOne({ email: validatedBody.email })
       .then(async (existingUser) => {
         if (existingUser) {
           return res.status(400).json({
@@ -40,73 +70,52 @@ const bcryptSalt = 8;
   }
 }
 
+exports.updateType = (req, res) => {
+  const { id } = req.params
+  const { type } = req.body
 
-/*exports.post = async (req, res, next) => { 
-    const { name, password, email, city, type, description } = req.body;
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    try {
-     /* Users.findOne({email: email})
-      .then( (existingUser) => {
-        if(existingUser) {
-          return res.status(400).json({
-            error: ["User already exists"]
-          })
-        }
-
-        const hashPass = bcrypt.hashSync(password, salt);
-
-        const newUser = new Users ({
-          name, 
-          email,
-          hashPass,
-          city, 
-          type,
-          description,
-      })
-
-      newUser.save()
-        .then((user) => res.status(201).json(user))
-        .catch((err) => next (err))
-     /* }) 
-      .catch((err) => {
-      res.status(400).json(err)
-    }) 
-
-  } catch (err) {
-    res.status(400).json(err)
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: `The specified ID is not valid.` })
+    return
   }
-} */
-
-exports.getAll = (req, res, next) => {
-  Users.find() 
-    .then((users) => {
-        res.status(200).json(users)
+  User.findByIdAndUpdate(id, { $set: { type } })
+    .then(() => {
+      res.status(200).json({
+        message: `The user game type of id: ${req.params.id} has been updated successfully.`
+      })
     })
-    .catch(err => {
-      res.status(500).json({ message: err })
-      console.log('ERRO')
-      next(err)
-      })
+    .catch((err) => {
+      res.json(err)
+    })
 }
 
-exports.getByCity = (req, res) => {
-  const {city}  = req.query;
-
-    Users.find({city: city})
-      .then((user) => {
-          res.status(200).json(user)
-      }) .catch((error) => {
-            res.status(400).json({ error: 'City not found' })
-          })
-}
-
-exports.getByGameType = (req, res) => {
-  const {type} = req.query;
-
- Users.find({type: type})
-      .then((user) => {
-          res.status(200).json(user)
-      }) .catch((error) => {
-          res.status(400).json({ error: 'Type not found' })
+exports.updateDescription = (req, res) => {
+    const { id } = req.params
+    const { description } = req.body
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).json({ message: `The specified ID is not valid.` })
+      return
+    }
+    User.findByIdAndUpdate(id, { $set: { description } })
+      .then(() => {
+        res.status(200).json({
+          message: `The user's description of id: ${req.params.id} has been updated successfully.`
+        })
       })
+      .catch((err) => {
+        res.json(err)
+      })
+  }
+
+exports.deleteUser = (req, res) => {
+  const { id } = req.params
+
+  User.findByIdAndDelete(id)
+    .then(() => {
+      res.status(200).json({ message: `User successfully deleted.` })
+    })
+    .catch((err) => {
+      throw new Error(err)
+    })
 }

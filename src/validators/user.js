@@ -1,6 +1,6 @@
 const yup = require('yup')
-
-/*yup.setLocale({
+/*
+yup.setLocale({
   string: {
     email: 'Esse e-mail não é válido',
     min: 'A senha precisa ter no mínimo 8 caracteres'
