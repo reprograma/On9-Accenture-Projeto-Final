@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 
 const users = require("./routes/usersRoute")
+const login = require('./routes/sessionRoute')
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv')
@@ -36,5 +37,6 @@ app.use(function(req, res, next) {
 })
 
 app.use("/findyourgeek", users)
+app.use("/findyourgeek/login", login)
 
 module.exports = app

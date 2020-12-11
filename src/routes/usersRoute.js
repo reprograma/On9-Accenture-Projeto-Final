@@ -1,20 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const controller = require("../controllers/usersControllers")
-const authMiddleware = require("../middlewares/auth")
+const express = require('express');
+const router = express.Router();
+const controller = require("../controllers/usersControllers");
+
+router.post("/register", controller.post);
 
 router.get("/all", controller.getAll);
 
-//router.get("/:type", controller.getByGameType);
+router.get("/city", controller.getByCity);
 
-router.post("/register", controller.post);
-router.use(authMiddleware)
-/*
-router.put("/update/:id"), controller.updateUsers
-
-router.delete("/delete/:id", controller.deleteUsers)
-*/
-//router.get("/:city", controller.getByCity);
+router.get("/type", controller.getByGameType);
 
 module.exports = router;
 
