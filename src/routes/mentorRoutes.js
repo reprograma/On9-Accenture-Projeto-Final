@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const mentorController = require("../controllers/mentorController");
-const authMiddleware = require("../middlewares/auth");
 
 router.post("/register", mentorController.createMentor);
 
@@ -18,7 +17,5 @@ router.put("/edit/:id", mentorController.updateMentor);
 router.patch("/update/:id", mentorController.updateMentorAvailable);
 
 router.delete("/:id", mentorController.deleteMentor);
-
-router.use(authMiddleware)
 
 module.exports = router;

@@ -96,10 +96,10 @@ const updateMentor = (request, response) => {
 //atualizar o campo disponibilidade
 const updateMentorAvailable = (request, response) => {
     const { id } = request.params;
-    const { availability } = request.body;
+    const { available } = request.body;
 
     Mentor.findByIdAndUpdate(id, {
-            $set: { availability }
+            $set: { available }
         })
         .then((mentor) => {
             response.status(200).json({

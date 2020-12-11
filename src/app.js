@@ -3,7 +3,6 @@ const app = express();
 
 const mentorRouter = require("./routes/mentorRoutes");
 const mentoredRouter = require("./routes/mentoredRoutes");
-const sessions = require("./routes/sessionRoute");
 
 const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/LearnShare', {
@@ -24,6 +23,5 @@ app.use(function(req, res, next) {
 
 app.use("/mentor", mentorRouter);
 app.use("/mentored", mentoredRouter);
-app.use("/sessions", sessions);
 
 module.exports = app;

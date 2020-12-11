@@ -27,7 +27,7 @@ const createMentored = async(request, response) => {
                             .then(() => {
                                 Mentor.findOneAndUpdate({ _id: request.params.mentorId }, { $push: { mentored: newMentored._id } })
                                     .then(() => {
-                                        response.status(201).json('new mentored');
+                                        response.status(201).json('Novo mentorado cadastrado com sucesso');
                                     })
                                     .catch((err) => {
                                         throw new Error(err);
@@ -82,14 +82,14 @@ const editMentored = (request, response) => {
     const { id } = request.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({ message: "Specified id is not valid" });
+        response.status(400).json({ message: "ID inválido" });
         return;
     }
     Mentored.findByIdAndUpdate(id, request.body)
         .then(() => {
             response
                 .status(200)
-                .json({ message: `${request.params.id} is updated successfully.` });
+                .json({ message: `Edição no ID ${request.params.id} editado com sucesso.` });
         })
         .catch((err) => {
             response.json(err);
@@ -104,7 +104,7 @@ const updateMentoredConcluded = (request, response) => {
     Mentored.findByIdAndUpdate(id, { $set: { concluded } })
         .then((mentored) => {
             response.status(200).json({
-                message: `${request.params.id} mentored concluded is updated.`,
+                message: `O campo concluido do mentorado de ID ${request.params.id} foi atualizado com sucesso!`,
             });
         })
         .catch((err) => {
@@ -114,19 +114,19 @@ const updateMentoredConcluded = (request, response) => {
 
 // deletar mentor, mas se estiver com disponibilidade true ele não deleta
 const deleteMentored = (request, response) => {
-    const { id } = request.params;
+    const { id } = request.params
 
-    Mentored.findById(id).then((mentored) => {
-        if (mentored.concluded == true) {
-            Mentored.findByIdAndDelete(id)
-                .then(() => {
-                    response.status(200).json("Mentored deleted");
-                })
-                .catch((err) => {
-                    throw new Error(err);
-                });
-        }
-    });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return response.status(400).json({ message: "O ID inserido é inválido" });
+    }
+
+    Mentored.findByIdAndDelete(id)
+        .then(() => {
+            response.status(200).json({ message: `Mentorado excluido com sucesso` })
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Não foi possível excluir` })
+        })
 };
 
 module.exports = {

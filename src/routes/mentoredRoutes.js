@@ -8,8 +8,6 @@ router.get("/destinyCountry", controller.getByDestinyCountry);
 
 router.get("/concluded", controller.getByConcluded);
 
-// router.post("/register", controller.createMentored);
-
 router.post("/register/:mentorId", controller.createMentored); //pega o Id do mentor para cadastrar o mentorado
 
 router.put("/edit/:id", controller.editMentored);
