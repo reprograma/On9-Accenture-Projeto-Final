@@ -66,8 +66,8 @@ const adicionarComentario = (req, res) => {
         // const comentar = new Restaurante.comentario({
         // });
         // comentar.push()
-        .then((comentar) => {
-        res.status(201).json(comentar);
+        .then((comentario) => {
+        res.status(201).json(comentario);
     })
     .catch(err => next(err));
 }
