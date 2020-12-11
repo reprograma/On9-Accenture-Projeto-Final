@@ -17,6 +17,21 @@ const vendas = (request, response) => {
         .catch(err => next(err));
 }
 
+//GET
+const nomeVendedor = (request, response) => {
+
+    const {nome} = request.params;
+ 
+    console.log(nome)
+    Vendas.find({vendedor: nome})
+
+        .then((vendedor) => {
+          
+            response.status(200).json(vendedor);
+        })
+        .catch(err => next(err));
+}
+
 //POST
 const vendaProduto = async (request, response) => {
 
@@ -94,5 +109,6 @@ console.log(id)
 module.exports = {
     vendas,
     vendaProduto,
-    estorno
+    estorno,
+    nomeVendedor
 }

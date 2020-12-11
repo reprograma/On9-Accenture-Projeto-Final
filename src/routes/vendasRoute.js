@@ -16,6 +16,14 @@ const authMiddleware =  require("../middlewares/auth")
 router.get("/", controller.vendas)
 
 /**
+@route GET venda
+@desc Retorna todas as vendas
+@access Public 
+@endpoint http://localhost:8080/venda/:nomeVendedor
+**/
+router.get("/:nome", controller.nomeVendedor)
+
+/**
 @route POST venda/produto
 @desc Registrar uma nova venda
 @access Public 
