@@ -2,19 +2,22 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-mongoose.connect(`mongodb+srv://ELIANESILVA:eliane@cluster0.edyv0.mongodb.net/AbrigueUmMiau?retryWrites=true&w=majority`,
+const dotenv = require('dotenv')
+dotenv.config()
+
+mongoose.connect(process.env.DATABASE_URL,
     {
         useNewUrlParser: true,
-        useFindAndModify: false,
+        // useFindAndModify: false,
         useCreateIndex: true,
         useUnifiedTopology: true,
     })
-    .then(()=>{
-        console.log('MongoDB conectado')
-    })
-    .catch((error)=>{
-        console.log('Não foi possível se conectar ao MongoDB')
-    })
+    // .then(()=>{
+    //     console.log('MongoDB conectado')
+    // })
+    // .catch((error)=>{
+    //     console.log('Não foi possível se conectar ao MongoDB')
+    // })
 
 
 const index = require('./routes/index')
