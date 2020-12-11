@@ -12,6 +12,6 @@ const hostingSchema = new Schema({
     site: {type: String}    
 })
 
-const hosting = mongoose.model('Hosting', hostingSchema)
+const Hosting = mongoose.model('Hosting', hostingSchema)
 
-module.exports = hosting
+module.exports = Hosting
