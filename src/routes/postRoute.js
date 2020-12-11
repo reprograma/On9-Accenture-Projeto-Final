@@ -7,7 +7,7 @@ router.get("/todos", controller.getAll)
 router.get("/materia", controller.getByMateria)
 router.get("/assunto", controller.getByAssunto)
 router.get("/:id", controller.getByID)
-router.get("/tags/:tag", controller.getByTags)
+
 
 router.use(authMiddleware);
 router.post("/criar", controller.createPost)

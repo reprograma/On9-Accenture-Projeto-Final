@@ -2,10 +2,10 @@
 Esse projeto foi elaborado para o trabalho de conclusão do Bootcamp de BackEnd promovido pela {reprograma} ocorrido entre Agosto e Dezembro de 2020 com duração de 18 semanas.
 
 ## Sobre o Projeto
-Como ex aluna de escola pública e atualmente aluna de uma universidade pública, eu senti muita dificuldade em estudar na época que eu me preparava para o enem, pensando nisso, desenvoldi a idéia do "Meu Resumão" para ajudar os vestibulandos do ENEM. A aplicação serve para os alunos postarem seus resumos pessoais sobre temas relacionados ao ENEM e ajudar outros alunos de forma mais simples e concentrada.
+Como ex aluna de escola pública e atualmente aluna de uma universidade pública, eu senti muita dificuldade em estudar na época que eu me preparava para o ENEM, pensando nisso, desenvolvi a idéia do "Meu Resumão" para ajudar os vestibulandos do ENEM. A aplicação serve para os alunos postarem seus resumos pessoais sobre temas relacionados ao ENEM e ajudar outros alunos de forma mais simples e concentrada.
 
 ## Objetivo
-O objetivo do projeto é possibilitar o registro de resumos sobre o ENEM e pesquisar por assunto, matéria e tags.
+O objetivo do projeto é possibilitar o registro de resumos sobre o ENEM e pesquisar por assunto e matéria.
 
 ## Status
 
@@ -15,8 +15,6 @@ Em desenvolvimento...
 
 
 ### Apresentação da API
-
-
 
 **POST:** /
 
@@ -35,7 +33,7 @@ Resposta [200]:
 ### Usuario
 Fazer login na API para gerar o JSON Web Token que será enviado em todas as requisições protegidas que apenas o usuário cadastrado terá acesso.
 
-**POST:** meuresumao/usuarios/registrar
+**POST:** meuresumao/login
 
 Body necessário:
 
@@ -57,6 +55,20 @@ Resposta [200]:
             },
             "token": "string"
         }
+    }
+~~~
+
+**POST:** meuresumao/usuarios/criar
+
+Cria um novo usuário.
+
+Body necessário:
+
+~~~Javascript
+    {
+        "name": "string",
+        "login": "string",
+        "password": "string"
     }
 ~~~
 
@@ -147,31 +159,6 @@ Resposta [200]:
 ]
 ~~~
 
-**GET:** /meuresumao/tags
-
-Visualizar resumo pela tag escolhida do resumo.
-
-Resposta [200]:
-
-~~~Javascript
-{
-        "_id": "object ID",
-        "referencias": [
-            "Aqui vai ficar as referencias",
-            "referencia"
-        ],
-        "tags": [
-            "tag01",
-            "tag02",
-            "tag03"
-        ],
-        "titulo": "titulo",
-        "autor": "Michelle Lícia",
-        "resumo": "Aqui vai ficar o resumo",
-        "materia": "Matéria",
-        "assunto": "Assunto",
-    }
-~~~
 
 **GET:** /meuresumao/assunto
 
@@ -202,7 +189,7 @@ Resposta [200]:
 
 **POST:** meuresumao/criar
 
-Posta novo resumo.
+Posta novo resumo. É necessário autorização com token no padrão: Bearer Token.
 
 Body necessário:
 
@@ -251,7 +238,7 @@ Resposta [201]
 
 **PUT:** meuresumao/atualizar
 
-Atualiza resumo pelo ID.
+Atualiza resumo pelo ID. É necessário autorização com token no padrão: Bearer Token.
 
 Body necessário:
 
@@ -269,6 +256,21 @@ Body necessário:
     }
 }
 ~~~
+
+**PUT:** meuresumao/atualizartitulo/:id
+
+Atualiza o campo titulo resumo pelo ID. É necessário autorização com token no padrão: Bearer Token.
+
+Body necessário:
+
+~~~Javascript
+{
+    {
+        "titulo": String,
+    }
+}
+~~~
+
 
 Resposta [200]:
 
@@ -301,6 +303,7 @@ Resposta [200]:
 ## Para rodar o Meu Resumão.
 
 1. Clone esse repositório
+
 2. Digite **npm install** em seu terminal para instalar as dependências configuradas no package.
 
     ~~~Shell
@@ -326,7 +329,7 @@ Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e de
 - MongoDB;
 - Mongoose;
 - Bcrypt;
-- Yup;
+- Express unless;
 - Jsonwebtoken;
 - Git e Github;
 - Visual Studio Code;
@@ -338,6 +341,7 @@ Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e de
 ## Futuras melhorias
 - Adicionar a opção de comentários nos resumos.
 - Adicionar a opção resumos favoritos para usuários.
+- Adicionar a filtragem por Tags.
 
 
 Este projeto encontra-se em desenvolvimento e está aberto para pullrequests.

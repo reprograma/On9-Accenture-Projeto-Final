@@ -31,12 +31,6 @@ const getByAssunto = (request, response) => {
         .then((posts) => { response.status(200).json(posts) })
 }
 
-const getByTags = (request, response) => {
-    const { tags } = request.params;
-    Task.find({ tags: tags })
-        .then((posts) => { response.status(200).json(posts) })
-}
-
 //Post
 const createPost = async (request, response, next) => {
     const { titulo, autor, resumo, materia, assunto, referencias, tags } = request.body
@@ -114,7 +108,6 @@ module.exports = {
     getByID,
     getByAssunto,
     getByMateria,
-    getByTags,
     updateTitulo,
     createPost,
     deletePost,

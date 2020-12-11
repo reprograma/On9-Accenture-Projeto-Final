@@ -1,15 +1,22 @@
 const express = require("express")
 const app = express()
 const unless = require("express-unless")
+const dotenv = require("dotenv")
+dotenv.config()
 
 const mongoose = require('mongoose');
-mongoose.set('useCreateIndex', true)
-//`${process.env.DATABASE}`
-mongoose.connect('mongodb://localhost/meuresumao',
+mongoose.connect(`${process.env.DATABASE_URL}`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    });
+        useCreateIndex: true
+    })
+    .then(() => {
+        console.log('MongoDB conectado')
+    })
+    .catch((error) => {
+        console.log('Não foi possível se conectar ao MongoDB')
+    })
 
 //rotas
 const index = require("./routes/index")
