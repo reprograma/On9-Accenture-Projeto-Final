@@ -5,8 +5,8 @@ const RestauranteSchema = new mongoose.Schema({
     especialidades:{type:Array, required:true},
     rua:{type:String, required:true}, 
     comentarios:[
-        {avaliacao: {type:String, required:true}, 
-        nota:{type:Number, required:true}
+        {avaliacao: {type:String, required:false}, 
+        nota:{type:Number, required:false}
         }
     ]
 });
