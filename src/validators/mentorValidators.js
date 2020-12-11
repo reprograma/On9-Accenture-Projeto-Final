@@ -13,6 +13,7 @@ exports.signupSchema = yup.object().shape({
     mentorName: yup.string().required(),
     visitedCountry: yup.string().required(),
     mentoringType: yup.string().required(),
+    mentored: yup.array(),
     descripition: yup.string(),
     available: yup.boolean().required()
 })

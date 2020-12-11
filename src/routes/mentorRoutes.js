@@ -5,7 +5,6 @@ const authMiddleware = require("../middlewares/auth");
 
 router.post("/register", mentorController.createMentor);
 
-
 router.get("/", mentorController.getAll);
 
 router.get("/visitedCountry", mentorController.getByVisitedCountry);

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { signupSchema } = require('../validators/mentoredValidators')
 const { hashPassword } = require('../helpers/hashPassword')
 const Mentored = require("../models/Mentored");
+const Mentor = require("../models/Mentor");
 
 const createMentored = async(request, response) => {
     try {
@@ -21,11 +22,22 @@ const createMentored = async(request, response) => {
                 newMentored.password = passwordHashed
 
                 newMentored.save()
-                    .then(newMentored => response.status(200).json(newMentored))
-                    .catch(err => {
-                        console.log(err)
-                        return response.status(500).json(err)
+                    .then(() => {
+                        Mentored.findOneAndUpdate({ _id: newMentored._id }, { $push: { mentor: request.params.mentorId } })
+                            .then(() => {
+                                Mentor.findOneAndUpdate({ _id: request.params.mentorId }, { $push: { mentored: newMentored._id } })
+                                    .then(() => {
+                                        response.status(201).json('new mentored');
+                                    })
+                                    .catch((err) => {
+                                        throw new Error(err);
+                                    });
+                            })
+                            .catch((err) => {
+                                throw new Error(err);
+                            });
                     })
+                    .catch(err => next(err));
             })
     } catch (e) {
         console.log(e)
