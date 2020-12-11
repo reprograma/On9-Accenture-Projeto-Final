@@ -29,10 +29,6 @@ const restaurantePorId = (req, res) => {
         })
 }
 
-//function checaSenha(senhaHash, senha) {
-//    return bcrypt.compareSync(senhaHash, senha)
-//}
-
 const cadastroRestaurante = (req, res) => {
     const { nome, restaurante, especialidades, rua } = req.body
     try {
@@ -56,8 +52,8 @@ const cadastroRestaurante = (req, res) => {
 
 
 const adicionarComentario = (req, res) => {
-    const { id } = request.params
-    const { avaliacao, nota } = request.body
+    const { id } = req.params
+    const { avaliacao, nota } = req.body
     Restaurante.findByIdAndUpdate(id, { comentario })
     try {
         const comentario = new Restaurante.comentario({
