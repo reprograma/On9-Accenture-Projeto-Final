@@ -61,7 +61,7 @@ const adicionarComentario = (req, res) => {
         function (err, model) {
             console.log(err);
         }
-    );
+    )
         //try {
         // const comentar = new Restaurante.comentario({
         // });
