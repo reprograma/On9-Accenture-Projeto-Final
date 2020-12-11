@@ -13,8 +13,7 @@ const getAll = (req, res) => {
 }
 
 const getByApply = (req, res) =>{
-    //const openApllies = event.find(event => event.openApply == true)
-    //res.status(200).send(openApllies)
+    
     Event.find({ openApply: true})
         .then((events) => {
             res.status(200).json(events)
@@ -46,7 +45,7 @@ const createEvent = (req, res, next) =>{
     }
     Event.findByIdAndUpdate(id, req.body)
         .then(() => {
-            res.status(200).json({ message: `${req.params.id} is is updated`})
+            res.status(200).json({ message: `${req.params.id} is updated`})
         })
         .catch((err) => {
             res.json(err)
