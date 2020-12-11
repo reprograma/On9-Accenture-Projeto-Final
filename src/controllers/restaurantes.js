@@ -7,11 +7,7 @@ const { senhaHash } = require('../helpers/usuario')
 const todosRestaurantes = (req, res) => {
     Restaurante.find()
         .then((restaurantes) => {
-            if (Restaurante.length < 0) {
-                res.status(204).json({ message: 'não existem restaurantes cadastrados' })
-            } else {
-                res.status(200).json(restaurantes)
-            }
+            res.status(200).json(restaurantes)
         })
         .catch((err) => {
             res.status(500).json(err)
@@ -38,36 +34,25 @@ const restaurantePorId = (req, res) => {
 //}
 
 const cadastroRestaurante = (req, res) => {
-    const { nome, senha, restaurante, especialidades, rua } = req.body
+    const { nome, restaurante, especialidades, rua } = req.body
     try {
-        bcrypt.compare(senha, senhaHash, function (err, result) {
-            console.log(result)
-            if (result) {
+        const restaurante = new Restaurante({
+            nome,
+            restaurante,
+            especialidades,
+            rua
+        });
 
-                try {
-                    const restaurante = new Restaurante({
-                        nome,
-                        restaurante,
-                        especialidades,
-                        rua
-                    });
-
-                    restaurante.save()
-                        .then((restaurante) => {
-                            res.status(201).json(restaurante);
-                        })
-                        .catch(err => next(err));
-                } catch (e) {
-                    return res.status(401).json({ error: 'erro' });
-                }
-            }
-        })
-
+        restaurante.save()
+            .then((restaurante) => {
+                res.status(201).json(restaurante);
+            })
+            .catch(err => next(err));
     } catch (e) {
-        console.log(e)
-        return res.status(400).json({ error: 'erro' });
+        return res.status(401).json({ error: 'erro' });
     }
 }
+
 
 const adicionarComentario = (req, res) => {
     const { id } = request.params
