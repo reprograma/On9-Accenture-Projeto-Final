@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const lawSchema = new Schema({
+const rightsSchema = new Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId, 
         auto: true,
@@ -12,16 +12,20 @@ const lawSchema = new Schema({
         required: true,
     },
     description: {
-        type: string,
+        type: String,
         required: true,
     },
     sourceInformation: {
+        type: String,
+        required: true,
+    },
+    inclusionDate: {
         type: String,
         required: true,
     }
 })
 
 
-const lawCollections = mongoose.model('law', lawSchema)
+const rights= mongoose.model('right', rightsSchema)
 
-module.exports = lawCollections
+module.exports = rights;

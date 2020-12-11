@@ -1,8 +1,9 @@
 {
   "name": "on9-accenture-projeto-final",
   "version": "1.0.0",
-  "description": "Um api para propagar conhecimento jurídico trabalhista às mulheres que trabalham com tecnologia ou para quem deseja conhecer os direitos antes de realizar a transição de carreira.",
+  "description": "Projeto 'Direitos Das Mulheres Tech' - É um api para propagar conhecimento jurídico trabalhista às mulheres que trabalham com tecnologia ou para quem deseja conhecer os direitos antes de realizar a transição de carreira.",
   "main": "index.js",
+  "start": "nodemon server.js",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
