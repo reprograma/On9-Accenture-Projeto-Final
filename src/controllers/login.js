@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const authConfig = require('../config/auth')
+// const authConfig = require('../config/auth')
 const bcrypt = require('bcrypt')
 const Admin = require('../models/Admin')
 
@@ -23,8 +23,8 @@ exports.accessToken = (req, res) => {
               id,
               email,
             },
-            token: jwt.sign({ id }, authConfig.secret, {
-              expiresIn: authConfig.expiresIn,
+            token: jwt.sign({ id }, process.env.SECRET, {
+              expiresIn: process.env.EXPIRESIN,
             }),
           })
         } catch (e) {
