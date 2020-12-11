@@ -17,7 +17,7 @@ O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que 
  - Express
  - Nodemon
  - Mongoose
-
+ - Dotenv
 
 ## Rotas
 

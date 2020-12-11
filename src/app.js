@@ -18,6 +18,6 @@ const booksRoutes = require("./routes/livrosRoutes")
 
 app.use(express.json())
 
-app.use("/alertaDeGatilho", booksRoutes)
+app.use("/", booksRoutes)
 
 module.exports = app
