@@ -1,0 +1,1 @@
+const category = ["Curso", "Bootcamp", "Hackaton", "Conferência", "Mentoria", "Palestra", "Bate-Papo", "Carreira"];
