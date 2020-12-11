@@ -1,6 +1,6 @@
 const healthClinic = require('../models/HealthClinic.js');
 const mongoose = require('mongoose');
-const { validatingBorough, sameZipcode, boroughs } = require('../validators/healthClinic.js')
+const { validatingBorough, sameZipcode, sameTypeAndZipcode, boroughs } = require('../validators/healthClinic.js')
 const { searchingVaccines, searchingVaccineAndDose } = require('../validators/Vaccine.js');
 
 
@@ -27,7 +27,7 @@ const getByVaccine = async (request, response) => {
     const { vaccine } = request.query;
     if (!(await searchingVaccines(vaccine) > 0)) { return response.status(200).json('Não foram encontradas Unidades de Saúde com a vacina desejada') }
 
-    healthClinic.find().populate({ path: 'vaccines', select: 'vaccine dose preventableDiseases', match: { vaccine: { $in: vaccine } } })
+    healthClinic.find().populate({ path: 'vaccines', select: 'vaccine dose preventableDiseases', match: { vaccine: vaccine } })
         .then((list) => { response.status(200).json(list) })
         .catch(err => { response.status(500).json(list) })
 
@@ -37,8 +37,8 @@ const getByVaccineDose = async (request, response) => {
     const { dose } = request.query;
     const { vaccine } = request.query;
 
-    if (!(await searchingVaccineAndDose(vaccine, dose) > 0)) { return response.status(200).json('Não foram encontradas Unidades de Saúde com a vacina e a dose desejada') }
-    healthClinic.find().populate({ path: 'vaccines', select: 'vaccine dose preventableDiseases', match: { $and: [{ vaccine: { $in: vaccine } }, { dose: { $in: dose } }] } })
+    if (!(await searchingVaccineAndDose(vaccine, dose) > 0)) { return response.status(200).json('Não foram encontradas Unidades de Saúde que tenham a vacina e a dose desejada') }
+    healthClinic.find().populate({ path: 'vaccines', select: 'vaccine dose preventableDiseases', match: { $and: [{ vaccine: vaccine }, { dose: dose }] } })
         .then((list) => { response.status(200).json(list) })
         .catch(err => { response.status(500).json(list) })
 }
@@ -63,10 +63,8 @@ const registerHealthClinic = async (request, response) => {
 const updateHealthClinic = async (request, response) => {
     const { id } = request.params;
     const { borough } = request.body;
-    const { zipcode } = request.body.address;
 
     if (!mongoose.Types.ObjectId.isValid(id)) { return response.status(400).json({ message: 'O ID inserido é inválido' }) }
-    if (await sameZipcode(zipcode)) { return response.status(401).json({ message: `Já existe uma Unidade de Saúde nesse mesmo CEP` }) }
     if (!(await validatingBorough(borough))) { return response.status(401).json({ message: `Insira um bairro válido. Em caso de dúvidas, veja a lista abaixo`, boroughs }) }
 
     healthClinic.findByIdAndUpdate(id, request.body)
@@ -78,27 +76,24 @@ const updateHealthClinic = async (request, response) => {
 const updateAddress = async (request, response) => {
     const { id } = request.params;
     const { address } = request.body;
-    const { zipcode } = request.body.address;
 
     if (!mongoose.Types.ObjectId.isValid(id)) { return response.status(400).json({ message: 'O ID inserido é inválido' }) }
-    if (sameZipcode(zipcode)) { return response.status(401).json({ message: `Já existe uma Unidade de Saúde nesse mesmo CEP` }) }
-
 
     healthClinic.findByIdAndUpdate(id, { $set: { address: address } })
-        .then((update) => { response.status(200).json(`O endereço da unidade de Saúde selecionada ${request.params.id} foi atualizado com sucesso`, update) })
-        .catch((err) => response.status(500).json(err))
-
-
+        .then(() => { response.status(200).json({ message: `O endereço da unidade de Saúde selecionada ${request.params.id} foi atualizado com sucesso` }) })
+        .catch((err) => response.status(500).json({ message: `Não foi possível atualizar o cadastro da unidade de Saúde`, err }))
 }
 
 const updateVaccinesList = async (request, response) => {
     const { id } = request.params;
     const { vaccines } = request.body;
+    let filteredList = [];
 
-    healthClinic.findByIdAndUpdate(id, { $push: { vaccines: vaccines } })
+    vaccines.forEach(vaccine => { if (!filteredList.includes(vaccine._id)) { filteredList.push(vaccine._id) } });
+
+    healthClinic.findByIdAndUpdate(id, { $set: { vaccines: filteredList } })
         .then(() => { response.status(200).json({ message: `A lista de vacinas da unidade de Saúde selecionada ${request.params.id} foi atualizada com sucesso` }) })
         .catch((err) => response.status(500).json(err))
-
 }
 
 

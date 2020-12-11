@@ -23,10 +23,12 @@ Pode acontecer, contudo, de na Unidade mais próxima não ser encontrada a vacin
 
 ## Dependências utilizadas
 
-- Express;
-- Nodemon
-- Mongoose
-- Yup
+- express;
+- nodemon
+- mongoose
+- bcrypt
+- jsonwebtoken
+- yup
 ___
 # ROTAS
 
@@ -34,16 +36,15 @@ ___
 
 Cadastro de **usuário-administrador** que vai modificar, atualizar cadastro de vacinas e Unidades de Saúde e correlacionar as informações entre elas.
 
-**http://localhost:8080/admin/registro**
+**http://localhost:8080/admin/register**
 
 **O que o body deve conter:**
 
 ```json
 {
-    "name":"",
-    "email":"",
-    "password":"",
-    "occupation":""
+    "name":"José da Silva",
+    "email":"josesilva@gmail.com",
+    "password":"2001005025"
 }
 ```
 
@@ -51,23 +52,63 @@ Cadastro de **usuário-administrador** que vai modificar, atualizar cadastro de 
 
 ```json
 {
-    "message":"Cadastro registrado com sucesso"
+    "message":"Cadastro registrado com sucesso",
+    "res": {
+        "_id": "5fd2ff031df15d366cfc18d7",
+        "name": "José da Silva",
+        "email": "josesilva@gmail.com",
+        "hashPass": "$2b$10$o3MPfGlNdLZc5bKhz3C6nuRBCuwnhUYfBBhfLp6dTR.KROsDwEeoe",
+        "createdAt": "2020-12-11T05:09:23.243Z",
+        "updatedAt": "2020-12-11T05:09:23.243Z",
+        "__v": 0
+    }
+
+}
+```
+## POST (Login do administrador)
+
+Login do **usuário-administrador** que vai gerar um token, permitindo a autenticação do usuário e o acesso dele às rotas privadas.
+
+**http://localhost:8080/admin/signin**
+
+**O que o body deve conter:**
+
+```json
+{
+    "email": "josesilva@gmail.com",
+    "password": "2001005025"
+}
+```
+
+**Resposta [200]**
+
+```json
+{
+    "user": {
+        "id": "5fd2ff031df15d366cfc18d7",
+        "email": "josesilva@gmail.com"
+    },
+    "token": "eiJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDJmZjAzMWRmMTVkMzY2Y2ZjMThkNyIsImlhdCI6MTYwNzY2MzQ5NCwiZXhwIjoxNjA4MjY4Mjk0fQ.uCktwnd135V5bkUMFYdArPP7nAOgpSSeUrElIi4OU3E"
 }
 ```
 
 ## POST (Cadastro de Vacinas)
 
-Cadastro de vacinas, registrando o nome, lote e as doses
+Cadastro de vacinas, registrando o nome, o lote, as doses e as doenças que cada uma previne.
 
-**http://localhost:8080/vacinas/cadastrar**
+**http://localhost:8080/vaccines/register**
 
 **O que o body deve conter:**
 
 ```json
 {
-    "vaccine":"",
-    "batch":"",
-    "doses":""
+    "vaccine": "Poliomelite Inativada",
+    "batch": "PLO2021BR",
+    "dose": "2ª dose",
+    "preventableDiseases": [
+            "Poliomelite",
+            "Paralisia Infantil"
+        ]
 }
 ```
 
@@ -75,33 +116,45 @@ Cadastro de vacinas, registrando o nome, lote e as doses
 
 ```json
 {
-    "message":"Vacina cadastrada com sucesso"
+    "message": "Vacina cadastrada com sucesso",
+    "newVaccine": {
+        "preventableDiseases": [
+            "Poliomelite",
+            "Paralisia Infantil"
+        ],
+        "_id": "5fd309015c9fb72b70ffc82d",
+        "vaccine": "Poliomelite Inativada",
+        "batch": "PLO2021BR",
+        "dose": "2ª dose",
+        "createdAt": "2020-12-11T05:52:01.827Z",
+        "updatedAt": "2020-12-11T05:52:01.827Z",
+        "__v": 0
+    }
 }
 ```
 
 ## POST (Cadastro de Unidades de Saúde)
 
-Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, endereço,  horário de funcionamento, se é um local acessível a PCD's e qual a lista de vacinas disponíveis no momento.
+Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, endereço,  horário de funcionamento e qual a lista de vacinas disponíveis no momento.
 
-**http://localhost:8080/unidades-de-saude/cadastrar**
+**http://localhost:8080/health-clinics/register**
 
 **O que o body deve conter:**
 
 ```json
 {
-		"type": "",
+    "type": "Unidade de Saude da Familia",
     "address": {
-        "street": "",
-        "zipcode": ""
+        "street": "Estrada do Passarinho, 956",
+        "zipcode": "53170110"
     },
-    "borough": "",
-    "openingHours": "",
-    "accessibility": "",
+    "borough": "Passarinho",
     "vaccines": [
         {
-            "name": "",
-            "dosage": "",
-            "vaccineId": ""
+            "_id": "5fd302841df15d366cfc18d8"
+        },
+        {
+            "_id": "5fd30433859cd146809be495"
         }
     ]
 }
@@ -111,40 +164,35 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"Unidade de saúde cadastrada com sucesso"
-},
-{
-		"_id":"",
-    "type": "",
-    "address": {
-        "street": "",
-        "zipcode": ""
-    },
-    "borough": "",
-    "openingHours": "",
-    "accessibility": "",
-    "vaccines": [
-        {
-            "name": "",
-            "dosage": "",
-            "vaccineId": ""
-        }
-    ],
-		"createdAt": "",
-		"updatedAt": ""
-}
-
+    "message": "Nova unidade de Saúde registrada com sucesso",
+    "newRegister": {
+        "openingHours": "Segunda a Sexta - 8h às 17h",
+        "vaccines": [
+            "5fd302841df15d366cfc18d8",
+            "5fd30433859cd146809be495"
+        ],
+        "_id": "5fd304bc5c9fb72b70ffc826",
+        "type": "Unidade de Saude da Familia",
+        "address": {
+            "street": "Estrada do Passarinho, 956",
+            "zipcode": 53170110
+        },
+        "borough": "Passarinho",
+        "createdAt": "2020-12-11T05:33:48.657Z",
+        "updatedAt": "2020-12-11T05:33:48.657Z",
+        "__v": 0
+    }
 }
 ```
 
 ## PUT (Atualização de Unidades de Saúde)
 
-**http://localhost:8080/unidades-de-saude/atualizar:/id**
+**http://localhost:8080/health-clinics/update/:id**
 
 **O que a URL deve conter:**
 
 ```json
-"http://localhost:8080/unidades-de-saude/atualizar/5fcb16455ee6964df83b020f"
+"http://localhost:8080/health-clinics/update/5fcb16455ee6964df83b020f"
 
 //Como paramêtro, enviamos o id da Unidade de Saúde cujos dados que queremos modificar
 ```
@@ -153,18 +201,18 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-		"address": {
-        "street": "",
-        "zipcode": ""
+    "type": "USF",
+    "address": {
+        "street": "Estrada dos Passarinhos, 956",
+        "zipcode": 53170111
     },
-    "borough": "",
-    "openingHours": "",
-    "accessibility": "",
+    "borough": "Passarinho",
     "vaccines": [
         {
-            "name": "",
-            "dosage": "",
-            "vaccineId": ""
+            "_id": "5fd302841df15d366cfc18d8"
+        },
+        {
+            "_id": "5fd30433859cd146809be495"
         }
     ]
 }
@@ -174,27 +222,32 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"Dados da Unidade de Saúde atualizados com sucesso"
+    "message": "A unidade de Saúde selecionada 5fd304bc5c9fb72b70ffc826 foi atualizada com sucesso"
 }
 ```
+## PUT (Atualização cadastral das Vacinas)
 
-## PATCH (Atualização do lote de uma vacina )
-
-**http://localhost:8080/vacinas/atualizar-lote/:id**
+**http://localhost:8080/vaccines/update/:id**
 
 **O que a URL deve conter:**
 
 ```json
-"http://localhost:8080/vacinas/atualizar-lote/5fcb16455ee6964df83b020f"
+"http://localhost:8080/vaccines/update/5fd309015c9fb72b70ffc82d"
 
-//Como paramêtro, enviamos o id da vacina cujo campo 'lote' queremos modificar
+//Como paramêtro, enviamos o id da Vacina cujo cadastro que queremos atualizar
 ```
 
 **O que o body deve conter:**
 
 ```json
 {
-    "batch":""    
+    "vaccine": "Poliomelite Inativada",
+    "batch": "PLO2021BR",
+    "dose": "2ª dose",
+    "preventableDiseases": [
+            "Poliomelite",
+            "Paralisia Infantil"
+        ]
 }
 ```
 
@@ -202,28 +255,31 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"O lote da vacina selecionada foi atualizado com sucesso"
+    "message": "A vacina de id 5fd309015c9fb72b70ffc82d foi atualizada com sucesso"
 }
 ```
 
 
-## PATCH (Atualização das doses de uma vacina )
+## PATCH (Atualização das doenças que cada vacina previne )
 
-**http://localhost:8080/vacinas/atualizar-doses/:id**
+**http://localhost:8080/vaccines/update-preventable-diseases/:id**
 
 **O que a URL deve conter:**
 
 ```json
-"http://localhost:8080/vacinas/atualizar-doses/5fcb16455ee6964df83b020f"
+"http://localhost:8080/vaccines/update-preventable-diseases/5fd302841df15d366cfc18d8"
 
-//Como paramêtro, enviamos o id da vacina cujo campo 'doses' queremos modificar
+//Como paramêtro, enviamos o id da vacina cujo campo 'prevantableDiseases' queremos modificar
 ```
 
 **O que o body deve conter:**
 
 ```json
 {
-    "doses":""    
+   "preventableDiseases": [
+            "Tuberculose miliar",
+            "Tuberculose meníngea"
+        ]    
 }
 ```
 
@@ -231,18 +287,18 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"As doses da vacina selecionada foram atualizadas com sucesso"
+    "message": "Lista de doenças evitáveis atualizada com sucesso"
 }
 ```
 
 ## PATCH (Atualização das vacinas disponíveis numa Unidade de Saúde)
 
-**http://localhost:8080/unidades-de-saude/atualizar-vacinas/:id**
+**http://localhost:8080/health-clinics/update-vaccines/:id**
 
 **O que a URL deve conter:**
 
 ```json
-"http://localhost:8080/unidades-de-saude/atualizar-vacinas/5fcb15c9d4837f2e3ce4a08f"
+"http://localhost:8080/health-clinics/update-vaccines/5fd304bc5c9fb72b70ffc826"
 
 //Como paramêtro, enviamos o id da Unidade de Saúde cujo campo 'vaccines' queremos modificar
 ```
@@ -253,9 +309,10 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 {
     "vaccines": [
         {
-            "name": "",
-            "dosage": "",
-            "vaccineId": ""
+            "_id": "5ad302841df15d344cfc18d8"
+        },
+        {
+            "_id": "5yd30433859cd148209be495"
         }
     ]
 }
@@ -271,24 +328,24 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ## PATCH (Atualização do endereço de uma Unidade de Saúde)
 
-**http://localhost:8080/unidades-de-saude/atualizar-endereco:/id**
+**http://localhost:8080/health-clinics/update-address/:id**
 
 **O que a URL deve conter:**
 
 ```json
-"http://localhost:8080/unidades-de-saude/atualizar-endereco/5fcb15c9d4837f2e3ce4a08f"
+"http://localhost:8080/health-clinics/update-address/5fd304bc5c9fb72b70ffc826"
 
-//Como paramêtro, enviamos o id da Unidade de Saúde cujo campo 'vaccines' queremos modificar
+//Como paramêtro, enviamos o id da Unidade de Saúde cujo campo 'address' queremos modificar
 ```
 
 **O que o body deve conter:**
 
 ```json
 {
-		"address": {
-        "street": "",
-        "zipcode": ""
-   }
+    "address": {
+        "street": "Estradas dos Passarinhos Azuis, 956",
+        "zipcode": "53270110"
+    }
 }
 ```
 
@@ -296,40 +353,21 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
 
 ```json
 {
-    "message":"O endereço desta Unidade de Saúde foi atualizado com sucesso"
+    "message": "O endereço da unidade de Saúde selecionada foi atualizado com sucesso"
 }
 ```
 
-## DELETE (Apagando um usuário administrador do sistema)
-
-**http://localhost:8080/admin/deletar/:id**
-
-**O que a URL deve conter**
-
-```json
-"http://localhost:8080/admin/deletar/5fcacc955344a12c8c1f8aea"
-
-//No endpoint, como parâmetro, devemos passar o ID do usuário para que seu cadastro seja apagado
-```
-
-**Resposta [200]**
-
-```json
-{
-    "message":"O cadastro do usuário de id ${id} foi apagado com sucesso"
-}
-```
 
 ## DELETE (Apagando uma unidade de saúde do sistema)
 
-**http://localhost:8080/unidades-de-saude/deletar/:id**
+**http://localhost:8080/health-clinics/delete/:id**
 
 **O que a URL deve conter**
 
 ```json
-"http://localhost:8080/unidades-de-saude/deletar/5fcacc955344a12c8c1f8aea"
+"http://localhost:8080/unidades-de-saude/deletar/5fd304bc5c9fb72b70ffc826"
 
-//No endpoint, como parâmetro, devemos passar o ID da unidade de saúde para que seu cadastro seja apagado
+//No endpoint, como parâmetro, devemos passar o ID da unidade de saúde cujo cadastro deve ser apagado
 ```
 
 **Resposta [200]**
@@ -339,31 +377,50 @@ Cadastro de Unidade de Saúde, registrando o respectivo o tipo de unidade, ender
     "message":"O cadastro da unidade de saúde de id ${id} foi apagado com sucesso"
 }
 ```
+## DELETE (Apagando uma vacina do sistema)
+
+**http://localhost:8080/vaccines/delete/:id**
+
+**O que a URL deve conter**
+
+```json
+"http://localhost:8080/vaccines/delete/5fd306395c9fb72b70ffc828"
+
+//No endpoint, como parâmetro, devemos passar o ID da vacina que queremos apagar do banco de dados
+```
+
+**Resposta [200]**
+
+```json
+{
+    "message":" A vacina selecionada foi apagada com sucesso"
+}
+```
 
 ## GET (Listando todas as vacinas cadastradas)
 
-**http://localhost:8080/vacinas/**
+**http://localhost:8080/vaccines/**
 
 ## GET (Listando as vacinas filtradas pelo lote)
 
-**http://localhost:8080/vacinas/lote?batch=1000520AC**
+**http://localhost:8080/vaccines/batch?batch=BCG2021BR**
 
 ## GET (Listando pelo nome de uma vacina especificamente)
 
-**http://localhost:8080/vacinas/vacina?name=Covid**
+**http://localhost:8080/vaccines/vaccine?vaccine=Covid**
 
-## GET (Listando todos os Postos de Saúde Cadastrados)
+## GET (Listando todas as Unidades de Saúde Cadastradas)
 
-**http://localhost:8080/unidades-de-saude/**
+**http://localhost:8080/health-clinics/**
 
-## GET (Listando os Postos de Saúde  por Bairro)
+## GET (Listando todas as Unidades de Saúde por Bairro)
 
-**http://localhost:8080/unidades-de-saude/bairro?borough=Ouro+Preto**
+**http://localhost:8080/health-clinics/borough?borough=Ouro+Preto**
 
-## GET (Listando os Postos de Saúde por Vacina desejada)
+## GET (Listando as Unidades de Saúde por Vacina desejada)
 
-**http://localhost:8080/unidades-de-saude/vacina?vaccine=BCG**
+**http://localhost:8080/health-clinics/vaccine?vaccine=BCG**
 
-## GET (Pesquisando os Postos de Saúde por Bairro e Vacina desejada)
+## GET (Pesquisando as Unidades de Saúde por Vacina e doses desejadas)
 
-**http://localhost:8080/unidades-de-saude/vacina-e-bairro?vaccine=Covid&borough=Sapucaia**
+**http://localhost:8080/health-clinics/vaccine-dose?vaccine=Covid&dose=1ª+dose**

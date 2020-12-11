@@ -1,6 +1,3 @@
-const HealthClinic = require('../models/HealthClinic.js');
-
-
 const boroughs = [
     "Aguas Compridas", "Aguazinha", "Alto da Bondade", "Alto da Conquista", "Alto da Nacao", "Alto do Sol Nascente",
     "Alto Nova Olinda", "Amaro Branco", "Amparo", "Bairro Novo", "Bonsucesso", "Bultrins", "Casa Caiada", "Caixa d'Agua",
@@ -9,25 +6,13 @@ const boroughs = [
     "Sapucaia", "Sitio Novo", "Tabajara", "Umuarama", "Varadouro", "Vila Popular", "Zona Rural"
 ]
 
+
 const validatingBorough = async (value) => {
     const validBorough = boroughs.includes(value);
     return validBorough
 }
-const sameZipcode = async (zipcode) => {
-    const same_Address = await HealthClinic.find({ "address.zipcode": zipcode })
-    if (same_Address.length > 0) { return true }
-    return false
-
-}
-const sameTypeAndZipcode = async (zipcode, type) => {
-    const same_Address = await HealthClinic.findOne({ $and: [{ "address.zipcode": zipcode }, { type: type }] })
-    if (same_Address.length > 0) { return true }
-    return false
-
-}
 
 module.exports = {
-    validatingBorough,
-    sameZipcode,
+    validatingBorough, 
     boroughs
 }
