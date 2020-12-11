@@ -2,11 +2,13 @@
   "name": "allana-caldas-aqui-tem-vacina",
   "version": "1.0.0",
   "description": "Primeira parte do Projeto Final da turma de Desenvolvimento BackEnd do Reprograma",
+  "engines": {
+    "node": "12.18.3"
+  },
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "start:dev": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "Allana Caldas",
   "license": "ISC",
