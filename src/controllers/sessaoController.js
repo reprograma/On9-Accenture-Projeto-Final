@@ -13,7 +13,7 @@ exports.accessToken = async (req, res) => {
   try {
       const { name, password: passwordEntry } = req.body;
       
-      if(name==Admin) {  
+     // if(name==Admin) {  
      
         Vendedor.findOne({nome: name})
         .then((user) => {
@@ -39,9 +39,9 @@ exports.accessToken = async (req, res) => {
         .catch((e) => {
           return res.status(401).json({ error: 'user not found' });
         });
-      } else{
-        return res.status(401).json({ error: 'Não autorizado' });
-      }
+      //} else{
+        //return res.status(401).json({ error: 'Não autorizado' });
+      //}
     } catch (e) {
       return res.status(401).json({ error: 'erro3' });
     }
