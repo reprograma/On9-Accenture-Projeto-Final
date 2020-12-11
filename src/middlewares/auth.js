@@ -8,7 +8,7 @@ module.exports = async (request, response, next) => {
     const [, token] = authHeader.split(' ');
 
     try {
-        const decoded = await promisify(jwt.verify)(token, process.env.SECRET);
+        const decoded = await promisify(jwt.verify)(token, `${process.env.SECRET}`);
         request.id = decoded.id
         return next()
     }

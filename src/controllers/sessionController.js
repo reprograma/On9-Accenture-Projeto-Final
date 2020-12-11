@@ -37,8 +37,8 @@ const accessToken = async (request, response) => {
                     id,
                     email
                 },
-                token: jwt.sign({ id }, process.env.SECRET, {
-                    expiresIn: process.env.EXPIRESIN
+                token: jwt.sign({ id },`${ process.env.SECRET}`, {
+                    expiresIn: `${process.env.EXPIRESIN}`
                 })
             })
 
