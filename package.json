@@ -5,9 +5,10 @@
     "node": "12.18.3"
   },
   "description": "Primeira parte do Projeto Final da turma de Desenvolvimento BackEnd do Reprograma",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "Allana Caldas",
