@@ -2,6 +2,7 @@ const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Estoque = require("../models/Estoque");
 const {produtoSchema, estoqueSchema} = require("../validators/estoque")
+const {DataSchema} = require("yup")
 
 //GET
 const estoqueGeral = (request, response) => {

@@ -1,6 +1,7 @@
 const express =  require("express") 
 const router =  express.Router(); 
 const controller = require("../controllers/vendedoresController")
+const authMiddleware =  require("../middlewares/auth")
 
 /**
 @route GET 
@@ -25,6 +26,8 @@ router.get("/:nome", controller.nomeVendedor)
 @endpoint http://localhost:8080/venda/novoVendedor
 **/
 router.post("/cadastro", controller.novoVendedor)
+
+router.use(authMiddleware);
 
 /**
 @route DELETE /:id

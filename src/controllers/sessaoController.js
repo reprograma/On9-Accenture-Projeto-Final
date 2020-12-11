@@ -10,19 +10,22 @@ function checkPassword(passwordEntry, password) {
 
 exports.accessToken = async (req, res) => {
    
+  const { name, password: passwordEntry } = req.body;
+
+  if(name=="Admin") {
+
   try {
-      const { name, password: passwordEntry } = req.body;
-      
-     // if(name==Admin) {  
-     
+           
         Vendedor.findOne({nome: name})
         .then((user) => {
-          console.log(user)
+   
           const {id, nome, hashPass } = user;
 
             if(!checkPassword(passwordEntry,hashPass)) {res.status(401).json({message: "senha incorreta"})}
-  
-            try {
+            
+         
+           try {
+         
               return res.json({
                 user: {
                   id,
@@ -32,22 +35,23 @@ exports.accessToken = async (req, res) => {
                   expiresIn: authConfig.expiresIn,
                 }),
               });
+           
             } catch (e) {
               return res.status(401).json({ error: 'erro1' });
-            }          
+            }
+          
         })
+        
         .catch((e) => {
           return res.status(401).json({ error: 'user not found' });
         });
-      //} else{
-        //return res.status(401).json({ error: 'Não autorizado' });
-      //}
+
     } catch (e) {
       return res.status(401).json({ error: 'erro3' });
     }
+
+  } else{
+    return res.status(401).json({ error: 'Não autorizado' });
+  }   
   }
   
-
-  /**
-   * 
-   */

@@ -74,7 +74,8 @@ const vendaProduto = async (request, response) => {
 const estorno =  (request, response) => {
     const { id } = request.params
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json
+        return response.status(400).json({message: "Specified id is not valid"});
+        
     }
     
 

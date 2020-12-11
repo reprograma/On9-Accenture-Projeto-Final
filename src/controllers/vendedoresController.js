@@ -1,7 +1,6 @@
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendedor = require("../models/Vendedores")
-const {vendedorSchema} = require("../validators/vendedores")
 const bcrypt = require("bcrypt");
 const bcryptSalt = 6;
 
@@ -43,7 +42,7 @@ const novoVendedor = async (req, res, next) => {
       
       Vendedor.findOne({nome:nome})
         .then((vendedor =>{
-            if (vendedor) {
+            if (vendedor ) {
                 res.status(401).json("Vendedor(a) já cadastrado(a)")
                
             }else{
