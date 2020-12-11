@@ -1,10 +1,8 @@
+//const { res} = require('express')
 const mongoose = require('mongoose')
-const { response } = require('../app')
-const Users = require('../models/User')
-/*const bcrypt = require("bcrypt");
-//const User = require('../models/User');
+const bcrypt = require("bcrypt");
 const bcryptSalt = 8;
-*/
+const Users = require('../models/User')
 
 exports.getAll = (req, res, next) => {
     Users.find() 
@@ -14,7 +12,7 @@ exports.getAll = (req, res, next) => {
         .catch(err => {
         res.status(500).json({ message: err })
         console.log('ERRO')
-          //  next(err)
+        next(err)
         })
 }
 
@@ -23,7 +21,7 @@ exports.getByCity = (req, res, next) => {
 
     Users.find({city: city})
     .then((users) => {
-        response.status(200).json(users)
+        res.status(200).json(users)
     })
     .catch(err => {
         next(err)
@@ -35,29 +33,36 @@ exports.getByCity = (req, res, next) => {
 } */
 
 exports.post = async (req, res, next) => { 
-    const { name, email, city, type, description } = req.body;
-    //const salt = bcrypt.genSaltSync(bcryptSalt);
-    try {
-     // const hashPass = await bcrypt.hashSync(password, salt);
-  
-      const newUser = new Users({
-        name,
-        email,
-       // hashPass,
-        city,
-        type,
-        description,
-      });
-      newUser.save()
-        .then((user) => {
-            res.status(201).json(user);
+    const { name, password, email, city, type, description } = req.body;
+    Users.findOne({email: email})
+    .then(async (existingUser) => {
+      if(existingUser) {
+        return res.status(400).json({
+          error: ["User already exists"]
         })
-        .catch(err => next(err));
-    } catch (e) {
-      return res.status(401).json({ error: 'erro' });
-      console.log('ERRO')
-    }
+      }
+
+      const newUser = new Users ({
+        name, 
+        email,
+        password,
+        city, 
+        type,
+        description
+      })
+
+      newUser
+        .save()
+        .then((user) => {
+          res.status(201).json(user)
+        })
+        .catch((err) => next (err))
+    })
+    .catch((err) => {
+      res.status(400).json(err)
+    })
+    
   }
 
+
 //exports.put = (req, res, next)
-  

@@ -1,4 +1,4 @@
-/*const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 const Users = require('../models/User');
 
@@ -12,14 +12,11 @@ function checkPassword(passwordEntry, password) {
         
       Users.findOne({email: email})
         .then((user) => {
-            const {id, email, hashPass } = user;
-  
-            try {
-              checkPassword(passwordEntry, hashPass);
-            } catch(e) {
-              return res.status(401).json({ error: 'password does not match' });
+            const {id, email, password } = user;
+            if(!checkPassword(passwordEntry, password)) {
+              return res.status(401).json({ error: 'Incorret Password. Try again!' })
             }
-  
+
             try {
               return res.json({
                 user: {
@@ -42,5 +39,4 @@ function checkPassword(passwordEntry, password) {
     } catch (e) {
       return res.status(401).json({ error: 'erro' });
     }
-  }
-  */
+}
