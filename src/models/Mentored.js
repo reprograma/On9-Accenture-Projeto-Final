@@ -6,6 +6,7 @@ const mentoredSchema = new mongoose.Schema({
     mentoredName: { type: String, required: true },
     destinyCountry: { type: String, required: true },
     mentoringType: { type: String, required: true },
+    mentor: [{ type: Schema.Types.ObjectId, ref: 'Mentor' }]
     concluded: { type: Boolean, default: false },
 }, { timestamps: true });
 

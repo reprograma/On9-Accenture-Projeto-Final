@@ -3,7 +3,7 @@ const app = express();
 
 const mentorRouter = require("./routes/mentorRoutes");
 const mentoredRouter = require("./routes/mentoredRoutes");
-const opportunityRouter = require("./routes/opportunityRoutes");
+const sessions = require("./routes/sessionRoute");
 
 const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost/LearnShare', {
@@ -13,10 +13,10 @@ mongoose.connect('mongodb://localhost/LearnShare', {
 
 app.use(express.json());
 
-app.use(function(request, response, next) {
-    response.header("Acess-Control-Allow-Origin", "*")
-    response.header(
-        "Acess-Control-Allow-Headers",
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header(
+        "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     )
     next()
@@ -24,6 +24,6 @@ app.use(function(request, response, next) {
 
 app.use("/mentor", mentorRouter);
 app.use("/mentored", mentoredRouter);
-app.use("/opportunity", opportunityRouter);
+app.use("/sessions", sessions);
 
 module.exports = app;

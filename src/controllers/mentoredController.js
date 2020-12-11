@@ -4,14 +4,6 @@ const { signupSchema } = require('../validators/mentoredValidators')
 const { hashPassword } = require('../helpers/hashPassword')
 const Mentored = require("../models/Mentored");
 
-const getAll = (request, response) => {
-    Mentored.find()
-        .then((mentoreds) => {
-            response.status(200).json(mentoreds);
-        })
-        .catch((err) => next(err));
-};
-
 const createMentored = async(request, response) => {
     try {
         const validatedBody = await signupSchema.validate(request.body)
@@ -39,9 +31,42 @@ const createMentored = async(request, response) => {
         console.log(e)
         return response.status(400).json(e)
     }
-}
+};
 
-const updateMentored = (request, response) => {
+const getAll = (request, response) => {
+    Mentored.find()
+        .then((mentoreds) => {
+            response.status(200).json(mentoreds);
+        })
+        .catch((err) => next(err));
+};
+
+const getByDestinyCountry = (request, response) => {
+    const destinyCountry = request.query.destinyCountry
+
+    Mentor.find({ destinyCountry: destinyCountry })
+        .then((mentor) => {
+            response.status(200).json(mentor)
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Falha na pesquisa de país de destino.` })
+        })
+};
+
+const getByConcluded = (request, response) => {
+    const concluded = request.query.concluded
+
+    Mentor.find({ concluded: concluded })
+        .then((mentor) => {
+            response.status(200).json(mentor)
+        })
+        .catch((error) => {
+            response.status(400).json({ error: `Falha na pesquisa.` })
+        })
+};
+
+
+const editMentored = (request, response) => {
     const { id } = request.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -94,8 +119,10 @@ const deleteMentored = (request, response) => {
 
 module.exports = {
     getAll,
+    getByDestinyCountry,
+    getByConcluded,
     createMentored,
-    updateMentored,
+    editMentored,
     updateMentoredConcluded,
     deleteMentored,
 };

@@ -4,11 +4,15 @@ const controller = require("../controllers/mentoredController");
 
 router.get("/", controller.getAll);
 
-router.post("/registerMentored", controller.createMentored);
+router.get("/destinyCountry", controller.getByDestinyCountry);
 
-router.put("/editMentored/:id", controller.updateMentored);
+router.get("/concluded", controller.getByConcluded);
 
-router.patch("/updateConcluded/:id", controller.updateMentoredConcluded);
+router.post("/register", controller.createMentored);
+
+router.put("/edit/:id", controller.editMentored);
+
+router.patch("/update/:id", controller.updateMentoredConcluded);
 
 router.delete("/:id", controller.deleteMentored);
 

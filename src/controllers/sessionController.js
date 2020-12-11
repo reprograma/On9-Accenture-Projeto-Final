@@ -7,40 +7,46 @@ function checkPassword(passwordEntry, password) {
     return bcrypt.compareSync(passwordEntry, password);
 }
 
-exports.accessToken = (req, res) => {
+const accessToken = async(request, response) => {
     try {
-        const { name, password: passwordEntry } = req.body;
+        const { mentorName, password: passwordEntry } = request.body;
 
-        Mentor.findOne({ nome: name })
+        Mentor.findOne({ mentorName: mentorName })
             .then((user) => {
-                const { id, nome, hashPass } = user;
-
+                const { id, mentorName, hashPass } = user;
                 try {
-                    checkPassword(passwordEntry, hashPass);
-                } catch (e) {
-                    return res.status(401).json({ error: 'password does not match' });
+                    checkPassWord(passwordEntry, hashPass)
+                } catch (err) {
+                    return response.status(401).json({ error: 'Senha incorreta' })
                 }
 
                 try {
-                    return res.json({
+                    return response.status(200).json({
                         user: {
                             id,
-                            nome,
+                            mentorName
                         },
                         token: jwt.sign({ id }, authConfig.secret, {
-                            expiresIn: authConfig.expiresIn,
-                        }),
-                    });
-                } catch (e) {
-                    return res.status(401).json({ error: 'erro' });
+                            expiresIn: authConfig.expiresIn
+                        })
+                    })
+                } catch (err) {
+                    return response.status(401).json({ error: err })
                 }
-
             })
             .catch((e) => {
-                return res.status(401).json({ error: 'user not found' });
-            });
+                return response.status(401).json({
+                    message: `Usuário não encontrado na nossa base de dados`
+                })
+            })
 
-    } catch (e) {
-        return res.status(401).json({ error: 'erro' });
+    } catch (error) {
+        console.log(error)
+
     }
+}
+
+
+module.exports = {
+    accessToken
 }
