@@ -14,6 +14,8 @@ router.get("/year", controller.getByYear);
 
 router.post("/cadastro", controller.createMovie);
 
+router.put("/update/:id", controller.updateMovie);
+
 router.delete("/:id", controller.deleteMovie);
 
 

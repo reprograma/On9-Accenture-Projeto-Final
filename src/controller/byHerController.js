@@ -56,6 +56,23 @@ const createMovie = (request, response) => {
         .catch(err => next(err));
 }
 
+const updateMovie = (request, response) => {
+    const { id } = request.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        response.status(400).json({ message: 'Specified id is not valid :(' });
+        return
+    }
+    Movie.findByIdAndUpdate(id, request.body)
+    .then(() => {
+        response.status(200).json({ message: `${request.params.id} was updated successfully! :)` });
+    })
+    .catch((err) => {
+        response.json(err);
+    })
+}
+
+
 const deleteMovie = (request, response) => {
     const { id } = request.params
     Movie.findByIdAndDelete(id)
@@ -74,5 +91,6 @@ module.exports = {
     getByNacionality,
     getByYear,
     createMovie,
+    updateMovie,
     deleteMovie
 }

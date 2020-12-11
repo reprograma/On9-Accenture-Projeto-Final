@@ -11,14 +11,12 @@ mongoose.connect(`${process.env.DATABASE_URL}`,
     useUnifiedTopology: true,
 });
 
-const toDoRoutes = require("./routes/byHerRoute");
 const index = require("./routes/index");
-
+const toDoRoutes = require("./routes/byHerRoute");
 
 app.use(express.json());
 
-app.use("/movies", toDoRoutes,);
 app.use("/", index);
-
+app.use("/movies", toDoRoutes,);
 
 module.exports = app
