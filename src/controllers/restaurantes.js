@@ -37,10 +37,10 @@ const cadastroRestaurante = (req, res) => {
     const { nome, restaurante, especialidades, rua } = req.body
     try {
         const restaurante = new Restaurante({
-            nome,
-            restaurante,
-            especialidades,
-            rua
+            nome = nome,
+            restaurante = restaurante,
+            especialidades = especialidades,
+            rua = rua
         });
 
         restaurante.save()
