@@ -2,8 +2,9 @@ const express = require("express")
 const app = express()
 
 const mongoose = require ("mongoose")
-mongoose.connect(`${process.env.DATABASE}`,
+mongoose.connect(`${process.env.DATABASE_URL}`,
 {
+
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -11,6 +12,7 @@ mongoose.connect(`${process.env.DATABASE}`,
 const index = require("./routes/index")
 const receita = require("./routes/receitaRoute")
 const sessions = require("./routes/sessionRoute")
+
 
 
 
