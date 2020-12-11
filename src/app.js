@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/surfday',
+mongoose.connect(`${process.env.DATABASE}`,
+    'mongodb://localhost/surfday',
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,
