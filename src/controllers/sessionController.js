@@ -1,12 +1,11 @@
 const User = require('../models/User.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const authConfig = require('../config/auth.js');
 
 const registerAdmin = async (request, response) => {
     const { name, email, password } = request.body
 
-    if (!password.length > 7) { return response.status(401).json('Insira uma senha numérica com mais de 7 dígitos')}
+    if (!password.length > 7) { return response.status(401).json('Insira uma senha numérica com mais de 7 dígitos') }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -38,8 +37,8 @@ const accessToken = async (request, response) => {
                     id,
                     email
                 },
-                token: jwt.sign({ id }, authConfig.secret, {
-                    expiresIn: authConfig.expiresIn
+                token: jwt.sign({ id }, process.env.SECRET, {
+                    expiresIn: process.env.EXPIRESIN
                 })
             })
 
