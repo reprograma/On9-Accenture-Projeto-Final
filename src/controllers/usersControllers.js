@@ -1,9 +1,10 @@
 //const { res} = require('express')
 const mongoose = require('mongoose')
+const Users = require('../models/User');
+const signupUserSchema = require('../validators/user');
 const bcrypt = require("bcrypt");
 const bcryptSalt = 8;
-const signupUserSchema = require('../validators/user')
-const Users = require('../models/User');
+
 
  exports.post = async (req, res) => {
   const { password } = req.body
