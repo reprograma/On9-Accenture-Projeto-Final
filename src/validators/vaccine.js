@@ -2,7 +2,7 @@ const Vaccine = require("../models/Vaccine")
 
 
 const validatingRegister = async (vaccine, batch, dose) => {
-    const validVaccine = await Vaccine.findOne({ $and: [{ vaccine: vaccine }, { batch: batch }, { dose: dose }] });
+    const validVaccine = await Vaccine.find({ $and: [{ vaccine: vaccine }, { batch: batch }, { dose: dose }] });
     return validVaccine.length
 }
 
