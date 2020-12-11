@@ -1,16 +1,12 @@
 const Usuario = require('../models/usuarios');
 const bcrypt = require('bcrypt')
-const { senhaHash } = require ('../helpers/usuario')
+const { senhaHash } = require('../helpers/usuario')
 
 
 const todosUsuarios = (req, res) => {
     Usuario.find()
         .then((usuarios) => {
-            if (usuarios) {
-                res.status(204).send({ message: 'não existem usuarios cadastrados' })
-            } else {
-                res.status(200).json(usuarios)
-            }
+            res.status(200).json(usuarios)
         })
         .catch((err) => {
             res.status(500).json(err)
@@ -22,7 +18,7 @@ const cadastroUsuario = async (req, res, next) => {
     const salt = bcrypt.genSaltSync(10)
 
     try {
-        const hasheaSenha = await senhaHash (senha, salt, res)
+        const hasheaSenha = await senhaHash(senha, salt, res)
         console.log(hasheaSenha)
         const usuario = new Usuario({
             nome,
