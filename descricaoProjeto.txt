@@ -1,0 +1,32 @@
+Geek é uma gíria que se refere a pessoas peculiares
+como fãs de tecnologia, eletrônica, jogos eletrônicos ou de tabuleiro entre outros.
+
+É notável o crescimento desse mundo em todo o planeta. Especificamente dos boardgames ou jogos de tabuleiro.
+
+Estima-se que no mundo todo é movimentado mais de R$ 138 bilhões neste setor (PROMOVIEW, 2019).
+É dentro deste mundo geek em que RPGs e Jogos de tabuleiros modernos são cada vez mais procurados.
+
+
+No Brasil em 2019 o setor de boardgames foi responsável por cerca de R$ 665 milhões
+do faturamento da indústria de brinquedos nacionais e em 2018,
+mais de 4.000 “boardgames” foram lançados no mundo todo
+com um crescimento de 7,5% no ano para a industria de jogos analógicos (SOMMADOSSI, 2019).
+No lado mais tradional do mundo, os RPGs, só em 2019,
+arrecadaram $15,793.3 milhões de dólares em todo o mundo (INTRADO GLOBENEWSWIRE, 2020).
+
+
+Com o aumento das vendas e crescimento das comunidades Geeks, muitas propagandas
+podem chamar a atenção de pessoas para entrar nesse novo mundo. 
+Porém, na maioria das vezes, indivíduos que não possuem um grupo físico podem encontrar dificuldades em usufrir
+a experiência de modo completo. 
+Além disso, como os jogos analógicos necessitam de encontros físicos, muitas pessoas possuem os jogos de tabuleiro, 
+mas não conta com a disponibilidades de jogadores.
+
+Coonsiderando os aspectos citados acima, o Find Your Geek tem o intuito para conectar jogadores e amantes de boardgames.
+
+No projeto, será possível fazer o seu cadastro;
+Deixa-lo disponível para pessoas que tenham interesses em comum com os seus;
+Consultar os Geeks cadastrados com informações como: 
+Nome, Email, Cidade onde reside, Tipo de jogo que o interessa e Descrição.
+Além disso, poderá filtrar os jogadores pela cidade e tipo de jogo que o interessa.
+
