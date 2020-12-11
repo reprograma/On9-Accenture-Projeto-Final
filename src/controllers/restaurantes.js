@@ -54,18 +54,23 @@ const cadastroRestaurante = (req, res) => {
 const adicionarComentario = (req, res) => {
     const { id } = req.params
     const { comentario } = req.body
-    Restaurante.findBy(id, function(err, info){
-        Restaurante.update({_id: info._id}, {$push:{"comentario":{avaliacao: avaliacao, nota: nota}}}, function(err))
-    })
+    Contact.findByIdAndUpdate(
+        info._id,
+        { $push: { comentario: { avaliacao: avaliacao, nota: nota } } },
+        { safe: true, upsert: true, new: true },
+        function (err, model) {
+            console.log(err);
+        }
+    );
         //try {
         // const comentar = new Restaurante.comentario({
         // });
         // comentar.push()
         .then((comentar) => {
-            res.status(201).json(comentar);
-        })
-        .catch(err => next(err));
-} 
+        res.status(201).json(comentar);
+    })
+    .catch(err => next(err));
+}
 
 
 module.exports = {
