@@ -19,4 +19,6 @@ router.patch("/update/:id", mentorController.updateMentorAvailable);
 
 router.delete("/:id", mentorController.deleteMentor);
 
+router.use(authMiddleware)
+
 module.exports = router;

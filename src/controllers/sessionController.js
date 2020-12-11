@@ -1,10 +1,11 @@
-const jwt = require('jsonwebtoken')
-const authConfig = require('../config/auth');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const Mentor = require('../models/Mentor');
+const authConfig = require('../config/auth');
+const Mentor = require('../models/Mentor')
 
-function checkPassword(passwordEntry, password) {
-    return bcrypt.compareSync(passwordEntry, password);
+
+function checkPassWord(passwordEntry, password) {
+    return bcrypt.compareSync(passwordEntry, password)
 }
 
 const accessToken = async(request, response) => {
@@ -17,7 +18,7 @@ const accessToken = async(request, response) => {
                 try {
                     checkPassWord(passwordEntry, hashPass)
                 } catch (err) {
-                    return response.status(401).json({ error: 'Senha incorreta' })
+                    return response.status(401).json({ error: 'wrong password' })
                 }
 
                 try {
@@ -36,7 +37,7 @@ const accessToken = async(request, response) => {
             })
             .catch((e) => {
                 return response.status(401).json({
-                    message: `Usuário não encontrado na nossa base de dados`
+                    message: `Sorry! The Colaborator's name that you are looking for wasn't found in out database`
                 })
             })
 
