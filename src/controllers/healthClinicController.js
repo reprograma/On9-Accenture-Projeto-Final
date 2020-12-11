@@ -1,9 +1,8 @@
 const healthClinic = require('../models/HealthClinic.js');
 const { boroughs } = require('../validators/healthClinic.js');
-const validators = require('../validators/healthClinic.js')
+const { validatingBorough, sameZipcode} = require('../validators/healthClinic.js')
 
-const { searchingVaccines } = require('../validators/Vaccine.js');
-const { searchingVaccineAndDose } = require('../validators/Vaccine.js');
+const { searchingVaccines, searchingVaccineAndDose } = require('../validators/Vaccine.js');
 
 const mongoose = require('mongoose');
 
@@ -49,7 +48,7 @@ const getByVaccineDose = async (request, response) => {
 const registerHealthClinic = async (request, response) => {
     const { type, address, borough, openingHours, vaccines } = request.body;
 
-    if (!(await validators.validatingBorough(borough))) { return response.status(401).json({ message: `Insira um bairro válido. Em caso de dúvidas, veja a lista abaixo`, boroughs }) }
+    if (!(await validatingBorough(borough))) { return response.status(401).json({ message: `Insira um bairro válido. Em caso de dúvidas, veja a lista abaixo`, boroughs }) }
 
     healthClinic.create({
         type: type,
@@ -69,8 +68,8 @@ const updateHealthClinic = async (request, response) => {
     const { zipcode } = request.body.address;
 
     if (!mongoose.Types.ObjectId.isValid(id)) { return response.status(400).json({ message: 'O ID inserido é inválido' }) }
-    if (await validators.sameZipcode(zipcode)) { return response.status(401).json({ message: `Já existe uma Unidade de Saúde nesse mesmo CEP` }) }
-    if (!(await validators.validatingBorough(borough))) { return response.status(401).json({ message: `Insira um bairro válido. Em caso de dúvidas, veja a lista abaixo`, boroughs }) }
+    if (await sameZipcode(zipcode)) { return response.status(401).json({ message: `Já existe uma Unidade de Saúde nesse mesmo CEP` }) }
+    if (!(await validatingBorough(borough))) { return response.status(401).json({ message: `Insira um bairro válido. Em caso de dúvidas, veja a lista abaixo`, boroughs }) }
 
     healthClinic.findByIdAndUpdate(id, request.body)
         .then(() => { response.status(200).json({ message: `A unidade de Saúde selecionada ${request.params.id} foi atualizada com sucesso` }) })
@@ -98,7 +97,7 @@ const updateVaccinesList = async (request, response) => {
     const { id } = request.params;
     const { vaccines } = request.body;
 
-    healthClinic.findByIdAndUpdate(id, { $set: { vaccines: vaccines } })
+    healthClinic.findByIdAndUpdate(id, { $push: { vaccines: vaccines } })
         .then(() => { response.status(200).json({ message: `A lista de vacinas da unidade de Saúde selecionada ${request.params.id} foi atualizada com sucesso` }) })
         .catch((err) => response.status(500).json(err))
 

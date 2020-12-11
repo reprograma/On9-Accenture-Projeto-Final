@@ -1,6 +1,5 @@
 const Vaccine = require('../models/Vaccine.js');
 const { validatingRegister } = require('../validators/vaccine.js');
-const { validatingDose } = require('../validators/vaccine.js');
 const mongoose = require('mongoose');
 
 
@@ -54,6 +53,18 @@ const updateVaccine = async (request, response) => {
         .then(() => { response.status(200).json({ message: `Vacina atualizada com sucesso:` }) })
         .catch((err) => { response.status(500).json(err) })
 
+}
+
+const insertPreventableDisease = (request, response) => {
+    const { id } = request.params;
+    const { preventableDiseases } = request.body;
+    const filteredList = [];
+
+    preventableDiseases.forEach(disease => {
+        if(!filteredList.includes(disease)){return response}
+    });
+
+    Vaccine.findByIdAndUpdate(id, { $push: { preventableDiseases: preventableDiseases } })
 }
 
 const deleteVaccine = async (request, response) => {

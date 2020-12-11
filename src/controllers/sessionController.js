@@ -1,20 +1,22 @@
 const User = require('../models/User.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const authConfig = require('../config/auth.js')
-
+const authConfig = require('../config/auth.js');
 
 const registerAdmin = async (request, response) => {
     const { name, email, password } = request.body
+
+    if (!password.length > 7) { return response.status(401).json('Insira uma senha numérica com mais de 7 dígitos')}
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt)
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     User.create({
         name: name,
         email: email,
         hashPass: hashedPassword
     })
-    .then((res) => { response.status(200).json({ message: `Usuário criado com sucesso`, res }) })
-    .catch(err => { response.status(500).json(err) })
+        .then((res) => { response.status(200).json({ message: `Usuário criado com sucesso`, res }) })
+        .catch(err => { response.status(500).json(err) })
 }
 
 function checkPassword(passwordEntry, password) {
@@ -22,34 +24,31 @@ function checkPassword(passwordEntry, password) {
 }
 
 const accessToken = async (request, response) => {
-    try {
-        const { name, password: passwordEntry } = request.body;
+    const { email, password: passwordEntry } = request.body;
 
-        User.findOne({ name: name })
-            .then((user) => {
-                const { id, name, hashPass } = user;
-                try {
-                    checkPassword(passwordEntry, hashPass);
-                } catch (err) { response.status(401).json({ message: `Senha incorreta!` }) }
+    User.findOne({ email: email })
+        .then((user) => {
 
-                try {
-                    return response.status(200).json({
-                        user: {
-                            id,
-                            name
-                        },
-                        token: jwt.sign({ id }, authConfig.secret, {
-                            expiresIn: authConfig.expiresIn
-                        })
-                    })
-                }
-                catch (err) { return response.status(401).json({ error: err }) }
+            const { id, email, hashPass } = user;
 
+            if (!checkPassword(passwordEntry, hashPass)) { return response.status(401).json({ message: `Senha incorreta!` }) }
+
+            return response.status(200).json({
+                user: {
+                    id,
+                    email
+                },
+                token: jwt.sign({ id }, authConfig.secret, {
+                    expiresIn: authConfig.expiresIn
+                })
             })
-            .catch(err => { response.status(203).json({ message: `Não encontramos esse usuário cadastrado na nossa base de dados` }) })
-    }
-    catch (err) { response.status(500).json }
+
+
+        })
+        .catch(err => { response.status(203).json({ message: `Não encontramos esse usuário cadastrado na nossa base de dados` }) })
 }
+
+
 
 
 module.exports = {

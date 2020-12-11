@@ -1,16 +1,24 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 const healthClinicRoutes = require('./routes/healthClinicRoutes.js');
 const vaccinesRoutes = require('./routes/vaccineRoutes.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
 
-const mongoose = require('mongoose');
-mongoose.connect(`${process.env.DATABASE_URL}`,
+const dotenv = require('dotenv');
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    });
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log('MONGODB Connected');
+    })
+    .catch(err => { console.log(err) })
 
 
 app.use(express.json());
