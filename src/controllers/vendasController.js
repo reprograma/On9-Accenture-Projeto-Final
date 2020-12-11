@@ -27,16 +27,16 @@ const vendaProduto = async (request, response) => {
 
     
 
-    Vendedor.findOne({nome: vendedor})
-    .then(async vendedor =>{
-        if(vendedor.nome){
-            console.log(vendedor.nome)
+    
+    
+        if(Vendedor.findOne({nome: vendedor})){
+            console.log(vendedor)
             console.log("vendedor cadastrado")
 
             try {
                 let produto = await Estoque.findOne({nomeProduto: nomeProduto});
-                 
-                    
+             
+                   
                 produto.estoque = produto.estoque - vendaValidada.quantidade
         
                 if (produto.estoque < 0) {
@@ -58,11 +58,8 @@ const vendaProduto = async (request, response) => {
         }else{
             console.log("vendedor não encontrado")
         }
-    })
-        .catch((err) => {
-            throw new Error(err);
-        });
     }
+        
 
 
 //DELETE
