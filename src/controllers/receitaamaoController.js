@@ -61,10 +61,6 @@ const getByTypeFood = (request,response) => {
 }
 
 const getByChoseRecipe = (request, response) => {
-    //if({receitaSelecionada == true}) {
-        //response.status(400).json({ message: "Não existe nenhuma receita selecionada" })
-        //return;
-    //} else {
         Recipe.find ({receitaSelecionada: true })
               .then((recipes) => {
                  response.status(200).json(recipes)
@@ -72,8 +68,7 @@ const getByChoseRecipe = (request, response) => {
               .catch(err => {
                   response.status(400).json({ message: "erro"})
               })
-    //}      
-}
+}      
 
 const getByNoChoseRecipe = (request, response) => {
     Recipe.find ({receitaSelecionada: false })
@@ -86,8 +81,7 @@ const getByNoChoseRecipe = (request, response) => {
 }
 
 
-const getBySortRecipe = (request, response) => {
-    
+const getBySortRecipe = (request, response) => {   
     Recipe.find({}).sort({"nomeReceita": 1})        
           .then((recipes) => {
              response.status(200).json(recipes);
@@ -244,17 +238,15 @@ const updateTitle = (req, res) => {
     let nameRepeat = false;
 
     for (let i = 0; i < nomeReceita.length; i ++) {
-        if(!newName.includes(nomeReceita)){
+        if(newName.includes(nomeReceita)){ 
          newName.push(nomeReceita)  
         } else {
             nameRepeat = true;
+            res.status(400).json({ message: `erro`})
         }    
-    };
+    };   
+    
 
-    //if (!mongoose.Types.ObjectId.isValid(id)) {
-        //res.status(400).json({ message: "ID não é válido" })
-        //return;
-    //} else {
         Recipe.findByIdAndUpdate(id, { $set: { nomeReceita } })
             .then(() => {
                 res.status(200).json({ message: `O nome da receita foi atualizado` })
