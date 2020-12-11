@@ -47,7 +47,7 @@ const updateVaccine = async (request, response) => {
     const { vaccine, batch, dose } = request.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) { return response.status(400).json({ message: 'O ID inserido é inválido' }) }
-    if (await validatingRegister(vaccine, batch, dose) > 0) { return response.status(401).json({ message: `Essa vacina já está registrada no nosso banco de dados` }) }
+    if (await validatingRegister(vaccine, batch, dose) > 0) { return response.status(401).json({ message: `Essa vacina já está registrada no nosso banco de dados. Infelizmente você não pode efetuar essa atualização` }) }
 
     Vaccine.findByIdAndUpdate(id, request.body)
         .then(() => { response.status(200).json({ message: `Vacina atualizada com sucesso:` }) })
@@ -60,11 +60,11 @@ const insertPreventableDisease = (request, response) => {
     const { preventableDiseases } = request.body;
     const filteredList = [];
 
-    preventableDiseases.forEach(disease => {
-        if(!filteredList.includes(disease)){return response}
-    });
+    preventableDiseases.forEach(disease => { if (!filteredList.includes(disease)) { filteredList.push(disease) } });
 
-    Vaccine.findByIdAndUpdate(id, { $push: { preventableDiseases: preventableDiseases } })
+    Vaccine.findByIdAndUpdate(id, { $set: { preventableDiseases: filteredList } })
+        .then((res) => { response.status(200).json({ message: `Lista de doenças evitáveis atualizada com sucesso` }) })
+        .catch(err => { response.status(500).json({ message: `Não foi possível atualizar a lista`, err }) })
 }
 
 const deleteVaccine = async (request, response) => {
@@ -84,5 +84,6 @@ module.exports = {
     getByVaccine,
     registerVaccine,
     updateVaccine,
+    insertPreventableDisease,
     deleteVaccine
 }

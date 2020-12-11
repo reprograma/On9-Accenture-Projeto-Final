@@ -16,6 +16,8 @@ router.post('/register', vaccineController.registerVaccine);
 
 router.put('/update/:id', vaccineController.updateVaccine);
 
+router.patch('/update-preventable-diseases/:id', vaccineController.insertPreventableDisease);
+
 router.delete('/delete/:id', vaccineController.deleteVaccine);
 
 module.exports = router;

@@ -1,10 +1,8 @@
 const healthClinic = require('../models/HealthClinic.js');
-const { boroughs } = require('../validators/healthClinic.js');
-const { validatingBorough, sameZipcode} = require('../validators/healthClinic.js')
-
+const mongoose = require('mongoose');
+const { validatingBorough, sameZipcode, boroughs } = require('../validators/healthClinic.js')
 const { searchingVaccines, searchingVaccineAndDose } = require('../validators/Vaccine.js');
 
-const mongoose = require('mongoose');
 
 
 const getAll = async (request, response) => {
