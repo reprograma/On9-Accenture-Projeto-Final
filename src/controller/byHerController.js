@@ -60,7 +60,7 @@ const deleteMovie = (request, response) => {
     const { id } = request.params
     Movie.findByIdAndDelete(id)
     .then(() => {
-        response.status(200).json('movie deleted.')
+        response.status(200).json('Movie deleted!')
     })
     .catch((err) => {
         throw new Error (err);
