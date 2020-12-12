@@ -1,0 +1,26 @@
+{
+  "name": "on9-accenture-projeto-final",
+  "version": "1.0.0",
+  "description": "API de educacao financeira",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/issues"
+  },
+  "homepage": "https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.7",
+    "nodemon": "^2.0.6"
+  }
+}
