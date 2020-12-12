@@ -58,6 +58,7 @@ const novoVendedor = async (request, response, next) => {
             }
             console.log(vendedor)
         }))
+        .catch(err => next(err));
      
     } catch (e) {
       return response.status(401).json({ error: 'erro' });

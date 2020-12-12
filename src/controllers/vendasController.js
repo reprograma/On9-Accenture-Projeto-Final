@@ -105,8 +105,15 @@ console.log(id)
                             throw new Error(err);
                         });
                 })
+                .catch((err) => {
+                    throw new Error(err);
+                });
+
 
         })
+        .catch((err) => {
+            throw new Error(err);
+        });
 
 }
 
