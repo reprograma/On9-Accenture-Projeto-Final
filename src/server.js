@@ -14,6 +14,7 @@ dotenv.config();
 /**
  * Routes
  */
+const index = require("./routes/index");
 const videos = require("./routes/video");
 const categorias = require("./routes/categoria");
 const users = require("./routes/user");
@@ -43,6 +44,7 @@ app.set("port", process.env.PORT || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use("/", index);
 app.use("/api/videos", videos);
 app.use("/api/categorias", categorias);
 app.use("/api/users", users);
