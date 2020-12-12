@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const authConfig = require ('../config/auth');
+//const authConfig = require ('../config/auth');
 const User = require('../models/userModels.js');
 
 function verificarSenha(senhaEntrada, senha) {
