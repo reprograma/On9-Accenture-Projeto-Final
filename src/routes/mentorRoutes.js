@@ -1,18 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/mentorController");
+const mentorController = require("../controllers/mentorController");
 
-router.get("/", controller.getAll);
+router.post("/register", mentorController.createMentor);
 
-router.post("/registerMentor", controller.createMentor);
+router.get("/", mentorController.getAll);
 
-//@ http://localhost:3000/mentor/edit/:id
-router.put("/edit/:id", controller.updateMentor);
+router.get("/:id", mentorController.getById);
 
-//@ http://localhost:3000/mentor/updateAvailable/:id
-router.patch("/updateAvailable/:id", controller.updateMentorAvailable);
+router.get("/visitedCountry", mentorController.getByVisitedCountry);
 
-//@ http://localhost:3000/mentor/id
-router.delete("/:id", controller.deleteMentor);
+router.get("/available", mentorController.getByAvailable);
+
+router.get("/mentoringType", mentorController.getByMentoringType);
+
+router.put("/edit/:id", mentorController.updateMentor);
+
+router.patch("/update/:id", mentorController.updateMentorAvailable);
+
+router.delete("/:id", mentorController.deleteMentor);
 
 module.exports = router;
