@@ -4,7 +4,7 @@ const rightsController = require("../controller/rightsController")
 
 //@route GET
 //retornar todos os direitos registrados
-//@endpoint http://localhost:8080/rights/
+//@endpoint http://localhost:8080/rights
 //@access Publico
 router.get('/rights', rightsController.getAll);
 
