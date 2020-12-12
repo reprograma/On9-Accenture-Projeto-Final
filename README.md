@@ -59,4 +59,27 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 ### Rotas
 
+Agora na segunda fase do projeto temos os seguintes requisitos:
+
+- [x] _Get_
+
+  - [x] "/" Retorna index com apresentação
+
+        {
+            mensagem: bem vinda a lista de todos os materiais sobre finanças
+        }
+
+  - [x] "/reservafinanceira" retorna todos os dados do banco de dados
+  - [x] "/reservafinanceira/investimentos/[NOME]" Retorna o investimento por nome específico
+
+- [x] _Post_
+  - [x]
+  - [x]
+- [x] _Put_
+  - [x]
+  - [x]
+- [x] _Delete_
+  - [x]
+  - [x]
+
 ---
