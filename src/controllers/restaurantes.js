@@ -51,11 +51,11 @@ const cadastroRestaurante = (req, res) => {
 }
 
 
-const adicionarComentario = (req, res) => {
+const adicionarComentario = (req, res, next) => {
     const { id } = req.params
-    const { avaliacao, nota } = req.body
-
-    Restaurante.findByIdAndUpdate(id, { $set: { $and: [{ "comentarios.avaliacao": avaliacao }, { "comentarios.nota": nota }] } })
+    const { comentarios } = req.body
+    Restaurante.findByIdAndUpdate(id, { $push: {comentarios: comentarios} })
+    //{$set: {"items.$.name": "yourValue","items.$.value": "yourvalue"}})
         .then(() => {
             res.status(201).json({ message: `comentario adicionado com sucesso` });
         })
