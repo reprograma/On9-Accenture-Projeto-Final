@@ -1,7 +1,8 @@
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Estoque = require("../models/Estoque");
-const {produtoSchema, estoqueSchema} = require("../validators/estoque")
+const {produtoSchema} = require("../validators/estoque")
+const estoqueSchema = require("../validators/estoque")
 const {DataSchema} = require("yup")
 
 //GET
@@ -32,17 +33,22 @@ const nomeProduto = (request, response) => {
 
 //POST
 const cadastroProduto = async (request, response) => {
-        
-    const produtoValidado = await produtoSchema.validate(request.body)
-  
-    const checarNome = produtoValidado.nomeProduto
+   
+    const {nomeProduto, descricao, estoque, valorFabrica} = request.body
+
+    const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})
+    
+
+    try {
+     
+    const checarNome = novoProduto.nomeProduto
       
     Estoque.findOne({nomeProduto: checarNome})
         .then(produto => {
             if (produto){
                 response.status(400).json("Produto já cadastrado")
             }else {
-                novoProduto = new Estoque({produtoValidado})
+                novoProduto = new Estoque({novoProduto})
                 novoProduto.save()
                 .then((res) => {
                     response.status(201).json(res);
@@ -55,19 +61,26 @@ const cadastroProduto = async (request, response) => {
         .catch((err) => {
             response.status(500).json(err);
         });
+    }catch (err) {
+
+        return response.status(400).json({ error: err.message })
     }
+}
 
 //PATCH
 const abastecerEstoque = async (request, response) => {
 
-    const produtoValidado = await estoqueSchema.validate(request.body)
-    const checarEstoque = produtoValidado.estoque
-    const nomeProduto = produtoValidado.nomeProduto
+    const {nomeProduto, estoque} = request.body
+    
+    //const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})
+    
+    //const checarEstoque = produtoValidado.estoque
+    //const nomeProduto = produtoValidado.nomeProduto
             
     try {
-        let produto = await Estoque.findOne({nomeProduto});
+        let produto = await Estoque.findOne({nomeProduto: nomeProduto});
 
-        produto.estoque = produto.estoque + checarEstoque
+        produto.estoque = produto.estoque + estoque
 
         await produto.save();
 

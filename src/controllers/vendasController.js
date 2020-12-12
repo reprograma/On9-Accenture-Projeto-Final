@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
 const Estoque = require("../models/Estoque");
 const Vendedor = require("../models/Vendedores")
-const {vendaSchema} = require("../validators/vendas")
+const vendaSchema = require("../validators/vendas")
+
 
 //const {vendaSchema} = require("../validators/vendaSchema")
 
@@ -39,23 +40,27 @@ const nomeVendedor = (request, response, next) => {
 //POST
 const vendaProduto = async (request, response) => {
 
-    const vendaValidada = await vendaSchema.validate(request.body)
-    const nomeProduto = vendaValidada.nomeProduto
-    const vendedor = vendaValidada.vendedor
+    const {nomeProduto, valorVenda, quantidade, vendedor, clienteContato} = request.body
+
+    const novoCadastro = new Vendas ({ nomeProduto, valorVenda, quantidade, vendedor, clienteContato})
+    
+    //const vendaValidada = await vendaSchema.validate(request.body)
+    const produtoNome = novoCadastro.nomeProduto
+    const vendedorNome = novoCadastro.vendedor
 
             try {
-                let produto = await Estoque.findOne({nomeProduto: nomeProduto});
-                let buscaVendedor = await Vendedor.findOne({nome: vendedor})
+                let produto = await Estoque.findOne({nomeProduto: produtoNome});
+                let buscaVendedor = await Vendedor.findOne({nome: vendedorNome})
 
                 if (buscaVendedor !== null){
                     
-                    produto.estoque = produto.estoque - vendaValidada.quantidade
+                    produto.estoque = produto.estoque - quantidade
         
                     if (produto.estoque < 0) {
                         return response.status(400).json("Quantidade insuficiente! Favor abastecer");
                     } else {
             
-                        let novoPedido = new Vendas(vendaValidada)
+                        let novoPedido = new Vendas(novoCadastro)
                             novoPedido.save()
                             produto.save();
             
