@@ -95,7 +95,7 @@ sobre oportunidades internacionais, com mentores que já passaram pelo mesmo pro
 - Rota https://learn-and-share.herokuapp.com/mentor/visitedCountry?visitedCountry=EUA
 
 # GET por disponibilidade
-- Rota http://localhost:8080/mentor/available?available=true
+- Rota https://learn-and-share.herokuapp.com/mentor/available?available=true
 - Ao passar uma rota incorreta o retorno será uma mensagem de erro
 ```javascript
 {
@@ -257,7 +257,7 @@ Retorno:
 ```
 
 ## DELETE
-- Rota https://learn-and-share.herokuapp.com/mentor/:id
+- Rota https://learn-and-share.herokuapp.com/mentored/:id
 - Resultado:
 ```javascript
 {
