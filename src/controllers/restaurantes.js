@@ -55,14 +55,7 @@ const cadastroRestaurante = (req, res) => {
 const adicionarComentario = (req, res, next) => {
     const { id } = req.params
     const { comentario } = req.body
-    Restaurante.findByIdAndUpdate(
-        _id,
-        { $push: { comentario: { avaliacao: avaliacao, nota: nota } } },
-        { safe: true, upsert: true, new: true },
-        function (err, model) {
-            console.log(err);
-        }
-    )
+    Restaurante.findByIdAndUpdate(_id, req.body)
         //try {
         // const comentar = new Restaurante.comentario({
         // });
