@@ -43,15 +43,9 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 ### Card Sorting
 
-<sub> Exemplo de texto </sub>
+<sub> Aqui nesta etapa, realizei um agrupamento. </sub>
 
-![imagem do card sorting](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG)
-
-<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" width=500 >
-
-<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width ="450" align="right" padding="150"/> <br>
-
-Aqui nesta etapa, realizei um agrupamento.
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width="650" align="center" />
 
 ---
 
