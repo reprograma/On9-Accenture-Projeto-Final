@@ -1,6 +1,6 @@
 const app = require("./src/app");
-const PORT = 5000
+const port = 5000
 
-app.listen(PORT, function(){
-    console.log("byHer rodando na porta " + PORT)
+app.listen(process.env.PORT || port, () => {
+    console.log("byHer rodando na porta " + port)
 });
