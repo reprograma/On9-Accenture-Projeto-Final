@@ -53,7 +53,7 @@ exports.getAll = (request, response) => {
 exports.getByCity = (request, response) => {
     const city = request.query.city
 
-    Home.find({ city: city, available: true }, { "name": 1, "contact": 1, "city": 1, "neigborhood": 1, "homeDescription": 1, "available": 1 })
+    Home.find({ city: city, available: true }, { "name": 1, "contact": 1, "city": 1, "neighborhood": 1, "homeDescription": 1, "available": 1 })
         .then((home) => {
             response.status(200).json(home)
         })
