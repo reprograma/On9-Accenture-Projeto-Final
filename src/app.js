@@ -6,7 +6,7 @@ dotenv.config();
 
 const mongoose = require("mongoose");
 //mongoose.connect(`${process.env.DATABASE_URL}`, {
-mongoose.connect(`${process.env.DATABASE_URL}`, "mongodb://localhost/alertamb", {
+mongoose.connect("mongodb://localhost/alertamb", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
