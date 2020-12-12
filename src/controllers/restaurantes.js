@@ -55,7 +55,7 @@ const adicionarComentario = (req, res, next) => {
     const { id } = req.params
     const { comentario } = req.body
     Restaurante.findByIdAndUpdate(
-        info._id,
+        id,
         { $push: { comentario: { avaliacao: avaliacao, nota: nota } } },
         { safe: true, upsert: true, new: true },
         function (err, model) {
