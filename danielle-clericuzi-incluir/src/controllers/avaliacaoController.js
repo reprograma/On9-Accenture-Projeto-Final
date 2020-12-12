@@ -21,7 +21,16 @@ const realizarCadastroAvaliacao = async(req, res) => {
     const { userId, estabelecimentoId, vagaPCD, banheiro, notaBanheiro, sinalizacao, notaSinalizacao, tradutorLibras, rampa, locomocaoInterna, avaliacaoGeral } = req.body
     
     try {
-    const validacaoAvaliacao = await avaliacaoSchema.validate(req.body);
+        const validacaoAvaliacao = await avaliacaoSchema.validate(req.body);
+    
+        if (banheiro == false && notaBanheiro !== undefined) {
+            res.status(400).json({ message: 'Não é possível dar nota banheiro' });
+        }
+        
+        if (sinalizacao == false && notaSinalizacao !== undefined) {
+            res.status(400).json({ message: 'Não é possível dar nota Sinalizacao' });
+        }
+
     const novaAvaliacao = new Avaliacao(validacaoAvaliacao);
     
     Avaliacao.find({ userId: validacaoAvaliacao.userId, estabelecimentoId: validacaoAvaliacao.estabelecimentoId  })
