@@ -19,16 +19,19 @@ mongoose.connect(`${process.env.DATABASE}`,
     .catch(err => console.error('Error connecting to mongo', err))
 
 const hostingRoutes = require("./routes/hostingRoutes")
-const authRoutes = require("./routes/authRoutes")
+const userRoutes = require("./routes/userRoutes")
+const authUserRoutes = require("./routes/authUserRoutes")
 
 
 
+app.use('/api/auth', authUserRoutes)
 app.use('/api/hosting', hostingRoutes);
-app.use('/api/user', authRoutes);
+app.use('/api/user', userRoutes);
+
 
 
 app.get("/", (request, response) => {
-    response.send("Deu certo")
+    response.send("Bem-vindo ao Viajante Sobre Rodas!")
 })
 
 module.exports = app
