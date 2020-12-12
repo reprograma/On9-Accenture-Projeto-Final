@@ -25,27 +25,33 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 ### Formulário de Perguntas
 
-![imagem com as perguntas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Perguntas_Formulario.PNG)
+<sub> Perguntas realizadas: </sub>
+
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Perguntas_Formulario.PNG" alt="imagem com as perguntas do formulário" width="750" />
 
 ---
 
 ### Análise das respostas do formulário
 
-![imagem com as respostas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Respostas_Formulario.PNG)
+<sub> Compilado com as alternativas mais respondidas pelos usuários. Presença maior de uma faixa etária de 30 a 39 anos na amostra, de ambos os sexos, e que referem que possuem um grau de conhecimento 3 em uma escala de 1 a 5 sobre finanças </sub>
+
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Respostas_Formulario.PNG" alt="imagem com as respostas do formulário" width="750" />
 
 ---
 
 ### Matriz CSD
 
-![imagem com a Matriz CSD](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Matriz_CSD.PNG)
+<sub> A 1ª Versão da matriz CSD era composta apenas por cards amarelos. Após a análise das respostas provenientes do formulário realizei uma 2ª versão da matriz. Os cards amarelos representam o que eu pesquisei acerca do tópico, e os cards azuis representam o que eu comprovei mediante a análise das respostas do formulário. </sub>
+
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Matriz_CSD.PNG" alt="2ª versão da matriz da matriz CSD" width="750" />
 
 ---
 
 ### Card Sorting
 
-<sub> Aqui nesta etapa, realizei um agrupamento. </sub>
+<sub> Aqui nesta etapa, realizei um agrupamento em 3 grandes tópicos: O que descobri acerca de dados pessoais, sobre temas relacionados a atualidades, e finanças. </sub>
 
-<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width="650" />
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width="750" />
 
 ---
 
