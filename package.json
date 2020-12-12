@@ -2,9 +2,9 @@
   "name": "danielle-clericuzi-incluir",
   "version": "1.0.0",
   "description": "Projeto Incluir - uma ferramenta de acessibilidade que busca fomentar a inclusão de pessoas com deficiência através do seu acesso livre e facilitado em todos os espaços - Entrega Final Reprograma",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "Danielle Clericuzi",
   "license": "ISC",
@@ -17,5 +17,8 @@
     "mongoose": "^5.11.0",
     "nodemon": "^2.0.6",
     "yup": "^0.31.0"
+  },
+  "engines": {
+    "node": "v12.14.0"
   }
 }
