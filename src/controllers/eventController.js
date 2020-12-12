@@ -4,7 +4,7 @@ const { response } = require('../app')
 const { events } = require('../models/event')
 const Event = require('../models/event')
 
-const getAll = (req, res) => {
+const getAll = (req, res, next) => {
     Event.find()
     .then((events) => {
         res.status(200).json(events)
@@ -12,7 +12,7 @@ const getAll = (req, res) => {
     .catch(err => next(err))
 }
 
-const getByApply = (req, res) =>{
+const getByApply = (req, res, next) =>{
     
     Event.find({ openApply: true})
         .then((events) => {
