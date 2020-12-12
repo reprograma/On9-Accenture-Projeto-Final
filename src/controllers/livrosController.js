@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { validatingPost } = require('../helpers/helpers');
 const Book = require('../models/Livros');
 
-const createBook = (request, response)=> {
+const createBook = async (request, response)=> {
     let { title, author, hasTrigger, triggers, synopsis } = request.body
 
     const newBook = new Book({
