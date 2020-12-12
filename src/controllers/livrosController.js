@@ -12,6 +12,7 @@ const createBook = (request, response)=> {
         triggers,
         synopsis,
       });
+
     newBook.save()
         .then((res) => {
             response.status(201).json(res);
@@ -93,7 +94,10 @@ const updateTriggers = (request, response) =>{
     Book.findById(id)
         .then((books) =>{
             if (books.hasTrigger == true) {
-                triggers.forEach(trigger => { if (!filteredList.includes(trigger)) { filteredList.push(trigger) } });
+                triggers.forEach(trigger => {
+                     if (!filteredList.includes(trigger)) { filteredList.push(trigger) } 
+                    });
+
                 Book.findByIdAndUpdate(id, {$set: { triggers: filteredList }})
                     .then((books)  =>{
                         response.status(200).json({ message: `${request.params.id} triggers have been updated`});
@@ -109,10 +113,12 @@ const updateTriggers = (request, response) =>{
         .catch(err => { throw new Errow(err) })
     } 
     
-
-
 const deleteBook = (request, response)=>{
     const { id } = request.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) { 
+        return response.status(400).json({ message: 'ID provided is not valid' }) 
+    }
     
     Book.findByIdAndDelete(id)
         .then(() => {
