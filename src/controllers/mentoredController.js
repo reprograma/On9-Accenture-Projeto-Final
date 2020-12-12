@@ -57,8 +57,8 @@ const getByDestinyCountry = (request, response) => {
     const destinyCountry = request.query.destinyCountry
 
     Mentor.find({ destinyCountry: destinyCountry })
-        .then((mentor) => {
-            response.status(200).json(mentor)
+        .then((mentored) => {
+            response.status(200).json(mentored)
         })
         .catch((error) => {
             response.status(400).json({ error: `Falha na pesquisa de país de destino.` })

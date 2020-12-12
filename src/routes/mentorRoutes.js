@@ -6,6 +6,8 @@ router.post("/register", mentorController.createMentor);
 
 router.get("/", mentorController.getAll);
 
+router.get("/:id", mentorController.getById);
+
 router.get("/visitedCountry", mentorController.getByVisitedCountry);
 
 router.get("/available", mentorController.getByAvailable);
