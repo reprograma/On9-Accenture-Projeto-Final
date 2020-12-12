@@ -11,7 +11,9 @@ const estoqueGeral = (request, response) => {
         .then((Produtos) => {
             response.status(200).json(Produtos);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            res.status(400).json(err)
+        });
 }
 
 //GET
@@ -23,7 +25,9 @@ const nomeProduto = (request, response) => {
         .then((produto) => {          
             response.status(200).json(produto);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            res.status(400).json(err)
+        });
 }
 
 //POST
@@ -43,7 +47,9 @@ const cadastroProduto = async (request, response) => {
                 .then((res) => {
                     response.status(201).json(res);
                 })
-                .catch(err => next(err));
+                .catch((err) => {
+                    res.status(400).json(err)
+                });
             }
         })
     }

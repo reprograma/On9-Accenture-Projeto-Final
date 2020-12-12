@@ -14,11 +14,13 @@ const vendas = (request, response) => {
         .then((Vendas) => {
             response.status(200).json(Vendas);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            res.status(400).json(err)
+        });
 }
 
 //GET
-const nomeVendedor = (request, response) => {
+const nomeVendedor = (request, response, next) => {
 
     const {nome} = request.params;
  
@@ -29,7 +31,9 @@ const nomeVendedor = (request, response) => {
           
             response.status(200).json(vendedor);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            res.status(400).json(err)
+        });
 }
 
 //POST
