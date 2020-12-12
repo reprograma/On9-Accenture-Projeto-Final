@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { validatingPost } = require('../helpers/helpers');
 const Book = require('../models/Livros');
 
-const createBook = async (request, response)=> {
+const createBook = async (request, response, next)=> {
     let { title, author, hasTrigger, triggers, synopsis } = request.body
 
     const newBook = new Book({
@@ -14,16 +14,29 @@ const createBook = async (request, response)=> {
         synopsis,
       });
 
-      if (await validatingPost(title, author) > 0) {
-           return response.status(401).json({ message: `This book already exists in these database` }) 
-        }
+     /* if (Book.find({ $and: [{ title: title }, { author: author }] }) > 0) {
+        response.status(401).json({ message: `This book already exists in these database` }) 
+      }*/
 
-    newBook.save()
-        .then((res) => {
-            response.status(201).json(res);
-        })
-        .catch(err => next(err));
-}
+      Book.findOne([{title: title}, {author: author}])
+        .then((books =>{
+            if (books) {
+                res.status(401).json("This book already exists in these database")
+               
+            }else{
+                newBook.save()
+                .then((res) => {
+                    response.status(201).json(res);
+                })
+                .catch(err => next(err));
+            }
+            console.log(vendedor)
+        }))
+     
+        //newBook.save()
+        
+    
+    
 
 const getAll = (request, response, next)=>{
     Book.find()
@@ -137,12 +150,12 @@ const deleteBook = (request, response)=>{
 module.exports = {
     createBook,
     getAll,
-    getById,
     getByAuthor,
     getByTitle,
     getByTrigger,
     getDoesntHasTrigger,
     getHasTrigger,
+    getById,
     updateTriggers,
     deleteBook
 }
