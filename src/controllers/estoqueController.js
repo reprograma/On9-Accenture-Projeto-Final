@@ -33,18 +33,18 @@ const nomeProduto = (request, response) => {
 const cadastroProduto = async (request, response) => {
    
     const {nomeProduto, descricao, estoque, valorFabrica} = request.body
-    const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  
-    const checarNome = novoProduto.nomeProduto
+    //const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  
+    //const checarNome = novoProduto.nomeProduto
     
     try {
           
-    Estoque.findOne({nomeProduto: checarNome})
+    Estoque.findOne({nomeProduto: nomeProduto})
         .then((produto) => {
 
             if (produto){              
                 response.status(400).json("Produto já cadastrado")
             }else {
-                novoProduto = new Estoque({novoProduto})
+                const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  //novoProduto = new Estoque({novoProduto})
                 novoProduto.save()
                 .then((res) => {
                     response.status(201).json(res);
