@@ -15,6 +15,8 @@ router.get("/city/:city", controller.getByCity) //quando era Id passado pelo pos
 
 router.post("/createhosting", controller.createHosting)
 
+router.put("/updatehosting/:id", controller.updateHosting)
+
 router.delete("/deletehosting/:id", controller.deleteHosting)
 
 module.exports = router
