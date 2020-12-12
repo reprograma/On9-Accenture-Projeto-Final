@@ -19,7 +19,7 @@ const createBook = (request, response)=> {
         .catch(err => next(err));
 }
 
-const getAll = (request, response)=>{
+const getAll = (request, response, next)=>{
     Book.find()
         .then((books) => {
             response.status(200).json(books);
@@ -37,7 +37,7 @@ const getById = (request, response) =>{
         .catch(err => {throw new Error(err)});
 }
 
-const getHasTrigger = (request, response) =>{
+const getHasTrigger = (request, response, next) =>{
     Book.find({ hasTrigger: true})
         .then((books)=>{
             response.status(200).send(books);
@@ -45,7 +45,7 @@ const getHasTrigger = (request, response) =>{
         .catch(err => next (err));
 }
 
-const getDoesntHasTrigger = (request, response) =>{
+const getDoesntHasTrigger = (request, response, next) =>{
     Book.find({ hasTrigger: false})
         .then((books)=>{
             response.status(200).send(books);
@@ -83,6 +83,31 @@ const getByTrigger = (request, response) =>{
         .catch(err => {throw new Error(err)});
 }
 
+//PATCH
+const updateTriggers = (request, response) =>{
+    const { id } = request.params
+    const { triggers } = request.body
+
+    Book.findById(id)
+        .then((books) =>{
+            if (books.hasTrigger == true) {
+                Book.findByIdAndUpdate(id, {$set: { triggers: triggers }})
+                    .then((books)  =>{
+                        response.status(200).json({ message: `${request.params.id} triggers have been updated`});
+            })
+            
+                    .catch((err) => next(err));
+            
+            }  else {
+                response.status(400).json({ message: `${request.params.id} cannot be updated because this book doesn't have triggers`});
+            }
+        
+        })
+        .catch(err => { throw new Errow(err) })
+    } 
+    
+
+
 const deleteBook = (request, response)=>{
     const { id } = request.params
     
@@ -104,5 +129,6 @@ module.exports = {
     getByTrigger,
     getDoesntHasTrigger,
     getHasTrigger,
+    updateTriggers,
     deleteBook
 }
