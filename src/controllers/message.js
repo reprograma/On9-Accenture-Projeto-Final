@@ -11,34 +11,38 @@ exports.get = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-
-
 exports.postNewMessage = (req, res, next) => {
-    let { id } = req.body
+  let { id } = req.body;
 
-    if (id == AmbulancesUser.findById(AmbulancesUser._id)){
-        const newMessageAmbulance = newMessageSend({
-            driverName: AmbulancesUser.driverName, 
-            licensePlate: AmbulancesUser.licensePlate,
-            locationAmbulance: req.body.locationAmbulance,
-            destinationHospital: req.body.destinationHospital,
-            telephoneNumberAmbulance: telephoneNumberAmbulance, 
-            routesToHopital: req.body.routesToHopital
-        })
-        newMessageAmbulance.save().then((newMessageAmbulance) => {
-            return res.status(201).json(newMessageAmbulance)
-        })
-        .catch((err) => next(err))
-    } else {
-        const newMessageAgent = new MessageSend({
-            transitAgentName: TransitAgentUser.transitAgentName , 
-            transitAgentlocation: TransitAgentUser.transitAgentlocation,
-            telephoneNumberAgent: TransitAgentUser.telephoneNumberAgent 
-        })
-        newMessageAgent.save().then((newMessageAgent) => {
-            return res.status(201).json(newMessageAgent)
-        })
-        .catch((err) => next(err))
-    }
-}
-
+  if (AmbulancesUser.findById(id, function (err, AmbulancesUser) {})) {
+    const newMessageAmbulance = MessageSend({
+      driverName: AmbulancesUser.driverName,
+      licensePlate: AmbulancesUser.licensePlate,
+      locationAmbulance: req.body.locationAmbulance,
+      destinationHospital: req.body.destinationHospital,
+      telephoneNumberAmbulance: AmbulancesUser.telephoneNumberAmbulance,
+      routesToHopital: req.body.routesToHopital,
+    });
+    newMessageAmbulance
+      .save()
+      .then((newMessageAmbulance) => {
+        return res.status(201).json(newMessageAmbulance);
+      })
+      .catch((err) => next(err));
+  } else if (TransitAgentUser.findById(id, function (err, TransitAgentUser) {})
+  ) {
+    const newMessageAgent = new MessageSend({
+      transitAgentName: TransitAgentUser.transitAgentName,
+      transitAgentlocation: req.body.transitAgentlocation,
+      telephoneNumberAgent: TransitAgentUser.telephoneNumberAgent,
+    });
+    newMessageAgent
+      .save()
+      .then((newMessageAgent) => {
+        return res.status(201).json(newMessageAgent);
+      })
+      .catch((err) => next(err));
+  } else {
+    return "não usuário com esse id";
+  }
+};
