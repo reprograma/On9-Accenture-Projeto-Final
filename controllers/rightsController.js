@@ -1,66 +1,45 @@
-const rights = require("../models/rightsSchema")
+const rights = require('../models/rightsSchema')
+const mongoose = require('mongoose')
 
-const getAll = (request, response)=>{
-    console.log(request.url)
+const getAll = (request, response) => {
 
-    rights.find((error, rights) =>{
-        if(error){
-            return response.status(500).send(error)
-        } else{
-            return response.status(200).send({
-                mensagem: "GET with sucess",
-                rights
-            })
-        }
-    })
+    rights.find()
+        .then((list) => { response.status(200).json(list) })
+        .catch(err => { response.status(500).json({ message: err }) })
 }
 
-const addRight = (request, response)=>{
+const addRight = (request, response) => {
     const rightBody = request.body //pegando o body que o usuario digitou
-    const right = new rightsCollection(rightBody)//criando um novo dado com o body
-
-    right.save((error)=>{
-        if(error){
-            return response.status(400).send(error)
-        }else{
-            return response.status(200).send({
-                mensagem: "POST with sucess",
-                right
-            })
-        }
+    
+    rights.create({
+        titleLegalSubject: rightBody.titlelegalSubject,
+        description: rightBody.description,
+        sourceInformation: rightBody.sourceInformation,
+        dateInclusion: rightBody.dateInclusion,
     })
-}
-
-const updateRight = (request, response) =>{
-    const { id } = request.params 
-    const { dataInclusion, description, sourceInformation, CollaboratorName } = request.body 
-
-    const rightUpdated = rightsModels.find(right => right.id == id) 
-
-    const newRight = { 
-        id: updatedLaw.id, 
-        dataInclusion: updatedRight.dataInclusion, 
-        description: description,
-        sourceInformation: sourceInformation,
-        collaboratorName: collaboratorName
-    }
-
-    const index = rightsModels.indexOf(rightUpdated) 
-
-    rightsModels[index] = newRight
-
-    response.status(200).json(rightsModels[index])
+        .then((newRegister) => { response.status(200).json({ message: `Direito registrado com sucesso`, newRegister }) })
+        .catch(err => { response.status(500).json({ message: `O direito não pode ser criado.`, err }) })
 
 }
 
-const deleteRight = (request, response)=>{
+const updateRight = (request, response) => {
     const { id } = request.params
-    const rightFiltered = rightsModels.find(right => right.id == id)
 
-    const index = rightsModels.indexOf(rightFiltered)
-    rightsModels.splice(index, 1)
+    rights.findByIdAndUpdate(id, request.body)
+    .then((newRegister) => { response.status(200).json({ message: `Direito atualizado com sucesso`}) })
+    .catch(err => { response.status(500).json({ message: `O direito não pode ser atualizado.`, err }) })
 
-    response.json({mensagem: "Right deleted with sucess"})
+}
+
+
+const deleteRight = (request, response) => {
+    const { id } = request.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) { return response.status(400).json({ message: 'O ID inserido é inválido' }) }
+
+    rights.findByIdAndDelete(id)
+        .then((list) => { response.status(200).json({ message: `O direito selecionado (id:${id}) foi excluído da base de dados com sucesso` }) })
+        .catch(err => { response.status(500).json(err) })
 }
 
 module.exports = {

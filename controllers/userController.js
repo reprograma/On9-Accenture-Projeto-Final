@@ -1,45 +1,73 @@
-const jwt = require('jsonwebtoken')
-const authConfig = require ('../config/auth');
+const jwt = require('jsonwebtoken');
 const user = require('../models/userModel');
-const { signupSchema } = require('../validators/user')
-const { hashPassword } = require('../validators/user')
+const bcrypt = require('bcrypt');
 
-exports.getAll = () => {
-    try {
-        User.find()
-            .then(user => res.status(200).json(user))
-            .catch(res.status(204).json({ message: 'No registered users' }))
+const getAll = (req, res) => {
+    user.find()
+        .then(user => res.status(200).json(user))
 
-    } catch (e) {
-        console.log(e)
-        return res.status(400).json({ e: 'No is possible to do search' })
-    }
+        .catch(err => { response.status(500).json(err) })
+
 }
 
-exports.signup = async (req, res) => {
+
+const register = async (request, response) => {
+    const { name, email, password } = request.body;
     try {
-        const validatedBody = await signupSchema.validate(req.body)
-        const user = new User(validatedBody)
-        User.findOne({ email: validatedBody.email })
-            .then(async existingUser => {
-                if (existingUser) {
-                    return res.status(400).json({
-                        errors: ['This account is registered with other e-mail.']
-                    })
+        
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user.create({
+            name: name,
+            email: email,
+            password: hashedPassword
+        })
+            .then((res) => { response.status(200).json({ message: `Usuário criado com sucesso`, res }) })
+            .catch(err => { response.status(500).json(err) })
+
+    } catch (err) { response.status(500).json(err) }
+}
+
+function checkPassword(passwordEntry, password) {
+    return bcrypt.compareSync(passwordEntry, password)
+}
+
+
+const signup = async (req, res) => {
+    const { email, password: passwordEntry } = request.body;
+    try {
+        user.findOne({ email: email })
+            .then((user) => {
+                const { id, email, password } = user;
+                if (!checkPassword(passwordEntry, password)) {
+                    return response.status(401).json({ message: `Senha incorreta!` })
                 }
 
-                const passwordHashed = await hashPassword(user.password, res)
-                user.password = passwordHashed
-                user.save()
-                    .then(user => res.status(200).json(user))
-
-                    .catch(err => {
-                        console.log(err)
-                        return res.status(500).json(err)
+                return response.status(200).json({
+                    user: {
+                        id,
+                        email
+                    },
+                    token: jwt.sign({ id }, `${process.env.SECRET}`, {
+                        expiresIn: `${process.env.EXPIRESIN}`
                     })
+                })
+
+
             })
-    } catch (e) {
+            .catch(err => { response.status(203).json({ message: `Não encontramos esse usuário cadastrado na nossa base de dados` }) })
+
+
+    }
+    catch (e) {
         console.log(e)
         return res.status(400).json(e)
     }
+}
+
+module.exports = { 
+    getAll,
+    register,
+    signup
 }

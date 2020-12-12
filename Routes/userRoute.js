@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/user');
-const authMiddleware = require('../middlewares/auth')
+const userController = require('../controllers/userController');
 
-router.post("/", controller.accessToken)
+router.post("/", userController.getAll)
 
-//@endpoint http://localhost:8080/user/createUser
-router.post('/create', userController.createUser)
+//@endpoint http://localhost:8080/user/register
+router.post('/register', userController.register)
 
-//@endpoint http://localhost:8080/user/singUp
-router.post('/singUp', userController.signUp)
+//@endpoint http://localhost:8080/user/signup
+router.post('/signup', userController.signup)
 
-router.use(authMiddleware)
 
 module.exports = router;
