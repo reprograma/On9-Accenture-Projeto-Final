@@ -96,7 +96,7 @@ body necessário:
 
 ```jsx
 {
-    "name": "nome",
+  "name": "nome",
 	"email": "email@email.com",
 	"password": "senha"
   }
@@ -137,12 +137,7 @@ Retorno:
 
 ```jsx
 {
-  "id": "2",
-  "eventTitle": "Paiva Surfday",
-  "state": "Pernambuco",
-  "beach": "Cupe",
-  "surfDay": "06/01/2020",
-  "openApply": true
+  "message": " is updated"
 }
 ```
 
@@ -167,7 +162,7 @@ Retorno:
 
 ```jsx
 {
-  "mensagem": "Inscrições encerradas"
+  "message": "_ID_ applies are closed"
 }
 ```
 
@@ -182,9 +177,8 @@ Retorno:
 [200] OK
 
 ```jsx
-{
-  "mensagem": "evento deletado com sucesso"
-}
+"Evento cancelado";
+
 ```
 
 ### Para rodar o projeto
