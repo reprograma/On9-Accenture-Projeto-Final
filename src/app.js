@@ -5,5 +5,10 @@ const cors = require("cors")
 app.use(cors())
 app.use(express.json())
 
-app.use("/", ROTA)
-app.use("/investimentos", ROTA)
+const index = require("./routes/index")
+const financas = require("./routes/financasRoute")
+
+app.use("/", index)
+app.use("/investimentos", financas)
+
+module.exports = app 
