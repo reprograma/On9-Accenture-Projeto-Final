@@ -77,7 +77,6 @@ const getByConcluded = (request, response) => {
         })
 };
 
-
 const editMentored = (request, response) => {
     const { id } = request.params;
 
