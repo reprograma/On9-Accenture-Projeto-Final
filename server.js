@@ -1,6 +1,6 @@
 const app = require("./src/app")
-const PORT = 3030
+const PORT = 8080;
 
-app.listen(PORT, function(){
-    console.log(`This APP is running in the service port ${PORT}`)
+app.listen(process.env.PORT || port, function(){
+    console.log(`This APP is running in the service port ${port}`)
 })
