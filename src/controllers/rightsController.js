@@ -1,4 +1,4 @@
-const rights = require('../models/rightsSchema')
+const rights = require('../Models/rightsSchema')
 const mongoose = require('mongoose')
 
 const getAll = (request, response) => {
