@@ -27,30 +27,30 @@ function checkPassword(passwordEntry, password) {
 
 const accessToken = async (request, response) => {
     const { email, password: passwordEntry } = request.body;
-    try {
 
-        User.findOne({ email: email })
-            .then((user) => {
 
-                const { id, email, hashPass } = user;
+    User.findOne({ email: email })
+        .then((user) => {
 
-                if (!checkPassword(passwordEntry, hashPass)) { return response.status(401).json({ message: `Senha incorreta!` }) }
+            const { id, email, hashPass } = user;
 
-                return response.status(200).json({
-                    user: {
-                        id,
-                        email
-                    },
-                    token: jwt.sign({ id }, `${process.env.SECRET}`, {
-                        expiresIn: `${process.env.EXPIRESIN}`
-                    })
+            if (!checkPassword(passwordEntry, hashPass)) { return response.status(401).json({ message: `Senha incorreta!` }) }
+
+            return response.status(200).json({
+                user: {
+                    id,
+                    email
+                },
+                token: jwt.sign({ id }, `${process.env.SECRET}`, {
+                    expiresIn: `${process.env.EXPIRESIN}`
                 })
-
-
             })
-            .catch(err => { response.status(203).json({ message: `Não encontramos esse usuário cadastrado na nossa base de dados` }) })
 
-    } catch (err) { return response.status(500).json(err) }
+
+        })
+        .catch(err => { response.status(203).json({ message: `Não encontramos esse usuário cadastrado na nossa base de dados` }) })
+
+
 }
 
 
