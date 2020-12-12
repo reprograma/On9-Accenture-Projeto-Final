@@ -5,7 +5,10 @@ const Book = require('../models/Livros');
 
 const createBook = async (request, response, next)=> {
     let { title, author, hasTrigger, triggers, synopsis } = request.body
-
+    const list = await Book.find({$and: [{ title: title}, {author: author}]})
+    if(list.length > 0){
+        return response.status(401).json({message: `Livro ja existente`})
+    }
     const newBook = new Book({
         title,
         author,
@@ -14,28 +17,13 @@ const createBook = async (request, response, next)=> {
         synopsis,
       });
 
-     /* if (Book.find({ $and: [{ title: title }, { author: author }] }) > 0) {
-        response.status(401).json({ message: `This book already exists in these database` }) 
-      }*/
+      newBook.save()
+        .then((res) => {
+            response.status(201).json(res);
+        })
+        .catch(err => next(err));
 
-      Book.findOne([{title: title}, {author: author}])
-        .then((books =>{
-            if (books) {
-                res.status(401).json("This book already exists in these database")
-               
-            }else{
-                newBook.save()
-                .then((res) => {
-                    response.status(201).json(res);
-                })
-                .catch(err => next(err));
-            }
-            console.log(vendedor)
-        }))
-     
-        //newBook.save()
-        
-    
+    }
     
 
 const getAll = (request, response, next)=>{
