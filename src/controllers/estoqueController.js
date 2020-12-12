@@ -33,21 +33,15 @@ const nomeProduto = (request, response) => {
 const cadastroProduto = async (request, response) => {
    
     const {nomeProduto, descricao, estoque, valorFabrica} = request.body
-
-   
-    const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})
-    
+    const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  
+    const checarNome = novoProduto.nomeProduto
     
     try {
-     
-    const checarNome = novoProduto.nomeProduto
-      
+          
     Estoque.findOne({nomeProduto: checarNome})
-        .then(produto => {
+        .then((produto) => {
 
-            console.log(produto)
-            if (produto){
-                
+            if (produto){              
                 response.status(400).json("Produto já cadastrado")
             }else {
                 novoProduto = new Estoque({novoProduto})
@@ -64,7 +58,6 @@ const cadastroProduto = async (request, response) => {
             response.status(500).json(err);
         });
     }catch (err) {
-
         return response.status(400).json({ error: err.message })
     }
 }
