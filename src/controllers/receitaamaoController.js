@@ -104,6 +104,17 @@ const getByQuickList = (request, response) =>{
 
 }
 
+const getByShoppingList = (request, response) =>{
+    Recipe.find({receitaSelecionada: true}, {"ingredientes": 1, "_id":0}).sort({"ingredientes": 1})
+    .then((recipes) => {
+        response.status(200).json(recipes);
+   })
+     .catch(err => {
+         response.status(400).json({ message: "erro" })
+   })
+
+}
+
 
 
 
@@ -329,6 +340,7 @@ module.exports = {
     getByNoChoseRecipe,
     getBySortRecipe,
     getByQuickList,
+    getByShoppingList,
     createRecipe,
     updateRecipe,
     uptdateChosenRecipe, 

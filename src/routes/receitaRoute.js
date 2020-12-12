@@ -22,12 +22,14 @@ router.get("/ordemalfabetica", controller.getBySortRecipe)
 
 router.get("/listaRapida", controller.getByQuickList)
 
+router.get("/listacompras", controller.getByShoppingList)
+
 router.post("/cadastro", controller.createRecipe)
 
 
 router.put("/editar/:id", controller.updateRecipe)
 
-router.patch("/receitanaoselecionada/:id", controller.uptdateChosenRecipe)
+router.patch("/selecionarreceita/:id", controller.uptdateChosenRecipe)
 
 router.patch("/editar/ingredientes/:id", controller.updateIngredients)
 
