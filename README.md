@@ -49,9 +49,9 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 <img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" width=500 >
 
-<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width ="350" align="right" padding="250"/>
+<img src="https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG" alt="respostas da pesquisa de card sorting" width ="450" align="right" padding="350"/>
 
-A ausência de representação negra nos parlamentos é um problema há muito denunciado pelos movimentos negros brasileiros. Se no Brasil mais de 56% das pessoas se declaram negras, os dados de composição racial nas casas legislativas espalhadas pelo país demonstram o tamanho do abismo. Segundo dados do TSE, negros somam 24,4% dos deputados federais e 28,9% dos deputados estaduais eleitos em 2018 e, dos vereadores eleitos em 2016, somam 42,1% de pretos e pardos. (Fonte: Votos Antirarcistas, 2020)
+Aqui nesta etapa, realizei um agrupamento.
 
 ## Documentação de API (versão 1.0)
 
