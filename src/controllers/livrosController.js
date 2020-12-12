@@ -87,11 +87,14 @@ const getByTrigger = (request, response) =>{
 const updateTriggers = (request, response) =>{
     const { id } = request.params
     const { triggers } = request.body
+    const filteredList = [];
+
 
     Book.findById(id)
         .then((books) =>{
             if (books.hasTrigger == true) {
-                Book.findByIdAndUpdate(id, {$set: { triggers: [triggers] }})
+                triggers.forEach(trigger => { if (!filteredList.includes(trigger)) { filteredList.push(trigger) } });
+                Book.findByIdAndUpdate(id, {$set: { triggers: filteredList }})
                     .then((books)  =>{
                         response.status(200).json({ message: `${request.params.id} triggers have been updated`});
             })
