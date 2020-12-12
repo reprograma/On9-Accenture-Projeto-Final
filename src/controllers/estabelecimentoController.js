@@ -19,7 +19,6 @@ const obterEstabelecimento = async(req, res) => {
 
 const obterEstabelecimentoPorCidade = async(req, res) => {
     const { cidade }  = req.query
-    console.log(cidade)
     Estabelecimento.find({ cidade: cidade })
         .then((estabelecimentos) => {
             if (estabelecimentos == 0) {
@@ -99,7 +98,6 @@ const atualizarCadastroEstabelecimento = async(req, res) =>{
 
     Estabelecimento.findById(new ObjectId(id))
     .then(async existeEstabelecimento => {
-        console.log(existeEstabelecimento)
         if (!existeEstabelecimento) {
             return res.status(400).json({
                 errors: ['O estabelecimento não está cadastrado']

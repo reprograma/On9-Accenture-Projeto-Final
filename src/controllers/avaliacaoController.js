@@ -35,7 +35,6 @@ const realizarCadastroAvaliacao = async(req, res) => {
     
     Avaliacao.find({ userId: validacaoAvaliacao.userId, estabelecimentoId: validacaoAvaliacao.estabelecimentoId  })
     .then(async existeAvaliacao => {
-        console.log(existeAvaliacao.length)
         if (existeAvaliacao !== null && existeAvaliacao.length > 0) {
             return res.status(400).json({
                 errors: ['Já foi realizada avaliação para esse estabelecimento']

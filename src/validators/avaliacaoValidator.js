@@ -13,8 +13,6 @@ yup.setLocale({
  * Declarar a validação para atributo Avaliacao
  */
 
-// será que preciso colocar aqui os IDs do user e estabelecimento??
-
 exports.avaliacaoSchema = yup.object().shape({
     vagaPCD: yup.boolean().required('É preciso avaliar este campo'),
     banheiro: yup.boolean().required('É preciso avaliar este campo'),

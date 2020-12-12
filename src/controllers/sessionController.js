@@ -1,25 +1,26 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-//const authConfig = require ('../config/auth');
 const User = require('../models/userModels.js');
 
 function verificarSenha(senhaEntrada, senha) {
+  console.log('senhaEntrada: ', senhaEntrada);
+  console.log('senha: ', senha);
     return bcrypt.compareSync(senhaEntrada, senha);
   }
   
   const loginUser = (req, res) => {
     try {
       const { email, senha: senhaEntrada } = req.body;
-      console.log(senhaEntrada)
-      
+      console.log('email: ', email);
+      console.log('senha: ', senhaEntrada);
       User.findOne({email: email})
         .then((user) => {
             const {id, nome, senha: senhaEncriptada } = user;
-            console.log(senhaEncriptada);
-            
-  
+            console.log('verificar senha');
             try {
-              verificarSenha(senhaEntrada, senhaEncriptada);
+              if (!verificarSenha(senhaEntrada, senhaEncriptada)) {
+                return res.status(401).json({ error: 'senha errada' });
+              }
             } catch(e) {
               return res.status(401).json({ error: 'senha errada' });
             }
@@ -30,9 +31,7 @@ function verificarSenha(senhaEntrada, senha) {
                   id,
                   nome,
                 },
-                //token: jwt.sign({ id }, authConfig.secret, {
                 token: jwt.sign({ id }, process.env.SECRET, {
-                  //expiresIn: authConfig.expiresIn,
                   expiresIn: process.env.EXPIRES_IN,
                 }),
               });
