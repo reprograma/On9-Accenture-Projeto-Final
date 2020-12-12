@@ -32,12 +32,14 @@ router.put('/edit/:id', eventController.updateEvent)
 //@access privado
 router.patch('/open/:id', eventController.closeApllies)
 
-router.use(authMiddleware)
+
 
 //@router DELETE /events/:id
 //@desc Deleta um evento
 //@access privado
 router.delete('/:id', eventController.deleteEvent )
+
+router.use(authMiddleware)
 
 module.exports = router
 
