@@ -12,7 +12,7 @@ const vendedores = (request, response) => {
             response.status(200).json(vendedores);
         })
         .catch((err) => {
-            res.status(400).json(err)
+            response.status(400).json(err)
         });
 }
 
@@ -26,7 +26,7 @@ const nomeVendedor = (request, response) => {
             response.status(200).json(nome);
         })
         .catch((err) => {
-            res.status(400).json(err)
+            response.status(400).json(err)
         });
 }
 

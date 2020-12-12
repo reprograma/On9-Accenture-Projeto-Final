@@ -12,7 +12,7 @@ const estoqueGeral = (request, response) => {
             response.status(200).json(Produtos);
         })
         .catch((err) => {
-            res.status(400).json(err)
+            response.status(400).json(err)
         });
 }
 
@@ -26,7 +26,7 @@ const nomeProduto = (request, response) => {
             response.status(200).json(produto);
         })
         .catch((err) => {
-            res.status(400).json(err)
+            response.status(400).json(err)
         });
 }
 
@@ -48,7 +48,7 @@ const cadastroProduto = async (request, response) => {
                     response.status(201).json(res);
                 })
                 .catch((err) => {
-                    res.status(400).json(err)
+                    response.status(400).json(err)
                 });
             }
         })
