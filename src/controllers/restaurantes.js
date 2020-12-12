@@ -52,17 +52,11 @@ const cadastroRestaurante = (req, res) => {
 
 
 const adicionarComentario = (req, res) => {
-    console.log("chegou")
     const { id } = req.params
-    console.log("batata")
     const { avaliacao, nota } = req.body
-    console.log("batata01")
     try {
-        const novoComentario = comentario([{
-            avaliacao,
-            nota
-        }])
-        novoComentario.push(Restaurante.comentarios)
+        const novoComentario = Restaurante.find(Restaurante => Restaurante.id == id)
+        novoComentario.push(Restaurante.comentarios);
             .then(() => {
                 res.status(201).json({ message: `comentario adicionado com sucesso` });
             })
