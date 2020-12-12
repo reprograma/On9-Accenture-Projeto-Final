@@ -9,6 +9,6 @@ const index = require("./routes/index")
 const financas = require("./routes/financasRoute")
 
 app.use("/", index)
-app.use("/investimentos", financas)
+//app.use("/investimentos", financas)
 
 module.exports = app 

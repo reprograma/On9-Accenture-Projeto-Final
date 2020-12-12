@@ -68,15 +68,17 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
     - [x] "/" Retorna index com apresentação
 
       {
+
       mensagem: bem vinda a lista de todos os materiais sobre finanças
+
       }
 
-  - [x] "/reservafinanceira" retorna todos os dados do banco de dados
-  - [x] "/reservafinanceira/investimentos/[NOME]" Retorna o investimento por nome específico
+  - [x] "/tiposreservafinanceira" retorna todos os dados do banco de dados
+  - [x] "/tiposreservafinanceira/investimentos" Retorna o investimento por nome específico
 
 - [x] _Post_
-  - [x] ""
-  - [x] ""
+  - [x] "/tiposreservafinanceira" cria uma nova modalidade de reserva financeira
+  - [x] "/tiposreservafinanceira/investimentos" cria um novo material de investimento
 - [x] _Put_
   - [x] ""
   - [x] ""
