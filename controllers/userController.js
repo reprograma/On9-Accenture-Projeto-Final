@@ -1,4 +1,6 @@
-const User = require('../models/User')
+const jwt = require('jsonwebtoken')
+const authConfig = require ('../config/auth');
+const user = require('../models/userModel');
 const { signupSchema } = require('../validators/user')
 const { hashPassword } = require('../validators/user')
 

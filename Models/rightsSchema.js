@@ -26,6 +26,6 @@ const rightsSchema = new Schema({
 })
 
 
-const rights= mongoose.model('right', rightsSchema)
+const rights = mongoose.model('rights', rightsSchema)
 
 module.exports = rights;
