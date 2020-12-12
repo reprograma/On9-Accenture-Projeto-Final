@@ -30,8 +30,10 @@ function verificarSenha(senhaEntrada, senha) {
                   id,
                   nome,
                 },
-                token: jwt.sign({ id }, authConfig.secret, {
-                  expiresIn: authConfig.expiresIn,
+                //token: jwt.sign({ id }, authConfig.secret, {
+                token: jwt.sign({ id }, process.env.SECRET, {
+                  //expiresIn: authConfig.expiresIn,
+                  expiresIn: process.env.EXPIRES_IN,
                 }),
               });
             } catch (e) {
