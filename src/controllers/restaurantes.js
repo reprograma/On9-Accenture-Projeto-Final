@@ -51,7 +51,7 @@ const cadastroRestaurante = (req, res) => {
 }
 
 
-const adicionarComentario = (req, res, next) => {
+const adicionarComentario = (req, res) => {
     const { id } = req.params
     const { comentarios } = req.body
     Restaurante.findByIdAndUpdate(id, req.body)
