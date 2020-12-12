@@ -9,7 +9,7 @@ router.use(authMiddleware);
 
 router.get('/', clienteController.obterTodos);
 
-router.put('/:id', clienteController.atualizarCliente);
+router.put('/atualizar/:id', clienteController.atualizarCliente);
 
 router.delete('/:id', clienteController.deletarCliente);
 

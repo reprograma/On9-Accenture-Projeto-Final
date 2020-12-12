@@ -8,7 +8,7 @@ const obterAlugueis = async(req, res) => {
     Aluguel.find()
         .then((alugueis) => {
             if (alugueis == 0) {
-                res.status(404).json({ message: 'Não há aluguel' });
+                res.status(404).json({ mensagem: 'Não há aluguel' });
             }
             res.status(200).json(alugueis);
         })
@@ -24,7 +24,7 @@ const alugar = async(req, res) => {
 
     Objeto.findById(idObjeto).then(objetoEncontrado => {
         if (objetoEncontrado.isAlugado == true) {
-            return res.status(400).json({ message: 'Objeto ja esta alugado' })
+            return res.status(400).json({ mensagem: 'Objeto ja esta alugado' })
         }
         Cliente.findById(IdCliente).then(cliente => {
             cliente.objetosAlugados.push(objetoEncontrado._id)
@@ -37,7 +37,7 @@ const alugar = async(req, res) => {
                     }
 
                     Aluguel.create(objetoAlugado).then(() => {
-                        res.status(200).json({ message: 'Sucesso' })
+                        res.status(200).json({ mensagem: 'Sucesso' })
                     })
 
                 })
@@ -56,10 +56,10 @@ const devolver = async(req, res) => {
 
             Aluguel.findByIdAndRemove(id)
                 .then(() => {
-                    res.status(200).json({ message: 'Devolução realizada' })
+                    res.status(200).json({ mensagem: 'Devolução realizada' })
                 })
                 .catch((err) => {
-                    res.status(400).json(err, { message: 'Não foi possivel realizar a devolução' })
+                    res.status(400).json(err, { mensagem: 'Não foi possivel realizar a devolução' })
                 })
         })
         .catch((e) => {

@@ -54,13 +54,13 @@ const atualizarCliente = async(req, res, next) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        res.status(400).json({ message: 'id nao é valido' });
+        res.status(400).json({ mensagem: 'id nao é valido' });
         return;
     }
 
     Cliente.findByIdAndUpdate(id, req.body)
         .then(() => {
-            res.status(200).json({ message: ` ${req.params.id} foi atualizado.` });
+            res.status(200).json({ mensagem: ` ${req.params.id} foi atualizado.` });
         })
         .catch(err => next(err));
 
@@ -72,14 +72,14 @@ const deletarCliente = async(req, res, next) => {
     Cliente.findById(id)
         .then(async(cliente) => {
             if ((cliente.objetosAlugados).length > 0) {
-                return res.status(400).json({ message: 'Faça devolução dos objetos alugados para deletar conta' })
+                return res.status(400).json({ mensagem: 'Faça devolução dos objetos alugados para deletar conta' })
             }
             Cliente.findByIdAndRemove(id)
                 .then(() => {
-                    res.status(200).json({ message: 'Conta deletada !' })
+                    res.status(200).json({ mensagem: 'Conta deletada !' })
                 })
                 .catch((err) => {
-                    res.status(400).json(err, { message: 'Não foi possivel deletar conta' })
+                    res.status(400).json(err, { mensagem: 'Não foi possivel deletar conta' })
                 })
         })
         .catch(err => next(err))

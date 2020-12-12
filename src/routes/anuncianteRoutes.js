@@ -9,7 +9,7 @@ router.use(authMiddleware);
 
 router.get('/', anuncianteController.obterTodos);
 
-router.put('/:id', anuncianteController.atualizarAnunciante);
+router.put('/atualizar/:id', anuncianteController.atualizarAnunciante);
 
 router.delete('/:id', anuncianteController.deletarAnunciante);
 

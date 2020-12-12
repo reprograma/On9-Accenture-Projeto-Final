@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { signupAnuncianteSchema } = require('../validators/anunciante');
 const Anunciante = require('../model/Anunciante');
 const Objeto = require('../model/Objeto');
-const Aluguel = require('../model/Aluguel');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
@@ -25,7 +24,7 @@ const atualizarAnunciante = async(req, res, next) => {
 
     Anunciante.findByIdAndUpdate(id, req.body)
         .then(() => {
-            res.status(200).json({ message: ` ${req.params.id} foi atualizado.` });
+            res.status(200).json({ mensagem: ` ${req.params.id} foi atualizado.` });
         })
         .catch(err => next(err));
 
@@ -75,11 +74,11 @@ const deletarAnunciante = async(req, res, next) => {
                     Objeto.findById(objeto)
                         .then(async(obj) => {
                             if (obj.isAlugado == true) {
-                                return res.status(400).json({ message: 'Não é possivel remover conta com objetos alugados' })
+                                return res.status(400).json({ mensagem: 'Não é possivel remover conta com objetos alugados' })
                             }
                             await Objeto.findByIdAndRemove(obj)
                             await Anunciante.findByIdAndRemove(id)
-                            res.status(200).json({ message: 'Conta deletada !' })
+                            res.status(200).json({ mensagem: 'Conta deletada !' })
                         })
                         .catch((err) => {
                             res.status(400).json(err)
@@ -88,10 +87,10 @@ const deletarAnunciante = async(req, res, next) => {
             } else {
                 Anunciante.findByIdAndRemove(id)
                     .then(() => {
-                        res.status(200).json({ message: 'Conta deletada !' })
+                        res.status(200).json({ mensagem: 'Conta deletada !' })
                     })
                     .catch((err) => {
-                        res.status(400).json(err, { message: 'Não foi possivel deletar conta' })
+                        res.status(400).json(err, { mensagem: 'Não foi possivel deletar conta' })
                     })
             }
 

@@ -7,7 +7,7 @@ const obterTodos = async(req, res, next) => {
     Objeto.find()
         .then((objetos) => {
             if (objetos == 0) {
-                res.status(404).json({ message: 'Não há objetos cadastrados' });
+                res.status(404).json({ mensagem: 'Não há objetos cadastrados' });
             }
             res.status(200).json(objetos);
         })
@@ -20,7 +20,7 @@ const obterPorNome = async(req, res, next) => {
     Objeto.find({ nome: nome })
         .then(async existeObjeto => {
             if (existeObjeto == 0) {
-                res.status(404).json({ message: 'Este objeto não esta cadastrado' });
+                res.status(404).json({ mensagem: 'Este objeto não esta cadastrado' });
             }
             res.status(200).json(existeObjeto);
 
@@ -67,12 +67,12 @@ const atualizarObjeto = async(req, res, next) => {
     Objeto.findById(id)
         .then((objeto) => {
             if (objeto.isAlugado == true) {
-                return res.status(400).json({ message: 'Não é possivel atualizar objetos alugados' })
+                return res.status(400).json({ mensagem: 'Não é possivel atualizar objetos alugados' })
             }
 
             Objeto.findByIdAndUpdate(id, req.body)
                 .then(() => {
-                    res.status(200).json({ message: ' O objeto foi atualizado.' });
+                    res.status(200).json({ mensagem: ' O objeto foi atualizado.' });
                 })
                 .catch(err => next(err));
         })
@@ -85,15 +85,15 @@ const deletarPorId = async(req, res, next) => {
     Objeto.findById(id)
         .then(async(objeto) => {
             if (objeto.isAlugado == true) {
-                return res.status(400).json({ message: 'Não é possivel remover objetos alugados' })
+                return res.status(400).json({ mensagem: 'Não é possivel remover objetos alugados' })
             }
             await Anunciante.findOneAndUpdate({ _id: objeto.anuncianteId }, { $pull: { objetos: id } })
             Objeto.findByIdAndRemove(id)
                 .then(() => {
-                    res.status(200).json({ message: 'Objeto removido !' })
+                    res.status(200).json({ mensagem: 'Objeto removido !' })
                 })
                 .catch((err) => {
-                    res.status(400).json(err, { message: 'Não foi possivel remover' })
+                    res.status(400).json(err, { mensagem: 'Não foi possivel remover' })
                 })
         })
         .catch(err => next(err))
