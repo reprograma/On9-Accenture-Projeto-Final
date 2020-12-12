@@ -1,7 +1,7 @@
 const healthClinic = require('../models/HealthClinic.js');
 const mongoose = require('mongoose');
-const { validatingBorough, sameZipcode, sameTypeAndZipcode, boroughs } = require('../validators/healthClinic.js')
-const { searchingVaccines, searchingVaccineAndDose } = require('../validators/Vaccine.js');
+const { validatingBorough, boroughs } = require('../validators/healthClinic.js')
+const { searchingVaccines, searchingVaccineAndDose } = require('../validators/vaccine');
 
 
 

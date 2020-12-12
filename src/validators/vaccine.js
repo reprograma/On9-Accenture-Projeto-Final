@@ -7,7 +7,7 @@ const validatingRegister = async (vaccine, batch, dose) => {
 }
 
 const searchingVaccineAndDose = async (vaccine, dose) => {
-    const validatedVaccineDose = await Vaccine.find({ $and: [{ vaccine: { $in: vaccine } }, { dose: { $in: dose } }] });
+    const validatedVaccineDose = await Vaccine.find({ $and: [{ vaccine: vaccine }, { dose: dose }] });
     return validatedVaccineDose.length
 }
 const searchingVaccines = async (value) => {
