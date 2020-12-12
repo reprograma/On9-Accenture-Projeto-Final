@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-mongoose.connect(`${process.env.DATABASE}`,//"mongodb://localhost/Controle", 
+mongoose.connect("mongodb://localhost/Controle", //`${process.env.DATABASE}`,//
     {
         useNewUrlParser: true,
         useCreateIndex: true,

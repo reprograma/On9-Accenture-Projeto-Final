@@ -42,7 +42,7 @@ const cadastroProduto = async (request, response) => {
             if (produto){
                 response.status(400).json("Produto já cadastrado")
             }else {
-                novoProduto = new Estoque(produtoValidado)
+                novoProduto = new Estoque({produtoValidado})
                 novoProduto.save()
                 .then((res) => {
                     response.status(201).json(res);
@@ -65,7 +65,7 @@ const abastecerEstoque = async (request, response) => {
     const nomeProduto = produtoValidado.nomeProduto
             
     try {
-        let produto = await Estoque.findOne( {nomeProduto});
+        let produto = await Estoque.findOne({nomeProduto});
 
         produto.estoque = produto.estoque + checarEstoque
 
