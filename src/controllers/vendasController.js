@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Vendas = require("../models/Vendas");
 const Estoque = require("../models/Estoque");
 const Vendedor = require("../models/Vendedores")
-const vendaSchema = require("../validators/vendas")
+
 
 
 //const {vendaSchema} = require("../validators/vendaSchema")
