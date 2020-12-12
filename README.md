@@ -3,7 +3,8 @@
 ## byHer API
 Essa API tem o propósito de listar filmes dirigidos por mulheres, assim facilitando a busca dos mesmos e oferecendo uma plataforma para que diretoras cinematográficas iniciantes possam cadastrar seus filmes para ganhar mais visibilidade.
 
-
+## Link Heroku
+https://by-her.herokuapp.com/
 
 ##  Rotas
 ### GET: /
@@ -55,7 +56,7 @@ Se o filme se encaixar em mais de um gênero, adicionar array.
 
 
 
-### GET
+### GET/
 **GET BY GENRE - Para buscar filmes por gênero:**
 http://localhost:5000/movies/genre?genre=*gênero de preferência*
 *Exemplo:* http://localhost:5000/movies/genre?genre=Comedy

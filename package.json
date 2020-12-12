@@ -1,7 +1,7 @@
 {
   "name": "projeto-byher",
   "version": "1.0.0",
-  "description": "servidor para projeto final da reprograma",
+  "description": "projeto final da reprograma",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
