@@ -52,17 +52,24 @@ const cadastroRestaurante = (req, res) => {
 
 
 const adicionarComentario = (req, res) => {
+    console.log("chegou")
     const { id } = req.params
-    const { comentarios } = req.body
-    Restaurante.findByIdAndUpdate(id, { $set: { comentarios }})
-        //try {
-        // const comentar = new Restaurante.comentario({
-        // });
-        // comentar.push()
-        .then(() => {
-            res.status(201).json({ message: `comentario adicionado com sucesso` });
-        })
-        .catch(err => next(err));
+    console.log("batata")
+    const { avaliacao, nota } = req.body
+    console.log("batata01")
+    try {
+        const novoComentario = comentario([{
+            avaliacao,
+            nota
+        }])
+        novoComentario.push(Restaurante.comentarios)
+            .then(() => {
+                res.status(201).json({ message: `comentario adicionado com sucesso` });
+            })
+            .catch(err => next(err));
+    } catch (e) {
+        return res.status(500).json(e);
+    }
 }
 
 

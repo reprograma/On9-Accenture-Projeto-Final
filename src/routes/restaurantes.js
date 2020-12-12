@@ -20,7 +20,7 @@ router.get('/:id', restauranteController.restaurantePorId)
 // @route PATCH api/restaurantes
 // @desc adiciona comentários ao restaurante
 // @access Public
-router.patch('/:id', restauranteController.adicionarComentario)
+router.patch('/comentar/:id', restauranteController.adicionarComentario)
 
 
 
