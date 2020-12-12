@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-//@route GET api/index/
+//@route GET api/
 //@desc Mostra boas vindas a API
 //@acess Public
 router.get('/', function (request, response){

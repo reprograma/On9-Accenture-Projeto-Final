@@ -16,7 +16,7 @@ Os usuários que cadastram um gato, também terá acesso as informações de lar
 
 - Exibe informação de boas vindas e nome do projeto
 
-[http://localhost:5000/index](http://localhost:5000/index)
+[https://abrigue-um-miau.herokuapp.com/](https://abrigue-um-miau.herokuapp.com/)
 
 ## Rotas (Lar Temporário)
 
@@ -24,7 +24,7 @@ Os usuários que cadastram um gato, também terá acesso as informações de lar
 
 - Cadastro um novo lar temporário:
 
-[http://localhost:5000/home/new](http://localhost:5000/home/new)
+[https://abrigue-um-miau.herokuapp.com/home/new](https://abrigue-um-miau.herokuapp.com/home/new)
 
 Como é o body:
 
@@ -70,7 +70,7 @@ Resposta (400) status de erro
 
 - Insere no campo "favoriteCats" o ID de um gato favoritado através do ID do usuário que está oferecendo um lar:
 
-[http://localhost:5000/home/favorite/:id](http://localhost:5000/home/favorite/:id)
+[https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6](https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6)
 
 Como é o body:
 
@@ -100,23 +100,23 @@ Resposta (400) status erro:
 
 Estas rotas GET irão retornar as informações dos gatos, pois não é de interesse que um usuário que ofereça um lar tenha acesso a outro usuário ofertante:
 
-- Realiza busca de todos os gatos cadastrados:
+- Realiza busca de todos os gatos cadastrados que estão disponíveis:
 
-[http://localhost:5000/home/all](http://localhost:5000/home/all)
+[https://abrigue-um-miau.herokuapp.com/home/all](https://abrigue-um-miau.herokuapp.com/home/all)
 
 - Realiza busca de gatos por cidade através de query. Ex: São+Paulo:
 
-[http://localhost:5000/home/by-city?city=São+Paulo](http://localhost:5000/home/by-city?city=S%C3%A3o+Paulo)
+[https://abrigue-um-miau.herokuapp.com/home/by-city?city=São+Paulo](https://abrigue-um-miau.herokuapp.com/home/by-city?city=S%C3%A3o+Paulo)
 
 - Realiza busca de gatos por bairro através de query. Ex: Cachoeirinha :
 
-[http://localhost:5000/home/by-district?neighborhood=Cachoeirinha](http://localhost:5000/home/by-district?neighborhood=Cachoeirinha)
+[https://abrigue-um-miau.herokuapp.com/home/by-district?neighborhood=Cachoeirinha](https://abrigue-um-miau.herokuapp.com/home/by-district?neighborhood=Cachoeirinha)
 
 ### GET
 
 - Mostra ao usuário as informações dos gatos que foram favoritados por ele através de seu ID:
 
-[http://localhost:5000/home/favorites/:id](http://localhost:5000/home/favorites/:id)
+[https://abrigue-um-miau.herokuapp.com/home/favorites/5fd4e9acccaaa600245f98a6](https://abrigue-um-miau.herokuapp.com/home/favorites/5fd4e9acccaaa600245f98a6)
 
 Resposta (200) status sucesso:
 
@@ -151,7 +151,7 @@ Resposta (400) status erro:
 
 - Atualiza todo cadastro do usuário de lar temporário utilizando o ID:
 
-[http://localhost:5000/home/update/:id](http://localhost:5000/home/update/:id)
+[https://abrigue-um-miau.herokuapp.com/home/update/5fd282d87e6a950fd8d4e31e](https://abrigue-um-miau.herokuapp.com/home/update/5fd282d87e6a950fd8d4e31e)
 
 Como é o body:
 
@@ -188,7 +188,7 @@ Reposta (400) status de erro:
 
 - Atualiza apenas o campo de disponibilidade do lar temporário utilizando o ID:
 
-[http://localhost:5000/home/available/:id](http://localhost:5000/home/available/:id)
+[https://abrigue-um-miau.herokuapp.com/home/available/5fd2bc063269dd14e0dd2ede](https://abrigue-um-miau.herokuapp.com/home/available/5fd2bc063269dd14e0dd2ede)
 
 Como é o body:
 
@@ -218,7 +218,7 @@ Resposta (400) status de erro:
 
 - Exclui o cadastro do lar temporário utilizando o ID:
 
-[http://localhost:5000/home/delete/:id](http://localhost:5000/home/delete/:id)
+[https://abrigue-um-miau.herokuapp.com/home/delete/:id](https://abrigue-um-miau.herokuapp.com/home/delete/:id)
 
 ## Rotas (Gatos)
 
@@ -226,7 +226,7 @@ Resposta (400) status de erro:
 
 - Cadastra um novo gato contendo as informações dele(a) e também da pessoa que tem o conhecimento do felino:
 
-[http://localhost:5000/cat/newcat](http://localhost:5000/cat/newcat)
+[https://abrigue-um-miau.herokuapp.com/cat/new-cat](https://abrigue-um-miau.herokuapp.com/cat/new-cat)
 
 Como é o body:
 
@@ -276,21 +276,21 @@ Assim como as rotas do lar temporário, as rotas GET de usuários que cadastrar�
 
 - Busca todos os lares temporários disponíveis:
 
-[http://localhost:5000/cat/all-homes](http://localhost:5000/cat/all-homes)
+[https://abrigue-um-miau.herokuapp.com/cat/all-homes](https://abrigue-um-miau.herokuapp.com/cat/all-homes)
 
 - Busca todos os lares temporários por cidade através de query. Ex: São+Paulo:
 
-[http://localhost:5000/cat/by-city?city=São+Paulo](http://localhost:5000/cat/by-city?city=S%C3%A3o+Paulo)
+[https://abrigue-um-miau.herokuapp.com/cat/by-city?city=São+Paulo](https://abrigue-um-miau.herokuapp.com/cat/by-city?city=S%C3%A3o+Paulo)
 
-- Busca todos os lares temporários por bairro através de query. Ex: Lapa:
+- Busca todos os lares temporários por bairro através de query. Ex: Centro:
 
-[http://localhost:5000/cat/by-district?neighborhood=Santana](http://localhost:5000/cat/by-district?neighborhood=Santana)
+[https://abrigue-um-miau.herokuapp.com/cat/by-district?neighborhood=Centro](https://abrigue-um-miau.herokuapp.com/cat/by-district?neighborhood=Centro)
 
 ### PUT
 
 - Atualiza todo o cadastro do usuário que realizou o cadastro do felino utilizando o ID:
 
-[http://localhost:5000/cat/update/:id](http://localhost:5000/cat/update/:id)
+[https://abrigue-um-miau.herokuapp.com/cat/update-registration/5fd2a57aa29adc3bbc96de0a](https://abrigue-um-miau.herokuapp.com/cat/update-registration/5fd2a57aa29adc3bbc96de0a)
 
 Estrutura do body:
 
@@ -329,13 +329,13 @@ Resposta (400) status de erro:
 
 - Atualiza apenas o campo de disponibilidade do felino utilizando o ID:
 
-[http://localhost:5000/cat/updateavailable/:id](http://localhost:5000/cat/updateavailable/:id)
+[https://abrigue-um-miau.herokuapp.com/cat/update-available/5fd4fdaf2b810e00249de423](https://abrigue-um-miau.herokuapp.com/cat/update-available/5fd4fdaf2b810e00249de423)
 
 Estrutura do body:
 
 ```jsx
 {
-    "available": true
+    "available": false
 }
 ```
 
@@ -359,11 +359,11 @@ Resposta (400) status de erro:
 
 - Exclui o cadastro do usuário juntamente com as informações do gato utilizando ID:
 
-[http://localhost:5000/cat/delete/:id](http://localhost:5000/cat/delete/:id)
+[https://abrigue-um-miau.herokuapp.com/cat/delete/:id](https://abrigue-um-miau.herokuapp.com/cat/delete/:id)
 
 ## Considerações
 
-Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's.
+Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's ou abrindo issue's.
 
 ## Como faço para rodar este projeto?
 
@@ -371,4 +371,4 @@ Comunidade, este projeto está em fase inicial e em estará em constante mudanç
 - No terminal, use o comando npm install para baixar as dependências
 - Em seguida, use o comando npm start e o projeto irá rodar
 
-# Obrigada por chegar até aqui! 👩‍💻😺
+# Obrigada por chegarem até aqui! 👩‍💻😺
