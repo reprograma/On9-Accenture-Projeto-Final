@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 
@@ -12,6 +13,7 @@ const admin = require('./routes/admin')
 const login = require('./routes/login')
 
 const app = express()
+app.use(cors())
 
 mongoose.connect(`${process.env.DATABASE}`, {
     useNewUrlParser: true,
@@ -19,8 +21,6 @@ mongoose.connect(`${process.env.DATABASE}`, {
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log(err))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
