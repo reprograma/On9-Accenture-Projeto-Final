@@ -335,6 +335,7 @@ Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e de
 - Visual Studio Code;
 - Node.js;
 - Express.js;
+- dotenv;
 
 
 
@@ -342,6 +343,7 @@ Foram utilizadas para o desenvolvimento do projeto as seguintes tecnologias e de
 - Adicionar a opção de comentários nos resumos.
 - Adicionar a opção resumos favoritos para usuários.
 - Adicionar a filtragem por Tags.
+- Adicionar filtragem por título.
 
 
 Este projeto encontra-se em desenvolvimento e está aberto para pullrequests.
