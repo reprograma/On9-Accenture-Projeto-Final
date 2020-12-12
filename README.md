@@ -53,6 +53,8 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 Aqui nesta etapa, realizei um agrupamento.
 
+---
+
 ## Documentação de API (versão 1.0)
 
 ### Rotas
