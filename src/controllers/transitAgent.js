@@ -25,24 +25,24 @@ exports.getById = (req, res) => {
     .catch((err) => next(err));
 };
 
-exports.getMessageAmbulanceSent = (req, res, next) => {
-    const todayDate = () => new Date().toString();
-    if (todayDate == MessagesSend.DateSchema){
-      .then((Messages) => {
-        resp.status(200).json(Messages);
-      })
-      .catch((err) => next(err));
-    }
-  };
+//exports.getMessageAmbulanceSent = (req, res, next) => {
+ //   const todayDate = () => new Date().toString();
+    //if (todayDate == MessagesSend.DateSchema){
+ //     .then((Messages) => {
+ //       resp.status(200).json(Messages);
+//      })
+//      .catch((err) => next(err));
+//    }
+//  };
 
 exports.postCreateAgent = async (req, res, next) => {
   const {
     email,
-    password,
     transitAgentName,
+    password,
     transitAgentCPF,
     transitAgentlocation,
-    telephoneNumber,
+    telephoneNumberAgent
   } = req.body;
   const salt = bcrypt.genSaltSync(bcryptSalt);
   try {
@@ -50,11 +50,11 @@ exports.postCreateAgent = async (req, res, next) => {
 
     const newAgent = new TransitAgentUser({
       email,
-      hashPass,
       transitAgentName,
+      hashPass,
       transitAgentCPF,
       transitAgentlocation,
-      telephoneNumber,
+      telephoneNumberAgent
     });
     newAgent
       .save()
@@ -67,19 +67,4 @@ exports.postCreateAgent = async (req, res, next) => {
   }
 };
 
-exports.postCreateNewMessageAgent = async (messageSendAgent, transitAgentId) => {
-    const newMessage = new Messages ({
-        transitAgentId: MessagesSend.id,
-        transitAgentName: MessagesSend.transitAgentName,
-        transitAgentlocation: MessagesSend.transitAgentlocation,
-        telephoneNumberAgent: MessagesSend.telephoneNumberAgent,
-        readConfirmation: MessagesSend.readConfirmation
-        dateSendAgent: MessagesSend.DateSchema
-    })
-    try {
-        return await newMessage.save()
-    } catch (e) {
-        console.log(e)
-        throw new Error(e)
-    }
-}
+

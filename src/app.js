@@ -2,16 +2,20 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
+//mongoose.connect(`${process.env.DATABASE_URL}`, {
 mongoose.connect("mongodb://localhost/alertamb", {
   useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
   useUnifiedTopology: true,
 });
 
 //routes
 const index = require("./routes/index");
-const ambulances = requre("./routes/ambulance");
+const ambulances = require("./routes/ambulance");
 const agentTransits = require("./routes/transitAgent");
-const sessions = require("./routes/sessionsRoute");
+const messagesSend = require("./routes/message")
+const sessions = require("./routes/sessionRoute");
 
 app.use(express.json());
 
@@ -26,7 +30,8 @@ app.use(function (req, res, next) {
 
 app.use("/", index);
 app.use("/ambulances", ambulances);
-app.use("agents", agents);
+app.use("/message", messagesSend);
+app.use("/agents", agentTransits);
 app.use("/sessions", sessions);
 
 module.exports = app;
