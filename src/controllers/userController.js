@@ -14,20 +14,22 @@ const cadastrarUser = async(req, res, next) => {
         const validacaoUser = await userSchema.validate(req.body);
         
         const novoUser = new User(validacaoUser);
-
+        console.log("aqui")
         User.findOne({ email: validacaoUser.email })
             .then(async existeUser => {
+                console.log("aqui1")
                 if (existeUser) {
                     return res.status(400).json({
                         errors: ['Já existe uma conta com esse e-mail']
                     })
                 }
-
+        console.log("aqui2")
         const senhaEncriptada = await bcrypt.hashSync(senha, salt);
         novoUser.senha = senhaEncriptada;
-
+        console.log("aqui3")
                 novoUser.save()
                     .then((user) => {
+                        console.log("aqui4")
                         res.status(201).json({ mensagem: 'Cadastro realizado com sucesso' });
                     })
                     .catch(err => next(err))

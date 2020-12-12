@@ -5,6 +5,7 @@ const { promisify } = require('util');
 
 module.exports = async(req, res, next) => {
     const authHeader = req.headers.authorization;
+    console.log("middle")
     if (!authHeader) {
         return res.status(401).json({ error: 'Token não informado' });
     }
