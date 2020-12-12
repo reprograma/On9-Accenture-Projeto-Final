@@ -6,9 +6,11 @@ Essa API tem o propósito de listar filmes dirigidos por mulheres, assim facilit
 ## Link Heroku
 https://by-her.herokuapp.com/
 
+
 ##  Rotas
 ### GET: /
 **GET ALL - Para buscar todos os títulos de filmes cadastrados no Banco de Dados:**
+
 http://localhost:5000/movies
  - Se necessário, alterar a porta.
 
@@ -16,7 +18,9 @@ http://localhost:5000/movies
 
 ### POST: /cadastro
 **POST para adicionar filmes no Banco de Dados:**
+
 http://localhost:5000/movies/cadastro
+
 
 Body necessário para cadastrar seu filme:
 
@@ -31,15 +35,19 @@ Body necessário para cadastrar seu filme:
 "atLeastOneFemaleWriter":{ type:  Boolean, required:  true}
 }`
 
- - No campo **"nacionality"**, seguir o padrão: "Brazilian", "Mexican", "Korean", etc.
+ - No campo **"nacionality"**, seguir o padrão: 
+ "Brazilian", "Mexican", "Korean", etc.
 Se o filme tiver sido produzido em mais de um país, adicionar array.
+
 *Ex:* ["Canadian", "Korean"]
 
  - No campo **"genre"**, seguir o padrão: "Drama", "Romance", "Comedy", etc.
 Se o filme se encaixar em mais de um gênero, adicionar array.
+
 *Ex:* ["Horror", "Musical"]
 
  - No campo **"atLeastOneFemaleWriter"**, se o filme tiver sido escrito por pelo menos uma mulher, digitar: ***true***, se não, digitar: ***false***.
+
 
 *Exemplo:*
 
@@ -58,30 +66,40 @@ Se o filme se encaixar em mais de um gênero, adicionar array.
 
 ### GET/
 **GET BY GENRE - Para buscar filmes por gênero:**
+
 http://localhost:5000/movies/genre?genre=*gênero de preferência*
+
 *Exemplo:* http://localhost:5000/movies/genre?genre=Comedy
 
 ### GET
 **GET BY NACIONALITY - Para buscar filmes pela nacionalidade do mesmo:**
+
 http://localhost:5000/movies/nacionality?nacionality=*nacionalidade de preferência*
+
 *Exemplo:* http://localhost:5000/movies/nacionality?nacionality=Canadian
 
 
 ### GET
 **GET BY YEAR - Para buscar filmes pelo ano de lançamento:**
+
 http://localhost:5000/movies/year?year=*ano de preferência*
+
 *Exemplo:* http://localhost:5000/movies/year?year=2000
 
 ### PUT
 **UPDATE BY ID - Para atualizar filmes a partir do ID:**
+
 http://localhost:5000/movies/update/*id do filme que deseja atualizar*
+
 *Exemplo:* http://localhost:5000/movies/update/5fd3cdb4778177336853c4eb
 
  - O body necessário para atualizar o filme é o mesmo que usamos para cadastrar o mesmo. Só inserir sua atulização no(s) campo(s) desejado(s).
 
 ### DELETE
 **DELETE BY ID - Para deletar filmes a partir do ID:**
+
 http://localhost:5000/movies/*id do filme que deseja deletar*
+
 *Exemplo:* http://localhost:5000/movies/5fd391c61ae3e422585247ed
 
 ## Dependências
@@ -95,4 +113,5 @@ http://localhost:5000/movies/*id do filme que deseja deletar*
 
 ### Contato:
 Linkedin: https://www.linkedin.com/in/vivian-costa-721376200/
+
 email: vivianalessandra_@hotmail.com
