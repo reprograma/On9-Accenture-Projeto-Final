@@ -2,7 +2,7 @@ const { req, res } = require('express');
 const bcrypt = require('bcrypt');
 const Restaurante = require('../models/restaurantes');
 const Usuario = require('../models/usuarios');
-const { senhaHash } = require('../helpers/usuario'); 
+const { senhaHash } = require('../helpers/usuario');
 const mongoose = require('mongoose');
 
 const todosRestaurantes = (req, res) => {
@@ -17,7 +17,6 @@ const todosRestaurantes = (req, res) => {
 
 const restaurantePorId = (req, res) => {
     const { id } = req.params
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ message: 'o id especificado não é valido' })
     }
@@ -61,9 +60,9 @@ const adicionarComentario = (req, res, next) => {
         // });
         // comentar.push()
         .then(() => {
-        res.status(201).json({message: `comentario adicionado com sucesso`});
-    })
-    .catch(err => next(err));
+            res.status(201).json({ message: `comentario adicionado com sucesso` });
+        })
+        .catch(err => next(err));
 }
 
 
