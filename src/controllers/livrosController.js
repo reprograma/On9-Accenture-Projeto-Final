@@ -54,7 +54,7 @@ const getDoesntHasTrigger = (request, response) =>{
 }
 
 const getByAuthor = (request, response) =>{
-    const { author } = request.params 
+    const { author } = request.query 
 
     Book.find(author)
         .then((books)=>{
@@ -64,7 +64,7 @@ const getByAuthor = (request, response) =>{
 }
 
 const getByTitle = (request, response) =>{
-    const { title } = request.params 
+    const { title } = request.query 
 
     Book.find(title)
         .then((books)=>{
