@@ -8,7 +8,7 @@ const categoriaController = require("../controllers/categoria");
 @access Public 
 @endpoint http://localhost:porta/categorias/all
 **/
-router.get("/all", categoriaController.getAll);
+router.get("/", categoriaController.getAll);
 
 /**
 @route GET categorias/:id

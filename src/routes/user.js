@@ -8,7 +8,7 @@ const userController = require("../controllers/user");
 @access Public 
 @endpoint http://localhost:porta/users/all
 **/
-router.get("/all", userController.getAll);
+router.get("/", userController.getAll);
 
 /**
 @route POST usuários
