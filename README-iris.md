@@ -96,14 +96,15 @@ O body deve conter:
     }
 
 Resposta [200]:
-
-    "message": "{id} triggers have been updated"
-
+    {
+        "message": "{id} triggers have been updated"
+    }
 
 Resposta [400]:
 
-    "Não foi possível deletar o livro."
-
+    {
+        "message": "{id} cannot be updated because this book doesn't have triggers"
+    }
 
 ### DELETE
 
@@ -113,7 +114,7 @@ http://localhost:8080/alertaDeGatilho/:id
 
 Resposta [200]:
 
-    "Livro deletado com sucesso!"
+    "Book deleted!"
 
 Resposta [400]:
 

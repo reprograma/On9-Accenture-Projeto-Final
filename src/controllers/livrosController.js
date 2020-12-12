@@ -1,5 +1,6 @@
 const { response, request } = require("express")
 const mongoose = require('mongoose');
+const { validatingPost } = require('../helpers/helpers');
 const Book = require('../models/Livros');
 
 const createBook = (request, response)=> {
@@ -12,6 +13,10 @@ const createBook = (request, response)=> {
         triggers,
         synopsis,
       });
+
+      if (await validatingPost(title, author) > 0) {
+           return response.status(401).json({ message: `This book already exists in these database` }) 
+        }
 
     newBook.save()
         .then((res) => {
