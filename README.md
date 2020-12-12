@@ -95,7 +95,7 @@ sobre oportunidades internacionais, com mentores que já passaram pelo mesmo pro
 - Rota https://learn-and-share.herokuapp.com/mentor/visitedCountry?visitedCountry=EUA
 
 # GET por disponibilidade
-- Rota http://localhost:8080/mentor/available?available=true
+- Rota https://learn-and-share.herokuapp.com/mentor/available?available=true
 - Ao passar uma rota incorreta o retorno será uma mensagem de erro
 ```javascript
 {
@@ -109,15 +109,15 @@ sobre oportunidades internacionais, com mentores que já passaram pelo mesmo pro
 - Rota https://learn-and-share.herokuapp.com/mentor/edit/:id
 - Body necessário:
 ```javascript
-{
+    {
 	"email": "joao@gmail.com",
 	"password": "joao123456",
 	"mentorName": "João",
-  "visitedCountry": "Espanha",
-  "mentoringType": "Ensino médio",
-  "descripition": "Ensino como aplicar para oportunidades de ensino médio na Espanha.",
+  	"visitedCountry": "Espanha",
+  	"mentoringType": "Ensino médio",
+  	"descripition": "Ensino como aplicar para oportunidades de ensino médio na Espanha.",
 	"available": false
-}
+     }
 ```
 - Mensagem de sucesso retornada:
 ```javascript
@@ -172,14 +172,14 @@ Retorno:
 - Rota https://learn-and-share.herokuapp.com/mentored/register/:idMentor
 - Body necessário:
 ```javascript
-  {
-	"email": "fernando@gmail.com",
-	"password": "123456789",
-	"mentoredName": "Fernando",
-  "destinyCountry": "Espanha",
-  "mentoringType": "Ensino médio",
-	"concluded": false
-  }
+{
+   "email": "fernando@gmail.com",
+   "password": "123456789",
+   "mentoredName": "Fernando",
+   "destinyCountry": "Espanha",
+   "mentoringType": "Ensino médio",
+   concluded": false
+}
 ```
 - Retorno
 "Novo mentorado cadastrado com sucesso"
@@ -219,12 +219,12 @@ Retorno:
 - Body necessário:
 ```javascript
   {
-	"email": "luis@gmail.com",
-	"password": "123456789",
-	"mentoredName": "Luis Augusto",
+  "email": "luis@gmail.com",
+  "password": "123456789",
+  "mentoredName": "Luis Augusto",
   "destinyCountry": "EUA",
   "mentoringType": "Graduação",
-	"concluded": true
+  "concluded": true
   }
 ```
 - Mensagem de sucesso retornada:
@@ -257,7 +257,7 @@ Retorno:
 ```
 
 ## DELETE
-- Rota https://learn-and-share.herokuapp.com/mentor/:id
+- Rota https://learn-and-share.herokuapp.com/mentored/:id
 - Resultado:
 ```javascript
 {
