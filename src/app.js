@@ -37,7 +37,7 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.use('/index', index)
+app.use('/', index)
 app.use("/home", home)
 app.use("/cat", cat)
 
