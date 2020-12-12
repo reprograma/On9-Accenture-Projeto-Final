@@ -1,7 +1,8 @@
 const { req, res } = require('express')
 const mongoose = require('mongoose');
 const Estabelecimento = require('../models/estabelecimentoModels');
-const { estabelecimentoSchema } = require('../validators/estabelecimentoValidator')
+const { estabelecimentoSchema } = require('../validators/estabelecimentoValidator');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const obterEstabelecimento = async(req, res) => {
     Estabelecimento.find()
@@ -64,7 +65,7 @@ const obterEstabelecimentoPorNome = async(req, res) => {
 }
 
 const cadastrarEstabelecimento = async(req, res, next) => {
-    const { nome, endereco, cidade, tipo, dataInclusao } = req.body;
+    const { nome, endereco, cidade, tipo } = req.body;
     
     try {
         const validacaoEstabelecimento = await estabelecimentoSchema.validate(req.body);
@@ -92,25 +93,36 @@ const atualizarCadastroEstabelecimento = async(req, res) =>{
     const { id } = req.params 
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({ message: 'O estabelecimento não existe' });
+        res.status(400).json({ message: 'Id inválido' });
         return;
     }
-    
+
+    Estabelecimento.findById(new ObjectId(id))
+    .then(async existeEstabelecimento => {
+        console.log(existeEstabelecimento)
+        if (!existeEstabelecimento) {
+            return res.status(400).json({
+                errors: ['O estabelecimento não está cadastrado']
+            }) 
+        }
+    })
+    .catch((err) => {
+        res.status(400).json(err);
+    });
+
     Estabelecimento.findByIdAndUpdate(id, req.body)
         .then(() => {
-            response.status(200).json({ message: ` ${request.params.id} atualizado com sucesso.` });
+            res.status(200).json({ message: ` ${req.params.id} foi atualizado.` });
         })
-        .catch((err) => {
-            response.json(err);
-        });
+        .catch(err => next(err));
 }
 
 const deletarEstabelecimento = async(req, res) =>{
-    const { id } = request.params
+    const { id } = req.params
     
     Estabelecimento.findByIdAndDelete(id)
         .then(() => {
-            response.status(200).json('Estabelecimento removido da base');
+            res.status(200).json('Estabelecimento removido da base');
         })
         .catch((err) => {
             throw new Error(err);

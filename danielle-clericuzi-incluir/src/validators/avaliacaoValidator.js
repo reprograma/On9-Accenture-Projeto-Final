@@ -24,6 +24,5 @@ exports.avaliacaoSchema = yup.object().shape({
     tradutorLibras: yup.boolean().required('É preciso avaliar este campo'),
     rampa: yup.boolean().required('É preciso avaliar este campo'),
     locomocaoInterna: yup.number().required('É preciso avaliar este campo'),
-    avaliacaoGeral: yup.number().required('É preciso avaliar este campo'),
-    dataInclusao: yup.date().required('É preciso avaliar este campo')
+    avaliacaoGeral: yup.number().required('É preciso avaliar este campo')
   }).required('Esse objeto não pode ser vazio');

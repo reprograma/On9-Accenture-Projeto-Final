@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const estabelecimentoController = require('../controllers/estabelecimentoController');
+const authMiddleware = require('../middlewares/autenticacao');
 
 /**
 @route GET estabelecimento
@@ -33,6 +34,8 @@ router.get('/tipo', estabelecimentoController.obterEstabelecimentoPorTipo);
 @endpoint http://localhost:porta/estabelecimentos/nome
 **/
 router.get('/nome', estabelecimentoController.obterEstabelecimentoPorNome);
+
+router.use(authMiddleware);
 
 /**
 @route POST estabelecimento/cadastro

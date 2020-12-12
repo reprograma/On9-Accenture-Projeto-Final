@@ -5,15 +5,14 @@ const User = require('../models/userModels');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
-
 const cadastrarUser = async(req, res, next) => {
-    console.log("Opaaaaa")
-    const { nome, sobrenome, nascimento, endereco, email, senha } = req.body;
+   
+    const { nome, sobrenome, endereco, nascimento, email, senha } = req.body;
     const salt = bcrypt.genSaltSync(bcryptSalt);
 
     try {
-        const validacaoUser = await suserSchema.validate(req.body);
-
+        const validacaoUser = await userSchema.validate(req.body);
+        
         const novoUser = new User(validacaoUser);
 
         User.findOne({ email: validacaoUser.email })
@@ -24,8 +23,9 @@ const cadastrarUser = async(req, res, next) => {
                     })
                 }
 
-                const senhaEncriptada = await bcrypt.hashSync(senha, salt);
-                novoUser.senha = senhaEncriptada;
+        const senhaEncriptada = await bcrypt.hashSync(senha, salt);
+        novoUser.senha = senhaEncriptada;
+
                 novoUser.save()
                     .then((user) => {
                         res.status(201).json({ mensagem: 'Cadastro realizado com sucesso' });
@@ -40,11 +40,13 @@ const cadastrarUser = async(req, res, next) => {
     }
 }
 
+
 const deletarUser = async(req, res) =>{
-    const { id } = request.params
-     Avaliacao.findByIdAndDelete(id)
+    const { id } = req.params
+    console.log(id)
+     User.findByIdAndDelete(id)
          .then(() => {
-             response.status(200).json('Cadastro removido com sucesso');
+             res.status(200).json('Cadastro removido com sucesso');
          })
          .catch((err) => {
              throw new Error(err);
@@ -53,5 +55,5 @@ const deletarUser = async(req, res) =>{
 
 module.exports = {
     cadastrarUser,
-    deletarUser
+    deletarUser,
 }
