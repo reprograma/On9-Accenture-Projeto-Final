@@ -2,10 +2,11 @@ const mongoose = require('mongoose')
 const User = require('../models/User')
 const { signupUserSchema } = require('../validators/user')
 const bcrypt = require('bcrypt')
+const { response } = require('../app')
 const bcryptSalt = 8
 
 exports.getAll = (req, res, next) => {
-  User.find()
+  User.find({}, { "name": 1, "email": 1, "city": 1, "type": 1, "description": 1 })
     .then((user) => {
       res.status(200).json(user)
     })
@@ -18,10 +19,9 @@ exports.getByCity = (req, res) => {
       User.find({city: city})
         .then((user) => {
             res.status(200).json(user)
-        }) 
-        .catch((error) => {
+        }) .catch((error) => {
               res.status(400).json({ error: 'City not found' })
-        })
+            })
 }
   
 exports.getByGameType = (req, res) => {
@@ -30,8 +30,7 @@ exports.getByGameType = (req, res) => {
    User.find({type: type})
         .then((user) => {
             res.status(200).json(user)
-        }) 
-        .catch((error) => {
+        }) .catch((error) => {
             res.status(400).json({ error: 'Type not found' })
         })
 }
@@ -49,7 +48,7 @@ exports.signup = async (req, res) => {
       .then(async (existingUser) => {
         if (existingUser) {
           return res.status(400).json({
-            error: [`User already exists`]
+            error: [`Email already exists`]
           })
         }
 
@@ -70,6 +69,36 @@ exports.signup = async (req, res) => {
   }
 }
 
+exports.favoriteUser = async (req, res, next) => {
+    const {id} = req.params; //pega o id do usuario que QUER favoritar
+    const { favoriteUser } = req.body // passo o id do user que VOU favoritar
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json({ message: `The specified ID is not valid.` })
+            return
+    }
+    User.findByIdAndUpdate(id, { $push: { favoriteUser } })
+        .then(() => {
+            res.status(200).json({ message: `You favored a geek` })
+            console.log(favoriteUser)
+        })
+        .catch((error) => {
+            res.status(400).json({ error: `Unable to favor a geek` })
+        })
+}
+
+
+
+exports.getById = (req, res, next) => {
+    const {id}= req.params
+    User.findById(id, { "name": 1, "email": 1, "city": 1, "type": 1, "description": 1 })
+      .then((user) => {
+        res.status(200).json(user);
+    })
+    .catch(err => next(err));
+}
+
+// ----------------- protect routes ----------------------
 exports.updateType = (req, res) => {
   const { id } = req.params
   const { type } = req.body
@@ -81,7 +110,7 @@ exports.updateType = (req, res) => {
   User.findByIdAndUpdate(id, { $set: { type } })
     .then(() => {
       res.status(200).json({
-        message: `The user game type of id: ${req.params.id} has been updated successfully.`
+        message: `The user's game type of id: ${req.params.id} has been updated successfully.`
       })
     })
     .catch((err) => {
@@ -106,16 +135,52 @@ exports.updateDescription = (req, res) => {
       .catch((err) => {
         res.json(err)
       })
-  }
+}
+
+exports.updateCity = (req, res) => {
+    const { city } = req.body
+    const { id } = req.params
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: `The specified ID is not valid.` })
+        return
+    }
+    User.findByIdAndUpdate(id, { $set: { city } })
+        .then(() => {
+            res.status(200).json({
+            message: `The user's city of id: ${req.params.id} has been updated successfully.`
+            })
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+}
 
 exports.deleteUser = (req, res) => {
   const { id } = req.params
 
   User.findByIdAndDelete(id)
     .then(() => {
-      res.status(200).json({ message: `User successfully deleted.` })
+      res.status(200).json({ message: `User successfully deleted` })
     })
     .catch((err) => {
       throw new Error(err)
     })
+}
+
+exports.getFavoriteUser = (req, res) => {
+    const {id} = req.params
+    User.findById(id).populate({ path: 'favoriteUser', select: 'name email city type description'})
+        .then((user) => { 
+            const { id, favoriteUser } = user
+            res.status(200).json({
+                user: {
+                    id,
+                },
+                favoriteUser 
+            })
+        })
+        .catch((error) => {
+            res.status(400).json({ error: `No favorite user found`})
+        })
 }

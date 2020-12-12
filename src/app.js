@@ -35,6 +35,6 @@ app.use(function(req, res, next) {
 })
 
 app.use("/findyourgeek", users)
-app.use("/findyourgeek/login", login)
+app.use("/fyg", login)
 
 module.exports = app
