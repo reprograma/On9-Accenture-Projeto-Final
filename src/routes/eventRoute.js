@@ -16,8 +16,6 @@ router.get('/', eventController.getAll)
 router.get('/open', eventController.getByApply)
 
 
-router.use(authMiddleware)
-
 
 //@router POST /events/create
 //@desc Cria um novo eventos
@@ -33,6 +31,8 @@ router.put('/edit/:id', eventController.updateEvent)
 //@desc Encerra as inscrições de um evento
 //@access privado
 router.patch('/open/:id', eventController.closeApllies)
+
+router.use(authMiddleware)
 
 //@router DELETE /events/:id
 //@desc Deleta um evento

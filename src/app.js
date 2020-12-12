@@ -1,22 +1,31 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
-const mongoose = require('mongoose')
-mongoose.connect(`${process.env.DATABASE}`,
+
+mongoose.connect(process.env.DATABASE_URL,
 {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
     useFindAndModify: true,
-})
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log('mongoDB conectado')
+    })
+    .catch((error) => {
+        console.log('nao foi possivel conectar ao mongo')
+    })
+
+
 
 //rotas
 const index = require('./routes/index')
 const eventRoute = require('./routes/eventRoute')
-const userController = require('./controllers/userController')
+//const userController = require('./controllers/userController')
 const userRoute = require('./routes/userRoute')
 const sessionRoute = require('./routes/sessionRoute')
 
