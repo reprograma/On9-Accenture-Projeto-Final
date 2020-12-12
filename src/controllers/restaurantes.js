@@ -29,6 +29,18 @@ const restaurantePorId = (req, res) => {
         })
 }
 
+const adicionarComentario = (req, res, next) => {
+    const { id } = req.params
+    const { comentarios } = req.body
+    Restaurante.findByIdAndUpdate(id, { $push: {comentarios: comentarios} })
+    //{$set: {"items.$.name": "yourValue","items.$.value": "yourvalue"}})
+        .then(() => {
+            res.status(201).json({ message: `comentario adicionado com sucesso` });
+        })
+        .catch(err => next(err));
+
+}
+
 const cadastroRestaurante = (req, res) => {
     const { nome, restaurante, especialidades, rua } = req.body
     try {
@@ -49,20 +61,6 @@ const cadastroRestaurante = (req, res) => {
         return res.status(401).json({ error: 'erro' });
     }
 }
-
-
-const adicionarComentario = (req, res, next) => {
-    const { id } = req.params
-    const { comentarios } = req.body
-    Restaurante.findByIdAndUpdate(id, { $push: {comentarios: comentarios} })
-    //{$set: {"items.$.name": "yourValue","items.$.value": "yourvalue"}})
-        .then(() => {
-            res.status(201).json({ message: `comentario adicionado com sucesso` });
-        })
-        .catch(err => next(err));
-
-}
-
 
 module.exports = {
     todosRestaurantes,

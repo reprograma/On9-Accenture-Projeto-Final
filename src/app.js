@@ -13,6 +13,7 @@ mongoose.connect(`${process.env.dataBaseUrl}`,
 
 const restautentes = require('./routes/restaurantes')
 const usuarios = require('./routes/usuarios')
+const sessions = require('./routes/sessionRouter')
 
 app.use(express.json())
 
@@ -27,5 +28,6 @@ app.use(function (req, res, next) {
 
 app.use("/restaurantes", restautentes)
 app.use("/usuarios", usuarios)
+app.use("/token", sessions )
 
 module.exports = app
