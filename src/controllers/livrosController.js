@@ -91,7 +91,7 @@ const updateTriggers = (request, response) =>{
     Book.findById(id)
         .then((books) =>{
             if (books.hasTrigger == true) {
-                Book.findByIdAndUpdate(id, {$set: { triggers: triggers }})
+                Book.findByIdAndUpdate(id, {$set: { triggers: [triggers] }})
                     .then((books)  =>{
                         response.status(200).json({ message: `${request.params.id} triggers have been updated`});
             })
