@@ -2,7 +2,8 @@ const { req, res } = require('express');
 const bcrypt = require('bcrypt');
 const Restaurante = require('../models/restaurantes');
 const Usuario = require('../models/usuarios');
-const { senhaHash } = require('../helpers/usuario')
+const { senhaHash } = require('../helpers/usuario'); 
+const mongoose = require('mongoose');
 
 const todosRestaurantes = (req, res) => {
     Restaurante.find()
