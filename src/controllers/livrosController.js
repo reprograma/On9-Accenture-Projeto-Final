@@ -56,7 +56,7 @@ const getDoesntHasTrigger = (request, response) =>{
 const getByAuthor = (request, response) =>{
     const { author } = request.query 
 
-    Book.find(author)
+    Book.find({author:author})
         .then((books)=>{
             response.status(200).json(books);
         })
@@ -66,7 +66,7 @@ const getByAuthor = (request, response) =>{
 const getByTitle = (request, response) =>{
     const { title } = request.query 
 
-    Book.find(title)
+    Book.find({title:title})
         .then((books)=>{
             response.status(200).json(books);
         })
@@ -76,7 +76,7 @@ const getByTitle = (request, response) =>{
 const getByTrigger = (request, response) =>{
     const { triggers } = request.query 
 
-    Book.find(triggers)
+    Book.find({triggers: triggers})
         .then((books)=>{
             response.status(200).json(books);
         })
