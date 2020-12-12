@@ -1,18 +1,48 @@
 # Turma On9 (Accenture) - Projeto Final
 
-Eis que se finda nosso curso, e agora queremos demonstrar nosso aprendizado em projeto prático.
+## Prisma Educação Financeira
 
-## Primeira Entrega - 05/12
+**Prisma** recebe uma iluminação e dissipa em várias outras cores. Assim como um prisma que reflete algo, o projeto possui o objetivo de democratizar o conhecimento acerca da educação financeira, e empoderar a sociedade, para que possam disseminar o aprendizado e ajudar a instruir os outros ao seu redor. Vem com a **Prisma Educação Financeira**! Tome as rédeas da sua vida financeira, sem conflito de interesse e que pode lhe proporcionar mais rentabilidade.
 
-* Descritivo do projeto
-* 30% da codificação
+---
 
-É importante que o projeto esteja numa pasta e não solto na raiz da branch. Além disso, sigam a seguinte estrutura para o nome:
-_nome-sobrenome-nome-do-projeto_
+## Índice
 
-## Segunda Entrega - 12/12
+- Formulário
+- Análise das Respostas
+- Matriz CSD
+- Card Sorting
+- Tecnologias Utilizadas
+- Rotas
 
-* 100% da codificação
-* Link do projeto publicado (o link da lista compartilhada será divulgado na semana 18)
+---
 
-## Apresentação do projeto - 13/12
+## Contexto
+
+Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar mediante a realização de um projeto. Após a validação que será explicada aqui, defini que abordaria sobre Educação Financeira. Iniciei uma pesquisa no padrão Double-Diamond, com realização de protótipo e etapa final de codificação.
+
+---
+
+## Formulário de Perguntas
+
+![imagem com as perguntas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Perguntas_Formulario.PNG)
+
+---
+
+## Análise das respostas do formulário
+
+![imagem com as respostas do formulário](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Respostas_Formulario.PNG)
+
+---
+
+## Matriz CSD
+
+![imagem com a Matriz CSD](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Matriz_CSD.PNG)
+
+---
+
+## Card Sorting
+
+![imagem do card sorting](https://github.com/Fabicaneyu/On9-Accenture-Projeto-Final/blob/a96bab003cc1fa1a33293d427363c479cfe139a7/fabiola-canedo-prisma-educa%C3%A7%C3%A3o-financeira/imgs/Card_Sorting.PNG)
+
+---
