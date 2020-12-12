@@ -3,9 +3,12 @@ const app = express();
 
 const mentorRouter = require("./routes/mentorRoutes");
 const mentoredRouter = require("./routes/mentoredRoutes");
+const dotenv = require("dotenv");
+
+dotenv.config()
 
 const mongoose = require("mongoose");
-mongoose.connect(`${process.env.DATABASE_ULR}`, {
+mongoose.connect(`${process.env.DATABASE}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
