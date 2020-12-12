@@ -1,18 +1,42 @@
-# Turma On9 (Accenture) - Projeto Final
+# Come on woman
 
-Eis que se finda nosso curso, e agora queremos demonstrar nosso aprendizado em projeto prático.
+## Descrição
 
-## Primeira Entrega - 05/12
+- Backend para cadastro de eventos.
 
-* Descritivo do projeto
-* 30% da codificação
+## Pré Requisitos
 
-É importante que o projeto esteja numa pasta e não solto na raiz da branch. Além disso, sigam a seguinte estrutura para o nome:
-_nome-sobrenome-nome-do-projeto_
+- [Node](https://nodejs.org/en/)
+- [Postman](https://www.postman.com/downloads/) [For tests].
 
-## Segunda Entrega - 12/12
+## Getting started
 
-* 100% da codificação
-* Link do projeto publicado (o link da lista compartilhada será divulgado na semana 18)
+Faça download do projeto com o seguinte comando.
 
-## Apresentação do projeto - 13/12
+```
+git clone https://github.com/deniseevelin/comeonwoman.git
+```
+
+Em seguida, instale as dependencias do projeto com o comando a seguir.
+
+```
+npm install
+```
+
+Finalmente, execute o camando a seguir para executar a aplicação.
+
+```
+npm start
+```
+
+## Postman Collection
+
+- As coleções do postman para teste das apis estão no link a seguir:
+
+```
+https://www.getpostman.com/collections/6a598e3f35b40a2fc3a6
+```
+
+## Heroku URL
+
+- https://comeonwoman.herokuapp.com

@@ -1,8 +1,7 @@
 [
     {
-        "eventId": 1,
         "title": "Reprograma",
-        "date": "ccccccc",
+        "date": "10/01/2021",
         "description": "kkkkkkk",
         "category": "Curso",
         "tags":["curso", "backend", "programacao"]
