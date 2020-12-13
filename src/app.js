@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
 
-
 app.use(express.json())
 
 mongoose.connect(`${process.env.DATABASE}`, 
@@ -22,8 +21,6 @@ const hostingRoutes = require("./routes/hostingRoutes")
 const userRoutes = require("./routes/userRoutes")
 const authUserRoutes = require("./routes/authUserRoutes")
 
-
-
 app.use('/api/auth', authUserRoutes)
 app.use('/api/hosting', hostingRoutes);
 app.use('/api/user', userRoutes);
@@ -31,7 +28,7 @@ app.use('/api/user', userRoutes);
 
 
 app.get("/", (request, response) => {
-    response.send("Bem-vindo ao Viajante Sobre Rodas!")
+    response.send("Bem-vindo(a) ao Viajante Sobre Rodas!")
 })
 
 module.exports = app
