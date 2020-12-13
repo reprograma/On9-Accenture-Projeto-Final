@@ -1,13 +1,13 @@
 const express = require("express")
-const app = express()
-
 const users = require("./routes/usersRoute")
+const login = require('./routes/sessionRoute')
+const app = express()
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv')
 dotenv.config()
 
-mongoose.connect(process.env.DATABASE,
+mongoose.connect(`${process.env.DATABASE}`,
     {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -25,7 +25,6 @@ mongoose.connect(process.env.DATABASE,
 app.use(express.json());
 
 
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header(
@@ -36,5 +35,6 @@ app.use(function(req, res, next) {
 })
 
 app.use("/findyourgeek", users)
+app.use("/fyg", login)
 
 module.exports = app

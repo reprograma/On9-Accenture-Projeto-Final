@@ -1,15 +1,16 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const { Schema } = mongoose
+
+const userSchema = new Schema ({
   name: {type: String, required: true },
-  email: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
-  city: { type: String, required: true },
-  type: { type: String},
-  description: { type: String}
-}
-  //{ timestamps: true }
-  )
+  email: {type: String, required: true},
+  password: {type: String, required: true},
+  city: {type: String, required: true},
+  type: {type: String, required: true},
+  description: {type: String, required: true},
+  favoriteUser: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
+}, {timestamps: true})
 
 const User = mongoose.model('User', userSchema)
 
