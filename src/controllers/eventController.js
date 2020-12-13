@@ -32,7 +32,7 @@ const createEvent = (req, res, next) =>{
     })
     newEvent.save()
         .then((newEvent) => {
-            res.status(201).json(newEvent)
+            res.status(201).json({ message: 'Event created successfully'})
         })
         .catch(err => next(err))
 }
@@ -72,7 +72,7 @@ const deleteEvent = (req, res, next) =>{
 
     Event.findByIdAndDelete(id)
         .then(() => {
-            res.status(200).json('Evento cancelado')
+            res.status(200).json('Evento canceled')
         })
         .catch((err) => {
             throw new Error(err)

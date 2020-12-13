@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const eventController = require('../controllers/eventController')
-const authMiddleware = require('../middlewares/auth')
+//const authMiddleware = require('../middlewares/auth')
 
 //@router GET /events
 //@desc Busca todos eventos
@@ -39,7 +39,7 @@ router.patch('/open/:id', eventController.closeApllies)
 //@access privado
 router.delete('/:id', eventController.deleteEvent )
 
-router.use(authMiddleware)
+//router.use(authMiddleware)
 
 module.exports = router
 
