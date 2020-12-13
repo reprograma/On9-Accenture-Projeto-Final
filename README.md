@@ -31,9 +31,17 @@ Negócio:
 * Express.js
 * Nodemon
 * mongoDB
-* JavaScript
 * Postman
 * MVC
+
+## Melhorias futuras
+* No POST messagens retornar sem os campos de senha.
+* Adicionar segurança para que apenas os usuários com sessão validada tenha acesso aos dados que consta na API.
+* Adicionar PACTH para atualizar os usuários e mensagens.
+* Adicionar DELETE para excluir usuários e mensagens que não trabalham mais na área ou outro motivo que necessite excluir o usuário ou a mensagem.
+* Adicionar GET para retornar apenas as mensagens por data atual e horário, por exemplo: data de hoje ou hora da manhã.
+* Usar o yup para solicitar os campos requeridos em todos os usuários em mensagem e definir a quantidade mínima e máxima de cada campo.
+* Adicionar as melhorias relacionado aos feedbacks da apresentação do projeto ou dos testes realizados.
 
 ## Rotas
 GET visualizar todas as mensagens
@@ -48,21 +56,11 @@ http://localhost:3001/ambulances/
 GET visualizar a ambulância por id
 http://localhost:3001/ambulances/5fd5d1e4229c5d39accc7330
 
+GET visualizar todos os agentes criados
+https://alert-ambulance.herokuapp.com/agents/
 
-GET
-~~~JavaScript
-
-~~~
-
-GET
-~~~JavaScript
-
-~~~
-
-GET
-~~~JavaScript
-
-~~~
+GET visualizar o agente por meio do id
+http://localhost:3001/agents/5fd5a153f4a8214eacba5858
 
 POST Transit Agent
 https://alert-ambulance.herokuapp.com/agents/create
