@@ -11,6 +11,16 @@ exports.get = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+exports.getById = (req, res) => {
+    const id = req.params.id;
+    MessageSend
+      .findById(id)
+      .then((messages) => {
+        res.status(200).json(messages);
+      })
+      .catch((err) => next(err));
+  };
+
 exports.postNewMessage = async (req, res, next) => {
   let { id } = req.body;
   const userAmbulance = await AmbulancesUser.findById(

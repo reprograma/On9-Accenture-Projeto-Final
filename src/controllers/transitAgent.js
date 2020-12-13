@@ -17,7 +17,7 @@ exports.get = (req, res, next) => {
 
 exports.getById = (req, res) => {
   const id = req.params.id;
-  transitAgents
+  TransitAgentUser
     .findById(id)
     .then((transitAgent) => {
       res.status(200).json(transitAgent);
