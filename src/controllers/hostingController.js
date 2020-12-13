@@ -2,42 +2,37 @@ const express = require("express");
 const Hosting = require("../models/hosting");
 const { request, response } = require("express");
 
-/*Mostra todas as hospedagens*/
 const allHostings = (request, response) => {
     Hosting.find()
         .then((list) => response.status(200).json(list))
         .catch((err) => response.status(400));
 };
 
-/*Mostra todas as hospedagens por estado*/
-const getByCity = async (request, response) => {
+const getByCity = (request, response) => {
     let { city } = request.params;
     Hosting.find({ city: city })
-    .then((hostings) =>{
-        if(hostings.length > 0) { 
-            return response.status(200).json({ 
-                message: "Essas são as hospedagens que possuem acessbilidade nessa cidade!", 
-                hostings})
-        }else {
-            return response.status(204).json({
-                message: "Infelizmente, ainda não há hospedagens cadastradas nessa cidade!"
-            })
-        }
-        
-    }).catch((err) => response.status(500))
+        .then((hostings) => {
+            if (hostings.length > 0) {
+                return response.status(200).json({
+                    message: "Essas são as hospedagens que possuem acessbilidade nessa cidade!",
+                    hostings
+                })
+            } else {
+                return response.status(204).json({
+                    message: "Infelizmente, ainda não há hospedagens cadastradas nessa cidade!"
+                })
+            }
 
+        }).catch((err) => response.status(500))
 };
 
-/*Mostra todas as hospedagens por cidade*/
-const getByState = async (request, response) => {
+const getByState = (request, response) => {
     let { state } = request.params
     Hosting.find({ state: state })
         .then((hostings) => { response.status(200).json(hostings) })
         .catch((error) => response.status(500).send({ error }))
-
 };
 
-/*Cria nova hospedagem*/
 const createHosting = async (request, response) => {
     let { name, state, city, phone, accessibility, address, site } = request.body;
 
@@ -49,7 +44,6 @@ const createHosting = async (request, response) => {
     }
 };
 
-/*Atualiza hospedagem*/
 const updateHosting = (request, response) => {
     const { id } = request.params;
     let { name, state, city, phone, accessibility, address, site } = request.body;
@@ -59,16 +53,12 @@ const updateHosting = (request, response) => {
         .catch(() => response.status(500).json(err))
 };
 
-/*Deleta hospedagem*/
 const deleteHosting = (request, response) => {
     const { id } = request.query;
 
     Hosting.deleteOne(id)
         .then(() => response.status(204).json({ message: "Hospedagem deletada com sucesso!" }))
         .catch(() => response.status(500).json(err))
-
-
-    //response.status(204).json({ mensagem: "Postagem deletada com sucesso! :D" });
 };
 
 module.exports = {
