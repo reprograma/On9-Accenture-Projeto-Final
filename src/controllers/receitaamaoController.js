@@ -61,10 +61,6 @@ const getByTypeFood = (request,response) => {
 }
 
 const getByChoseRecipe = (request, response) => {
-    //if({receitaSelecionada == true}) {
-        //response.status(400).json({ message: "Não existe nenhuma receita selecionada" })
-        //return;
-    //} else {
         Recipe.find ({receitaSelecionada: true })
               .then((recipes) => {
                  response.status(200).json(recipes)
@@ -72,8 +68,7 @@ const getByChoseRecipe = (request, response) => {
               .catch(err => {
                   response.status(400).json({ message: "erro"})
               })
-    //}      
-}
+}      
 
 const getByNoChoseRecipe = (request, response) => {
     Recipe.find ({receitaSelecionada: false })
@@ -86,8 +81,7 @@ const getByNoChoseRecipe = (request, response) => {
 }
 
 
-const getBySortRecipe = (request, response) => {
-    
+const getBySortRecipe = (request, response) => {   
     Recipe.find({}).sort({"nomeReceita": 1})        
           .then((recipes) => {
              response.status(200).json(recipes);
@@ -110,26 +104,27 @@ const getByQuickList = (request, response) =>{
 
 }
 
+const getByShoppingList = (request, response) =>{
+    Recipe.find({receitaSelecionada: true}, {"ingredientes": 1, "_id":0}).sort({"ingredientes": 1})
+    .then((recipes) => {
+        response.status(200).json(recipes);
+   })
+     .catch(err => {
+         response.status(400).json({ message: "erro" })
+   })
+
+}
 
 
 
-const createRecipe = (request, response) => {
+
+const createRecipe = async (request, response) => {
     let { nomeReceita, ingredientePrincipal, ingredientes, preparo, observacoes,tipoReceita,receitaSelecionada } = request.body
-    
-    let newName = [];
-    let nameRepeat = false;
-
-    for (let i = 0; i < nomeReceita.length; i ++) {
-        if(!newName.includes(nomeReceita)){
-         newName.push(nomeReceita)  
-        } else {
-            nameRepeat = true;
-        }    
-    };
-       // if(nameRepeat == nomeReceita) {
-            //response.status(400).json({message: "Não se pode cadastrar duas receitas iguais!"});
-        //return;
-        //}
+   
+    const list = await Recipe.find({$and: [{ nomeReceita:nomeReceita}]})
+    if(list.length > 0){
+        return response.status(401).json({message: "Não se pode cadastrar duas receitas com o mesmo nome"})
+    }
           
 
     const newRecipe =  new Recipe({ 
@@ -143,21 +138,16 @@ const createRecipe = (request, response) => {
 
     });
 
-    //Recipe.push(newRecipe);
-
-
     newRecipe.save()
             .then((res) => {
                 response.status(201).json(res)
         })
             .catch((err)=> {
-                response.status(400).json({ message: "Não se pode cadastrar duas receitas com nome igual!" })
+                response.status(400).json({ message: "erro" })
     
         });
 }    
 
-
-   
 
     
 
@@ -170,7 +160,7 @@ const updateRecipe = (request, response) => {
     } else {
         Recipe.findByIdAndUpdate(id, request.body)
             .then(() => {
-                response.status(200).json({ message: `Sua receita foi atualizada.` });
+                response.status(200).json({ message: "Sua receita foi atualizada." });
             })
             .catch((err) => {
                 response.json(err);
@@ -208,7 +198,7 @@ const updateIngredients = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { ingredientes } })
             .then(() => {
-                res.status(200).json({ message: `Os ingredientes da receita foram atualizados` })
+                res.status(200).json({ message: "Os ingredientes da receita foram atualizados" })
             })
             .catch((err) => {
                 res.json(err)
@@ -227,7 +217,7 @@ const updateMainIngredient = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { ingredientePrincipal } })
             .then(() => {
-                res.status(200).json({ message: `Os ingredientes principal da receita foi atualizado` })
+                res.status(200).json({ message: "O ingrediente principal da receita foi atualizado" })
             })
             .catch((err) => {
                 res.json(err)
@@ -239,29 +229,15 @@ const updateMainIngredient = (req, res) => {
 const updateTitle = (req, res) => {
     const { id } = req.params
     const { nomeReceita } = req.body
-
-    let newName = [];
-    let nameRepeat = false;
-
-    for (let i = 0; i < nomeReceita.length; i ++) {
-        if(!newName.includes(nomeReceita)){
-         newName.push(nomeReceita)  
-        } else {
-            nameRepeat = true;
-        }    
-    };
-
-    //if (!mongoose.Types.ObjectId.isValid(id)) {
-        //res.status(400).json({ message: "ID não é válido" })
-        //return;
-    //} else {
-        Recipe.findByIdAndUpdate(id, { $set: { nomeReceita } })
-            .then(() => {
-                res.status(200).json({ message: `O nome da receita foi atualizado` })
-            })
-            .catch((err) => {
-                res.json(err)
-            })
+    
+     
+    Recipe.findByIdAndUpdate(id, { $set: { nomeReceita } })
+        .then(() => {
+            res.status(200).json({ message: "O nome da receita foi atualizado" })
+        })
+        .catch((err) => {
+            res.json(err)
+        })
 
 }
 
@@ -277,7 +253,7 @@ const updateType = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { tipoReceita } })
             .then(() => {
-                res.status(200).json({ message: `O tipo de receita foi modificado` })
+                res.status(200).json({ message: "O tipo de receita foi modificado" })
             })
             .catch((err) => {
                 res.json(err)
@@ -296,7 +272,7 @@ const updatePreparation = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { preparo } })
             .then(() => {
-                res.status(200).json({ message: `O modo de preparo foi modificado` })
+                res.status(200).json({ message: "O modo de preparo foi modificado" })
             })
             .catch((err) => {
                 res.json(err)
@@ -315,7 +291,7 @@ const updateComment = (req, res) => {
     } else {
         Recipe.findByIdAndUpdate(id, { $set: { observacoes } })
             .then(() => {
-                res.status(200).json({ message: `O campo observações foi modificado` })
+                res.status(200).json({ message: "O campo observações foi modificado" })
             })
             .catch((err) => {
                 res.json(err)
@@ -330,7 +306,7 @@ const deleteRecipe = (req, res) => {
 
     Recipe.findByIdAndDelete(id)
         .then(() => {
-            res.status(200).json("Sua receita foi apagada")
+            res.status(200).json({message: "Sua receita foi apagada"})
         })
         .catch((err) => {
             throw new Error(err)
@@ -348,6 +324,7 @@ module.exports = {
     getByNoChoseRecipe,
     getBySortRecipe,
     getByQuickList,
+    getByShoppingList,
     createRecipe,
     updateRecipe,
     uptdateChosenRecipe, 

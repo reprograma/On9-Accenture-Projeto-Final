@@ -16,6 +16,6 @@ const userSchema = new Schema({
     { timestamp: true });
 
 
-const Receitas = mongoose.model('Receita', userSchema);
+const Receitas = mongoose.model("Receita", userSchema);
 
 module.exports = Receitas; 

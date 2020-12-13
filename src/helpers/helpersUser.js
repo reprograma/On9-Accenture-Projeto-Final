@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt")
 
 exports.hashPassword = async (password, res) => {
   try {
@@ -10,7 +10,7 @@ exports.hashPassword = async (password, res) => {
   } catch (e) {
     console.log(e)
     return res.status(500).json({
-      errors: ['Aconteceu algo de errado ao salvar a senha']
+      errors: ["Aconteceu algo de errado ao salvar a senha"]
     })
   }
 }
