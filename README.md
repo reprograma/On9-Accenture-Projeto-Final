@@ -51,6 +51,7 @@ Resposta (200) status de sucesso
 ```jsx
 {
 	"available": true,
+	"_id": "5fd2a701a29adc3bbc96de0c",
 	"name": "Nome Sobrenone",
 	"email": "email@email.com",
 	"password": "password",
@@ -252,7 +253,8 @@ Resposta (200) status sucesso:
 
 ```jsx
 {
-
+    "available": true
+    "_id": "5fd2a701a29adc3bbc96de0c",
     "responsible": "Nome",
     "email": "email@email.com",
     "contact": 11010111010,
@@ -260,9 +262,8 @@ Resposta (200) status sucesso:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Apelido gato",
-    "aboutTheMiau": "Fêmea, adulta e está prestes a parir. Necessita de um abrigo.",
-    "avaiable": true
-
+    "aboutTheMiau": "Fêmea, adulta e está prestes a parir. Necessita de um abrigo."
+   
 }
 ```
 
@@ -300,6 +301,8 @@ Estrutura do body:
 
 ```jsx
 {
+    "available": true,
+    "_id": "5fd2a701a29adc3bbc96de0c",
     "responsible": "Nome",
     "email": "email@email.com",
     "contact": 11010111010,
@@ -307,8 +310,8 @@ Estrutura do body:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Mel",
-    "aboutTheCat": "Amarelo, filhote e já está na rua por um bom tempo",
-    "avaiable": true
+    "aboutTheCat": "Amarelo, filhote e já está na rua por um bom tempo"
+    
 
 }
 ```
