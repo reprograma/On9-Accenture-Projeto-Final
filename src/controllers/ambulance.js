@@ -5,16 +5,16 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 8;
 
 exports.get = (req, res, next) => {
-  AmbulanceUser.find()
+  AmbulancesUser.find()
     .then((ambulances) => {
-      resp.status(200).json(ambulances);
+      res.status(200).json(ambulances);
     })
     .catch((err) => next(err));
 };
 
 exports.getById = (req, res) => {
   const id = req.params.id;
-  ambulances
+  AmbulancesUser
     .findById(id)
     .then((ambulance) => {
       res.status(200).json(ambulance);

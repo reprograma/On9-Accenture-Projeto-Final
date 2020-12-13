@@ -31,17 +31,81 @@ Negócio:
 * Express.js
 * Nodemon
 * mongoDB
-* JavaScript
 * Postman
 * MVC
 
+## Melhorias futuras
+* No POST messagens retornar sem os campos de senha.
+* Adicionar segurança para que apenas os usuários com sessão validada tenha acesso aos dados que consta na API.
+* Adicionar PACTH para atualizar os usuários e mensagens.
+* Adicionar DELETE para excluir usuários e mensagens que não trabalham mais na área ou outro motivo que necessite excluir o usuário ou a mensagem.
+* Adicionar GET para retornar apenas as mensagens por data atual e horário, por exemplo: data de hoje ou hora da manhã.
+* Usar o yup para solicitar os campos requeridos em todos os usuários em mensagem e definir a quantidade mínima e máxima de cada campo.
+* Adicionar feedbacks para o usuário quando houver um erro ou quando demorar o retorno da aplicação.
+* Adicionar as melhorias relacionado aos feedbacks da apresentação do projeto ou dos testes realizados.
+
 ## Rotas
-GET
-~~~JavaScript
+GET visualizar todas as mensagens
+https://alert-ambulance.herokuapp.com/message/
 
+GET visualizar a mensagem por meio do id
+https://alert-ambulance.herokuapp.com/message/5fd5a2592f782e105c230632
+
+GET visualizar todas as ambulâncias
+http://localhost:3001/ambulances/
+
+GET visualizar a ambulância por id
+http://localhost:3001/ambulances/5fd5d1e4229c5d39accc7330
+
+GET visualizar todos os agentes criados
+https://alert-ambulance.herokuapp.com/agents/
+
+GET visualizar o agente por meio do id
+http://localhost:3001/agents/5fd5a153f4a8214eacba5858
+
+POST Transit Agent
+https://alert-ambulance.herokuapp.com/agents/create
+~~~JavaScript
+{
+    "email": "luana-agent01@teste.com",
+    "transitAgentName": "luana agent",
+    "password": "teste123",
+    "transitAgentCPF": "00400000001",
+    "telephoneNumberAgent": "810000000000"
+  }
 ~~~
 
-POST
+POST ambulance
+https://alert-ambulance.herokuapp.com/ambulances/create
 ~~~JavaScript
-
+{
+    "email": "luana2@teste.com",
+    "driverName": "luana ambulance,
+    "password": "luana",
+    "driverCPF": "00000000002",
+    "licensePlate": "23e456",
+    "telephoneNumberAmbulance": "811234577"
+}
 ~~~
+
+POST message ambulance
+https://alert-ambulance.herokuapp.com/message/create
+~~~JavaScript
+{
+  "id": "5fd59afba21cf60017e69e57",
+  "locationAmbulance": "Camaragibe", 
+  "destinationHospital": "Recife",
+  "routesToHopital": "Casa Forte"
+}
+~~~
+
+POST message agent
+http://localhost:3001/message/create
+~~~JavaScript
+{
+  "id": "5fd5e29d688d2e0017182440",
+  "transitAgentlocation": "Camaragibe"
+}
+~~~
+
+## Obs.: O body das rotas POST são modelos para criar, usar ou testar a API. Por ter validação para não criar com o mesmo cpf e e-mail devemos alterar os mesmos.
