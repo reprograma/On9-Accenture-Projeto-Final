@@ -41,6 +41,7 @@ Negócio:
 * Adicionar DELETE para excluir usuários e mensagens que não trabalham mais na área ou outro motivo que necessite excluir o usuário ou a mensagem.
 * Adicionar GET para retornar apenas as mensagens por data atual e horário, por exemplo: data de hoje ou hora da manhã.
 * Usar o yup para solicitar os campos requeridos em todos os usuários em mensagem e definir a quantidade mínima e máxima de cada campo.
+* Adicionar feedbacks para o usuário quando houver um erro ou quando demorar o retorno da aplicação.
 * Adicionar as melhorias relacionado aos feedbacks da apresentação do projeto ou dos testes realizados.
 
 ## Rotas
@@ -102,7 +103,9 @@ POST message agent
 http://localhost:3001/message/create
 ~~~JavaScript
 {
-  "id": "5fd5a153f4a8214eacba5858",
+  "id": "5fd5e29d688d2e0017182440",
   "transitAgentlocation": "Camaragibe"
 }
 ~~~
+
+## Obs.: O body das rotas POST são modelos para criar, usar ou testar a API. Por ter validação para não criar com o mesmo cpf e e-mail devemos alterar os mesmos.
