@@ -85,8 +85,6 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 ### Rotas
 
-Agora na segunda fase do projeto temos os seguintes requisitos:
-
 - [x] _Get_
 
   - [x] status code: 200 (ok)
