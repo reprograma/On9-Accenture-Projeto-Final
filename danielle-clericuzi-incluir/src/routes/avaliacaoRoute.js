@@ -1,31 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const avaliacaoController = require('../controllers/avaliacaoController');
+const authMiddleware = require('../middlewares/autenticacao');
 
 /**
 @route GET avaliacao/estabelecimento
 @desc Retornar todas as avaliações por estabelecimento
 @access Publico
-@endpoint http://localhost:porta/avaliacao/estabelecimento
+@endpoint http://localhost:porta/avaliacao/
 **/
-router.get('/avaliacao/estabelecimento', avaliacaoController.obterAvaliacaoPorEstabelecimento);
+router.get('/', avaliacaoController.obterAvaliacaoPorEstabelecimento);
 
- /**
-@route GET avaliacao/user
-@desc Retornar as avaliações realizadas por aquele usuario
-@access Privado
-@endpoint http://localhost:porta/avaliacao/user
-**/
-router.get('/avaliacao/user', avaliacaoController.obterAvaliacaoPorUsuario);
+router.use(authMiddleware);
 
 /**
 @route POST avaliacao/cadastro
 @desc Realizar o cadastro de uma avaliacao para um estabelecimento
-@access Publico
+@access Privado
 @endpoint http://localhost:porta/avaliacao/cadastro
 **/
-router.get('/avaliacao/cadastro', avaliacaoController.realizarCadastroAvaliacao);
-
+router.post('/cadastro', avaliacaoController.realizarCadastroAvaliacao);
 
 /**
 @route DELETE avaliacao/id
@@ -33,7 +27,7 @@ router.get('/avaliacao/cadastro', avaliacaoController.realizarCadastroAvaliacao)
 @access Privado
 @endpoint http://localhost:porta/avaliacao/:id
 **/
-router.delete('/avaliacao/:id', avaliacaoController.deletarAvaliacao);
+router.delete('/:id', avaliacaoController.deletarAvaliacao);
 
 
 module.exports = router;

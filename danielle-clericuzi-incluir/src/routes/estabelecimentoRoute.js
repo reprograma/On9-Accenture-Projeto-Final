@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const estabelecimentoController = require('../controllers/estabelecimentoController');
+const authMiddleware = require('../middlewares/autenticacao');
 
 /**
 @route GET estabelecimento
@@ -8,7 +9,7 @@ const estabelecimentoController = require('../controllers/estabelecimentoControl
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimento);
+router.get('/', estabelecimentoController.obterEstabelecimento);
 
  /**
 @route GET estabelecimento/cidade
@@ -16,7 +17,7 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimento);
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/cidade
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorCidade);
+router.get('/cidade', estabelecimentoController.obterEstabelecimentoPorCidade);
 
 /**
 @route GET estabelecimento/tipo
@@ -24,7 +25,7 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/tipo
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorTipo);
+router.get('/tipo', estabelecimentoController.obterEstabelecimentoPorTipo);
 
 /**
 @route GET estabelecimento/nome
@@ -32,7 +33,9 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Publico
 @endpoint http://localhost:porta/estabelecimentos/nome
 **/
-router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPorTipo);
+router.get('/nome', estabelecimentoController.obterEstabelecimentoPorNome);
+
+router.use(authMiddleware);
 
 /**
 @route POST estabelecimento/cadastro
@@ -40,15 +43,15 @@ router.get('/estabelecimentos', estabelecimentoController.obterEstabelecimentoPo
 @access Privado
 @endpoint http://localhost:porta/estabelecimentos/cadastro
 **/
-router.get('/estabelecimentos/cadastro', estabelecimentoController.realizarCadastroEstabelecimento);
+router.post('/cadastro', estabelecimentoController.cadastrarEstabelecimento);
 
 /**
  @route PATCH estabelecimentos/id
- @desc Atualizar somente o título
+ @desc Atualizar os campos do cadastro com exceção do tipo
  @access Privado
  @endpoint http://localhost:porta/estabelecimentos/:id
  */
- router.patch('/estabelecimentos/:id', estabelecimentoController.atualizarCadastroEstabelecimento);
+ router.patch('/:id', estabelecimentoController.atualizarCadastroEstabelecimento);
 
 /**
 @route DELETE estabelecimentos/id
@@ -56,7 +59,7 @@ router.get('/estabelecimentos/cadastro', estabelecimentoController.realizarCadas
 @access Privado
 @endpoint http://localhost:porta/estabelecimentos/:id
 **/
-router.delete('/estabelecimentos/:id', estabelecimentoController.deletarEstabelecimento);
+router.delete('/:id', estabelecimentoController.deletarEstabelecimento);
 
 
 module.exports = router;

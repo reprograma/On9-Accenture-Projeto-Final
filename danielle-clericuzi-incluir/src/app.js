@@ -5,18 +5,16 @@
 require('dotenv').config();
 
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-
 const app = express();
 
 /*
   * Conectar com o MongoDB
 */
-//mongoose.connect(process.env.MONGODB_URI, {
-  //useNewUrlParser: true,
- /// useUnifiedTopology: true
-//});
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 let db = mongoose.connection;
 
@@ -31,14 +29,13 @@ db.once("open", function (){
 /**
  * Routes
  */
-//const user = require("./routes/userRoute")
-//const estabelecimento = require("./routes/estabelecimentoRoute")
-//const avaliacao = require("./routes/avaliacaoRoute")
+const users = require('./routes/userRoute');
+const estabelecimentos = require('./routes/estabelecimentoRoute');
+const avaliacoes = require('./routes/avaliacaoRoute');
+const sessions = require("./routes/sessionRoute");
 
-/**
- * Configurar body parser
- */
-app.use(bodyParser.json());
+
+app.use(express.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -49,8 +46,9 @@ app.use(function (req, res, next) {
     next()
   });
 
-//app.use("/user", user)
-//app.use("/estabelecimento", estabelecimento)
-//app.use("/avaliacao", avaliacao)
+app.use('/users', users);
+app.use('/estabelecimentos', estabelecimentos);
+app.use('/avaliacao', avaliacoes);
+app.use('/sessions', sessions);
 
-module.exports = app
+module.exports = app;

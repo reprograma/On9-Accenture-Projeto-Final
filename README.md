@@ -7,8 +7,12 @@ Eis que se finda nosso curso, e agora queremos demonstrar nosso aprendizado em p
 * Descritivo do projeto
 * 30% da codificação
 
-É importante que o projeto esteja numa pasta e não solto na raiz da branch. Além disso, sigam a seguinte estrutura para o nome:
-_nome-sobrenome-nome-do-projeto_
+~É importante que o projeto esteja numa pasta e não solto na raiz da branch.~ ~Além disso, sigam a seguinte estrutura para o nome:
+_nome-sobrenome-nome-do-projeto_~
+
+>**ATUALIZAÇÃO**
+>
+>É importante que o projeto esteja na raiz da branch, caso contrário o heroku não vai conseguir enxergar seu projeto na hora do deploy.
 
 ## Segunda Entrega - 12/12
 

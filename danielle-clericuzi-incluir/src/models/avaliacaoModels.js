@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
  * Atributos da entidade avaliacao
  */
 const avaliacaoSchema = new mongoose.Schema({
-    id: { type : Number},
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     estabelecimentoId: { type: Schema.Types.ObjectId, ref: 'Estabelecimento', required: true },
     vagaPCD: { type: Boolean, required: true },
@@ -17,13 +16,12 @@ const avaliacaoSchema = new mongoose.Schema({
     rampa: { type: Boolean, required: true },
     locomocaoInterna: { type: Number, required: true },
     avaliacaoGeral: { type: Number, required: true },
-    dataInclusao: { type: Date, required: true },
   }, { timestamps: true })
 
   /**
  * Definir collection que irá ser salva no banco
  */
-  const Avaliacao = mongoose.model('User', avaliacaoSchema);
+  const Avaliacao = mongoose.model('Avaliacao', avaliacaoSchema);
 
    /**
  * Exportar o model Avaliacao para ser utilizado

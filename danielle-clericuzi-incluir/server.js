@@ -2,13 +2,13 @@
  * Module dependencies.
  */
 const app = require("./src/app");
-const port = process.env.PORT;
+const port = 8080;
 
 /**
  * Start Express server.
  */
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`app está rodando na porta ${port}`);
 });
 
