@@ -10,15 +10,15 @@
 
 - [Contexto](#contexto)
 - [Formulário](#formulário-de-perguntas)
-- Análise das Respostas
-- Matriz CSD
-- Card Sorting
-- Tecnologias Utilizadas
-- Documentação de API (versão 1.0)
-- Rotas
-- Arquitetura MVC
-- Agradecimentos
-- Contribuições
+- [Análise das Respostas](#análise-das-respostas-do-formulário)
+- [Matriz CSD](#matriz-csd)
+- [Card Sorting](#card-sorting)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Documentação de API (versão 1.0)](#documentação-de-api-versão-1.0)
+- [Rotas](#rotas)
+- [Arquitetura MVC](#arquitetura-mvc)
+- [Agradecimentos](#agradecimentos)
+- [Contribuições](#contribuições)
 
 ---
 
@@ -64,18 +64,18 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 <p align="left">
   <a>
-    <a href="https://git-scm.com/"><img alt="Git version" src="https://img.shields.io/badge/Git/GitHub-blue">
-    <a href="https://nodejs.org/pt-br/"><img alt="Node version" src="https://img.shields.io/badge/NodeJS-blue">
-    <a href="https://www.mongodb.com/cloud/atlas"><img alt="Node version" src="https://img.shields.io/badge/MongoDB%20Atlas-blue">
-    <a href="https://herokuapp.com/"><img alt="Deploy on Heroku" src="https://img.shields.io/badge/Heroku-yellow">
+    <a href="https://git-scm.com/"><img alt="Git version" src="https://img.shields.io/badge/Git/GitHub-blueviolet">
+    <a href="https://nodejs.org/pt-br/"><img alt="Node version" src="https://img.shields.io/badge/NodeJS-blueviolet">
+    <a href="https://www.mongodb.com/cloud/atlas"><img alt="Node version" src="https://img.shields.io/badge/MongoDB%20Atlas-blueviolet">
+    <a href="https://herokuapp.com/"><img alt="Deploy on Heroku" src="https://img.shields.io/badge/Heroku-blueviolet">
     <br/>
-    <a href="https://www.npmjs.com/"><img alt="npm version" src="https://img.shields.io/badge/npm-6.14.6-yellow">
-    <a href="https://expressjs.com/pt-br/"><img alt="Express version" src="https://img.shields.io/badge/express-4.17.1-yellow">
-    <a href="https://mongoosejs.com/"><img alt="Mongoose version" src="https://img.shields.io/badge/mongoose-5.10.17-yellow">
-    <a href="https://www.npmjs.com/package/dotenv-safe"><img alt="Dotenv-safe version" src="https://img.shields.io/badge/dotenv-8.2.0-yellow">
-    <a href="https://www.npmjs.com/package/bcryptjs"><img alt="Bcrypt version" src="https://img.shields.io/badge/bcrypt-5.0.0-yellow">
-    <a href="https://www.npmjs.com/package/jsonwebtoken"><img alt="Jsonwebtoken version" src="https://img.shields.io/badge/jsonwebtoken-8.5.1-yellow">
-    <a href="https://www.npmjs.com/package/nodemon"><img alt="Nodemon version" src="https://img.shields.io/badge/nodemon-2.0.6-yellow">
+    <a href="https://www.npmjs.com/"><img alt="npm version" src="https://img.shields.io/badge/npm-6.14.6-blueviolet">
+    <a href="https://expressjs.com/pt-br/"><img alt="Express version" src="https://img.shields.io/badge/express-4.17.1-blueviolet">
+    <a href="https://mongoosejs.com/"><img alt="Mongoose version" src="https://img.shields.io/badge/mongoose-5.10.17-blueviolet">
+    <a href="https://www.npmjs.com/package/dotenv-safe"><img alt="Dotenv-safe version" src="https://img.shields.io/badge/dotenv-8.2.0-blueviolet">
+    <a href="https://www.npmjs.com/package/bcryptjs"><img alt="Bcrypt version" src="https://img.shields.io/badge/bcrypt-5.0.0-blueviolet">
+    <a href="https://www.npmjs.com/package/jsonwebtoken"><img alt="Jsonwebtoken version" src="https://img.shields.io/badge/jsonwebtoken-8.5.1-blueviolet">
+    <a href="https://www.npmjs.com/package/nodemon"><img alt="Nodemon version" src="https://img.shields.io/badge/nodemon-2.0.6-blueviolet">
   </a> 
 </p>
 
