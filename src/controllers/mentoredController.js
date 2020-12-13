@@ -56,7 +56,7 @@ const getAll = (request, response) => {
 const getByDestinyCountry = (request, response) => {
     const destinyCountry = request.query.destinyCountry
 
-    Mentor.find({ destinyCountry: destinyCountry })
+    Mentored.find({ destinyCountry: destinyCountry })
         .then((mentored) => {
             response.status(200).json(mentored)
         })
@@ -68,7 +68,7 @@ const getByDestinyCountry = (request, response) => {
 const getByConcluded = (request, response) => {
     const concluded = request.query.concluded
 
-    Mentor.find({ concluded: concluded })
+    Mentored.find({ concluded: concluded })
         .then((mentor) => {
             response.status(200).json(mentor)
         })
@@ -76,7 +76,6 @@ const getByConcluded = (request, response) => {
             response.status(400).json({ error: `Falha na pesquisa.` })
         })
 };
-
 
 const editMentored = (request, response) => {
     const { id } = request.params;

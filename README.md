@@ -213,6 +213,17 @@ Retorno:
     "__v": 0
   }
 ```
+# GET por país de destino
+- Rota https://learn-and-share.herokuapp.com/mentored/destinyCountry?destinyCountry=EUA
+
+# GET por conclusão
+- Rota https://learn-and-share.herokuapp.com/mentored/concluded?concluded=true
+- Ao passar uma rota incorreta o retorno será uma mensagem de erro
+```javascript
+{
+  "error": "Falha na pesquisa de disponibilidade do mentor."
+}
+```
 
 ## PUT
 - Rota https://learn-and-share.herokuapp.com/mentored/edit/:id

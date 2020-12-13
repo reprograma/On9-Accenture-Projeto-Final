@@ -41,18 +41,6 @@ const getAll = (request, response) => {
         });
 };
 
-const getById = (request, response) => {
-    const { id } = request.params.id
-
-    Mentor.find({ id: id })
-        .then((mentor) => {
-            response.status(200).json(mentor)
-        })
-        .catch((error) => {
-            response.status(400).json({ error: `Falha na pesquisa por id.` })
-        })
-};
-
 const getByVisitedCountry = (request, response) => {
     const visitedCountry = request.query.visitedCountry
 
@@ -141,7 +129,6 @@ const deleteMentor = (request, response) => {
 
 module.exports = {
     getAll,
-    getById,
     getByVisitedCountry,
     getByAvailable,
     getByMentoringType,
