@@ -11,38 +11,46 @@ exports.get = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-exports.postNewMessage = (req, res, next) => {
+exports.postNewMessage = async (req, res, next) => {
   let { id } = req.body;
+  const userAmbulance = await AmbulancesUser.findById(
+    id,
+    function (err, AmbulancesUser) {}
+  );
+  const userAgent = await TransitAgentUser.findById(
+    id,
+    function (err, TransitAgentUser) {}
+  );
 
-  if (AmbulancesUser.findById(id, function (err, AmbulancesUser) {})) {
+  //if (AmbulancesUser.findById(id, function (err, AmbulancesUser) {})) {
+  if (userAmbulance) {
     const newMessageAmbulance = MessageSend({
-      driverName: AmbulancesUser.driverName,
-      licensePlate: AmbulancesUser.licensePlate,
       locationAmbulance: req.body.locationAmbulance,
       destinationHospital: req.body.destinationHospital,
-      telephoneNumberAmbulance: AmbulancesUser.telephoneNumberAmbulance,
       routesToHopital: req.body.routesToHopital,
+      userAmbulance
     });
     newMessageAmbulance
       .save()
       .then((newMessageAmbulance) => {
         return res.status(201).json(newMessageAmbulance);
       })
-      .catch((err) => next(err));
-  } else if (TransitAgentUser.findById(id, function (err, TransitAgentUser) {})
-  ) {
+      .catch((err) => next(err, "There is not an user with this id."));
+    // } else if (TransitAgentUser.findById(id, function (err, TransitAgentUser) {})  ) {
+  } else if (userAgent) {
     const newMessageAgent = new MessageSend({
       transitAgentName: TransitAgentUser.transitAgentName,
       transitAgentlocation: req.body.transitAgentlocation,
       telephoneNumberAgent: TransitAgentUser.telephoneNumberAgent,
+      userAgent
     });
     newMessageAgent
       .save()
       .then((newMessageAgent) => {
         return res.status(201).json(newMessageAgent);
       })
-      .catch((err) => next(err));
+      .catch((err) => next(err, "There is not an user with this id."));
   } else {
-    return "não usuário com esse id";
+    return "There is not an user with this id";
   }
 };
