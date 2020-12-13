@@ -8,6 +8,7 @@ const bcryptSalt = 8
 const getAll = function (request, response) {
     Task.find()
         .then((tasks) => { response.status(200).json(tasks) })
+        .then(() => response.send("M"))
         .catch(err => next(err));
 }
 
@@ -15,28 +16,19 @@ const getByID = (request, response) => {
     const { id } = request.params;
     Task.findById(id)
         .then((task) => { response.status(200).json(task) })
-        .catch(err => next(err));
+        .catch(err => { response.status(500).json({ message: err }) })
 }
 
 const getByMateria = (request, response) => {
-    const { materia } = request.params;
+    const { materia } = request.query;
     Task.find({ materia: materia })
         .then((posts) => { response.status(200).json(posts) })
-        .catch(err => next(err));
 }
 
 const getByAssunto = (request, response) => {
-    const { assunto } = request.params;
+    const { assunto } = request.query;
     Task.find({ assunto: assunto })
         .then((posts) => { response.status(200).json(posts) })
-        .catch(err => next(err));
-}
-
-const getByTags = (request, response) => {
-    const { tags } = request.params;
-    Task.find({ tags: tags })
-        .then((posts) => { response.status(200).json(posts) })
-        .catch(err => next(err));
 }
 
 //Post
@@ -57,8 +49,8 @@ const createPost = async (request, response, next) => {
             .then((tasks) => {
                 response.status(201).json(tasks);
             })
-            .then(() => {
-                response.send('Resumo postado com sucesso!')
+            .then((tasks) => {
+                response.send('Resumo postado com sucesso!').json(tasks);
             })
             .catch(err => next(err));
     } catch (e) {
@@ -70,7 +62,6 @@ const createPost = async (request, response, next) => {
 //Put
 const updatePost = (request, response) => {
     const { id } = request.params;
-    let teste = false;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         response.status(400).json({ message: 'ID não é válido.' })
@@ -117,7 +108,6 @@ module.exports = {
     getByID,
     getByAssunto,
     getByMateria,
-    getByTags,
     updateTitulo,
     createPost,
     deletePost,
