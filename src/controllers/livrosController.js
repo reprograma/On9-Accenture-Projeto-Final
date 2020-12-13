@@ -7,7 +7,7 @@ const createBook = async (request, response, next)=> {
     let { title, author, hasTrigger, triggers, synopsis } = request.body
     const list = await Book.find({$and: [{ title: title}, {author: author}]})
     if(list.length > 0){
-        return response.status(401).json({message: `Livro ja existente`})
+        return response.status(401).json({message: `Book already exists in this database`})
     }
     const newBook = new Book({
         title,
