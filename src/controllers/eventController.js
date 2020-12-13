@@ -72,7 +72,7 @@ const deleteEvent = (req, res, next) =>{
 
     Event.findByIdAndDelete(id)
         .then(() => {
-            res.status(200).json('Evento canceled')
+            res.status(200).json('Event canceled')
         })
         .catch((err) => {
             throw new Error(err)
