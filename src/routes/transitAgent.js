@@ -4,7 +4,7 @@ const controller = require("../controllers/transitAgent");
 const authMiddleware = require("../middlewares/auth");
 
 //@route GET
-//router.get("/", controller.get)
+router.get("/", controller.get)
 
 //@route POST 
 router.post("/create", controller.postCreateAgent)
