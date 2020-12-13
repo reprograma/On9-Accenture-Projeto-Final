@@ -1,5 +1,6 @@
 module.exports = async (req, res, next) => {
   try {
+    console.log(req.isAdmin);
     if (req.isAdmin) {
       return next();
     } else {

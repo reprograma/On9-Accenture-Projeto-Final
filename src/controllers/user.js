@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Favorite = require("../models/Favorite");
 const { userSchema } = require("../validators/user");
 const mongoose = require("mongoose");
+const { hashPassword } = require("../helpers/user");
 
 exports.getAll = async (req, res) => {
   try {
@@ -52,7 +53,8 @@ exports.getById = async (req, res) => {
 };
 
 exports.atualizarUser = async (req, res) => {
-  const { id } = req.params; //pega o ID na URL
+  const { email, password } = req.params; //pega o ID na URL
+  const { id } = req.userId;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     // verifica se o valor passado é um ID e, se é válido no BD
@@ -60,7 +62,9 @@ exports.atualizarUser = async (req, res) => {
     return;
   }
 
-  User.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
+  const passwordHashed = await hashPassword(password, res);
+
+  User.findByIdAndUpdate(id, { email, password: passwordHashed }) // método que encontra e atualiza por ID
     .then(() => {
       res.status(200).json({
         message: `O usuário com o ID: ${req.params.id} foi atualizado.`,
@@ -72,7 +76,7 @@ exports.atualizarUser = async (req, res) => {
 };
 
 exports.deletarUser = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.userId;
 
   User.findByIdAndDelete(id) // o método encontra e deleta o usuário por ID
     .then(() => {

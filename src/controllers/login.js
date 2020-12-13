@@ -17,13 +17,13 @@ exports.accessToken = (req, res) => {
     User.findOne({ email: email })
       .then((user) => {
         const { id, email, password: hashPassword, tipo } = user;
-
         try {
           checkPassword(passwordEntry, hashPassword); //comparando a senha de entrada com a do banco
         } catch (e) {
           return res.status(401).json({ message: "password does not match" });
         }
 
+      
         try {
           return res.json({
             //se a senha conferiu, retorna id e nome do usuário
@@ -32,7 +32,7 @@ exports.accessToken = (req, res) => {
               email,
               tipo,
             },
-            token: jwt.sign({ id }, config.secret, {
+            token: jwt.sign({ id, email, tipo }, config.secret, {
               //gera o token a partir do id
               expiresIn: config.expiresIn,
             }),

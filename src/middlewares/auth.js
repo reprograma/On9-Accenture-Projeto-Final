@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
 
   try {
     const decoded = await promisify(jwt.verify)(token, config.secret);
+    console.log('decoded', decoded)
     req.userId = decoded.id;
     req.isAdmin = decoded.tipo == 1;
     return next();
