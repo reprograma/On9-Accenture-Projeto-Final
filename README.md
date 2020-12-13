@@ -8,12 +8,17 @@
 
 ### Índice
 
-- Formulário
+- [Contexto](#contexto)
+- [Formulário](#formulário-de-perguntas)
 - Análise das Respostas
 - Matriz CSD
 - Card Sorting
 - Tecnologias Utilizadas
+- Documentação de API (versão 1.0)
 - Rotas
+- Arquitetura MVC
+- Agradecimentos
+- Contribuições
 
 ---
 
@@ -55,6 +60,27 @@ Busquei em mim algum ponto de dor, alguma necessidade que eu pudesse sanar media
 
 ---
 
+## Tecnologias Utilizadas
+
+<p align="left">
+  <a>
+    <a href="https://git-scm.com/"><img alt="Git version" src="https://img.shields.io/badge/Git/GitHub-blue">
+    <a href="https://nodejs.org/pt-br/"><img alt="Node version" src="https://img.shields.io/badge/NodeJS-blue">
+    <a href="https://www.mongodb.com/cloud/atlas"><img alt="Node version" src="https://img.shields.io/badge/MongoDB%20Atlas-blue">
+    <a href="https://herokuapp.com/"><img alt="Deploy on Heroku" src="https://img.shields.io/badge/Heroku-yellow">
+    <br/>
+    <a href="https://www.npmjs.com/"><img alt="npm version" src="https://img.shields.io/badge/npm-6.14.6-yellow">
+    <a href="https://expressjs.com/pt-br/"><img alt="Express version" src="https://img.shields.io/badge/express-4.17.1-yellow">
+    <a href="https://mongoosejs.com/"><img alt="Mongoose version" src="https://img.shields.io/badge/mongoose-5.10.17-yellow">
+    <a href="https://www.npmjs.com/package/dotenv-safe"><img alt="Dotenv-safe version" src="https://img.shields.io/badge/dotenv-8.2.0-yellow">
+    <a href="https://www.npmjs.com/package/bcryptjs"><img alt="Bcrypt version" src="https://img.shields.io/badge/bcrypt-5.0.0-yellow">
+    <a href="https://www.npmjs.com/package/jsonwebtoken"><img alt="Jsonwebtoken version" src="https://img.shields.io/badge/jsonwebtoken-8.5.1-yellow">
+    <a href="https://www.npmjs.com/package/nodemon"><img alt="Nodemon version" src="https://img.shields.io/badge/nodemon-2.0.6-yellow">
+  </a> 
+</p>
+
+---
+
 ## Documentação de API (versão 1.0)
 
 ### Rotas
@@ -73,12 +99,12 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
 
       }
 
-  - [x] "/tiposreservafinanceira" retorna todos os dados do banco de dados
-  - [x] "/tiposreservafinanceira/investimentos" Retorna o investimento por nome específico
+  - [x] "/financas" retorna todos os dados do banco de dados sobre finanças
+  - [x] "/financas/contacorrente" Retorna as finanças do tipo conta corrente
 
 - [x] _Post_
-  - [x] "/tiposreservafinanceira" cria uma nova modalidade de reserva financeira
-  - [x] "/tiposreservafinanceira/investimentos" cria um novo material de investimento
+  - [x] "/financas" cria uma nova modalidade de finanças
+  - [x] "" cria um novo material de investimento
 - [x] _Put_
   - [x] ""
   - [x] ""
@@ -87,3 +113,41 @@ Agora na segunda fase do projeto temos os seguintes requisitos:
   - [x] ""
 
 ---
+
+### Arquitetura MVC
+
+```bash
+\--📂 NOME-DO-SEU-SERVIDOR
+		 |   .gitignore
+		 |   package-lock.json
+		 |   package.json
+	   |   **server.js**
+			\--📂 node_modules
+			\--📂src
+			    |   **app.js**
+			    |
+			    📂---controller
+			    |       **NOMEController.js**
+			    |
+			    📂---model
+			    |       **NOMESchema.js
+					|       Repository.js**
+			    |
+			    📂---routes
+			            **NOMERoute.js
+									index.js**
+```
+
+---
+
+## Agradecimentos
+
+Minha profunda gratidão a minha amada Reprograma <3
+Accenture, Dé, Robs, professoras, monitoras, minhas maravilhosas colegas de turma,
+agradeço por todo apoio e conhecimento transmitido, cada risada dentro de sala de aula, cada código que deu errado e que juntas conseguimos resolver! Realmente uma experiência única e marcante em minha vida. Vamos juntas reprogramar o mundo :D
+
+---
+
+## Contribuições
+
+Alô pessoas desenvolvedoras, aceito contribuições ao meu projeto, abra seu PR e faça do github um mundo mais open source.

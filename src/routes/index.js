@@ -3,7 +3,7 @@ const router = express.Router()
 
 router.get("/", function(request,response){
     response.status(200).send({
-        titulo: "Prisma edicação financeira",
+        titulo: "Prisma educação financeira",
         version:"1.0.0"
     })
 })
