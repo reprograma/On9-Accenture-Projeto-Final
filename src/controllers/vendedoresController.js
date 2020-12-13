@@ -70,7 +70,7 @@ const desligamento = (request, response) => {
     const { id } = request.params
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({message: "Specified id is not valid"});
+        response.status(400).json({message: "Id inválido"});
         return;
     }
        

@@ -32,9 +32,7 @@ const nomeProduto = (request, response) => {
 //POST
 const cadastroProduto = async (request, response) => {
    
-    const {nomeProduto, descricao, estoque, valorFabrica} = request.body
-    //const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  
-    //const checarNome = novoProduto.nomeProduto
+    const {nomeProduto, descricao, estoque, valorFabrica} = request.body;
     
     try {
           
@@ -42,9 +40,9 @@ const cadastroProduto = async (request, response) => {
         .then((produto) => {
 
             if (produto){              
-                response.status(400).json("Produto já cadastrado")
+                response.status(400).json("Produto já cadastrado");
             }else {
-                const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})  //novoProduto = new Estoque({novoProduto})
+                const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica});
                 novoProduto.save()
                 .then((res) => {
                     response.status(201).json(res);
@@ -65,13 +63,8 @@ const cadastroProduto = async (request, response) => {
 //PATCH
 const abastecerEstoque = async (request, response) => {
 
-    const {nomeProduto, estoque} = request.body
-    
-    //const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica})
-    
-    //const checarEstoque = produtoValidado.estoque
-    //const nomeProduto = produtoValidado.nomeProduto
-            
+    const {nomeProduto, estoque} = request.body;
+        
     try {
         let produto = await Estoque.findOne({nomeProduto: nomeProduto});
 
@@ -84,7 +77,7 @@ const abastecerEstoque = async (request, response) => {
     }
     catch (err) {
 
-        return response.status(400).json({ error: err.message })
+        return response.status(400).json({ error: err.message });
     }
 }
 
@@ -93,13 +86,13 @@ const deletarProduto = (request, response) => {
     const { id } = request.params
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({message: "Specified id is not valid"});
+        response.status(400).json({message: "Id inválido"});
         return;
     }
        
         Estoque.findByIdAndDelete(id)
                     .then(() => {
-                        response.status(200).json("Produto deletado!");
+                        response.status(200).json("Produto excluido!");
                     })
                     .catch((err) => {
                         throw new Error(err);

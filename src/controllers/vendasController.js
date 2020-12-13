@@ -4,10 +4,6 @@ const Vendas = require("../models/Vendas");
 const Estoque = require("../models/Estoque");
 const Vendedor = require("../models/Vendedores")
 
-
-
-//const {vendaSchema} = require("../validators/vendaSchema")
-
 //GET 
 const vendas = (request, response) => {
 
@@ -16,12 +12,12 @@ const vendas = (request, response) => {
             response.status(200).json(Vendas);
         })
         .catch((err) => {
-            response.status(400).json(err)
+            response.status(400).json(err);
         });
 }
 
 //GET
-const nomeVendedor = (request, response, next) => {
+const nomeVendedor = (request, response) => {
 
     const {nome} = request.params;
  
@@ -33,24 +29,21 @@ const nomeVendedor = (request, response, next) => {
             response.status(200).json(vendedor);
         })
         .catch((err) => {
-            response.status(400).json(err)
+            response.status(400).json(err);
         });
 }
 
 //POST
 const vendaProduto = async (request, response) => {
 
-    const {nomeProduto, valorVenda, quantidade, vendedor, clienteContato} = request.body
-
-    const novoCadastro = new Vendas ({ nomeProduto, valorVenda, quantidade, vendedor, clienteContato})
-    
-    //const vendaValidada = await vendaSchema.validate(request.body)
-    const produtoNome = novoCadastro.nomeProduto
-    const vendedorNome = novoCadastro.vendedor
+    const {nomeProduto, valorVenda, quantidade, vendedor, clienteContato} = request.body;
+    const novoCadastro = new Vendas ({ nomeProduto, valorVenda, quantidade, vendedor, clienteContato});   
+    const produtoNome = novoCadastro.nomeProduto;
+    const vendedorNome = novoCadastro.vendedor;
 
             try {
                 let produto = await Estoque.findOne({nomeProduto: produtoNome});
-                let buscaVendedor = await Vendedor.findOne({nome: vendedorNome})
+                let buscaVendedor = await Vendedor.findOne({nome: vendedorNome});
 
                 if (buscaVendedor !== null){
                     
@@ -61,10 +54,10 @@ const vendaProduto = async (request, response) => {
                     } else {
             
                         let novoPedido = new Vendas(novoCadastro)
-                            novoPedido.save()
+                            novoPedido.save();
                             produto.save();
             
-                        return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + " unidades")
+                        return response.status(201).json("Estoque atualizado!, restam " + produto.estoque + " unidades");
                     }
 
                 }else (buscaVendedor == null); {
@@ -83,12 +76,11 @@ const vendaProduto = async (request, response) => {
 const estorno =  (request, response) => {
     const { id } = request.params
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return response.status(400).json({message: "Specified id is not valid"});
-        
+        return response.status(400).json({message: "Specified id is not valid"});        
     }
     
 
-console.log(id)
+
 
     Vendas.findById(id)
         .then((venda) => {
@@ -104,7 +96,7 @@ console.log(id)
 
                      Vendas.findByIdAndDelete(id)
                         .then(() => {
-                            response.status(200).json("Estorno feito com sucesso e estoque atualizado ")
+                            response.status(200).json("Estorno feito com sucesso e estoque atualizado ");
                         })
                         .catch((err) => {
                             throw new Error(err);
@@ -113,7 +105,6 @@ console.log(id)
                 .catch((err) => {
                     throw new Error(err);
                 });
-
 
         })
         .catch((err) => {

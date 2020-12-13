@@ -12,10 +12,12 @@ Nessa API é possível cadastrar produtos (estoque) e emitir pedidos (vendas). P
 ## Dependências requeridas
 
     "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.1",
     "nodemon": "^2.0.6",
-    "yup": "^0.32.1"
+    
 
 ## Rotas
 
@@ -24,28 +26,25 @@ Nessa API é possível cadastrar produtos (estoque) e emitir pedidos (vendas). P
 - GET
 
 ```
-@route GET estoque
 @desc Retorna todos os produtos
-@access Public 
-@endpoint http://localhost:8080/estoque/
+@endpointHeroku https://controle-autonomo.herokuapp.com/estoque
+@endpointLocalHost http://localhost:porta/estoque
 ```
 
 - GET
 
 ```
-route GET estoque/:nomeProduto
 @desc Retorna produto pelo nome
-@access Public 
-@endpoint http://localhost:8080/estoque/:nomeProduto
+@endpointHeroku https://controle-autonomo.herokuapp.com/estoque/:nomeProduto
+@endpointLocalHost http://localhost:porta/estoque/:nomeProduto
 ```
 
 - POST
 
 ```
-@route POST estoque/add
 @desc Cadastrar novo produto
-@access Public 
-@endpoint http://localhost:8080/estoque/cadastro
+@endpointHeroku https://controle-autonomo.herokuapp.com/estoque/cadastro
+@endpointLocalHost http://localhost:porta/estoque/cadastro
 ```
     
  - Body necessário
@@ -63,10 +62,9 @@ route GET estoque/:nomeProduto
 
 
 ```
-@route PATCH estoque/abastecimento
 @desc Abastecer o estoque de um produto
-@access Public 
-@endpoint http://localhost:8080/estoque/abastecimento
+@endpointHeroku https://controle-autonomo.herokuapp.com/estoque/abastecimento
+@endpointLocalHost http://localhost:porta/estoque/abastecimento
 ```
 
  - Body necessário
@@ -81,42 +79,36 @@ route GET estoque/:nomeProduto
 - DELETE
 
 ```
-@route DELETE /:id
 @desc Deletar um produto
 @access Private 
-@endpoint http://localhost:8080/estoque/:id
+@endpointHeroku https://controle-autonomo.herokuapp.com/estoque/:id
+@endpoint http://localhost:porta/estoque/:id
 ```
 
 ### Vendas
 
-
-
 - GET
 
 ```
-@route GET venda
 @desc Retorna todas as vendas
-@access Public 
-@endpoint http://localhost:8080/venda/
+@endpointHeroku https://controle-autonomo.herokuapp.com/venda
+@endpointLocalHost http://localhost:porta/venda
 ```
 
 - GET
 
 ```
-@route GET venda/:data
-@desc Retorna todas as vendas do dia 
-@access Public 
-@endpoint http://localhost:8080/venda/:data 
+@desc Retorna todas as vendas do vendedor(a) solicitado
+@endpointHeroku https://controle-autonomo.herokuapp.com/venda/:nome
+@endpointLocalHost http://localhost:porta/venda/:nome
 ```
 
 - POST
 
 ```
-
-@route POST venda/produto
 @desc Registrar uma nova venda
-@access Public 
-@endpoint http://localhost:8080/venda/produto
+@endpointHeroku https://controle-autonomo.herokuapp.com/venda/produto
+@endpointLocalHost http://localhost:porta/venda/produto
 
 ```
 
@@ -135,23 +127,91 @@ route GET estoque/:nomeProduto
     }
     ```
 
+- DELETE
+
+```
+@desc Estornar uma venda 
+@access Private 
+@endpointHeroku https://controle-autonomo.herokuapp.com/venda/:id
+@endpointLocalHost http://localhost:porta/venda/:id
+```
+### Vendedores
+
+- GET
+
+```
+@desc Retorna todos(as) os vendedores(as) cadastrados(as)
+@endpointHeroku https://controle-autonomo.herokuapp.com/vendedor
+@endpointLocalHost http://localhost:porta/vendedor
+```
+
+- GET
+
+```
+@desc Retorna o(a) vendedor(a)
+@endpointHeroku https://controle-autonomo.herokuapp.com/vendedor/:nome
+@endpointLocalHost http://localhost:porta/vendedor/:nome
+```
+
+- POST
+
+```
+@desc Cadastrar um(a) novo(a) vendedor(a)
+@endpointHeroku https://controle-autonomo.herokuapp.com/vendedor/cadastro
+@endpointLocalHost http://localhost:porta/vendedor/cadastro
+
+```
+
+- Body necessário
+
+    ```
+    {
+    "nome": "String",
+    "rg": Number,
+    "password": "String"
+    }
+    ```
 
 - DELETE
 
 ```
-@route DELETE /:id
-@desc delete task
+@desc Desligar um(a) vendedor(a) 
 @access Private 
-@endpoint http://localhost:8080/venda/:id
+@endpointHeroku https://controle-autonomo.herokuapp.com/vendedor/desligamento/:id
+@endpointLocalHost http://localhost:porta/vendedor/desligamento/:id
 ```
+### Sessão
+
+- POST
+
+```
+@desc Iniciar uma sessão e gerar um token para rotas privadas
+@access Private 
+@endpointHeroku https://controle-autonomo.herokuapp.com/sessao
+@endpointLocalHost http://localhost:porta/sessao
+
+```
+
+- Body necessário
+
+    ```
+    {
+    "nome": "String",
+    "password": "String"
+    }
+    ```
+
 
 ## Regras de negócio 
 
-- Não cadastrar um produto com nome já existente 
-- Não emitir pedidos caso o estoque não seja o suficiente
-- Senha de acesso para deletar (produto ou venda) com tamanho de 6 caracteres
-- Após o estorno somar o quantidade vendida no estoque
-- Após a venda subtrair a quantidade vendida no estoque
+- Não cadastrar um produto com nome já existente;
+- Não cadastrar um(a) vendedor(a) já existente;
+- Não emitir pedidos caso o estoque não seja o suficiente;
+- Não emitir pedidos caso vendedor não esteja cadastrado;
+- Permitir apenas ao Administrador estornar, desligar ou deletar; 
+- Gerar token apenas para o Administrador;
+- Após o estorno somar o quantidade vendida no estoque;
+- Após a venda subtrair a quantidade vendida no estoque.
 
 
 ## Como ter acesso?
@@ -159,10 +219,17 @@ route GET estoque/:nomeProduto
 Para ter o acesso na sua máquina, fazer os seguintes comandos no seu terminal:
 
 ```
-git clone <link repositório>
+git clone https://github.com/anareisier/On9-Accenture-Projeto-Final.git
 npm install
 npm start
 ```
+
+É possível ter o acesso também através do Herkoku:
+
+```
+https://controle-autonomo.herokuapp.com/
+```
+
 
 ### Contato
 

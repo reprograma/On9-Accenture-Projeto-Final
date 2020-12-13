@@ -18,10 +18,10 @@ exports.accessToken = async (req, res) => {
            
         Vendedor.findOne({nome: name})
         .then((user) => {
-   
+
           const {id, nome, hashPass } = user;
 
-            if(!checkPassword(passwordEntry,hashPass)) {res.status(401).json({message: "senha incorreta"})}
+            if(!checkPassword(passwordEntry,hashPass)) {res.status(401).json({message: "Senha incorreta"})}
             
          
            try {
@@ -43,11 +43,11 @@ exports.accessToken = async (req, res) => {
         })
         
         .catch((e) => {
-          return res.status(401).json({ error: 'user not found' });
+          return res.status(401).json({ error: 'Usuário não encontrado' });
         });
 
     } catch (e) {
-      return res.status(401).json({ error: 'erro3' });
+      return res.status(401).json({ error: 'erro2' });
     }
 
   } else{

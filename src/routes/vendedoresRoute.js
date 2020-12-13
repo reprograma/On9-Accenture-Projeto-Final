@@ -5,25 +5,25 @@ const authMiddleware =  require("../middlewares/auth")
 
 /**
 @route GET 
-@desc Retorna todas as vendas
+@desc Retorna todos(as) os vendedores(as) cadastrados(as)
 @access Public 
 @endpoint http://localhost:8080/vendedor
 **/
 router.get("/", controller.vendedores)
 
 /**
-@route GET 
-@desc Retorna todas as vendas
+@route GET vendedor/:nome
+@desc Retorna o(a) vendedor(a)
 @access Public 
-@endpoint http://localhost:8080/venda/:nome
+@endpoint http://localhost:8080/vendedor/:nome
 **/
 router.get("/:nome", controller.nomeVendedor)
 
 /**
-@route POST ACESSO VENDEDORX
-@desc Registrar uma nova venda
+@route POST vendedor/cadastro
+@desc Cadastrar um(a) novo(a) vendedor(a)
 @access Public 
-@endpoint http://localhost:8080/venda/novoVendedor
+@endpoint http://localhost:8080/vendedor/cadastro
 **/
 router.post("/cadastro", controller.novoVendedor)
 
@@ -31,7 +31,7 @@ router.use(authMiddleware);
 
 /**
 @route DELETE /:id
-@desc delete 
+@desc Desligar um(a) vendedor(a) 
 @access Private 
 @endpoint http://localhost:8080/vendedor/desligamento/:id
 **/
