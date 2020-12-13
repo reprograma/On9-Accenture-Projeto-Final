@@ -36,18 +36,14 @@ exports.postNewMessage = async (req, res, next) => {
         return res.status(201).json(newMessageAmbulance);
       })
       .catch((err) => next(err, "There is not an user with this id."));
-    // } else if (TransitAgentUser.findById(id, function (err, TransitAgentUser) {})  ) {
   } else if (userAgent) {
     const newMessageAgent = new MessageSend({
-      transitAgentName: TransitAgentUser.transitAgentName,
       transitAgentlocation: req.body.transitAgentlocation,
-      telephoneNumberAgent: TransitAgentUser.telephoneNumberAgent,
-      userAgent
     });
     newMessageAgent
       .save()
       .then((newMessageAgent) => {
-        return res.status(201).json(newMessageAgent);
+        return res.status(201).json(newMessageAgent + userAgent);
       })
       .catch((err) => next(err, "There is not an user with this id."));
   } else {
