@@ -1,7 +1,11 @@
 const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/RestaurantesRecife', 
+const dotenv =  require('dotenv');
+
+dotenv.config(); 
+
+mongoose.connect(`${process.env.dataBaseUrl}`, 
 {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -9,6 +13,7 @@ mongoose.connect('mongodb://localhost/RestaurantesRecife',
 
 const restautentes = require('./routes/restaurantes')
 const usuarios = require('./routes/usuarios')
+const sessions = require('./routes/sessionRouter')
 
 app.use(express.json())
 
@@ -23,5 +28,6 @@ app.use(function (req, res, next) {
 
 app.use("/restaurantes", restautentes)
 app.use("/usuarios", usuarios)
+app.use("/token", sessions )
 
 module.exports = app
