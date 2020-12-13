@@ -7,6 +7,12 @@ Sabemos da importância de manter em dia a vacinação para prevenir doenças co
 ## Objetivo
 O objetivo do projeto é possibilitar o registro de usuários e vacinas, possibilitando visualizar todos ou por ID, fazer atualizações de campo específico, assim como ser possível deletar registros. Todo o desenvolvimento da API foi pensado na utilização de boas práticas e estrutura de pastas, seguindo o design MVC. Além disso, a utilização dos métodos relacionados ao banco de dados MongoDB e suas consultas avançadas.
 
+## Deploy da Aplicação com Heroku:
+https://vacina-em-dia.herokuapp.com/
+
+## Apresentação do projeto:
+[Vacina em Dia](https://www.canva.com/design/DAEQEhRp_rk/DFh1njLm7BAAZm5S2QAyqQ/view?utm_content=DAEQEhRp_rk&utm_campaign=designshare&utm_medium=link&utm_source=publishpresent)
+
 ## Status
 🚧 Em construção... 🚧
 
@@ -514,8 +520,7 @@ Resposta [401]:
 - O CPF não pode ser alterado.
 - Apenas o usuário administrador poderá cadastrar e deletar vacinas.
 - Apenas o usuário administrador poderá inserir as vacinas tomadas.
-- Apenas o usuário administrador poderá visualizar todos os usuários.
-- Apenas o usuário administrador poderá deletar os usuários.
+- Apenas o usuário administrador poderá visualizar todos os usuários e deletá-los.
 - Não pode inserir no cartão do usuário uma vacina que não está cadastrada na base de dados.
 - Listar todas as vacinas por ordem alfabética.
 
