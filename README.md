@@ -22,7 +22,11 @@ Os usuários que cadastram um gato, também terá acesso as informações de lar
 
 ### POST
 
-- Cadastro um novo lar temporário:
+- Cadastro um novo lar temporário.
+
+**Regra**: 
+
+Um endereço de email só poderá ser cadastrado uma vez na base de dados.
 
 [https://abrigue-um-miau.herokuapp.com/home/new](https://abrigue-um-miau.herokuapp.com/home/new)
 
@@ -68,7 +72,7 @@ Resposta (400) status de erro
 
 ### POST
 
-- Insere no campo "favoriteCats" o ID de um gato favoritado através do ID do usuário que está oferecendo um lar:
+- Insere no campo "favoriteCats" o ID de um ou mais gatos favoritados através do ID do usuário que está oferecendo um lar:
 
 [https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6](https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6)
 
@@ -363,7 +367,7 @@ Resposta (400) status de erro:
 
 ## Considerações
 
-Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's ou abrindo issue's.
+Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's, ou abrindo issue's.
 
 ## Como faço para rodar este projeto?
 
