@@ -1,6 +1,6 @@
 # Alugue Aí 
 
-**Documentação de API (versão 1.0)**
+**Documentação de API (versão 2.0)**
 
 ### **Sobre o que é o projeto ?**
 
@@ -16,9 +16,9 @@ Conectar pessoas que possuem objetos ociosos a pessoas que precisam momentaneame
 
 Baixar as dependências na raiz do projeto com o comando `npm install`
 
-Depois de ter instalado as dependências, usar o comando `npm start` para rodar o servidor e iniciar a aplicação.
+Depois de ter instalado as dependências, usar o comando `npm start` ou `npm run dev` para rodar o servidor e iniciar a aplicação localmente.
 
-# **Rotas**
+# **Rotas Públicas**
 
 ### POST
 
@@ -48,6 +48,37 @@ Resposta [201]
 }
 ```
 
+### POST
+
+**sessao/cliente**
+
+**sessao/anunciante**
+
+body necessário
+
+```jsx
+{
+	"mail":"",
+	"senhaEntrada":""
+}
+```
+
+Resposta [200]
+
+```jsx
+{
+  "cliente": {
+    "id": "",
+    "email": ""
+  },
+  "token": ""
+}
+```
+
+# **Rotas Privadas**
+
+necessário token para acessa-las
+
 ### **POST**
 
 **/objeto**/cadastrar/:id
@@ -68,9 +99,28 @@ Resposta [201]
 }
 ```
 
+### **POST**
+
+**aluguel/alugar**
+
+```jsx
+{
+	"idObjeto":"",
+	"IdCliente":""
+}
+```
+
+Resposta [200]
+
+```jsx
+{
+  "mensagem": "Sucesso"
+}
+```
+
 ## GET
 
-**/objeto**/
+**/objeto**
 
 Resposta [200]
 
@@ -102,12 +152,216 @@ Resposta [200]
 ]
 ```
 
-Resposta [404]
+## GET
+
+**/aluguel**
+
+Resposta [200]
+
+```jsx
+[
+	{ "_id": "",
+    "objetoId": "",
+    "clienteId": "",
+	}
+]
+```
+
+## GET
+
+**/anunciante**
+
+Resposta [200]
+
+```jsx
+[
+	{
+    "objetos": [
+      ""
+    ],
+    "_id": "",
+    "nome": "",
+    "telefone": "",
+    "endereco": "",
+    "email": "",
+    "senha": ""
+	}
+]
+```
+
+## GET
+
+**/cliente**
+
+Resposta [200]
+
+```jsx
+[
+	{
+		"objetosAlugados": [
+	      ""
+	    ],
+	    "_id": "",
+	    "nome": "",
+	    "telefone": "",
+	    "endereco": "",
+	    "email": "",
+	    "senha": ""
+	}
+]
+```
+
+## PUT
+
+**/objeto/atualizar/:id**
+
+body necessário
+
+```jsx
+[
+	{
+		"nome":"",
+		"preco": numero,
+		"foto":""	
+	}
+]
+```
+
+## PUT
+
+**/anunciante/atualizar/:id**
+
+body necessário
+
+```jsx
+[
+	{
+		"nome":"",
+		"telefone":"",
+		"endereco":"",
+		"email":"",
+		"senha":""
+	}
+]
+```
+
+## PUT
+
+**/cliente/atualizar/:id**
+
+body necessário
+
+```jsx
+[
+	{
+		"nome":"",
+		"telefone":"",
+		"endereco":"",
+		"email":"",
+		"senha":""
+	}
+]
+```
+
+## DELETE
+
+**/objeto/:id**
+
+Resposta[200]
 
 ```jsx
 {
-  "message": "Este objeto não esta cadastrado"
+  "mensagem": "Objeto Removido !"
 }
 ```
 
-**Projeto em desenvolvimento**
+Resposta[400]
+
+```jsx
+{
+	"mensagem": "Não é possivel remover objetos alugados"
+}
+```
+
+## DELETE
+
+**/aluguel/devolver/:id**
+
+Resposta[200]
+
+```jsx
+{
+  "mensagem": "Devolução realizada"
+}
+```
+
+## DELETE
+
+**/anunciante/:id**
+
+Resposta[200]
+
+```jsx
+{
+  "mensagem": "Conta deletada !"
+}
+```
+
+Resposta[400]
+
+```jsx
+{
+  "mensagem": "Não é possivel remover conta com objetos alugados"
+}
+```
+
+## DELETE
+
+**/cliente/:id**
+
+Resposta[200]
+
+```jsx
+{
+  "mensagem": "Conta deletada !"
+}
+```
+
+Resposta[400]
+
+```jsx
+{
+  "mensagem": "'Faça devolução dos objetos alugados para deletar conta"
+}
+```
+
+# **O que foi usado no projeto ?**
+
+### Arquitetura MVC
+
+### MongoDB
+
+### Dependencias:
+
+- express
+- nodemon
+- mongoose
+- jsonwebtoken
+- bcrypt
+- dotenv
+- cors
+- yup
+
+# Melhorias
+
+Reescrever todo código para inglês
+
+Separar middlewares, separar as funcionalidade dos usuários
+
+Contar o tempo entre o aluguel e a devolução e calcular o preço
+
+Melhorar validações
+
+Inserir mais validações
+
+Mais sugestões ? Entra em contato :D

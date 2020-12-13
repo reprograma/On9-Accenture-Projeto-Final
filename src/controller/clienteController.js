@@ -5,6 +5,18 @@ const Cliente = require('../model/Cliente');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
+const obterTodos = async(req, res) => {
+    Cliente.find()
+        .then((existeCliente) => {
+            if (existeCliente) {
+                res.status(200).json(existeCliente)
+            }
+        })
+        .catch((e) => {
+            res.status(500).json(e)
+        })
+}
+
 const salvarCliente = async(req, res, next) => {
     const { nome, telefone, endereco, email, senha } = req.body;
     const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -38,6 +50,47 @@ const salvarCliente = async(req, res, next) => {
     }
 }
 
+const atualizarCliente = async(req, res, next) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400).json({ mensagem: 'id nao é valido' });
+        return;
+    }
+
+    Cliente.findByIdAndUpdate(id, req.body)
+        .then(() => {
+            res.status(200).json({ mensagem: ` ${req.params.id} foi atualizado.` });
+        })
+        .catch(err => next(err));
+
+}
+
+const deletarCliente = async(req, res, next) => {
+    const { id } = req.params;
+
+    Cliente.findById(id)
+        .then(async(cliente) => {
+            if ((cliente.objetosAlugados).length > 0) {
+                return res.status(400).json({ mensagem: 'Faça devolução dos objetos alugados para deletar conta' })
+            }
+            Cliente.findByIdAndRemove(id)
+                .then(() => {
+                    res.status(200).json({ mensagem: 'Conta deletada !' })
+                })
+                .catch((err) => {
+                    res.status(400).json(err, { mensagem: 'Não foi possivel deletar conta' })
+                })
+        })
+        .catch(err => next(err))
+}
+
+
+
+
 module.exports = {
+    obterTodos,
+    atualizarCliente,
     salvarCliente,
+    deletarCliente
 }
