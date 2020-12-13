@@ -3,23 +3,23 @@ const TransitAgentUser = require("../models/TransitAgents");
 const AmbulancesUser = require("../models/Ambulances");
 const MessageSend = require("../models/Messages");
 
-exports.get = (req, res, next) => {
-  MessageSend.find()
-    .then((messages) => {
-      resp.status(200).json(messages);
-    })
-    .catch((err) => next(err));
-};
 
-exports.getById = (req, res) => {
-    const id = req.params.id;
-    MessageSend
-      .findById(id)
-      .then((messages) => {
-        res.status(200).json(messages);
+exports.get = (req, res, next) => {
+    MessageSend.find()
+      .then((messagesSend) => {
+        res.status(200).json(messagesSend);
       })
       .catch((err) => next(err));
   };
+
+exports.getById = (req, res) => {
+  const id = req.params.id;
+  MessageSend.findById(id)
+    .then((messagesSend) => {
+      res.status(200).json(messagesSend);
+    })
+    .catch((err) => next(err));
+};
 
 exports.postNewMessage = async (req, res, next) => {
   let { id } = req.body;
@@ -38,12 +38,12 @@ exports.postNewMessage = async (req, res, next) => {
       locationAmbulance: req.body.locationAmbulance,
       destinationHospital: req.body.destinationHospital,
       routesToHopital: req.body.routesToHopital,
-      userAmbulance
+      userAmbulance,
     });
     newMessageAmbulance
       .save()
       .then((newMessageAmbulance) => {
-        return res.status(201).json(newMessageAmbulance);
+        return res.status(201).json(newMessageAmbulance + userAmbulance);
       })
       .catch((err) => next(err, "There is not an user with this id."));
   } else if (userAgent) {

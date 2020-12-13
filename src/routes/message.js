@@ -14,7 +14,7 @@ router.post("/create", messageController.postNewMessage);
 
 
 // @rout GET /messages/
-router.get("/", messageController.get);
+router.get("/", messageController.get)
 
 // @rout GET /messages/:id
 router.get("/:id", messageController.getById);

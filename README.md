@@ -41,6 +41,32 @@ GET
 
 ~~~
 
+
+GET
+~~~JavaScript
+
+~~~
+
+GET
+~~~JavaScript
+
+~~~
+
+GET
+~~~JavaScript
+
+~~~
+
+GET
+~~~JavaScript
+
+~~~
+
+GET
+~~~JavaScript
+
+~~~
+
 POST Transit Agent
 https://alert-ambulance.herokuapp.com/agents/create
 ~~~JavaScript
@@ -58,7 +84,7 @@ https://alert-ambulance.herokuapp.com/ambulances/create
 ~~~JavaScript
 {
     "email": "luana2@teste.com",
-    "driverName": "luana",
+    "driverName": "luana ambulance,
     "password": "luana",
     "driverCPF": "00000000002",
     "licensePlate": "23e456",
@@ -71,7 +97,6 @@ https://alert-ambulance.herokuapp.com/message/create
 ~~~JavaScript
 {
   "id": "5fd59afba21cf60017e69e57",
-  "nome": "luana abulance",
   "locationAmbulance": "Camaragibe", 
   "destinationHospital": "Recife",
   "routesToHopital": "Casa Forte"
@@ -83,12 +108,6 @@ http://localhost:3001/message/create
 ~~~JavaScript
 {
   "id": "5fd5a153f4a8214eacba5858",
-  "nome": "luana ambulance",
   "transitAgentlocation": "Camaragibe"
 }
-~~~
-
-POST
-~~~JavaScript
-
 ~~~
