@@ -1,7 +1,12 @@
 # Alerta de Gatilho (versão 1.0) - Documentação
 
+[
+![logo alerta de gatilho](https://user-images.githubusercontent.com/65046215/102000960-5199e580-3ccb-11eb-9627-307c5334e590.gif)
+
 # Sejam bem vindos!
-Olá, essa API chamada Alerta de Gatilho tem como propósito listar livros que possuem gatilhos, cenas sensíveis que podem afetar estado psíquico do leitor e que nem sempre estão claros na sinopse. Dessa forma, a pessoa já inicia a leitura sabendo de tópicos que serão abordados, podendo assim saber se está preparada psicologicamente ou não para embarcar na leitura da obra sem que essa faça mal ao indivíduo. Considerando que a leitura pode fazer com que a pessoa se prenda na história, e isso pode trazer reflexos bons ou ruins ao indivíduo, dependendo do que é tratado na obra.
+Olá, esse projeto foi desenvolvido como Projeto Final do Curso Bootcamp de Back-end da {reprograma} em parceria com a Accenture!
+
+A API chamada Alerta de Gatilho tem como propósito listar livros que possuem gatilhos, cenas sensíveis que podem afetar estado psíquico do leitor e que nem sempre estão claros na sinopse. Dessa forma, a pessoa já inicia a leitura sabendo de tópicos que serão abordados, podendo assim saber se está preparada psicologicamente ou não para embarcar na leitura da obra sem que essa faça mal ao indivíduo. Considerando que a leitura pode fazer com que a pessoa se prenda na história, e isso pode trazer reflexos bons ou ruins ao indivíduo, dependendo do que é tratado na obra.
 
 ## Contato
 Desenvolvido por *Íris Brito*
@@ -13,6 +18,11 @@ Desenvolvido por *Íris Brito*
 ## Arquitetura do Projeto
 O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que a parte de View que é Front-end não foi realizada, porque o foco está no Back-end.
 
+## Ferramentas necessárias
+ - VSCode
+ - NodeJS
+ - MongoDB
+
 ## Dependências utilizadas
  - Express
  - Nodemon
@@ -23,26 +33,26 @@ O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que 
 
 ### GET 
 Retornar todos os livros do sistema:
-http://localhost:8080/alertaDeGatilho 
+http://localhost:8080/ 
 
 Retornar o livro de acordo com o id:
-http://localhost:8080/alertaDeGatilho/:id
+http://localhost:8080/:id
 
 Retornar o livro de acordo com o título:
-http://localhost:8080/alertaDeGatilho/titulo?title=*titulo*
+http://localhost:8080/titulo?title=*titulo*
 
 Retornar os livros de acordo com o nome do(a) autor(a)
-http://localhost:8080/alertaDeGatilho/autor?author=nome do autor
+http://localhost:8080/autor?author=nome do autor
 
 Retornar os livros que têm gatilhos:
-http://localhost:8080/alertaDeGatilho/temgatilho
+http://localhost:8080/temgatilho
 
 Retornar os livros que não tem gatilhos:
-http://localhost:8080/alertaDeGatilho/naotemgatilho
+http://localhost:8080/naotemgatilho
 
 ### POST
 Adicionar um novo livro:
-http://localhost:8080/alertaDeGatilho/cadastro
+http://localhost:8080/cadastro
 
 O body deve conter:
 
@@ -80,13 +90,13 @@ Resposta [200]:
 
 Resposta [400]:
 
-    "Impossível cadastrar o livro. Confira as informações e se ele já não está cadastrado."
+    "Book already exists in this database."
 
 ### PATCH
 
 Atualizar os gatilhos de um livro:
 
-http://localhost:8080/alertaDeGatilho/alterargatilho/:id
+http://localhost:8080/alterargatilho/:id
 
 O body deve conter: 
 
@@ -110,7 +120,7 @@ Resposta [400]:
 
 Deletar um livro:
 
-http://localhost:8080/alertaDeGatilho/:id
+http://localhost:8080/:id
 
 Resposta [200]:
 
