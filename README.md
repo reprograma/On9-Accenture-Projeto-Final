@@ -22,7 +22,11 @@ Os usuários que cadastram um gato, também terá acesso as informações de lar
 
 ### POST
 
-- Cadastro um novo lar temporário:
+- Cadastro um novo lar temporário.
+
+**Regra**: 
+
+Um endereço de email só poderá ser cadastrado uma vez na base de dados.
 
 [https://abrigue-um-miau.herokuapp.com/home/new](https://abrigue-um-miau.herokuapp.com/home/new)
 
@@ -47,6 +51,7 @@ Resposta (200) status de sucesso
 ```jsx
 {
 	"available": true,
+	"_id": "5fd2a701a29adc3bbc96de0c",
 	"name": "Nome Sobrenone",
 	"email": "email@email.com",
 	"password": "password",
@@ -68,7 +73,7 @@ Resposta (400) status de erro
 
 ### POST
 
-- Insere no campo "favoriteCats" o ID de um gato favoritado através do ID do usuário que está oferecendo um lar:
+- Insere no campo "favoriteCats" o ID de um ou mais gatos favoritados através do ID do usuário que está oferecendo um lar:
 
 [https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6](https://abrigue-um-miau.herokuapp.com/home/favorite/5fd4e9acccaaa600245f98a6)
 
@@ -248,7 +253,8 @@ Resposta (200) status sucesso:
 
 ```jsx
 {
-
+    "available": true
+    "_id": "5fd2a701a29adc3bbc96de0c",
     "responsible": "Nome",
     "email": "email@email.com",
     "contact": 11010111010,
@@ -256,9 +262,8 @@ Resposta (200) status sucesso:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Apelido gato",
-    "aboutTheMiau": "Fêmea, adulta e está prestes a parir. Necessita de um abrigo.",
-    "avaiable": true
-
+    "aboutTheMiau": "Fêmea, adulta e está prestes a parir. Necessita de um abrigo."
+   
 }
 ```
 
@@ -296,6 +301,8 @@ Estrutura do body:
 
 ```jsx
 {
+    "available": true,
+    "_id": "5fd2a701a29adc3bbc96de0c",
     "responsible": "Nome",
     "email": "email@email.com",
     "contact": 11010111010,
@@ -303,8 +310,8 @@ Estrutura do body:
     "city": "Cidade",
     "neighborhood": "Bairro",
     "nicknameCat": "Mel",
-    "aboutTheCat": "Amarelo, filhote e já está na rua por um bom tempo",
-    "avaiable": true
+    "aboutTheCat": "Amarelo, filhote e já está na rua por um bom tempo"
+    
 
 }
 ```
@@ -363,7 +370,7 @@ Resposta (400) status de erro:
 
 ## Considerações
 
-Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's ou abrindo issue's.
+Comunidade, este projeto está em fase inicial e em estará em constante mudanças. Fiquem a vontade para contribuírem utilizando PR's, ou abrindo issue's.
 
 ## Como faço para rodar este projeto?
 
