@@ -1,16 +1,25 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 const healthClinicRoutes = require('./routes/healthClinicRoutes.js');
 const vaccinesRoutes = require('./routes/vaccineRoutes.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
+const index = require('./routes/index');
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/AquiTemVacina',
+const dotenv = require('dotenv');
+dotenv.config();
+
+mongoose.connect(`${process.env.MONGO_URI}`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    });
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log('MONGODB Connected');
+    })
+    .catch(err => { console.log(err) })
 
 
 app.use(express.json());
@@ -24,9 +33,9 @@ app.use(function (request, response, next) {
     next()
 })
 
-
-app.use('/unidades-de-saude', healthClinicRoutes);
-app.use('/vacinas', vaccinesRoutes);
+app.use('/', index)
+app.use('/health-clinics', healthClinicRoutes);
+app.use('/vaccines', vaccinesRoutes);
 app.use('/admin', sessionRoutes);
 
 module.exports = app;

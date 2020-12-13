@@ -1,18 +1,27 @@
 {
   "name": "allana-caldas-aqui-tem-vacina",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.18.3"
+  },
   "description": "Primeira parte do Projeto Final da turma de Desenvolvimento BackEnd do Reprograma",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Allana Caldas",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.4",
-    "nodemon": "^2.0.6",
-    "yup": "^0.32.1"
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
