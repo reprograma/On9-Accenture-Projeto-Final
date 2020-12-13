@@ -2,7 +2,7 @@
 
 ### Prisma Educação Financeira
 
-A estrutura de um **Prisma** recebe uma iluminação e dissipa em várias outras cores. Assim como um prisma que multiplica algo, o projeto possui o objetivo de democratizar o conhecimento acerca da educação financeira, e empoderar a sociedade, para que possam disseminar o aprendizado e ajudar a instruir os outros ao seu redor. Vem com a **Prisma Educação Financeira**! Tome as rédeas da sua vida financeira, sem conflito de interesse e que pode lhe proporcionar mais rentabilidade.
+A estrutura de um **Prisma** recebe uma iluminação e dissipa em várias outras cores. Assim como um prisma que multiplica algo, o projeto possui o objetivo de democratizar o conhecimento acerca da educação financeira, e empoderar a sociedade, para que possam disseminar o aprendizado e ajudar a instruir os outros ao seu redor sobre as melhores práticas para manejar as suas finanças. Vem com a **Prisma Educação Financeira**! Tome as rédeas da sua vida financeira, sem conflito de interesse e que pode lhe proporcionar mais rentabilidade.
 
 ---
 
@@ -14,7 +14,7 @@ A estrutura de um **Prisma** recebe uma iluminação e dissipa em várias outras
 - [Matriz CSD](#matriz-csd)
 - [Card Sorting](#card-sorting)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Documentação de API (versão 1.0)](#documentação-de-api-versão-1.0)
+- [Documentação de API (versão 1.0)](#documentação-de-api)
 - [Rotas](#rotas)
 - [Arquitetura MVC](#arquitetura-mvc)
 - [Agradecimentos](#agradecimentos)
