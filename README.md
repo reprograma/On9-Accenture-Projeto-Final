@@ -36,21 +36,18 @@ Negócio:
 * MVC
 
 ## Rotas
-GET
-~~~JavaScript
+GET visualizar todas as mensagens
+https://alert-ambulance.herokuapp.com/message/
 
-~~~
+GET visualizar a mensagem por meio do id
+https://alert-ambulance.herokuapp.com/message/5fd5a2592f782e105c230632
 
+GET visualizar todas as ambulâncias
+http://localhost:3001/ambulances/
 
-GET
-~~~JavaScript
+GET visualizar a ambulância por id
+http://localhost:3001/ambulances/5fd5d1e4229c5d39accc7330
 
-~~~
-
-GET
-~~~JavaScript
-
-~~~
 
 GET
 ~~~JavaScript

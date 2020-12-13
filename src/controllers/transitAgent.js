@@ -9,8 +9,8 @@ const bcryptSalt = 8;
 
 exports.get = (req, res, next) => {
   TransitAgentUser.find()
-    .then((transitAgents) => {
-      resp.status(200).json(transitAgents);
+    .then((agentTransits) => {
+      resp.status(200).json(agentTransits);
     })
     .catch((err) => next(err));
 };
@@ -19,8 +19,8 @@ exports.getById = (req, res) => {
   const id = req.params.id;
   TransitAgentUser
     .findById(id)
-    .then((transitAgent) => {
-      res.status(200).json(transitAgent);
+    .then((agentTransits) => {
+      res.status(200).json(agentTransits);
     })
     .catch((err) => next(err));
 };
