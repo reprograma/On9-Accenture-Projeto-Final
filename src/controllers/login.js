@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const authConfig = require('../config/auth')
 const bcrypt = require('bcrypt')
 const Admin = require('../models/Admin')
 
@@ -9,14 +8,11 @@ function checkPassword(passwordEntry, password) {
 
 exports.accessToken = (req, res) => {
   try {
-    const { nameAdmin, password: passwordEntry } = req.body
-    Admin.findOne({ name: nameAdmin })
+    const { email, password: passwordEntry } = req.body
+    Admin.findOne({ email: email })
       .then((admin) => {
-        const { id, name, password } = admin
-
-        try {
-          checkPassword(passwordEntry, password)
-        } catch (e) {
+        const { id, email, password } = admin
+        if (!checkPassword(passwordEntry, password)) {
           return res.status(401).json({ error: `Senha não corresponde.` })
         }
 
@@ -24,10 +20,10 @@ exports.accessToken = (req, res) => {
           return res.json({
             admin: {
               id,
-              name,
+              email,
             },
-            token: jwt.sign({ id }, authConfig.secret, {
-              expiresIn: authConfig.expiresIn,
+            token: jwt.sign({ id }, `${process.env.SECRET}`, {
+              expiresIn: `${process.env.EXPIRESIN}`,
             }),
           })
         } catch (e) {

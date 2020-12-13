@@ -5,7 +5,13 @@ Projeto elaborado para conclusão do Bootcamp de Back-End promovido pela {reprog
 Sabemos da importância de manter em dia a vacinação para prevenir doenças como hepatites e sarampo, porém, muitas pessoas não fazem ideia de onde guardaram o seu cartão de vacina ou muitas vezes ele está muito antigo e de difícil leitura. Foi a partir desse problema que surgiu a ideia de uma API de um cartão de vacina virtual que tem a proposta das pessoas poderem ter o controle de suas vacinas.
 
 ## Objetivo
-O objetivo do projeto é possibilitar o registro de usuários e vacinas, visualizar todos ou por ID, fazer atualizações de campo específico, assim como ser possível deletar registros. Todo o desenvolvimento da API foi pensado na utilização de boas práticas e estrutura de pastas, seguindo o design MVC.
+O objetivo do projeto é possibilitar o registro de usuários e vacinas, possibilitando visualizar todos ou por ID, fazer atualizações de campo específico, assim como ser possível deletar registros. Todo o desenvolvimento da API foi pensado na utilização de boas práticas e estrutura de pastas, seguindo o design MVC. Além disso, a utilização dos métodos relacionados ao banco de dados MongoDB e suas consultas avançadas.
+
+## Deploy da Aplicação com Heroku:
+https://vacina-em-dia.herokuapp.com/
+
+## Apresentação do projeto:
+[Vacina em Dia](https://www.canva.com/design/DAEQEhRp_rk/DFh1njLm7BAAZm5S2QAyqQ/view?utm_content=DAEQEhRp_rk&utm_campaign=designshare&utm_medium=link&utm_source=publishpresent)
 
 ## Status
 🚧 Em construção... 🚧
@@ -13,7 +19,7 @@ O objetivo do projeto é possibilitar o registro de usuários e vacinas, visuali
 ## Rotas
 ### Apresentação da API
 
-**POST:** /
+**GET:** /
 
 Apresenta o título da API e sua versão.
 
@@ -30,7 +36,7 @@ Resposta [200]:
 
 **POST:** admin/register
 
-Criar novo usuário administrador.
+Criar novo usuário administrador. Ele que terá acesso a determinadas rotas.
 
 Body necessário:
 
@@ -53,7 +59,7 @@ Resposta [200]:
 }
 ~~~
 
-Resposta [400]:
+Resposta [400] quando o usuário administrador insere o e-mail igual a um já cadastrado:
 
 ~~~Javascript
 {
@@ -63,32 +69,56 @@ Resposta [400]:
 }
 ~~~
 
+Resposta [400] quando o usuário administrador cria uma senha com menos de 8 caracteres:
+
+~~~Javascript
+{
+    "errors": [
+        "A senha precisa ter no mínimo 8 caracteres."
+    ]
+}
+~~~
+
 ### Login
 Fazer login na API para gerar o JSON Web Token que será enviado em todas as requisições protegidas que apenas o usuário administrador terá acesso.
 
-**POST:** /login
+**POST:** /login/admin
 
 Body necessário:
 
 ~~~Javascript
-    {
-        "nameAdmin": "string",
-        "password": "string"
-    }
+{
+    "email": "string",
+    "password": "string"
+}
 ~~~
 
 Resposta [200]:
 
 ~~~Javascript
-    {
-        {
-            "admin": {
-                "id": "object ID",
-                "name": "string"
-            },
-            "token": "string"
-        }
-    }
+{
+    "admin": {
+        "id": "object ID",
+        "email": "string"
+    },
+    "token": "string"
+}
+~~~
+
+Resposta [401]:
+
+~~~Javascript
+{
+    "error": "Administrador não encontrado."
+}
+~~~
+
+Resposta [401]:
+
+~~~Javascript
+{
+    "error": "Senha não corresponde."
+}
 ~~~
 
 ### Usuários
@@ -150,12 +180,22 @@ Resposta [200]:
 }
 ~~~
 
-Resposta [400]:
+Resposta [400] quando o usuário insere o e-mail igual a um já cadastrado:
 
 ~~~Javascript
 {
     "error": [
         "Já existe uma conta com esse e-mail."
+    ]
+}
+~~~
+
+Resposta [400] quando o usuário cria uma senha com menos de 8 caracteres:
+
+~~~Javascript
+{
+    "errors": [
+        "A senha precisa ter no mínimo 8 caracteres."
     ]
 }
 ~~~
@@ -177,6 +217,58 @@ Usuário com o ID informado.
     "password": "string",
     "cpf": "string",
     "phone": "string",
+}
+~~~
+
+Resposta [400]:
+
+Quando o ID informado está incorreto.
+
+~~~Javascript
+{
+    "message": "O ID especificado não é válido."
+}
+~~~
+
+**GET:** /card/{id}
+
+Visualizar o cartão do usuário a partir do seu ID.
+
+Resposta [200]:
+
+Usuário com o ID informado.
+
+~~~Javascript
+{
+    "vaccinesTaken": [
+        {
+            "_id": "object ID",
+            "name": "string",
+            "dose": "string",
+            "avoidedDiseases": "string"
+        },
+        {
+            "_id": "object ID",
+            "name": "string",
+            "dose": "string",
+            "avoidedDiseases": "string"
+        }
+    ],
+    "_id": "object ID",
+    "name": "string",
+    "email": "string",
+    "cpf": "string",
+    "phone": "string"
+}
+~~~
+
+Resposta [400]:
+
+Quando o ID informado está incorreto.
+
+~~~Javascript
+{
+    "message": "O ID especificado não é válido."
 }
 ~~~
 
@@ -234,7 +326,7 @@ Resposta [401]:
 
 **GET:** /vaccines
 
-Listar todas as vacinas
+Listar todas as vacinas em ordem alfabética.
 
 Resposta [200]:
 
@@ -249,9 +341,33 @@ Resposta [200]:
 ]
 ~~~
 
+**GET:** /name
+
+Lista a vacina pelo nome.
+
+Params necessário:
+
+| Key | Value |
+| ---- | ---- |
+| name | Nome da vacina |
+
+Resposta [200]:
+
+~~~Javascript
+[
+    {
+        "_id": "object ID",
+        "name": "string",
+        "date": "date",
+        "dose": "string",
+        "avoidedDiseases": "string"
+    }
+]
+~~~
+
 **POST:** /register
 
-Cadastrar nova vacina.
+Cadastrar vacina. É necessário autorização com token no padrão: Bearer Token.
 
 Body necessário:
 
@@ -272,6 +388,24 @@ Resposta [201]:
     "date": "date",
     "dose": "string",
     "avoidedDiseases": "string"
+}
+~~~
+
+Resposta [400]:
+
+~~~Javascript
+{
+    "error": [
+        "Já existe essa vacina cadastrada."
+    ]
+}
+~~~
+
+Resposta [401]:
+
+~~~Javascript
+{
+    "error": "Token não fornecido."
 }
 ~~~
 
@@ -293,33 +427,74 @@ Vacina com o ID informado.
 }
 ~~~
 
-**POST:** /register/{id}
+Resposta [400]:
 
-Registrar vacina no cartão do usuário.
+Quando o ID informado está incorreto.
+
+~~~Javascript
+{
+    "message": "O ID especificado não é válido."
+}
+~~~
+
+**PATCH:** /vaccinestaken/{id}
+
+Atualizar as vacinas tomadas do usuário. É necessário autorização com token no padrão: Bearer Token.
 
 Body necessário:
 
 ~~~Javascript
 {
     "name": "string",
-    "dose": "string",
-    "avoidedDiseases": "string"
+    "dose": "string"
 }
 ~~~
 
-Resposta [201]:
+Resposta [200]:
 
 ~~~Javascript
 {
+    "vaccinesTaken": [
+        "object ID",
+        "object ID"
+    ],
     "_id": "object ID",
     "name": "string",
-    "dose": "string",
-    "avoidedDiseases": "string",
-    "userId": "object ID"
+    "email": "string",
+    "password": "string",
+    "cpf": "string",
+    "phone": "string"
 }
 ~~~
 
-**DELETE:** /:id
+Resposta [400]:
+
+Quando o ID informado está incorreto.
+
+~~~Javascript
+{
+    "message": "O ID especificado não é válido."
+}
+~~~
+
+Resposta [401]:
+
+~~~Javascript
+{
+    "error": "Token não fornecido."
+}
+~~~
+
+Resposta [404]:
+~~~Javascript
+{
+    "error": [
+        "Não existe essa vacina cadastrada na base de dados."
+    ]
+}
+~~~
+
+**DELETE:** /{id}
 
 Deletar uma vacina a partir do seu ID. É necessário autorização com token no padrão: Bearer Token.
 
@@ -344,9 +519,10 @@ Resposta [401]:
 - Não pode existir usuários iguais.
 - O CPF não pode ser alterado.
 - Apenas o usuário administrador poderá cadastrar e deletar vacinas.
-- Apenas o usuário administrador poderá atualizar as vacinas tomadas.
-- Apenas o usuário administrador poderá visualizar todos os usuários.
-- Apenas o usuário administrador poderá deletar os usuários.
+- Apenas o usuário administrador poderá inserir as vacinas tomadas.
+- Apenas o usuário administrador poderá visualizar todos os usuários e deletá-los.
+- Não pode inserir no cartão do usuário uma vacina que não está cadastrada na base de dados.
+- Listar todas as vacinas por ordem alfabética.
 
 ## Para rodar o projeto
 - Clone esse repositório
@@ -386,8 +562,11 @@ Foram utilizadas no desenvolvimento do projeto as seguintes tecnologias:
 Obs.: O Nodemon está como dependência de desenvolvimento.
 
 ## Melhorias futuras
+- Detalhamento das vacinas por faixa etária da pessoa.
 - Opção de filtrar por vacinas específicas de acordo com a idade da pessoa.
 - Visualizar as vacinas que o usuário ainda precisa tomar.
+- Inserir a busca pelo CPF do usuário.
+- Implementar autenticação para o usuário comum.
 
 
 Este projeto encontra-se em desenvolvimento e está aberto para pull request.

@@ -14,11 +14,33 @@ exports.getUser = (req, res, next) => {
 
 exports.getUserById = (req, res, next) => {
   const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: `O ID especificado não é válido.` })
+    return
+  }
+
   User.findById(id)
     .then((user) => {
       res.status(200).json(user)
     })
     .catch((err) => next(err))
+}
+
+exports.getUserCard = (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(400).json({ message: `O ID especificado não é válido.` })
+    return
+  }
+  
+  User.findById(id, {"name":1, "email":1, "cpf":1, "phone":1})
+    .populate({ path: 'vaccinesTaken', select: 'name dose avoidedDiseases' })
+    .then((cardUser) => {
+      res.status(200).json(cardUser)
+    })
+    .catch((err) => json(err))
 }
 
 exports.signup = async (req, res) => {
@@ -30,25 +52,26 @@ exports.signup = async (req, res) => {
 
     const user = new User(validatedBody)
 
-    User.findOne({ email: validatedBody.email }).then(async (existingUser) => {
-      if (existingUser) {
-        return res.status(400).json({
-          error: ["Já existe uma conta com esse e-mail."],
-        })
-      }
+    User.findOne({ email: validatedBody.email })
+      .then(async (existingUser) => {
+        if (existingUser) {
+          return res.status(400).json({
+            error: [`Já existe uma conta com esse e-mail.`]
+          })
+        }
 
-      const passwordHashed = await bcrypt.hashSync(password, salt)
-      user.password = passwordHashed
+        const passwordHashed = await bcrypt.hashSync(password, salt)
+        user.password = passwordHashed
 
-      user.save()
-        .then((user) => res.status(200).json(user))
-        .catch((err) => {
-          return res.status(500).json(err)
-        })
-    })
-    .catch((err) => {
-      res.status(400).json(err)
-    })
+        user.save()
+          .then((user) => res.status(200).json(user))
+          .catch((err) => {
+            return res.status(500).json(err)
+          })
+      })
+      .catch((err) => {
+        res.status(400).json(err)
+      })
   } catch (e) {
     return res.status(400).json(e)
   }
@@ -64,11 +87,9 @@ exports.updatePhone = (req, res) => {
   }
   User.findByIdAndUpdate(id, { $set: { phone } })
     .then(() => {
-      res
-        .status(200)
-        .json({
-          message: `O telefone do usuário de id: ${req.params.id} foi atualizado com sucesso.`,
-        })
+      res.status(200).json({
+        message: `O telefone do usuário de id: ${req.params.id} foi atualizado com sucesso.`
+      })
     })
     .catch((err) => {
       res.json(err)
