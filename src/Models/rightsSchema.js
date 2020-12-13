@@ -2,12 +2,8 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const rightsSchema = new Schema({
-    _id: {
-        type: mongoose.Schema.Types.ObjectId, 
-        auto: true,
-        required: true
-    },
-    titlelegalSubject: {
+    
+    titleLegalSubject: {
         type: String,
         required: true,
     },
