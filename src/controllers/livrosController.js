@@ -1,6 +1,5 @@
 const { response, request } = require("express")
 const mongoose = require('mongoose');
-const { validatingPost } = require('../helpers/helpers');
 const Book = require('../models/Livros');
 
 const createBook = async (request, response, next)=> {
