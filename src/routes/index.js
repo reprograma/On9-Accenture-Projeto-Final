@@ -8,5 +8,7 @@ router.get("/", function(request,response){
     })
 })
 
+router.get
+
 
 module.exports = router
