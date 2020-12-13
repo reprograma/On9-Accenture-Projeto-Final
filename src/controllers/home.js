@@ -77,8 +77,12 @@ exports.getByNeighborhood = (request, response) => {
 exports.getFavCats = (request, response) => {
     const { id } = request.params
     Home.findById(id).populate({ path: 'favoriteCats', select: 'responsible contact city neighborhood nicknameCat aboutTheMiau available' })
-        .then(() => {
+        .then((user) => {
+            const { id, favoriteCats } = user
             response.status(200).json({
+                user: {
+                    id,
+                },
                 favoriteCats
             })
         })
