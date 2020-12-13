@@ -2,9 +2,11 @@ const express = require('express');
 const app = require('../app');
 const router = express.Router();
 
-router.get('/', function(req, res) {
-    res.status(200).send({
+router.get('/', (req, res) => {
+    res.status(200).json({
         name: "API Alugue Aí",
-        vesao: "1.0"
+        versao: "1.0"
     })
 });
+
+module.exports = router;
