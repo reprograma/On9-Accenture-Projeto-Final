@@ -17,7 +17,7 @@ router.get("/naotemgatilho", controller.getDoesntHasTrigger);
 
 router.post("/cadastro", controller.createBook);
 
-//router.patch("/gatilho/:id")
+router.patch("/alterargatilho/:id", controller.updateTriggers);
 
 router.get("/:id", controller.getById);
 

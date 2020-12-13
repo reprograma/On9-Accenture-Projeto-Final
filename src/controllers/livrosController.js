@@ -2,9 +2,12 @@ const { response, request } = require("express")
 const mongoose = require('mongoose');
 const Book = require('../models/Livros');
 
-const createBook = (request, response)=> {
+const createBook = async (request, response, next)=> {
     let { title, author, hasTrigger, triggers, synopsis } = request.body
-
+    const list = await Book.find({$and: [{ title: title}, {author: author}]})
+    if(list.length > 0){
+        return response.status(401).json({message: `Book already exists in this database`})
+    }
     const newBook = new Book({
         title,
         author,
@@ -12,14 +15,17 @@ const createBook = (request, response)=> {
         triggers,
         synopsis,
       });
-    newBook.save()
+
+      newBook.save()
         .then((res) => {
             response.status(201).json(res);
         })
         .catch(err => next(err));
-}
 
-const getAll = (request, response)=>{
+    }
+    
+
+const getAll = (request, response, next)=>{
     Book.find()
         .then((books) => {
             response.status(200).json(books);
@@ -37,7 +43,7 @@ const getById = (request, response) =>{
         .catch(err => {throw new Error(err)});
 }
 
-const getHasTrigger = (request, response) =>{
+const getHasTrigger = (request, response, next) =>{
     Book.find({ hasTrigger: true})
         .then((books)=>{
             response.status(200).send(books);
@@ -45,7 +51,7 @@ const getHasTrigger = (request, response) =>{
         .catch(err => next (err));
 }
 
-const getDoesntHasTrigger = (request, response) =>{
+const getDoesntHasTrigger = (request, response, next) =>{
     Book.find({ hasTrigger: false})
         .then((books)=>{
             response.status(200).send(books);
@@ -54,9 +60,9 @@ const getDoesntHasTrigger = (request, response) =>{
 }
 
 const getByAuthor = (request, response) =>{
-    const { author } = request.body 
+    const { author } = request.query 
 
-    Book.find(author)
+    Book.find({author:author})
         .then((books)=>{
             response.status(200).json(books);
         })
@@ -64,9 +70,9 @@ const getByAuthor = (request, response) =>{
 }
 
 const getByTitle = (request, response) =>{
-    const { title } = request.body 
+    const { title } = request.query 
 
-    Book.find(title)
+    Book.find({title:title})
         .then((books)=>{
             response.status(200).json(books);
         })
@@ -74,17 +80,50 @@ const getByTitle = (request, response) =>{
 }
 
 const getByTrigger = (request, response) =>{
-    const { triggers } = request.body 
+    const { triggers } = request.query 
 
-    Book.find(triggers)
+    Book.find({triggers: triggers})
         .then((books)=>{
             response.status(200).json(books);
         })
         .catch(err => {throw new Error(err)});
 }
 
+//PATCH
+const updateTriggers = (request, response) =>{
+    const { id } = request.params
+    const { triggers } = request.body
+    const filteredList = [];
+
+
+    Book.findById(id)
+        .then((books) =>{
+            if (books.hasTrigger == true) {
+                triggers.forEach(trigger => {
+                     if (!filteredList.includes(trigger)) { filteredList.push(trigger) } 
+                    });
+
+                Book.findByIdAndUpdate(id, {$set: { triggers: filteredList }})
+                    .then((books)  =>{
+                        response.status(200).json({ message: `${request.params.id} triggers have been updated`});
+            })
+            
+                    .catch((err) => next(err));
+            
+            }  else {
+                response.status(400).json({ message: `${request.params.id} cannot be updated because this book doesn't have triggers`});
+            }
+        
+        })
+        .catch(err => { throw new Errow(err) })
+    } 
+    
 const deleteBook = (request, response)=>{
     const { id } = request.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) { 
+        return response.status(400).json({ message: 'ID provided is not valid' }) 
+    }
     
     Book.findByIdAndDelete(id)
         .then(() => {
@@ -98,11 +137,12 @@ const deleteBook = (request, response)=>{
 module.exports = {
     createBook,
     getAll,
-    getById,
     getByAuthor,
     getByTitle,
     getByTrigger,
     getDoesntHasTrigger,
     getHasTrigger,
+    getById,
+    updateTriggers,
     deleteBook
 }

@@ -1,7 +1,7 @@
 # Alerta de Gatilho (versão 1.0) - Documentação
 
 # Sejam bem vindos!
-Olá, essa API chamada Alerta de Gatilho tem como propósito listar livros que possuem gatilhos que podem afetar estado psíquico do leitor e que nem sempre estão claros na sinopse. Dessa forma, a pessoa já inicia a leitura sabendo de tópicos que serão abordados, podendo assim saber se está preparada psicologicamente ou não para embarcar na leitura da obra sem que essa faça mal ao indivíduo. Considerando que a leitura pode fazer com que a pessoa se prenda na história, e isso pode trazer reflexos bons ou ruins ao indivíduo, dependendo do que é tratado na obra.
+Olá, essa API chamada Alerta de Gatilho tem como propósito listar livros que possuem gatilhos, cenas sensíveis que podem afetar estado psíquico do leitor e que nem sempre estão claros na sinopse. Dessa forma, a pessoa já inicia a leitura sabendo de tópicos que serão abordados, podendo assim saber se está preparada psicologicamente ou não para embarcar na leitura da obra sem que essa faça mal ao indivíduo. Considerando que a leitura pode fazer com que a pessoa se prenda na história, e isso pode trazer reflexos bons ou ruins ao indivíduo, dependendo do que é tratado na obra.
 
 ## Contato
 Desenvolvido por *Íris Brito*
@@ -17,7 +17,7 @@ O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que 
  - Express
  - Nodemon
  - Mongoose
-
+ - Dotenv
 
 ## Rotas
 
@@ -29,10 +29,10 @@ Retornar o livro de acordo com o id:
 http://localhost:8080/alertaDeGatilho/:id
 
 Retornar o livro de acordo com o título:
-http://localhost:8080/alertaDeGatilho/titulo/*titulo*
+http://localhost:8080/alertaDeGatilho/titulo?title=*titulo*
 
 Retornar os livros de acordo com o nome do(a) autor(a)
-http://localhost:8080/alertaDeGatilho/autor/nome-do-autor
+http://localhost:8080/alertaDeGatilho/autor?author=nome do autor
 
 Retornar os livros que têm gatilhos:
 http://localhost:8080/alertaDeGatilho/temgatilho
@@ -46,19 +46,37 @@ http://localhost:8080/alertaDeGatilho/cadastro
 
 O body deve conter:
 
-    { 
-	    "title": "Por lugares incríveis",
-	    "author": "Jennifer Niven",
-	    "hasTrigger": true
-	    "triggers": ["bullying", "trauma", "suicídio", "depressão", "transtorno bipolar"],
-	    "synopsis": "Violet Markey tinha uma vida perfeita, mas todos os seus planos deixam de fazer sentido quando ela e a irmã sofrem um acidente de carro e apenas Violet sobrevive. Sentindo-se culpada pelo que aconteceu, Violet se afasta de todos e tenta descobrir como seguir em frente. Theodore Finch é o esquisito da escola, perseguido pelos valentões e obrigado a lidar com longos períodos de depressão, o pai violento e a apatia do resto da família. Enquanto Violet conta os dias para o fim das aulas, quando poderá ir embora da cidadezinha onde mora, Finch pesquisa diferentes métodos de suicídio e imagina se conseguiria levar algum deles adiante. Em uma dessas tentativas, ele vai parar no alto da torre da escola e, para sua surpresa, encontra Violet, também prestes a pular. Um ajuda o outro a sair dali, e essa dupla improvável se une para fazer um trabalho de geografia: visitar os lugares incríveis do estado onde moram. Nessas andanças, Finch encontra em Violet alguém com quem finalmente pode ser ele mesmo, e a garota para de contar os dias e passa a vivê-los."
-	    
+    {
+        "title": "Raio de Sol",
+        "author": "Kim Holden",
+        "hasTrigger": true,
+        "triggers": ["transtorno alimentar", "bulimia", "suicidio", "aborto", "homofobia", "assédio", "violencia", "abuso parental"],
+        "synopsis": "Faça épico, costuma dizer Kate Sedgwick quando quer estimular alguém a dar o melhor de si. Nascida numa família-problema, com direito a mortes e abandono, a garota de dezenove anos sempre buscou fazer a diferença. Em vez de passar os dias lamentando os infortúnios da vida, como tantos fariam em seu lugar, sempre vê as coisas pelo lado positivo não é por outro motivo que Gus, seu melhor amigo, a chama de Raio de Sol.E é por isso que, quando passa na faculdade e se muda da ensolarada San Diego, na Califórnia, para a fria cidade de Grant, em Minnesota, ela leva consigo apenas boas lembranças e perspectivas. O que ela não espera é que será surpreendida pelo amor único aspecto da vida em relação ao qual nunca quis ser otimista ao conhecer Keller Banks, um rapaz que parece corresponder aos seus sentimentos. Acontece que tanto ele quanto ela têm um segredo. E segredos, às vezes, podem mudar tudo."
     }
 
 
 Resposta [200]:
 
-    "Livro cadastrado com sucesso!"
+    {
+    "hasTrigger": true,
+    "triggers": [
+        "transtorno alimentar",
+        "bulimia",
+        "suicidio",
+        "aborto",
+        "homofobia",
+        "assédio",
+        "violencia",
+        "abuso parental"
+    ],
+    "_id": "5fd4ff934f5ede0017ed6adf",
+    "title": "Raio de Sol",
+    "author": "Kim Holden",
+    "synopsis": "Faça épico, costuma dizer Kate Sedgwick quando quer estimular alguém a dar o melhor de si. Nascida numa família-problema, com direito a mortes e abandono, a garota de dezenove anos sempre buscou fazer a diferença. Em vez de passar os dias lamentando os infortúnios da vida, como tantos fariam em seu lugar, sempre vê as coisas pelo lado positivo não é por outro motivo que Gus, seu melhor amigo, a chama de Raio de Sol.E é por isso que, quando passa na faculdade e se muda da ensolarada San Diego, na Califórnia, para a fria cidade de Grant, em Minnesota, ela leva consigo apenas boas lembranças e perspectivas. O que ela não espera é que será surpreendida pelo amor único aspecto da vida em relação ao qual nunca quis ser otimista ao conhecer Keller Banks, um rapaz que parece corresponder aos seus sentimentos. Acontece que tanto ele quanto ela têm um segredo. E segredos, às vezes, podem mudar tudo.",
+    "createdAt": "2020-12-12T17:36:19.129Z",
+    "updatedAt": "2020-12-12T17:36:19.129Z",
+    "__v": 0
+}
 
 Resposta [400]:
 
@@ -68,14 +86,24 @@ Resposta [400]:
 
 Atualizar os gatilhos de um livro:
 
-http://localhost:8080/alertaDeGatilho/alterar/:id
+http://localhost:8080/alertaDeGatilho/alterargatilho/:id
 
 O body deve conter: 
 
-
     { 
-	    "id": 9517861964548hgdjs
+	    "_id": 9517861964548hgdjs
 	    "triggers": ["bullying", "trauma", "suicídio", "depressão", "ansiedade"]   
+    }
+
+Resposta [200]:
+    {
+        "message": "{id} triggers have been updated"
+    }
+
+Resposta [400]:
+
+    {
+        "message": "{id} cannot be updated because this book doesn't have triggers"
     }
 
 ### DELETE
@@ -86,7 +114,7 @@ http://localhost:8080/alertaDeGatilho/:id
 
 Resposta [200]:
 
-    "Livro deletado com sucesso!"
+    "Book deleted!"
 
 Resposta [400]:
 
@@ -95,11 +123,11 @@ Resposta [400]:
 
 # Regras de negócios
 
-- Não aceitar cadastrar livro com título e autor existente no banco de dados
 - Não aceitar incluir gatilhos iguais no mesmo livro
-- Não permitir que qualquer pessoa possa alterar ou excluir livros
+- Não aceitar cadastrar livro com título e autor existente no banco de dados
 - Não permitir que um livro que está cadastrado que não tem gatilho tenha inclusão de gatilhos
 - Não permitir que um livro que está cadastrado que tem gatilho fique com o campo de gatilhos em branco
+- Não permitir que qualquer pessoa possa alterar ou excluir livros
 
 
 # Para rodar o projeto
