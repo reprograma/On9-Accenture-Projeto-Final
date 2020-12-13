@@ -9,8 +9,8 @@ const bcryptSalt = 8;
 
 exports.get = (req, res, next) => {
   TransitAgentUser.find()
-    .then((agentTransits) => {
-      resp.status(200).json(agentTransits);
+    .then((agents) => {
+      res.status(200).json(agents);
     })
     .catch((err) => next(err));
 };
