@@ -2,11 +2,11 @@
 
 ## Sobre o projeto
 
-Assim como na programação, os praticantes de surf são predominantemente homens, porém, a cada dia que passa, mais mulheres se desafiam a adentrar esses espaços que antes não eram possíveis pra nós. Encontrei nesse projeto, uma forma de unificar duas paixões que carrego, afim de incentivar mais mulheres a conhecer projetos e vivenciar uma nova experiência em um ambiente seguro.
+Assim como na programação, os praticantes de surf são predominantemente homens. Porém, a cada dia que passa, mais mulheres se desafiam a adentrar esses espaços que antes não eram possíveis pra nós. Encontrei neste projeto, uma forma de unificar duas paixões que carrego, afim de incentivar mais mulheres a conhecer projetos e vivenciar uma nova experiência em um ambiente seguro.
 
 Em diversas praias, ocorrem os chamados "surfdays", projetos onde instrutoras e praticantes do esporte se reunem para surfar juntas, além de outras práticas integrativas como yoga e rodas de debates. Não há restrição quanto ao nível de experiência no mar, basta saber nadar e ter interesse em aprender.
 
-Essa API tem como objetivo informar sobre esses eventos. A usuária pode localiza-los a partir da localização desejada e verificar se as inscrições estão abertas, e, caso seja cadastrada, é possível criar novos eventos, adiá-los ou até mesmo alterar o local da prática.
+Essa API tem como objetivo informar sobre esses eventos. A usuária pode localizá-los a partir da localização desejada e verificar se as inscrições estão abertas, e, caso seja cadastrada, é possível criar novos eventos, adiá-los ou até mesmo alterar o local da prática.
 
 # Rotas
 
