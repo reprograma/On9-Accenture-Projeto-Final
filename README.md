@@ -16,18 +16,18 @@ API publicada: https://api-blackflix.herokuapp.com/
 
 - **/api/videos**
 - **/api/videos/:id**
-- **/api/videos/categoria/:id**
-- **/api/perfil/:id/videos/favorite**
+- **/api/videos/categoria/:id** 
+- **/api/perfil/:id/videos/favorite**(necessário estar logado)
 
 - **/api/categorias**
 - **/api/categorias/:id**
 
-- **/api/admin/users**
-- **/api/admin/users/:id**
+- **/api/admin/users**(necessário estar logado como admin)
+- **/api/admin/users/:id**(necessário estar logado como admin)
 
 #### POST
 
-- **/api/admin/videos/new**
+- **/api/admin/videos/new**(necessário estar logado como admin)
 
 Body necessário para criar vídeo:
 
@@ -39,7 +39,7 @@ Body necessário para criar vídeo:
 }
 ```
 
-- **/api/admin/categorias/new**
+- **/api/admin/categorias/new**(necessário estar logado como admin)
 
 Body necessário para criar categoria:
 
@@ -75,7 +75,7 @@ Body necessário para fazer login:
 }
 ```
 
-- **/api/perfil/:userid/favorite/:videoId/like**
+- **/api/perfil/:userid/favorite/:videoId/like**(necessário estar logado)
 
 Body necessário para favoritar vídeo:
 
@@ -86,7 +86,7 @@ Body necessário para favoritar vídeo:
 }
 ```
 
-- **/api/perfil/:userid/favorite/:videoId/dislike**
+- **/api/perfil/:userid/favorite/:videoId/dislike**(necessário estar logado)
 
 Body necessário para desfavoritar vídeo:
 
@@ -99,7 +99,7 @@ Body necessário para desfavoritar vídeo:
 
 #### PUT
 
-- **/api/admin/videos/editar/:id**
+- **/api/admin/videos/editar/:id**(necessário estar logado como admin)
 
 Body necessário para atualizar vídeo:
 
@@ -111,7 +111,7 @@ Body necessário para atualizar vídeo:
 }
 ```
 
-- **/api/admin/categorias/editar/:id**
+- **/api/admin/categorias/editar/:id**(necessário estar logado como admin)
 
 Body necessário para atualizar categoria:
 
@@ -124,7 +124,7 @@ Body necessário para atualizar categoria:
 }
 ```
 
-- **/api/perfil/editar/:id**
+- **/api/perfil/editar/:id**(necessário estar logado)
 
 Body necessário para atualizar usuário:
 
@@ -137,11 +137,11 @@ Body necessário para atualizar usuário:
 
 #### DELETE
 
-- **/api/admin/videos/:id**
+- **/api/admin/videos/:id**(necessário estar logado como admin)
 
-- **/api/admin/categorias/:id**
+- **/api/admin/categorias/:id**(necessário estar logado como admin)
 
-- **/api/perfil/:id**
+- **/api/perfil/:id**(necessário estar logado)
 
 ## Para rodar o projeto use:
 `git clone [link]`
