@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Essa API tem o intuito de incluir o recurso de login na plataforma 'Blackflix', bem como, favoritem os vídeos que desejarem. Além disso, o perfil de Administrador poderá utilizar dos métodos do CRUD para fazer cadastro de novos vídeos, atualização dos cadastros desses vídeos, deletar vídeos, filtrar vídeos, etc.
+Essa API tem o intuito de incluir o recurso de login na plataforma **'Blackflix'**, bem como, favoritem os vídeos que desejarem. Além disso, o perfil de Administrador poderá utilizar dos métodos do CRUD para fazer cadastro de novos vídeos, atualização dos cadastros desses vídeos, deletar vídeos, filtrar vídeos, etc.
 
 O banco de dados utilizado para registro das informações acima mencionadas foi o MongoDB.
 
