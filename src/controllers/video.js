@@ -1,4 +1,5 @@
 const Video = require("../models/Video");
+const Favorite = require("../models/Favorite");
 const { videoSchema } = require("../validators/video");
 const mongoose = require("mongoose");
 
@@ -74,7 +75,7 @@ exports.criarVideo = async (req, res) => {
               console.log(e);
               // Retornando a nossa função mais cedo caso haja um erro ao salvar o Video
               return res.status(303).json({
-                errors: ["Houve um erro ao criar uma entrada na tabela "],
+                message: "Houve um erro ao criar uma entrada na tabela ",
               });
             });
         } else {
@@ -117,9 +118,29 @@ exports.deletarVideo = (req, res) => {
 
   Video.findByIdAndDelete(id) // o método encontra e deleta o vídeo por ID
     .then(() => {
-      res.status(200).json("Vídeo deletado.");
+      res.status(200).json({ message: "Vídeo deletado." });
     })
     .catch((err) => {
       throw new Error(err); // throw new Error => mostra o erro
     });
+};
+
+exports.getAllFavorite = async (req, res) => {
+  try {
+    Favorite.find({ userId: req.params.id, isFavorite: true })
+      .populate({ path: "videoId" })
+      .exec()
+      .then(async (videos) => {
+        const status = videos && videos.length > 0 ? 200 : 204;
+
+        videos = videos.map((v) => {
+          return v.videoId;
+        });
+
+        return res.status(status).send(videos);
+      });
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json(e);
+  }
 };

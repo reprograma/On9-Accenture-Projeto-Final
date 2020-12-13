@@ -5,7 +5,7 @@ const { promisify } = require("util");
 module.exports = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).json({ error: "Token not provided" });
+    return res.status(401).json({ message: "Token not provided" });
   }
 
   const [, token] = authHeader.split(" ");
@@ -16,6 +16,6 @@ module.exports = async (req, res, next) => {
     req.isAdmin = decoded.tipo == 1;
     return next();
   } catch (err) {
-    return res.status(401).json({ error: "Token invalid" });
+    return res.status(401).json({ message: "Token invalid" });
   }
 };

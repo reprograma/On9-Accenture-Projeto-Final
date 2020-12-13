@@ -8,96 +8,151 @@ O banco de dados utilizado para registro das informações acima mencionadas foi
 
 A plataforma BlackFlix foi desenvolvida por mim, com o intuito de reunir vídeos de Youtubers pretos, com conteúdos variados. A tecnologia utilizada no Front-End foi o React e, você pode conhecer a plataforma aqui: [Blackflix](https://blackflix.vercel.app/)
 
-### Endpoints
+API publicada: https://api-blackflix.herokuapp.com/
 
-##### GET
+## Endpoints
 
-- `/api/videos`
-- `/api/videos/:id`
-- `/api/videos/categoria/:id`
+#### GET
 
-- `/api/categorias`
-- `/api/categorias/:id`
+- **/api/videos**
+- **/api/videos/:id**
+- **/api/videos/categoria/:id**
+- **/api/perfil/:id/videos/favorite**
 
-- `/api/admin/users`
-- `/api/admin/users/:id`
+- **/api/categorias**
+- **/api/categorias/:id**
 
-##### POST
+- **/api/admin/users**
+- **/api/admin/users/:id**
 
-- `/api/admin/videos/new`
+#### POST
+
+- **/api/admin/videos/new**
 
 Body necessário para criar vídeo:
 
-`{ "titulo": "QUER COMEÇAR A ORGANIZAR SUA VIDA FINANCEIRA? NATH FINANÇAS TE AJUDA!! - GABI OLIVEIRA", "urlVideo": "https://www.youtube.com/watch?v=wTnSMw4NtXA", "categoriaId": "5fcfcfb69b882e392cae3b3a" }`
+```
+{
+    "titulo": "QUER COMEÇAR A ORGANIZAR SUA VIDA FINANCEIRA? NATH FINANÇAS TE AJUDA!! - GABI OLIVEIRA",
+    "urlVideo": "https://www.youtube.com/watch?v=wTnSMw4NtXA",
+    "categoriaId": "5fcfcfb69b882e392cae3b3a" 
+}
+```
 
-- `/api/admin/categorias/new`
+- **/api/admin/categorias/new**
 
 Body necessário para criar categoria:
 
-`{ "titulo": "Gabi Oliveira", "cor": "#6BD1FF", "canal": "Canal De pretas por Gabi Oliveira", "urlCanal": "https://www.youtube.com/channel/UCF108KZPnFVxP8lILiJ1kng" }`
+```
+{
+    "titulo": "Gabi Oliveira", 
+    "cor": "#6BD1FF", 
+    "canal": "Canal De pretas por Gabi Oliveira", 
+    "urlCanal": "https://www.youtube.com/channel/UCF108KZPnFVxP8lILiJ1kng" 
+}
 
-- `/api/users/signup`
+```
+
+- **/api/signup**
 
 Body necessário para criar usuário:
 
-`{"email": "jennyffer@hotmail.com", "password": "senha123456"}`
+```
+{
+    "email": "jennyffer@hotmail.com",
+    "password": "senha123456"
+}
+```
 
-- `/api/login`
+- **/api/signin**
 
 Body necessário para fazer login:
 
-`{"email": "jennyffer@hotmail.com", "password": "senha123456"}`
+```
+{
+    "email": "jennyffer@hotmail.com",
+    "password": "senha123456"
+}
+```
 
-- `/api/perfil/:id/favorite/:videoId/like`
+- **/api/perfil/:userid/favorite/:videoId/like**
 
 Body necessário para favoritar vídeo:
 
-`{"userid":"5fd52a649de32b0b14cb95be", "videoid":"5fcfd10f9b882e392cae3b3d"}`
+```
+{
+    "userid":"5fd52a649de32b0b14cb95be", 
+    "videoid":"5fcfd10f9b882e392cae3b3d"
+}
+```
 
-- `/api/perfil/:id/favorite/:videoId/dislike`
+- **/api/perfil/:userid/favorite/:videoId/dislike**
 
 Body necessário para desfavoritar vídeo:
 
-`{"userid":"5fd52a649de32b0b14cb95be", "videoid":"5fcfd10f9b882e392cae3b3d"}`
+```
+{
+    "userid":"5fd52a649de32b0b14cb95be", 
+    "videoid":"5fcfd10f9b882e392cae3b3d"
+}
+```
 
-##### PUT
+#### PUT
 
-- `/api/admin/videos/editar/:id`
+- **/api/admin/videos/editar/:id**
 
 Body necessário para atualizar vídeo:
 
-`{ "titulo": "teste put", "urlVideo": "https://www.youtube.com/watch?v=qL6HTLmJ3OUteste-put", "categoriaId": "5fcfcfb69b882e392cae3b3a" }`
+```
+{
+    "titulo": "teste put",
+    "urlVideo": "https://www.youtube.com/watch?v=qL6HTLmJ3OUteste-put",
+    "categoriaId": "5fcfcfb69b882e392cae3b3a" 
+}
+```
 
-- `/api/admin/categorias/editar/:id`
+- **/api/admin/categorias/editar/:id**
 
 Body necessário para atualizar categoria:
 
-`{ "titulo": "teste put", "cor": "#9cd33b", "canal": "teste put", "urlCanal": "https://www.youtube.com/c/spartakus/featuredteste-put" }`
+```
+{
+    "titulo": "teste put",
+    "cor": "#9cd33b",
+    "canal": "teste put",
+    "urlCanal": "https://www.youtube.com/c/spartakus/featuredteste-put" 
+}
+```
 
-- `/api/perfil/editar/:id`
+- **/api/perfil/editar/:id**
 
 Body necessário para atualizar usuário:
 
-`{"email": "jennyffer@hotmail.com", "password": "jennyffer"}`
+```
+{
+    "email": "jennyffer@hotmail.com",
+    "password": "jennyffer"
+}
+```
 
-##### DELETE
+#### DELETE
 
-- `/api/admin/videos/:id`
+- **/api/admin/videos/:id**
 
-- `/api/admin/categorias/:id`
+- **/api/admin/categorias/:id**
 
-- `/api/perfil/:id`
+- **/api/perfil/:id**
 
-##Para rodar o projeto use:
+## Para rodar o projeto use:
 `git clone [link]`
 `npm install`
 `npm start`
 
-### Documentação da API
+## Documentação da API:
 
 ![Arquitetura do projeto](./arquitetura.png)
 
-### Contatos da Desenvolvedora
+## Contatos da Desenvolvedora
 
 [LinkedIn da Jennyffer](https://www.linkedin.com/in/jennyfferndemorais/)
 E-mail: jnm.morais@gmail.com

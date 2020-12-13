@@ -13,7 +13,6 @@ const config = require("./config");
 const index = require("./routes/index");
 const videos = require("./routes/video");
 const categorias = require("./routes/categoria");
-const users = require("./routes/user");
 const perfil = require("./routes/perfil");
 const admin = require("./routes/admin");
 const login = require("./routes/login");
@@ -46,12 +45,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", index);
-app.use("/api/videos", videos);
+app.use("/api", login);
 app.use("/api/categorias", categorias);
-app.use("/api/users", users);
+app.use("/api/videos", videos);
 app.use("/api/perfil", authMiddleware, perfil);
 app.use("/api/admin", authMiddleware, adminMiddleware, admin);
-app.use("/api/login", login);
 
 /*
  * Error Handler.

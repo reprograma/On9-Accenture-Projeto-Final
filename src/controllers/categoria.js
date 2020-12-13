@@ -59,7 +59,7 @@ exports.criarCategoria = async (req, res) => {
               console.log(e);
               // Retornando a nossa função mais cedo caso haja um erro ao salvar a categoria
               return res.status(303).json({
-                errors: ["Houve um erro ao criar uma entrada na tabela "],
+                message: "Houve um erro ao criar uma entrada na tabela ",
               });
             });
         } else {
@@ -102,7 +102,7 @@ exports.deletarCategoria = (req, res) => {
 
   Categoria.findByIdAndDelete(id) // o método encontra e deleta a categoria por ID
     .then(() => {
-      res.status(200).json("Categoria deletada.");
+      res.status(200).json({ message: "Categoria deletada." });
     })
     .catch((err) => {
       throw new Error(err); // throw new Error => mostra o erro
