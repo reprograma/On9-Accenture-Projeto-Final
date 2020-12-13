@@ -9,5 +9,6 @@ if(process.env.NODE_ENV == 'development') {
 module.exports = {
   secret: process.env.SECRET,
   expiresIn: process.env.EXPIRESIN,
-  stringConnection: process.env.DATABASE
+  stringConnection: process.env.DATABASE,
+  port:process.env.PORT,
 };
