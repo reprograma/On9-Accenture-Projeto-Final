@@ -4,7 +4,7 @@ const { response } = require('../app')
 const { events } = require('../models/event')
 const Event = require('../models/event')
 
-const getAll = (req, res) => {
+const getAll = (req, res, next) => {
     Event.find()
     .then((events) => {
         res.status(200).json(events)
@@ -12,7 +12,7 @@ const getAll = (req, res) => {
     .catch(err => next(err))
 }
 
-const getByApply = (req, res) =>{
+const getByApply = (req, res, next) =>{
     
     Event.find({ openApply: true})
         .then((events) => {
@@ -32,7 +32,7 @@ const createEvent = (req, res, next) =>{
     })
     newEvent.save()
         .then((newEvent) => {
-            res.status(201).json(newEvent)
+            res.status(201).json({ message: 'Event created successfully'})
         })
         .catch(err => next(err))
 }
@@ -72,7 +72,7 @@ const deleteEvent = (req, res, next) =>{
 
     Event.findByIdAndDelete(id)
         .then(() => {
-            res.status(200).json('Evento cancelado')
+            res.status(200).json('Event canceled')
         })
         .catch((err) => {
             throw new Error(err)
