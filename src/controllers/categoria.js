@@ -1,5 +1,6 @@
 const Categoria = require("../models/Categoria");
 const { categoriaSchema } = require("../validators/categoria");
+const mongoose = require("mongoose");
 
 exports.getAll = async (req, res) => {
   try {
@@ -58,7 +59,7 @@ exports.criarCategoria = async (req, res) => {
               console.log(e);
               // Retornando a nossa função mais cedo caso haja um erro ao salvar a categoria
               return res.status(303).json({
-                errors: ["Houve um erro ao criar uma entrada na tabela "],
+                message: "Houve um erro ao criar uma entrada na tabela ",
               });
             });
         } else {
@@ -74,4 +75,36 @@ exports.criarCategoria = async (req, res) => {
     console.log({ e });
     return res.status(200).json(e);
   }
+};
+
+exports.atualizarCategoria = (req, res) => {
+  const { id } = req.params; //pega o ID na URL
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    // verifica se o valor passado é um ID e, se é válido no BD
+    res.status(400).json({ message: "Esse ID não é válido." });
+    return;
+  }
+
+  Categoria.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
+    .then(() => {
+      res.status(200).json({
+        message: ` A categoria com o ID: ${req.params.id} foi atualizada.`,
+      });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
+exports.deletarCategoria = (req, res) => {
+  const { id } = req.params;
+
+  Categoria.findByIdAndDelete(id) // o método encontra e deleta a categoria por ID
+    .then(() => {
+      res.status(200).json({ message: "Categoria deletada." });
+    })
+    .catch((err) => {
+      throw new Error(err); // throw new Error => mostra o erro
+    });
 };

@@ -3,20 +3,21 @@
  */
 const express = require("express");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const config = require("./config");
 
-/**
- * * Carregar variaveis do arquivo .env file, onde chaves de API e senhas são configuradas
- */
-dotenv.config();
 
 /**
  * Routes
  */
+const index = require("./routes/index");
 const videos = require("./routes/video");
 const categorias = require("./routes/categoria");
-// const users = require("./routes/user");
+const perfil = require("./routes/perfil");
+const admin = require("./routes/admin");
+const login = require("./routes/login");
+const authMiddleware = require("./middlewares/auth");
+const adminMiddleware = require("./middlewares/authAdmin");
 
 /**
  * Create Express server.
@@ -27,7 +28,7 @@ const app = express();
  * Conectar com o MongoDB
  */
 mongoose
-  .connect(`${process.env.DATABASE}`, {
+  .connect(`${config.stringConnection}`, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
@@ -39,13 +40,16 @@ mongoose
 /**
  * Express configuration.
  */
-app.set("port", process.env.PORT || 8080);
+app.set("port", config.port || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/api/videos", videos);
+app.use("/", index);
+app.use("/api", login);
 app.use("/api/categorias", categorias);
-// app.use("/api/users", users);
+app.use("/api/videos", videos);
+app.use("/api/perfil", authMiddleware, perfil);
+app.use("/api/admin", authMiddleware, adminMiddleware, admin);
 
 /*
  * Error Handler.

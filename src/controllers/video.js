@@ -1,5 +1,7 @@
 const Video = require("../models/Video");
+const Favorite = require("../models/Favorite");
 const { videoSchema } = require("../validators/video");
+const mongoose = require("mongoose");
 
 exports.getAll = async (req, res) => {
   try {
@@ -37,8 +39,7 @@ exports.getByCategoria = async (req, res) => {
   try {
     const categoriaId = req.params.id;
 
-    Video.find({ categoriaId: categoriaId })
-    .then(async (videos) => {
+    Video.find({ categoriaId: categoriaId }).then(async (videos) => {
       const status = videos && videos.length > 0 ? 200 : 204;
 
       return res.status(status).send(videos);
@@ -74,7 +75,7 @@ exports.criarVideo = async (req, res) => {
               console.log(e);
               // Retornando a nossa função mais cedo caso haja um erro ao salvar o Video
               return res.status(303).json({
-                errors: ["Houve um erro ao criar uma entrada na tabela "],
+                message: "Houve um erro ao criar uma entrada na tabela ",
               });
             });
         } else {
@@ -89,5 +90,57 @@ exports.criarVideo = async (req, res) => {
     // Retornando erro de validação
     console.log({ e });
     return res.status(200).json(e);
+  }
+};
+
+exports.atualizarVideo = async (req, res) => {
+  const { id } = req.params; //pega o ID na URL
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    // verifica se o valor passado é um ID e, se é válido no BD
+    res.status(400).json({ message: "Esse ID não é válido." });
+    return;
+  }
+
+  Video.findByIdAndUpdate(id, req.body) // método que encontra e atualiza por ID
+    .then(() => {
+      res.status(200).json({
+        message: `O vídeo com o ID: ${req.params.id} foi atualizado.`,
+      });
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+};
+
+exports.deletarVideo = (req, res) => {
+  const { id } = req.params;
+
+  Video.findByIdAndDelete(id) // o método encontra e deleta o vídeo por ID
+    .then(() => {
+      res.status(200).json({ message: "Vídeo deletado." });
+    })
+    .catch((err) => {
+      throw new Error(err); // throw new Error => mostra o erro
+    });
+};
+
+exports.getAllFavorite = async (req, res) => {
+  try {
+    Favorite.find({ userId: req.params.id, isFavorite: true })
+      .populate({ path: "videoId" })
+      .exec()
+      .then(async (videos) => {
+        const status = videos && videos.length > 0 ? 200 : 204;
+
+        videos = videos.map((v) => {
+          return v.videoId;
+        });
+
+        return res.status(status).send(videos);
+      });
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json(e);
   }
 };
