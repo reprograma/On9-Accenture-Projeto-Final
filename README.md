@@ -29,6 +29,7 @@ Fazendo um pedido de de busca sobre um direiro (usando uma palavra que lhe repre
 -título do assunto jurídico: texto e obrigatório;
 -descrição sobre o assunto: texto e obrigatório;
 -fonte de informação do direito: texto e obrigatório.
+-data en que a informação foi inserida no banco de dados.
 
 
 ## API deve retornar seguinte JSON com dados da API:
@@ -97,26 +98,24 @@ RETORNA: "/rights/delete/[ID]" Deleta o direito por id específico e retorna men
 		**rightsValidator.js**
 
 
-### Endpoints
+### Endpoints - links para testar o API
 
-- `/api/users/singup`
-- `/api/users/all`
-- `/api/rights/requests/new`
+**Link dos direitos:**
+- retornar todos os direitos registrados: http://localhost:8080/rights
+- Realizar o cadastro de um direito:  http://localhost:8080/rights/add
+- Atualizar os dados do direito: http://localhost:8080/rights/:id
+- Deletar o registro do direito: http://localhost:8080/rights/:id
 
 
-### links para testar o API
-
-- **/rights/ferias/user/:id**
-
-  - Buscar o item cadastro "férias" dentro dos arquivos dos direitos, para o usuário ler.
-
-- **/rights/requested/user/:id**
-  - Buscar todos os direitos que esse usuário requisitou.
-
-**/rights/request/delete/:id**
-
-- Excluir um direito (dentro da pasta direitos) cadastrado na API.
+**Link dos usuários para cadastrar:**
+- registrar o usuário do API: http://localhost:8080/user/register
+- Fazer o login do usuário no API: http://localhost:8080/user/signup
 
 
 
 **O presente API "Direitos das Mulheres Tech" está em constante desenvolvimento.**
+
+**Autora:** Rebeca Coelho
+**Email:** rebecabcrebeca@outlook.com
+**Linkedin:** www.linkedin.com/in/rebeca-coelho-871a42139
+**Github:** https://github.com/Rebeca-Coelho
