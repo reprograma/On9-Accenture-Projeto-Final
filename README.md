@@ -18,6 +18,8 @@ Desenvolvido por *Íris Brito*
 ## Arquitetura do Projeto
 O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que a parte de View que é Front-end não foi realizada, porque o foco está no Back-end.
 
+**Projeto no Heroku:** https://alerta-de-gatilho.herokuapp.com/
+
 ## Ferramentas necessárias
  - VSCode
  - NodeJS
