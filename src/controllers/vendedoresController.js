@@ -1,7 +1,6 @@
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Vendedor = require("../models/Vendedores")
-const {vendedorSchema} = require("../validators/vendedores")
 const bcrypt = require("bcrypt");
 const bcryptSalt = 6;
 
@@ -12,7 +11,9 @@ const vendedores = (request, response) => {
         .then((vendedores) => {
             response.status(200).json(vendedores);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            response.status(400).json(err)
+        });
 }
 
 //GET
@@ -24,12 +25,14 @@ const nomeVendedor = (request, response) => {
         .then((nome) => {
             response.status(200).json(nome);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            response.status(400).json(err)
+        });
 }
 
 //POST
-const novoVendedor = async (req, res, next) => { 
-    const { nome, password, rg } = req.body;
+const novoVendedor = async (request, response, next) => { 
+    const { nome, password, rg } = request.body;
     const salt = bcrypt.genSaltSync(bcryptSalt);
 
     try {
@@ -43,21 +46,22 @@ const novoVendedor = async (req, res, next) => {
       
       Vendedor.findOne({nome:nome})
         .then((vendedor =>{
-            if (vendedor) {
-                res.status(401).json("Vendedor(a) já cadastrado(a)")
+            if (vendedor ) {
+                response.status(401).json("Vendedor(a) já cadastrado(a)")
                
             }else{
                 novoVendedor.save()
                 .then((vendedor) => {
-                    res.status(201).json(vendedor);
+                    response.status(201).json(vendedor);
                 })
                 .catch(err => next(err));
             }
             console.log(vendedor)
         }))
+        .catch(err => next(err));
      
     } catch (e) {
-      return res.status(401).json({ error: 'erro' });
+      return response.status(401).json({ error: 'erro' });
     }
   }
 
@@ -66,7 +70,7 @@ const desligamento = (request, response) => {
     const { id } = request.params
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({message: "Specified id is not valid"});
+        response.status(400).json({message: "Id inválido"});
         return;
     }
        

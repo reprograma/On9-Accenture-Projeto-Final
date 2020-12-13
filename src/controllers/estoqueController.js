@@ -1,7 +1,7 @@
 const { request, response } = require("express")
 const mongoose = require("mongoose");
 const Estoque = require("../models/Estoque");
-const {produtoSchema, estoqueSchema} = require("../validators/estoque")
+
 
 //GET
 const estoqueGeral = (request, response) => {
@@ -10,7 +10,9 @@ const estoqueGeral = (request, response) => {
         .then((Produtos) => {
             response.status(200).json(Produtos);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            response.status(400).json(err);
+        });
 }
 
 //GET
@@ -22,42 +24,51 @@ const nomeProduto = (request, response) => {
         .then((produto) => {          
             response.status(200).json(produto);
         })
-        .catch(err => next(err));
+        .catch((err) => {
+            response.status(400).json(err);
+        });
 }
 
 //POST
 const cadastroProduto = async (request, response) => {
-        
-    const produtoValidado = await produtoSchema.validate(request.body)
-  
-    const checarNome = produtoValidado.nomeProduto
-      
-    Estoque.findOne({nomeProduto: checarNome})
-        .then(produto => {
-            if (produto){
-                response.status(400).json("Produto já cadastrado")
+   
+    const {nomeProduto, descricao, estoque, valorFabrica} = request.body;
+    
+    try {
+          
+    Estoque.findOne({nomeProduto: nomeProduto})
+        .then((produto) => {
+
+            if (produto){              
+                response.status(400).json("Produto já cadastrado");
             }else {
-                novoProduto = new Estoque(produtoValidado)
+                const novoProduto = new Estoque ({ nomeProduto, descricao, estoque, valorFabrica});
                 novoProduto.save()
                 .then((res) => {
                     response.status(201).json(res);
                 })
-                .catch(err => next(err));
+                .catch((err) => {
+                    response.status(400).json(err);
+                });
             }
         })
+        .catch((err) => {
+            response.status(500).json(err);
+        });
+    }catch (err) {
+        return response.status(400).json({ error: err.message })
     }
+}
 
 //PATCH
 const abastecerEstoque = async (request, response) => {
 
-    const produtoValidado = await estoqueSchema.validate(request.body)
-    const checarEstoque = produtoValidado.estoque
-    const nomeProduto = produtoValidado.nomeProduto
-            
+    const {nomeProduto, estoque} = request.body;
+        
     try {
-        let produto = await Estoque.findOne( {nomeProduto});
+        let produto = await Estoque.findOne({nomeProduto: nomeProduto});
 
-        produto.estoque = produto.estoque + checarEstoque
+        produto.estoque = produto.estoque + estoque
 
         await produto.save();
 
@@ -66,7 +77,7 @@ const abastecerEstoque = async (request, response) => {
     }
     catch (err) {
 
-        return response.status(400).json({ error: err.message })
+        return response.status(400).json({ error: err.message });
     }
 }
 
@@ -75,13 +86,13 @@ const deletarProduto = (request, response) => {
     const { id } = request.params
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        response.status(400).json({message: "Specified id is not valid"});
+        response.status(400).json({message: "Id inválido"});
         return;
     }
        
         Estoque.findByIdAndDelete(id)
                     .then(() => {
-                        response.status(200).json("Produto deletado!");
+                        response.status(200).json("Produto excluido!");
                     })
                     .catch((err) => {
                         throw new Error(err);

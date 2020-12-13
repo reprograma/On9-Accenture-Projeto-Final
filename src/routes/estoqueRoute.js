@@ -14,14 +14,14 @@ router.get("/", controller.estoqueGeral)
 
 /**
 @route GET estoque/:nomeProduto
-@desc Retorna produto pelo nome
+@desc Retorna o produto pelo nome
 @access Public 
 @endpoint http://localhost:8080/estoque/:nomeProduto
 **/
 router.get("/:nomeProduto", controller.nomeProduto);
 
 /**
-@route POST estoque/add
+@route POST estoque/cadastro
 @desc Cadastrar novo produto
 @access Public 
 @endpoint http://localhost:8080/estoque/cadastro

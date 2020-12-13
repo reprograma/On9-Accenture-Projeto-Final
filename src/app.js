@@ -1,17 +1,21 @@
 const express = require("express")
 const app = express() 
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
 
-mongoose.connect("mongodb://localhost/Controle", //`${process.env.DATABASE}`
+dotenv.config();
+
+mongoose.connect(`${process.env.DATABASE}`,//"mongodb://localhost/Controle", //
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
     });
 
 const estoqueRoute = require("./routes/estoqueRoute")
 const vendasRoute = require("./routes/vendasRoute")
 const vendedorRoute = require ("./routes/vendedoresRoute")
-const sessions = require("./routes/sessaoRoute");
+const sessao = require("./routes/sessaoRoute");
 
 app.use(express.json())
 
@@ -26,7 +30,8 @@ app.use(function(req, res, next) {
   
 app.use("/estoque", estoqueRoute)
 app.use("/venda", vendasRoute)
-app.use("/session", sessions)
+app.use("/sessao", sessao)
 app.use("/vendedor", vendedorRoute)
 
 module.exports = app
+
