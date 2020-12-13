@@ -17,7 +17,7 @@ const anunciantes = require('./routes/anuncianteRoutes');
 const objetos = require('./routes/objetoRoutes');
 const alugueis = require('./routes/aluguelRoutes');
 const sessions = require('./routes/sessaoRoute');
-
+const index = require('./routes/index');
 app.use(cors())
 app.use(express.json());
 
@@ -26,5 +26,6 @@ app.use('/anunciante', anunciantes);
 app.use('/objeto', objetos);
 app.use('/aluguel', alugueis);
 app.use('/sessao', sessions);
+app.use('/', index);
 
 module.exports = app;
