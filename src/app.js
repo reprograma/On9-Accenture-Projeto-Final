@@ -5,6 +5,7 @@ const app = express();
 const healthClinicRoutes = require('./routes/healthClinicRoutes.js');
 const vaccinesRoutes = require('./routes/vaccineRoutes.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
+const index = require('./routes/index');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -32,7 +33,7 @@ app.use(function (request, response, next) {
     next()
 })
 
-
+app.use('/', index)
 app.use('/health-clinics', healthClinicRoutes);
 app.use('/vaccines', vaccinesRoutes);
 app.use('/admin', sessionRoutes);
