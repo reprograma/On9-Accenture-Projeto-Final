@@ -1,6 +1,6 @@
 # Alerta de Gatilho (versão 1.0) - Documentação
 
-[
+
 ![logo alerta de gatilho](https://user-images.githubusercontent.com/65046215/102000960-5199e580-3ccb-11eb-9627-307c5334e590.gif)
 
 # Sejam bem vindos!
