@@ -1,6 +1,6 @@
 # Alerta de Gatilho (versão 1.0) - Documentação
 
-[
+
 ![logo alerta de gatilho](https://user-images.githubusercontent.com/65046215/102000960-5199e580-3ccb-11eb-9627-307c5334e590.gif)
 
 # Sejam bem vindos!
@@ -17,6 +17,8 @@ Desenvolvido por *Íris Brito*
 
 ## Arquitetura do Projeto
 O projeto foi desenvolvido utilizando a estrutura MVC + Rotas, considerando que a parte de View que é Front-end não foi realizada, porque o foco está no Back-end.
+
+**Projeto no Heroku:** https://alerta-de-gatilho.herokuapp.com/
 
 ## Ferramentas necessárias
  - VSCode
