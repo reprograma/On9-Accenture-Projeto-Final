@@ -118,27 +118,13 @@ const getByShoppingList = (request, response) =>{
 
 
 
-const createRecipe = (request, response) => {
+const createRecipe = async (request, response) => {
     let { nomeReceita, ingredientePrincipal, ingredientes, preparo, observacoes,tipoReceita,receitaSelecionada } = request.body
-    
-    const confirmarNome = async (nomeReceita) =>{
-        const validarNome = await Recipe.find({ $and: [{ nomeReceita:nomeReceita}]});
-        return validarNome.lenght
+   
+    const list = await Recipe.find({$and: [{ nomeReceita:nomeReceita}]})
+    if(list.length > 0){
+        return response.status(401).json({message: "Não se pode cadastrar duas receitas com o mesmo nome"})
     }
-    //let newName = [];
-    //let nameRepeat = false;
-
-    //for (let i = 0; i < nomeReceita.length; i ++) {
-       // if(!newName.includes(nomeReceita)){
-        // newName.push(nomeReceita)  
-        //} else {
-            //nameRepeat = true;
-       // }    
-    //};
-       // if(nameRepeat == nomeReceita) {
-            //response.status(400).json({message: "Não se pode cadastrar duas receitas iguais!"});
-        //return;
-        //}
           
 
     const newRecipe =  new Recipe({ 
@@ -151,9 +137,6 @@ const createRecipe = (request, response) => {
         receitaSelecionada
 
     });
-
-    //Recipe.push(newRecipe);
-
 
     newRecipe.save()
             .then((res) => {
@@ -246,6 +229,7 @@ const updateMainIngredient = (req, res) => {
 const updateTitle = (req, res) => {
     const { id } = req.params
     const { nomeReceita } = req.body
+    
      
     Recipe.findByIdAndUpdate(id, { $set: { nomeReceita } })
         .then(() => {
